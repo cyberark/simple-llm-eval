@@ -1,0 +1,2 @@
+[run]
+omit = dev_scripts/*,tests/*,__init__.py

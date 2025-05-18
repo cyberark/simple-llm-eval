@@ -1,0 +1,8 @@
+{
+    "name": "detect_user_action",
+    "max_concurrent_judge_tasks": 10,
+    "max_concurrent_llm_tasks": 10,
+    "llm_as_a_judge_name": "bedrock_claude_sonnet",
+    "eval_metrics": ["completeness", "correctness"],
+    "unused_possible_revelant_eval_metrics": ["completeness", "correctness", "following_instructions", "helpfulness"]
+}

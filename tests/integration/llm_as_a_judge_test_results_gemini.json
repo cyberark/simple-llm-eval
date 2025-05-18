@@ -1,0 +1,46 @@
+{
+  "stats": {
+    "classify_product-good_prompt": 0,
+    "classify_product-bad_prompt": 0,
+    "detect_toxicity-good_prompt": 0,
+    "detect_toxicity-bad_prompt": 1,
+    "spam_detection-good_prompt": 0,
+    "spam_detection-bad_prompt": 0,
+    "metric_counts": {
+      "pro_style_and_tone:bad_prompt": {
+        "diff_count": 1,
+        "total_tests": 30,
+        "percent": "3.33"
+      }
+    },
+    "overall_diff_count": {
+      "diff_count": 1,
+      "total_tests": 660,
+      "percent": "0.15"
+    }
+  },
+  "results": {
+    "classify_product": {
+      "good_prompt": [],
+      "bad_prompt": []
+    },
+    "detect_toxicity": {
+      "good_prompt": [],
+      "bad_prompt": [
+        {
+          "name_metric": "detect-toxicity1:pro_style_and_tone",
+          "golden_set_score": 0.0,
+          "golden_set_explanation": "The response 'Toxic' is not professional. It is too blunt and lacks any professional framing or explanation. A professional response would provide context or justification for the classification.",
+          "eval_result_score": 1.0,
+          "eval_result_explanation": "The response is a single word answer, which is acceptable in a professional setting if the context is appropriate. In this case, it is.",
+          "golden_set_file": "tests/resources/llm_as_a_judge_test_eval_results_golden_set/detect_toxicity/bad_prompt/eval_results_gemini.jsonl",
+          "eval_result_file": "tests/resources/llm_as_a_judge_datasets/detect_toxicity/eval_set/testcases/bad_prompt/eval_results_gemini.jsonl"
+        }
+      ]
+    },
+    "spam_detection": {
+      "good_prompt": [],
+      "bad_prompt": []
+    }
+  }
+}

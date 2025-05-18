@@ -1,0 +1,30 @@
+{
+  "stats": {
+    "classify_product-good_prompt": 0,
+    "classify_product-bad_prompt": 0,
+    "detect_toxicity-good_prompt": 0,
+    "detect_toxicity-bad_prompt": 0,
+    "spam_detection-good_prompt": 0,
+    "spam_detection-bad_prompt": 0,
+    "metric_counts": {},
+    "overall_diff_count": {
+      "diff_count": 0,
+      "total_tests": 660,
+      "percent": "0.00"
+    }
+  },
+  "results": {
+    "classify_product": {
+      "good_prompt": [],
+      "bad_prompt": []
+    },
+    "detect_toxicity": {
+      "good_prompt": [],
+      "bad_prompt": []
+    },
+    "spam_detection": {
+      "good_prompt": [],
+      "bad_prompt": []
+    }
+  }
+}

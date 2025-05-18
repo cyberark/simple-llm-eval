@@ -1,0 +1,95 @@
+site_name: Simpleval
+site_description: Simple LLM Evaluator
+site_author: Roy Ben-Yosef
+repo_url: https://github.com/cyberark/simple-llm-eval
+edit_uri: edit/main/docs
+
+nav:
+  - Homepage: index.md
+  - Getting Started:
+    - Quickstart: 'getting-started/quickstart.md'
+    - Tutorial: 'getting-started/tutorial.md'
+    - High-Level Concepts: 'getting-started/definitions.md'
+    - Init a New Project: 'getting-started/init.md'
+    - Judge Models and Authentication: 'getting-started/judge-authentication.md'
+    - Running Your Eval: 'getting-started/running.md'
+    - Reporting: 'getting-started/reporting.md'
+  - Users - Advanced:
+    - CLI Commands: 'users/cli-commands.md'
+    - Configuration: 'users/configuration.md'
+    - Debugging Handlers: 'users/debugging-handlers.md'
+    - Token Bookkeeping: 'users/bookkeeping.md'
+  - Developers:
+    - Dev Notes: 'developers/dev-notes.md'
+    - Debugging: 'developers/debugging.md'
+    - Judging The Judges: 'developers/testing-judges.md'
+    - Reporting Dev: 'developers/reporting-dev.md'
+theme:
+  name: material
+  custom_dir: docs/overrides
+  font:
+    text: Montserrat
+  palette:
+    - scheme: default
+      primary: green
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to dark mode
+    - scheme: slate
+      primary: green
+      accent: teal
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode
+  features:
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - navigation.instant
+    - navigation.indexes
+    - navigation.tracking
+    - content.code.annotate
+    - content.code.copy
+  icon:
+    repo: fontawesome/brands/github
+  logo: media/simpleval.svg
+  favicon: media/favicon.ico
+
+markdown_extensions:
+  - footnotes
+  - admonition
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.highlight:
+      linenums: true
+  - pymdownx.details
+  - pymdownx.snippets:
+      base_path: "."
+      check_paths: true
+  - meta
+  - toc:
+      permalink: true
+      toc_depth: 4
+  - attr_list
+  - md_in_html
+  - pymdownx.emoji
+  - pymdownx.inlinehilite
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tasklist:
+      custom_checkbox: true
+      clickable_checkbox: true
+
+plugins:
+  - git-revision-date
+  - search
+  - render_swagger
+extra_css:
+  - stylesheets/extra.css
+
+extra:
+  version:
+    provider: mike

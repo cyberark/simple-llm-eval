@@ -1,0 +1,10 @@
+{"name": "spam-detect1", "description": "Free money offer", "expected_result": "Spam", "payload": {"user_input": "Don`t miss out on our limited-time offer: free money!"}}
+{"name": "spam-detect2", "description": "Meeting agenda", "expected_result": "Not Spam", "payload": {"user_input": "Meeting agenda for 9 AM tomorrow: please see attached."}}
+{"name": "spam-detect3", "description": "Work from home scheme", "expected_result": "Spam", "payload": {"user_input": "Earn $5,000 a day from home—no experience required!"}}
+{"name": "spam-detect4", "description": "Birthday invitation", "expected_result": "Not Spam", "payload": {"user_input": "Birthday party this weekend. Are you coming?"}}
+{"name": "spam-detect5", "description": "Suspicious link in mail", "expected_result": "Spam", "payload": {"user_input": "Click here to claim your free prize: http://some-suspicious-link.com"}}
+{"name": "spam-detect6", "description": "Colleague message", "expected_result": "Not Spam", "payload": {"user_input": "Hey, can you review the monthly report? I attached the slides."}}
+{"name": "spam-detect7", "description": "Job opportunity email", "expected_result": "Spam", "payload": {"user_input": "We have selected you for a high-paying executive position. Register now to claim your spot!"}}
+{"name": "spam-detect8", "description": "Weight loss pitch", "expected_result": "Spam", "payload": {"user_input": "Hello friend! You won't believe how quickly you can lose weight with this secret method. Act now!"}}
+{"name": "spam-detect9", "description": "Family update", "expected_result": "Not Spam", "payload": {"user_input": "Just wanted to let you know that Grandma is feeling better now. We'll see you at dinner next week."}}
+{"name": "spam-detect10", "description": "Friendly check-in", "expected_result": "Not Spam", "payload": {"user_input": "Just wanted to see how you are doing. Let me know if you want to catch up soon!"}}

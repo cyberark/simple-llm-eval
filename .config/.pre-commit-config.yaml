@@ -1,0 +1,46 @@
+---
+# Globally exclude the react js app
+exclude: 'reports-frontend'
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: check-ast
+        name: Check python abstract syntax trees
+      - id: check-case-conflict
+        name: Check for case conflicts
+      - id: check-yaml
+        name: Check YAML files format
+        ## In order to support serverless.yaml (contains cloudformation syntax)
+        ## which is not a valid normal yaml syntax (example: !Ref), but it will fail for all the regular yaml standard
+        args: [ '--unsafe' ]
+      - id: check-json
+        name: Check JSON files format
+      - id: check-toml
+        name: Check TOML files format
+      - id: check-shebang-scripts-are-executable
+        name: Check that scripts with shebangs are executable
+      - id: check-merge-conflict
+        name: Check for merge conflicts in code
+      - id: check-docstring-first
+        name: Docstrings should be placed before code
+      - id: end-of-file-fixer
+        name: Files should end with empty line
+        exclude: ".json"
+      - id: double-quote-string-fixer
+        name: Strings should be single quoted
+      - id: trailing-whitespace
+        name: Trims trailing whitespace
+        exclude: ".md"
+  - repo: https://github.com/pre-commit/pygrep-hooks
+    rev: v1.10.0
+    hooks:
+      - id: python-use-type-annotations
+        name: Check for type annotations instead of comments
+  - repo: local
+    hooks:
+      - id: py-isort
+        name: isort (python)
+        files: ^simpleval/.*\.py$
+        entry: isort --sp .config/.isort.cfg --src simpleval
+        language: system

@@ -1,0 +1,69 @@
+[project]
+name = "simpleval-cyberark"
+version = "0.4"
+description = "Simple Evaluation Framework for LLM use cases"
+authors = [{ name = "Roy Ben Yosef", email = "roy.benyosef@cyberark.com" }]
+requires-python = ">=3.11"
+readme = "README.md"
+dependencies = [
+    "boto3>=1.35.87,<2",
+    "pydantic>=2.10.4,<3",
+    "tqdm>=4.67.1,<5",
+    "tenacity>=9.0.0,<10",
+    "colorama>=0.4.6,<0.5",
+    "jinja2>=3.1.5,<4",
+    "click>=8.1.8,<9",
+    "tabulate>=0.9.0,<0.10",
+    "beautifulsoup4>=4.12.3,<5",
+    "inquirerpy>=0.3.4,<0.4",
+    "matplotlib>=3.10.0,<4",
+    "litellm==1.65.4",
+    "httpcore>=1.0.7,<2",
+    "google-genai>=1.13.0,<2",
+]
+
+[project.urls]
+Repository = "https://github.cyberng.com/InnoAI/simple-llm-eval"
+
+[project.scripts]
+simpleval = "simpleval.main:main"
+
+[dependency-groups]
+dev = [
+    "pytest-mock",
+    "mkdocs>=1.6.1,<2",
+    "mkdocs-git-revision-date-plugin>=0.3.2,<0.4",
+    "pandas>=2.2.3,<3",
+    "flake8>=7.2.0,<8",
+    "bandit>=1.8.3,<2",
+    "isort>=6.0.1,<7",
+    "yapf>=0.43.0,<0.44",
+    "xenon>=0.9.3,<0.10",
+    "semver>=3.0.4,<4",
+    "radon>=6.0.1,<7",
+    "mike>=2.1.3,<3",
+    "mkdocs-material>=9.6.14,<10",
+    "mkdocs-material-extensions>=1.3.1,<2",
+    "pre-commit>=4.2.0,<5",
+    "pylint>=3.3.7,<4",
+    "pymdown-extensions~=10.15",
+    "pytest-cov>=6.1.1,<7",
+    "pytest-html>=4.1.1,<5",
+    "pytest-metadata>=3.1.1,<4",
+    "mkdocs-render-swagger-plugin>=0.1.2,<0.2",
+]
+
+[tool.uv]
+default-groups = [
+    "dev",
+]
+
+[tool.hatch.build.targets.sdist]
+include = ["simpleval"]
+
+[tool.hatch.build.targets.wheel]
+include = ["simpleval"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

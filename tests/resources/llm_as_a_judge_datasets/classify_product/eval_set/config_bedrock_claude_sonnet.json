@@ -1,0 +1,7 @@
+{
+    "name": "classify_product",
+    "max_concurrent_judge_tasks": 10,
+    "max_concurrent_llm_tasks": 10,
+    "eval_metrics": ["helpfulness", "faithfulness", "no_ground_truth", "readability", "correctness", "coherence", "following_instructions", "completeness", "pro_style_and_tone", "relevance", "no_ground_truth_simple"],
+    "llm_as_a_judge_name": "bedrock_claude_sonnet"
+}

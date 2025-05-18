@@ -1,0 +1,11 @@
+{ "name": "dummy eval case 1", "description": "dummy eval case", "expected_result": "The user clicked on the tab key", "payload": { "frames": ["frames/frame1.jpg"], "keyboard_input": ["tab"] } }
+{ "name": "dummy eval case 2", "description": "dummy eval case", "expected_result": "The user clicked on chrome", "payload": { "frames": ["frames/frame2.jpg"], "mouse_input": [{ "x": 648, "y": 39, "button": "LEFT"}] } }
+{ "name": "dummy eval case 3", "description": "dummy eval case", "expected_result": "The user clicked on the enter key", "payload": { "frames": ["frames/frame3.jpg"], "keyboard_input": ["enter"] } }
+{ "name": "dummy eval case 4", "description": "dummy eval case", "expected_result": "The user clicked on chrome", "payload": { "frames": ["frames/frame4.jpg"], "mouse_input": [{ "x": 648, "y": 39, "button": "LEFT"}] } }
+{ "name": "dummy eval case 5", "description": "dummy eval case", "expected_result": "The user clicked on the enter key", "payload": { "frames": ["frames/frame5.jpg"], "keyboard_input": ["enter"] } }
+{ "name": "dummy eval case 6", "description": "dummy eval case", "expected_result": "The user clicked on chrome", "payload": { "frames": ["frames/frame6.jpg"], "mouse_input": [{ "x": 648, "y": 39, "button": "LEFT"}] } }
+{ "name": "dummy eval case 7", "description": "dummy eval case", "expected_result": "The user clicked on the enter key", "payload": { "frames": ["frames/frame7.jpg"], "keyboard_input": ["enter"] } }
+{ "name": "dummy eval case 8", "description": "dummy eval case", "expected_result": "The user clicked on chrome", "payload": { "frames": ["frames/frame8.jpg"], "mouse_input": [{ "x": 648, "y": 39, "button": "LEFT"}] } }
+{ "name": "dummy eval case 9", "description": "dummy eval case", "expected_result": "The user clicked on the enter key", "payload": { "frames": ["frames/frame9.jpg"], "keyboard_input": ["enter"] } }
+{ "name": "dummy eval case 10", "description": "dummy eval case", "expected_result": "The user clicked on chrome", "payload": { "frames": ["frames/frame10.jpg"], "mouse_input": [{ "x": 648, "y": 39, "button": "LEFT"}] } }
+{ "name": "dummy eval case 11", "description": "dummy eval case", "expected_result": "The user clicked on the enter key", "payload": { "frames": ["frames/frame11.jpg"], "keyboard_input": ["enter"] } }

@@ -1,0 +1,13 @@
+{
+    "name": "empty",
+    "max_concurrent_judge_tasks": 10,
+    "max_concurrent_llm_tasks": 10,
+    "eval_metrics": [],
+    "llm_as_a_judge_name": "open_ai",
+    "override": {
+        "testcase_name_you_want_to_override": {
+            "max_concurrent_judge_tasks": 1,
+            "max_concurrent_llm_tasks": 1
+        }
+    }
+}

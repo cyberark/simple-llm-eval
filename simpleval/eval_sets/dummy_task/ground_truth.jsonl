@@ -1,0 +1,15 @@
+{ "name": "dummy eval case 1", "description": "dummy eval case 1", "expected_result": "User says: OY!", "payload": { "user_input": "OY!" } }
+{ "name": "dummy eval case 2", "description": "dummy eval case 2", "expected_result": "User says: OY VEY!", "payload": { "user_input": "OY VEY!" } }
+{ "name": "dummy eval case 3", "description": "dummy eval case 3", "expected_result": "User says OY VEY IZ MIR!", "payload": { "user_input": "OY VEY IZ MIR!" } }
+{ "name": "dummy eval case 4", "description": "dummy eval case 4", "expected_result": "User says: HELLO!", "payload": { "user_input": "HELLO!" } }
+{ "name": "dummy eval case 5", "description": "dummy eval case 5", "expected_result": "User says: GOODBYE!", "payload": { "user_input": "GOODBYE!" } }
+{ "name": "dummy eval case 6", "description": "dummy eval case 6", "expected_result": "User says: YES!", "payload": { "user_input": "YES!" } }
+{ "name": "dummy eval case 7", "description": "dummy eval case 7", "expected_result": "User says: NO!", "payload": { "user_input": "NO!" } }
+{ "name": "dummy eval case 8", "description": "dummy eval case 8", "expected_result": "User says: MAYBE!", "payload": { "user_input": "MAYBE!" } }
+{ "name": "dummy eval case 9", "description": "dummy eval case 9", "expected_result": "User says: PLEASE!", "payload": { "user_input": "PLEASE!" } }
+{ "name": "dummy eval case 10", "description": "dummy eval case 10", "expected_result": "User says: THANK YOU!", "payload": { "user_input": "THANK YOU!" } }
+{ "name": "dummy eval case 11", "description": "dummy eval case 11", "expected_result": "User says: SORRY!", "payload": { "user_input": "SORRY!" } }
+{ "name": "dummy eval case 12", "description": "dummy eval case 12", "expected_result": "User says: EXCUSE ME!", "payload": { "user_input": "EXCUSE ME!" } }
+{ "name": "dummy eval case 13", "description": "dummy eval case 13", "expected_result": "User says: HOW ARE YOU?", "payload": { "user_input": "HOW ARE YOU?" } }
+{ "name": "dummy eval case 14", "description": "dummy eval case 14", "expected_result": "User says: I'M FINE!", "payload": { "user_input": "I'M FINE!" } }
+{ "name": "dummy eval case 15", "description": "dummy eval case 15", "expected_result": "User says: SEE YOU LATER!", "payload": { "user_input": "SEE YOU LATER!" } }

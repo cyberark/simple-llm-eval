@@ -1,0 +1,7 @@
+{
+    "name": "dummy_task",
+    "max_concurrent_judge_tasks": 10,
+    "max_concurrent_llm_tasks": 10,
+    "eval_metrics": ["dummy", "completeness"],
+    "llm_as_a_judge_name": "dummy_judge"
+}

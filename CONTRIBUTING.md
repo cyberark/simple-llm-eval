@@ -12,7 +12,7 @@ For general contribution and community guidelines, please see the [community rep
 - [Contributing](#contributing)
 
 ## Development
-Go over the [developer's guide](https://pages.github.com/cyberark/simple-llm-eval/developers/dev-notes/) according to the type of contribution you want to make.
+Go over the [developer's guide](https://cyberark.github.io/simple-llm-eval/developers/dev-notes/) according to the type of contribution you want to make.
 
 ## Testing
 * Continually make sure that tests are passing.

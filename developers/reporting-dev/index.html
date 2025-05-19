@@ -851,6 +851,33 @@ You're not viewing the latest version.
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisites 🛠
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#building-the-reports" class="md-nav__link">
+    <span class="md-ellipsis">
+      Building the Reports 🏗
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-the-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      Running the Tests 🧪
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#new-reports" class="md-nav__link">
     <span class="md-ellipsis">
       New Reports 🤖📊
@@ -1007,6 +1034,33 @@ You're not viewing the latest version.
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisites 🛠
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#building-the-reports" class="md-nav__link">
+    <span class="md-ellipsis">
+      Building the Reports 🏗
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-the-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      Running the Tests 🧪
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#new-reports" class="md-nav__link">
     <span class="md-ellipsis">
       New Reports 🤖📊
@@ -1140,6 +1194,29 @@ You're not viewing the latest version.
 
 
 <h1 id="reporting-dev">Reporting Dev 📊🧑‍💻<a class="headerlink" href="#reporting-dev" title="Permanent link">&para;</a></h1>
+<h2 id="prerequisites">Prerequisites 🛠<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>Node.js</code> (v18.20.6 or higher)</li>
+<li><code>npm</code>
+️</li>
+</ul>
+<h2 id="building-the-reports">Building the Reports 🏗<a class="headerlink" href="#building-the-reports" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Run <code>cd reports-frontend</code></li>
+<li>Install packages: <code>npm install</code></li>
+<li>Build all reports: <code>npm run build</code></li>
+<li>Build single reports:<ul>
+<li><code>npm run build:eval</code></li>
+<li><code>npm run build:compare</code></li>
+<li><code>npm run build:summary</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="running-the-tests">Running the Tests 🧪<a class="headerlink" href="#running-the-tests" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Run tests (watch): <code>npm run test</code></li>
+<li>Run tests (once): <code>npm run test-no-watch</code></li>
+</ul>
 <h2 id="new-reports">New Reports 🤖📊<a class="headerlink" href="#new-reports" title="Permanent link">&para;</a></h2>
 <p>The new reports are implemented with React with vite as the build tool.
 Each report is a standalone React app that is built into a single, self contained HTML file.
@@ -1148,6 +1225,7 @@ It does not use TS, but it probably should eventually.</p>
 <p>The react project is in <code>simpleval/reports-frontend</code></p>
 <p>Each such react app generates an HTML template that needs to be populated with data by simpleval and then saved to disk.</p>
 <p>The results and compare reports use native react, and the summary report use Material UI.</p>
+<p>There are some internal notes here: <code>reports-frontend/README.md</code></p>
 <h2 id="populating-the-templates">Populating the Templates 📝📊<a class="headerlink" href="#populating-the-templates" title="Permanent link">&para;</a></h2>
 <p>Take a look at <code>reports-frontend/src/components/LLMEvalReport.jsx</code>
 You will see mock data that is used during testing.
@@ -1249,7 +1327,7 @@ They will be removed in future releases.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    2025-05-18
+    2025-05-19
   </span>
 
     

@@ -27,6 +27,12 @@
 <br>or
 <br>`.venv\Scripts\activate` (Windows)
 
+## Running all checks 🔍
+* Run the the `dev_scripts/pr/pre_pull_request_checks.sh/bat` script
+* If you made changes to the `reports-frontend` reports, run the `dev_scripts/pr/pre_pull_request_checks_react.sh/bat` script
+
+These scripts will run in the pipeline as well.
+
 ## Building the Package 🏗️
 * Build the package using: `uv build`
 

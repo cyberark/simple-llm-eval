@@ -23,7 +23,7 @@ See [📚 Project Documentation 📚](https://cyberark.github.io/simple-llm-eval
 
 Contributions are welcome!
 
-If you would like to contribute to the SimplEval, please follow the guidelines outlined in the [CONTRIBUTING.md](https://github.com/cyberark/FuzzyAI/blob/main/CONTRIBUTING.md) file.
+If you would like to contribute to the SimplEval, please follow the guidelines outlined in the [CONTRIBUTING.md](https://github.com/cyberark/simple-llm-eval/blob/main/CONTRIBUTING.md) file.
 
 ## License
 

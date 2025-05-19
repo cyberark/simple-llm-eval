@@ -51,7 +51,7 @@ echo "Running pylint linter..."
 pylint --recursive=y simpleval --rcfile .config/.pylintrc
 
 echo "Running npm audit..."
-npm audit 
+npm audit
 
 if [ "$WITH_COVERAGE" = true ]; then
     echo "Running coverage checks with fail-under=$COVERAGE_FAIL_UNDER..."

@@ -784,6 +784,15 @@ You're not viewing the latest version.
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#breaking-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Breaking Changes ⛓️‍💥
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#pre-requisites" class="md-nav__link">
     <span class="md-ellipsis">
       Pre-requisites 🛠️
@@ -811,9 +820,9 @@ You're not viewing the latest version.
 </li>
       
         <li class="md-nav__item">
-  <a href="#breaking-changes" class="md-nav__link">
+  <a href="#publishing-the-docs" class="md-nav__link">
     <span class="md-ellipsis">
-      Breaking Changes ⛓️‍💥
+      Publishing the docs
     </span>
   </a>
   
@@ -958,6 +967,15 @@ You're not viewing the latest version.
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#breaking-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Breaking Changes ⛓️‍💥
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#pre-requisites" class="md-nav__link">
     <span class="md-ellipsis">
       Pre-requisites 🛠️
@@ -985,9 +1003,9 @@ You're not viewing the latest version.
 </li>
       
         <li class="md-nav__item">
-  <a href="#breaking-changes" class="md-nav__link">
+  <a href="#publishing-the-docs" class="md-nav__link">
     <span class="md-ellipsis">
-      Breaking Changes ⛓️‍💥
+      Publishing the docs
     </span>
   </a>
   
@@ -1040,6 +1058,20 @@ You're not viewing the latest version.
 
 
 <h1 id="dev-notes">Dev Notes 👩‍💻<a class="headerlink" href="#dev-notes" title="Permanent link">&para;</a></h1>
+<h2 id="breaking-changes">Breaking Changes ⛓️‍💥<a class="headerlink" href="#breaking-changes" title="Permanent link">&para;</a></h2>
+<div class="admonition danger">
+<p class="admonition-title">Danger</p>
+<p>Make sure you don't introduce breaking changes unless you have to (in which case up the major version)</p>
+<p>Breaking changes affect the implementation of task_handler.py</p>
+<p>Specifically:</p>
+<ul>
+<li>The name of the file must be <code>task_handler.py</code></li>
+<li>The signature of the <code>task_logic</code> function must be <code>task_logic(name: str, payload: dict) -&gt; LlmTaskResult</code></li>
+<li>Handlers are expected to use the <code>simpleval.utilities.retryables.bedrock_limits_retry</code> decorator as is.</li>
+<li>The structure of the <code>ground_truth.jsonl</code> file must not change (see <code>base_eval_case_schema.GroundTruth</code>).</li>
+<li>The structure of result files must not change (see <code>eval_result_schema.EvalTestResult</code>, <code>llm_task_result.LlmTaskResult</code>).</li>
+</ul>
+</div>
 <h2 id="pre-requisites">Pre-requisites 🛠️<a class="headerlink" href="#pre-requisites" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Python 3.11 or higher</li>
@@ -1057,20 +1089,12 @@ You're not viewing the latest version.
 <ul>
 <li>Build the package using: <code>uv build</code></li>
 </ul>
-<h2 id="breaking-changes">Breaking Changes ⛓️‍💥<a class="headerlink" href="#breaking-changes" title="Permanent link">&para;</a></h2>
-<div class="admonition danger">
-<p class="admonition-title">Danger</p>
-<p>Make sure you don't introduce breaking changes unless you have to (in which case up the major version)</p>
-<p>Breaking changes affect the implementation of task_handler.py</p>
-<p>Specifically:</p>
+<h2 id="publishing-the-docs">Publishing the docs<a class="headerlink" href="#publishing-the-docs" title="Permanent link">&para;</a></h2>
+<p>This project uses mkdocs/mike to publish its docs to GitHub Pages. </p>
 <ul>
-<li>The name of the file must be <code>task_handler.py</code></li>
-<li>The signature of the <code>task_logic</code> function must be <code>task_logic(name: str, payload: dict) -&gt; LlmTaskResult</code></li>
-<li>Handlers are expected to use the <code>simpleval.utilities.retryables.bedrock_limits_retry</code> decorator as is.</li>
-<li>The structure of the <code>ground_truth.jsonl</code> file must not change (see <code>base_eval_case_schema.GroundTruth</code>).</li>
-<li>The structure of result files must not change (see <code>eval_result_schema.EvalTestResult</code>, <code>llm_task_result.LlmTaskResult</code>).</li>
+<li>To test the docs locally, run: <code>mkdocs serve</code></li>
+<li>The pipeline publishes the docs after a successful merge to main.</li>
 </ul>
-</div>
 <h2 id="cli-dev">CLI Dev<a class="headerlink" href="#cli-dev" title="Permanent link">&para;</a></h2>
 <p>The CLI uses the click library, see commands package for examples.</p>
 <blockquote>
@@ -1117,7 +1141,7 @@ All Lite LLM-based judges use the same prompts for metrics.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    2025-05-18
+    2025-05-19
   </span>
 
     

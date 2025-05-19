@@ -15,11 +15,10 @@ For general contribution and community guidelines, please see the [community rep
 Go over the [developer's guide](https://cyberark.github.io/simple-llm-eval/developers/dev-notes/) according to the type of contribution you want to make.
 
 ## Testing
-* Continually make sure that tests are passing.
-* Run the pre-PR script: `dev_scripts/pr/pre_pull_request_checks.sh/bat` to run all checks before you create a PR. This included, but is not limited to:
-   - Linting
-   - Type checking
-   - Unit tests and coverage
+* Continually make sure that tests are passing: `pytest -v tests`
+* Run the pre-PR script: `dev_scripts/pr/pre_pull_request_checks.sh/bat` to run all checks before you create 
+a PR. This includes linters, unit tests coverage, etc.
+* If you made changes to `reports-frontend`, also run `dev_scripts/pr/pre_pull_request_checks_react.sh/bat`
 
 ## Documentation
 Make sure to update the documentation as needed.

@@ -1,5 +1,25 @@
 # Reporting Dev 📊🧑‍💻
 
+## Prerequisites 🛠 
+
+* `Node.js` (v18.20.6 or higher)
+* `npm`
+️
+## Building the Reports 🏗
+
+* Run `cd reports-frontend`
+* Install packages: `npm install`
+* Build all reports: `npm run build`
+* Build single reports:
+    * `npm run build:eval`
+    * `npm run build:compare`
+    * `npm run build:summary`
+
+## Running the Tests 🧪
+
+* Run tests (watch): `npm run test`
+* Run tests (once): `npm run test-no-watch`
+
 ## New Reports 🤖📊
 The new reports are implemented with React with vite as the build tool.
 Each report is a standalone React app that is built into a single, self contained HTML file.
@@ -11,6 +31,8 @@ The react project is in `simpleval/reports-frontend`
 Each such react app generates an HTML template that needs to be populated with data by simpleval and then saved to disk.
 
 The results and compare reports use native react, and the summary report use Material UI.
+
+There are some internal notes here: `reports-frontend/README.md`
 
 ## Populating the Templates 📝📊
 Take a look at `reports-frontend/src/components/LLMEvalReport.jsx`

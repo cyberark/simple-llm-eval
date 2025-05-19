@@ -8,13 +8,14 @@ Currently, two official plugins are available:
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
 ## Build and run the reports
+
 * install packages: `npm install`
 * build all reports: `npm run build` or `npm run build:eval`/`npm run build:compare`/`npm run build:summary`
-* run tests: `npm run test`
+* run tests (watch): `npm run test`
 
-## What I did
+## What was done
 
-## Main steps
+### Main steps
 
 - `npm create vite@latest local-report-app`
     - choose: React, Javascript
@@ -47,13 +48,13 @@ To be able to inject placeholders I did:
 * created `inject_placeholders_compare.js` to inject placeholders into the compare report
 * Run the scripts in package.json
 
-### ADditional components for charts
+### Additional components for charts
 Some reports like summary and radar users additional components from material-ui
 * followed instructions in https://mui.com/material-ui/getting-started/installation/
 * charts from: https://mui.com/x/react-charts/
 
 ### Testing
-* To solve issues I had to add the test section in `vite.config.js` and also the `tests/setup.jsx`
+* To solve some issues I had to add the test section in `vite.config.js` and also the `tests/setup.jsx`
 * To run tests in vscode I had to set `vite.config.js` in `Vitest: Root Config`
 
 ## Other resources

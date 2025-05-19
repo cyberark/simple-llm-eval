@@ -1,5 +1,5 @@
 ---
-name: Bug report
+name: "Bug report \U0001F41E"
 about: Create a report to help us improve
 title: ''
 labels: ''
@@ -25,8 +25,8 @@ If applicable, add screenshots to help explain your problem.
 
 **Environment (please complete the following information):**
  - OS: [e.g. iOS]
- - Python version
- - `simpleval --version`
+ - Python version:
+ - SimplEval version:
 
 **Additional context**
 Add any other context about the problem here.

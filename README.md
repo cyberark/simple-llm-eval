@@ -13,11 +13,11 @@ Welcome to the simple llm evaluation framework, or SimplEval for short.
 
 ## Getting Started
 
-See the [📚 Quickstart Guide 📚](https://pages.github.com/cyberark/simple-llm-eval/getting-started/quickstart/)
+See the [📚 Quickstart Guide 📚](https://cyberark.github.io/simple-llm-eval/getting-started/quickstart/)
 
 ## Documentation
 
-See [📚 Project Documentation 📚](https://pages.github.com/cyberark/simple-llm-eval/)
+See [📚 Project Documentation 📚](https://cyberark.github.io/simple-llm-eval/)
 
 ## Contributing
 

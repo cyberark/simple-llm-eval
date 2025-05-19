@@ -1,19 +1,5 @@
 # Dev Notes 👩‍💻
 
-## Pre-requisites 🛠️
-* Python 3.11 or higher
-* The `uv` package manager
-
-## Getting Started 🚀
-* Clone this repo
-* Install all dependencies: `uv sync`
-* Activate the virtual environment: <br>`source .venv/bin/activate` (Linux/Mac)
-<br>or
-<br>`.venv\Scripts\activate` (Windows)
-
-## Building the Package 🏗️
-* Build the package using: `uv build`
-
 ## Breaking Changes ⛓️‍💥
 
 !!! danger
@@ -28,6 +14,26 @@
     * Handlers are expected to use the `simpleval.utilities.retryables.bedrock_limits_retry` decorator as is.
     * The structure of the `ground_truth.jsonl` file must not change (see `base_eval_case_schema.GroundTruth`).
     * The structure of result files must not change (see `eval_result_schema.EvalTestResult`, `llm_task_result.LlmTaskResult`).
+
+## Pre-requisites 🛠️
+* Python 3.11 or higher
+* The `uv` package manager
+
+## Getting Started 🚀
+* Clone this repo
+* Install all dependencies: `uv sync`
+* Activate the virtual environment: <br>`source .venv/bin/activate` (Linux/Mac)
+<br>or
+<br>`.venv\Scripts\activate` (Windows)
+
+## Building the Package 🏗️
+* Build the package using: `uv build`
+
+## Publishing the docs
+This project uses mkdocs/mike to publish its docs to GitHub Pages. 
+
+* To test the docs locally, run: `mkdocs serve`
+* The pipeline publishes the docs after a successful merge to main.
 
 ## CLI Dev
 The CLI uses the click library, see commands package for examples.

@@ -5,7 +5,7 @@ cd reports-frontend
 
 # Building react reports
 echo "Installing react reports dependencies..."
-npm install 
+npm install
 
 echo "Building react reports..."
 npm run build

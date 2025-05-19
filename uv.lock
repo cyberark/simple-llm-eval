@@ -2141,7 +2141,7 @@ wheels = [
 ]
 
 [[package]]
-name = "simpleval-cyberark"
+name = "simple-llm-eval"
 version = "0.4"
 source = { editable = "." }
 dependencies = [

@@ -32,7 +32,7 @@
     **Install the package:**
 
     ```bash
-    pip install simpleval
+    pip install simple-llm-eval
     ```
 
 ???- note "uv package manager"
@@ -51,7 +51,7 @@
         **Install the package:**
 
         ```bash
-        uv add simpleval
+        uv add simple-llm-eval
         ```
 ### Usage
 

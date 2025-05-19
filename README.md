@@ -21,7 +21,9 @@ See [📚 Project Documentation 📚](https://pages.github.com/cyberark/simple-l
 
 ## Contributing
 
-Contributions are welcome! If you would like to contribute to the FuzzyAI Fuzzer, please follow the guidelines outlined in the [CONTRIBUTING.md](https://github.com/cyberark/FuzzyAI/blob/main/CONTRIBUTING.md) file.
+Contributions are welcome!
+
+If you would like to contribute to the SimplEval, please follow the guidelines outlined in the [CONTRIBUTING.md](https://github.com/cyberark/FuzzyAI/blob/main/CONTRIBUTING.md) file.
 
 ## License
 

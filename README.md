@@ -9,7 +9,7 @@
 
 ![Simpleval Banner](docs/media/simpleval-banner.jpeg)
 
-Welcome to the simple llm evaluation framework, or `simpleval` for short.
+Welcome to the simple llm evaluation framework, or SimplEval for short.
 
 ## Getting Started
 
@@ -19,10 +19,16 @@ See the [📚 Quickstart Guide 📚](https://pages.github.com/cyberark/simple-ll
 
 See [📚 Project Documentation 📚](https://pages.github.com/cyberark/simple-llm-eval/)
 
-## Publishing the docs
-This project uses mkdocs/mike to publish its docs to GitHub Pages. 
-It does NOT support versioning, so the docs are always the latest version.
+## Contributing
 
+Contributions are welcome! If you would like to contribute to the FuzzyAI Fuzzer, please follow the guidelines outlined in the [CONTRIBUTING.md](https://github.com/cyberark/FuzzyAI/blob/main/CONTRIBUTING.md) file.
 
-* To test the docs locally, run: `mkdocs serve`
-* The pipeline publishes the docs when running in master (using `mkdocs gh-deploy --force`)
+## License
+
+SimplEval is released under the [Apache License](https://www.apache.org/licenses/LICENSE-2.0). See the [LICENSE](https://github.com/cyberark/simple-llm-eval/blob/main/LICENSE) file for more details.
+
+## Contact
+
+If you have any questions or suggestions, feel free to join our [GitHub discussions forum](https://github.com/cyberark/simple-llm-eval/discussions) 💬
+
+If you want to report a bug or request a feature, please open an issue in the [GitHub issues tracker](https://github.com/cyberark/simple-llm-eval/issues) 🐛

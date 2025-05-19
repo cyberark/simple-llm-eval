@@ -18,6 +18,7 @@
 ## Pre-requisites 🛠️
 * Python 3.11 or higher
 * The `uv` package manager
+* Only for reporting dev: `npm`
 
 ## Getting Started 🚀
 * Clone this repo

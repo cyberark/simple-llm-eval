@@ -21,7 +21,7 @@ The log format include the time, source (eval, handler etc), input and output to
     This is done by calling `log_bookkeeping_data` after your call to the model.
 
 ## Bookkeeping summary
-You can use the `dev_utils/bookkeeping.py` to summarize the bookkeeping data. 
+You can use the `tools/bookkeeping.py` to summarize the bookkeeping data. 
 This includes hard-coded pricing.
 Update as needed.
 

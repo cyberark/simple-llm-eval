@@ -138,7 +138,7 @@ def main():
         print(f'{Fore.RED}Errors were found during the tests even after retries. Please check the logs for details.{Fore.RESET}')
         print(f'{Fore.RED}Error logs can be found in: {eval_set_dir}/testcases/<testcase>{Fore.RESET}')
         print(
-            f'{Fore.RED}To run only failed tests: `python dev_utils/run_all_llm_as_a_judge_tests.py -d` and select the same judge{Fore.RESET}'
+            f'{Fore.RED}To run only failed tests: `python tools/run_all_llm_as_a_judge_tests.py -d` and select the same judge{Fore.RESET}'
         )
 
 

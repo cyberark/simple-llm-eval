@@ -1,90 +1,93 @@
 Copyright (c) 2025 CyberArk Software Ltd. All rights reserved
 
-SimplEval is using the following open source components:
+Simple-Eval is using the following open source components:
 
-1)	boto / boto3 (https://github.com/boto/boto3): Apache Software License (Apache-2.0)
-Copyright 2013-2017 Amazon.com, Inc. or its affiliates. All Rights Reserved
+1) boto / boto3 (https://github.com/boto/boto3): Apache Software License (Apache-2.0)
+        Copyright 2013-2017 Amazon.com, Inc. or its affiliates. All Rights Reserved
 
-2)	boto / botocore (https://github.com/boto/botocore): Apache Software License (Apache-2.0)
-Copyright 2012-2022 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+2) boto / botocore (https://github.com/boto/botocore): Apache Software License (Apache-2.0)
+        Copyright 2012-2022 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 
-3)	pydantic / jiter (https://github.com/pydantic/jiter/): MIT License
-Copyright (c) 2022 to present Samuel Colvin.
+3) pydantic / jiter (https://github.com/pydantic/jiter/): MIT License
+        Copyright (c) 2022 to present Samuel Colvin.
 
-4)	tqdm (https://github.com/tqdm/tqdm): Mozilla Public Licence (MPL) v. 2.0 and MIT License
-MPL-2.0 2015-2024 (c) Casper da Costa-Luis
-MIT 2016 (c) [PR #96] on behalf of Google Inc.
-MIT 2013 (c) Noam Yorav-Raphael, original author.
+4) tqdm (https://github.com/tqdm/tqdm): Mozilla Public Licence (MPL) v. 2.0 and MIT License
+        MPL-2.0 2015-2024 (c) Casper da Costa-Luis
+        MIT 2016 (c) [PR #96] on behalf of Google Inc.
+        MIT 2013 (c) Noam Yorav-Raphael, original author.
 
 5)  jd / tenacity (https://github.com/jd/tenacity): Apache Software License (Apache-2.0)
-Copyright Julien Danjou
+        Copyright 2016 Étienne Bersac
+        Copyright 2016 Julien Danjou
+        Copyright 2016 Joshua Harlow
+        Copyright 2013-2014 Ray Holder
 
-6)  colorama (https://github.com/tartley/colorama): BSD 3-Clause license
-Copyright Jonathan Hartley & Arnon Yaari, 2013-2020.
+6) colorama (https://github.com/tartley/colorama): BSD 3-Clause license
+        Copyright Jonathan Hartley & Arnon Yaari, 2013-2020.
 
-7)	Jinja2 (https://github.com/pallets/jinja/): BSD-3-Clause License
-Copyright (c) 2006 by the respective authors (see AUTHORS file).
-All rights reserved.
+7) Jinja2 (https://github.com/pallets/jinja): BSD-3-Clause License
+        Copyright 2007 Pallets
 
-8)	pallets / click (https://github.com/pallets/click): BSD-3-Clause License
-Copyright 2014 Pallets
+8) pallets / click (https://github.com/pallets/click): BSD-3-Clause License
+        Copyright 2014 Pallets
 
-9)	tabulate (https://github.com/astanin/python-tabulate): MIT License
-Copyright (c) 2011-2020 Sergey Astanin and contributors
+9) tabulate (https://github.com/astanin/python-tabulate): MIT License
+        Copyright (c) 2011-2020 Sergey Astanin and contributors
 
 10) beautifulsoup4 (https://www.crummy.com/software/BeautifulSoup/): MIT License
-Copyright (c) Leonard Richardson
+        Copyright (c) Leonard Richardson
 
 11) inquirerpy (https://github.com/kazhala/InquirerPy): MIT License
-Copyright (c) 2020 Kevin Zhuang
+        Copyright (c) 2020 Kevin Zhuang
 
-12)	matplotlib (https://github.com/matplotlib/matplotlib): Python Software Foundation License
-Copyright (c) 2012- Matplotlib Development Team; All Rights Reserved
+12) matplotlib (https://github.com/matplotlib/matplotlib): Python Software Foundation License
+        Copyright (c) 2002–2012 John Hunter, Darren Dale, Eric Firing, Michael Droettboom and the Matplotlib development team;
+        Copyright (c) 2012-2025 Matplotlib Development Team;
 
 13) litellm (https://github.com/BerriAI/litellm): MIT License
-Copyright (c) 2023 Berri AI
+        Copyright (c) 2023 Berri AI
 
-14)	httpcore (https://github.com/encode/httpcore): BSD-3-Clause License
-Copyright © 2020, Encode OSS Ltd. All rights reserved.
+14) httpcore (https://github.com/encode/httpcore): BSD-3-Clause License
+        Copyright © 2020, Encode OSS Ltd. All rights reserved.
 
 15) google-genai (https://github.com/googleapis/python-genai): Apache Software License (Apache-2.0)
-Copyright 2024 Google LLC
+        Copyright 2024 Google LLC
 
-16) @babel/generator (https://github.com/babel/babel.git): MIT
-Copyright (c) 2014-present Sebastian McKenzie and other contributors
+16) babel/generator (https://github.com/babel/babel.git): MIT License
+        Copyright (c) 2014-present Sebastian McKenzie and other contributors
 
-17) @babel/parser (https://github.com/babel/babel/): MIT
-Copyright (C) 2012-2014 by various contributors (see AUTHORS)
+17) babel/parser (https://github.com/babel/babel/): MIT License
+        Copyright (C) 2012-2014 by various contributors (see AUTHORS)
 
-18) @babel/traverse (https://github.com/babel/babel): MIT
-Copyright (c) 2014-present Sebastian McKenzie and other contributors
+18) babel/traverse (https://github.com/babel/babel): MIT License
+        Copyright (c) 2014-present Sebastian McKenzie and other contributors
 
-19) @emotion/react (https://github.com/emotion-js/emotion/tree/main/packages/react): MIT
-Copyright (c) Emotion team and other contributors
+19) emotion/react (https://github.com/emotion-js/emotion/tree/main/packages/react): MIT License
+        Copyright (c) Emotion team and other contributors
 
-20) @emotion/styled (https://github.com/emotion-js/emotion/tree/main/packages/styled): MIT
-Copyright (c) Emotion team and other contributors
+20) emotion/styled (https://github.com/emotion-js/emotion/tree/main/packages/styled): MIT License
+        Copyright (c) Emotion team and other contributors
 
-21) @mui/material (https://github.com/mui/material-ui): MIT
-Copyright (c) 2014 Call-Em-All
+21) mui/material (https://github.com/mui/material-ui): MIT License
+        Copyright (c) 2014 Call-Em-All
 
-22) @mui/x-charts (https://github.com/mui/mui-x): MIT
-Copyright (c) 2020 Material-UI SAS
+22) mui/x-charts (https://github.com/mui/mui-x): MIT License
+        Copyright (c) 2020 Material-UI SAS
 
-23) @tailwindcss/vite (https://github.com/tailwindlabs/tailwindcss): MIT
-Copyright (c) Tailwind Labs, Inc.
+23) tailwindcss/vite (https://github.com/tailwindlabs/tailwindcss): MIT License
+        Copyright (c) Tailwind Labs, Inc.
 
-24) lucide-react (https://github.com/lucide-icons/lucide): ISC
-Copyright (c) for portions of Lucide are held by Cole Bemis 2013-2022 as part of Feather (MIT). All other copyright (c) for Lucide are held by Lucide Contributors 2022.
+24) lucide-react (https://github.com/lucide-icons/lucide): ISC License
+        Copyright (c) for portions of Lucide are held by Cole Bemis 2013-2022 as part of Feather (MIT). All other copyright (c) for Lucide are held by Lucide Contributors 2022.
 
-25) react (https://github.com/facebook/react): MIT
-Copyright (c) Meta Platforms, Inc. and affiliates.
+25) react (https://github.com/facebook/react): MIT License
+        Copyright (c) Meta Platforms, Inc. and affiliates.
 
-26) react-dom (https://github.com/facebook/react): MIT
-Copyright (c) Meta Platforms, Inc. and affiliates.
+26) react-dom (https://github.com/facebook/react): MIT License
+        Copyright (c) Meta Platforms, Inc. and affiliates.
 
-27) tailwindcss (https://github.com/tailwindlabs/tailwindcss): MIT
-Copyright (c) Tailwind Labs, Inc.
+27) tailwindcss (https://github.com/tailwindlabs/tailwindcss): MIT License
+        Copyright (c) Tailwind Labs, Inc.
 
 =================================================================================
 
@@ -1393,6 +1396,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 21) MIT License
+
 The MIT License (MIT)
 
 Copyright (c) 2014 Call-Em-All

@@ -21,7 +21,7 @@ def run_command(cmd, description=None):
 def update_requirements_txt():
     ci_path = Path(__file__).parent
     requirements_temp_path = ci_path / 'requirements-temp.txt'
-    
+
     simpleval_path = ci_path.parent
     requirements_path = simpleval_path / 'requirements.txt'
 

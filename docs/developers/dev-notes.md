@@ -28,8 +28,8 @@
 <br>`.venv\Scripts\activate` (Windows)
 
 ## Running all checks 🔍
-* Run the the `dev_scripts/pr/pre_pull_request_checks.sh/bat` script
-* If you made changes to the `reports-frontend` reports, run the `dev_scripts/pr/pre_pull_request_checks_react.sh/bat` script
+* Run the the `ci/pre_pull_request_checks.py` script
+* If you made changes to the `reports-frontend` reports, run the `ci/pre_pull_request_checks_react.py` script
 
 These scripts will run in the pipeline as well.
 

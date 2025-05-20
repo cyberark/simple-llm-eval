@@ -24,9 +24,9 @@ Go over the [developer's guide](https://cyberark.github.io/simple-llm-eval/devel
 ## Testing
 
 * Continually make sure that tests are passing: `pytest -v tests`
-* Run the pre-PR script: `dev_scripts/pr/pre_pull_request_checks.sh/bat` to run all checks before you create 
+* Run the pre-PR script: `ci/pre_pull_request_checks.py` to run all checks before you create 
 a PR. This includes linters, unit tests coverage, etc.
-* If you made changes to `reports-frontend`, also run `dev_scripts/pr/pre_pull_request_checks_react.sh/bat`
+* If you made changes to `reports-frontend`, also run `ci/pre_pull_request_checks_react.py`
 
 ## Documentation
 

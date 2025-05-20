@@ -15,18 +15,18 @@ The `tests/integration/test_llm_as_a_judge.py` integration test runs in the pipe
 
 You can run all evaluation for a judge with this script:
 ```bash
-python dev_utils/run_all_llm_as_a_judge_tests.py --config-file <config> 
+python tools/run_all_llm_as_a_judge_tests.py --config-file <config> 
 ```
 
 The code retries on errors, but if you still get temporary errors (like throttling, parsing issues), simply run again without overwriting. This usually finishes the failed tests:
 
 ```bash
-python dev_utils/run_all_llm_as_a_judge_tests.py --config-file <config> --do-not-overwrite-eval-results
+python tools/run_all_llm_as_a_judge_tests.py --config-file <config> --do-not-overwrite-eval-results
 ```
 
 !!! example
     ```bash
-    python dev_utils/run_all_llm_as_a_judge_tests.py -c tests/resources/llm_as_a_judge_datasets/classify_product/eval_set/config_open_ai.json
+    python tools/run_all_llm_as_a_judge_tests.py -c tests/resources/llm_as_a_judge_datasets/classify_product/eval_set/config_open_ai.json
     ```
 
 !!! warning
@@ -39,7 +39,7 @@ Use the `--help` flag to see all the options, `-v` for verbose output.
 To open the reports for a specific judge use this script and select the judge you want to use:
 
 ```bash
-python dev_utils/show_reports_for_all_llm_as_a_judge_tests.py
+python tools/show_reports_for_all_llm_as_a_judge_tests.py
 ```
 
 Use the `--help` flag to see all the options.

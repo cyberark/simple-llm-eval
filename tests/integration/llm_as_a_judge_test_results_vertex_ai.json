@@ -1,30 +1,387 @@
 {
   "stats": {
-    "classify_product-good_prompt": 0,
-    "classify_product-bad_prompt": 0,
-    "detect_toxicity-good_prompt": 0,
-    "detect_toxicity-bad_prompt": 0,
+    "classify_product-good_prompt": 1,
+    "classify_product-bad_prompt": 8,
+    "detect_toxicity-good_prompt": 3,
+    "detect_toxicity-bad_prompt": 8,
     "spam_detection-good_prompt": 0,
-    "spam_detection-bad_prompt": 0,
-    "metric_counts": {},
+    "spam_detection-bad_prompt": 14,
+    "metric_counts": {
+      "relevance:bad_prompt": {
+        "diff_count": 10,
+        "total_tests": 30,
+        "percent": "33.33"
+      },
+      "pro_style_and_tone:bad_prompt": {
+        "diff_count": 9,
+        "total_tests": 30,
+        "percent": "30.00"
+      },
+      "readability:bad_prompt": {
+        "diff_count": 8,
+        "total_tests": 30,
+        "percent": "26.67"
+      },
+      "helpfulness:good_prompt": {
+        "diff_count": 2,
+        "total_tests": 30,
+        "percent": "6.67"
+      },
+      "following_instructions:good_prompt": {
+        "diff_count": 1,
+        "total_tests": 30,
+        "percent": "3.33"
+      },
+      "no_ground_truth_simple:good_prompt": {
+        "diff_count": 1,
+        "total_tests": 30,
+        "percent": "3.33"
+      },
+      "no_ground_truth:bad_prompt": {
+        "diff_count": 1,
+        "total_tests": 30,
+        "percent": "3.33"
+      },
+      "coherence:bad_prompt": {
+        "diff_count": 1,
+        "total_tests": 30,
+        "percent": "3.33"
+      },
+      "following_instructions:bad_prompt": {
+        "diff_count": 1,
+        "total_tests": 30,
+        "percent": "3.33"
+      }
+    },
     "overall_diff_count": {
-      "diff_count": 0,
+      "diff_count": 34,
       "total_tests": 660,
-      "percent": "0.00"
+      "percent": "5.15"
     }
   },
   "results": {
     "classify_product": {
-      "good_prompt": [],
-      "bad_prompt": []
+      "good_prompt": [
+        {
+          "name_metric": "classify-product-text1:following_instructions",
+          "golden_set_score": 1.0,
+          "golden_set_explanation": "The model correctly classifies the user inquiry into one of the four categories provided, without any additional text or apology.",
+          "eval_result_score": 0.0,
+          "eval_result_explanation": "The model was asked to only return one of the four categories without explanation or any additional text. The model returned the correct category but also included an explanation, thus violating the instructions.",
+          "golden_set_file": "tests/resources/llm_as_a_judge_test_eval_results_golden_set/classify_product/good_prompt/eval_results_vertex_ai.jsonl",
+          "eval_result_file": "tests/resources/llm_as_a_judge_datasets/classify_product/eval_set/testcases/good_prompt/eval_results_vertex_ai.jsonl"
+        }
+      ],
+      "bad_prompt": [
+        {
+          "name_metric": "classify-product-text1:readability",
+          "golden_set_score": 0.0,
+          "golden_set_explanation": "The response provided the wrong answer to the question. The question asked the model to classify a user inquiry, but the response provided a classification that is not related to readability.",
+          "eval_result_score": 1.0,
+          "eval_result_explanation": "The response 'Positive Testimonial' does not contain any text that needs to be assessed for readability. The question asks the model to classify the user inquiry into one of four categories, and the response provides one of those categories. Therefore, the readability assessment is not applicable in this case, but to follow the instructions, I will assess it as having excellent readability because it is a single, clear answer.",
+          "golden_set_file": "tests/resources/llm_as_a_judge_test_eval_results_golden_set/classify_product/bad_prompt/eval_results_vertex_ai.jsonl",
+          "eval_result_file": "tests/resources/llm_as_a_judge_datasets/classify_product/eval_set/testcases/bad_prompt/eval_results_vertex_ai.jsonl"
+        },
+        {
+          "name_metric": "classify-product-text2:pro_style_and_tone",
+          "golden_set_score": 0.0,
+          "golden_set_explanation": "The response is completely incorrect, as it provides a classification that is not even remotely related to the user inquiry. The user inquiry is about a refund request due to receiving the wrong size, which should be classified as \"Refund/Returns\". However, the response classifies it as \"Positive Testimonial\", which is entirely inappropriate and unprofessional in this context.",
+          "eval_result_score": 1.0,
+          "eval_result_explanation": "The response is simply a label, without any additional text or explanation. This is acceptable in a professional setting, as it is concise and directly answers the question. However, the answer is incorrect, which could be unprofessional in some contexts, but the question is about style and tone, not correctness.",
+          "golden_set_file": "tests/resources/llm_as_a_judge_test_eval_results_golden_set/classify_product/bad_prompt/eval_results_vertex_ai.jsonl",
+          "eval_result_file": "tests/resources/llm_as_a_judge_datasets/classify_product/eval_set/testcases/bad_prompt/eval_results_vertex_ai.jsonl"
+        },
+        {
+          "name_metric": "classify-product-text3:readability",
+          "golden_set_score": 0.0,
+          "golden_set_explanation": "The response provided is not a text that can be assessed for readability. It is simply a classification label, not a text passage.",
+          "eval_result_score": 1.0,
+          "eval_result_explanation": "The response is very short and does not contain any complex sentence structures or vocabulary. It is easy to understand.",
+          "golden_set_file": "tests/resources/llm_as_a_judge_test_eval_results_golden_set/classify_product/bad_prompt/eval_results_vertex_ai.jsonl",
+          "eval_result_file": "tests/resources/llm_as_a_judge_datasets/classify_product/eval_set/testcases/bad_prompt/eval_results_vertex_ai.jsonl"
+        },
+        {
+          "name_metric": "classify-product-text4:pro_style_and_tone",
+          "golden_set_score": 0.0,
+          "golden_set_explanation": "The response provides an incorrect classification (Positive Testimonial) without any explanation, which is not professional. A professional response would at least provide the correct classification and potentially a brief justification.",
+          "eval_result_score": 1.0,
+          "eval_result_explanation": "The response provides a label without any additional text, which aligns with the instructions. The label itself is a valid category from the prompt. The response does not contain any elements that would be considered unprofessional.",
+          "golden_set_file": "tests/resources/llm_as_a_judge_test_eval_results_golden_set/classify_product/bad_prompt/eval_results_vertex_ai.jsonl",
+          "eval_result_file": "tests/resources/llm_as_a_judge_datasets/classify_product/eval_set/testcases/bad_prompt/eval_results_vertex_ai.jsonl"
+        },
+        {
+          "name_metric": "classify-product-text5:pro_style_and_tone",
+          "golden_set_score": 0.0,
+          "golden_set_explanation": "The response provides the classification label, but it also includes additional text (the category name), which is not professional for a text classification model. The instruction was to return only the label without explanation or any additional text.",
+          "eval_result_score": 1.0,
+          "eval_result_explanation": "The response provided is simply a category label. This is perfectly acceptable in a professional setting, as it is direct and to the point. There are no elements of unprofessionalism present.",
+          "golden_set_file": "tests/resources/llm_as_a_judge_test_eval_results_golden_set/classify_product/bad_prompt/eval_results_vertex_ai.jsonl",
+          "eval_result_file": "tests/resources/llm_as_a_judge_datasets/classify_product/eval_set/testcases/bad_prompt/eval_results_vertex_ai.jsonl"
+        },
+        {
+          "name_metric": "classify-product-text8:relevance",
+          "golden_set_score": 0.0,
+          "golden_set_explanation": "The question asks the model to classify a user inquiry into one of four categories. The response provides one of the categories, but it is the wrong category. Therefore, the response is not at all relevant.",
+          "eval_result_score": 1.0,
+          "eval_result_explanation": "The question asks to classify a user inquiry into one of four categories. The response provides one of the categories as an answer. Therefore, the response is completely relevant.",
+          "golden_set_file": "tests/resources/llm_as_a_judge_test_eval_results_golden_set/classify_product/bad_prompt/eval_results_vertex_ai.jsonl",
+          "eval_result_file": "tests/resources/llm_as_a_judge_datasets/classify_product/eval_set/testcases/bad_prompt/eval_results_vertex_ai.jsonl"
+        },
+        {
+          "name_metric": "classify-product-text9:readability",
+          "golden_set_score": 0.0,
+          "golden_set_explanation": "The response provided 'Positive Testimonial' which is not a readability assessment. The question asks for an assessment of the readability of a given response, using a specific scale (unreadable, poor readability, fair readability, good readability, excellent readability). The response does not follow the instructions.",
+          "eval_result_score": 1.0,
+          "eval_result_explanation": "The response provided is a single word, which is not a sentence or paragraph. Therefore, it is difficult to assess its readability in terms of sentence structure, vocabulary, and organization. However, since the question asks for a single word answer, the readability is excellent because it is concise and directly answers the question.",
+          "golden_set_file": "tests/resources/llm_as_a_judge_test_eval_results_golden_set/classify_product/bad_prompt/eval_results_vertex_ai.jsonl",
+          "eval_result_file": "tests/resources/llm_as_a_judge_datasets/classify_product/eval_set/testcases/bad_prompt/eval_results_vertex_ai.jsonl"
+        },
+        {
+          "name_metric": "classify-product-text10:pro_style_and_tone",
+          "golden_set_score": 1.0,
+          "golden_set_explanation": "The response is a single word, which is appropriate for a professional setting.",
+          "eval_result_score": 0.0,
+          "eval_result_explanation": "The response is not professional because it provides an incorrect classification of the user inquiry. The user inquiry is about obtaining a receipt, which falls under a general question or a request for information, not a positive testimonial. The response should have classified the inquiry as a 'General Question' or something similar, but it incorrectly classified it as 'Positive Testimonial'.",
+          "golden_set_file": "tests/resources/llm_as_a_judge_test_eval_results_golden_set/classify_product/bad_prompt/eval_results_vertex_ai.jsonl",
+          "eval_result_file": "tests/resources/llm_as_a_judge_datasets/classify_product/eval_set/testcases/bad_prompt/eval_results_vertex_ai.jsonl"
+        }
+      ]
     },
     "detect_toxicity": {
-      "good_prompt": [],
-      "bad_prompt": []
+      "good_prompt": [
+        {
+          "name_metric": "detect-toxicity3:helpfulness",
+          "golden_set_score": 0.0,
+          "golden_set_explanation": "The response does not follow the instructions. The response should be one of the three categories: 'Non-toxic', 'Neutral', or 'Toxic'.",
+          "eval_result_score": 0.8333333333333334,
+          "eval_result_explanation": "The user message expresses disagreement but also respect, which aligns with the 'Neutral' category as it shows mild criticism without being aggressively harassing or hateful.",
+          "golden_set_file": "tests/resources/llm_as_a_judge_test_eval_results_golden_set/detect_toxicity/good_prompt/eval_results_vertex_ai.jsonl",
+          "eval_result_file": "tests/resources/llm_as_a_judge_datasets/detect_toxicity/eval_set/testcases/good_prompt/eval_results_vertex_ai.jsonl"
+        },
+        {
+          "name_metric": "detect-toxicity3:no_ground_truth_simple",
+          "golden_set_score": 0.0,
+          "golden_set_explanation": "The message expresses disagreement but also respect, which aligns more closely with the 'Neutral' category. The candidate response incorrectly classified it as 'Neutral'.",
+          "eval_result_score": 1.0,
+          "eval_result_explanation": "The user message expresses disagreement but also respect, which aligns with the 'Neutral' category. The message does not contain any hateful or harassing language, so it is not 'Toxic'. It is more than just non-toxic, as it expresses disagreement, so it is not 'Non-toxic'.",
+          "golden_set_file": "tests/resources/llm_as_a_judge_test_eval_results_golden_set/detect_toxicity/good_prompt/eval_results_vertex_ai.jsonl",
+          "eval_result_file": "tests/resources/llm_as_a_judge_datasets/detect_toxicity/eval_set/testcases/good_prompt/eval_results_vertex_ai.jsonl"
+        },
+        {
+          "name_metric": "detect-toxicity8:helpfulness",
+          "golden_set_score": 0.0,
+          "golden_set_explanation": "The response only provides the classification label without any reasoning, failing to adhere to the schema's requirement for a 'reasoning' field explaining the derivation of the answer.",
+          "eval_result_score": 0.8333333333333334,
+          "eval_result_explanation": "The user message expresses an opinion with a reservation, which falls into the 'Neutral' category as it shows disagreement but is not aggressively harassing or hateful.",
+          "golden_set_file": "tests/resources/llm_as_a_judge_test_eval_results_golden_set/detect_toxicity/good_prompt/eval_results_vertex_ai.jsonl",
+          "eval_result_file": "tests/resources/llm_as_a_judge_datasets/detect_toxicity/eval_set/testcases/good_prompt/eval_results_vertex_ai.jsonl"
+        }
+      ],
+      "bad_prompt": [
+        {
+          "name_metric": "detect-toxicity1:pro_style_and_tone",
+          "golden_set_score": 0.0,
+          "golden_set_explanation": "The response 'Toxic' is not professional. It is too blunt and lacks any professional framing or explanation. A professional response would provide context or justification for the classification.",
+          "eval_result_score": 1.0,
+          "eval_result_explanation": "The response is a single word, which is acceptable in a professional setting when a short answer is expected. The word itself is not unprofessional.",
+          "golden_set_file": "tests/resources/llm_as_a_judge_test_eval_results_golden_set/detect_toxicity/bad_prompt/eval_results_vertex_ai.jsonl",
+          "eval_result_file": "tests/resources/llm_as_a_judge_datasets/detect_toxicity/eval_set/testcases/bad_prompt/eval_results_vertex_ai.jsonl"
+        },
+        {
+          "name_metric": "detect-toxicity2:relevance",
+          "golden_set_score": 0.0,
+          "golden_set_explanation": "The question asks for a classification of the user message as 'Non-toxic', 'Neutral', or 'Toxic'. The response provides 'Non-toxic' which is not a relevance rating.",
+          "eval_result_score": 1.0,
+          "eval_result_explanation": "The question asks the LLM to classify a user message as either \"Non-toxic\", \"Neutral\", or \"Toxic\". The response provides one of these three categories. However, the classification is incorrect, as the user message is clearly toxic. Despite the incorrect classification, the response is still relevant because it directly addresses the question by providing one of the requested categories.",
+          "golden_set_file": "tests/resources/llm_as_a_judge_test_eval_results_golden_set/detect_toxicity/bad_prompt/eval_results_vertex_ai.jsonl",
+          "eval_result_file": "tests/resources/llm_as_a_judge_datasets/detect_toxicity/eval_set/testcases/bad_prompt/eval_results_vertex_ai.jsonl"
+        },
+        {
+          "name_metric": "detect-toxicity4:relevance",
+          "golden_set_score": 0.0,
+          "golden_set_explanation": "The response provides a classification of the user message, but the classification is incorrect according to the instructions. The message \"Stay out of my country, you don`t belong here\" should be classified as toxic, not non-toxic. Therefore, the response is not at all relevant.",
+          "eval_result_score": 1.0,
+          "eval_result_explanation": "The response provides a classification of the user message as \"Non-toxic\". While the message contains exclusionary language, it does not contain direct insults, threats, slurs, hate speech, or strong harassment. Therefore, the response is relevant to the question.",
+          "golden_set_file": "tests/resources/llm_as_a_judge_test_eval_results_golden_set/detect_toxicity/bad_prompt/eval_results_vertex_ai.jsonl",
+          "eval_result_file": "tests/resources/llm_as_a_judge_datasets/detect_toxicity/eval_set/testcases/bad_prompt/eval_results_vertex_ai.jsonl"
+        },
+        {
+          "name_metric": "detect-toxicity5:relevance",
+          "golden_set_score": 0.0,
+          "golden_set_explanation": "The question asks for one of three categories: \u201cNon-toxic\u201d, \u201cNeutral\u201d, or \u201cToxic\u201d. The response gives \"Toxic\" which is not a relevance rating.",
+          "eval_result_score": 1.0,
+          "eval_result_explanation": "The question asks for a classification of a user message into one of three categories: \"Non-toxic\", \"Neutral\", or \"Toxic\". The response provides one of these three categories, so it is completely relevant.",
+          "golden_set_file": "tests/resources/llm_as_a_judge_test_eval_results_golden_set/detect_toxicity/bad_prompt/eval_results_vertex_ai.jsonl",
+          "eval_result_file": "tests/resources/llm_as_a_judge_datasets/detect_toxicity/eval_set/testcases/bad_prompt/eval_results_vertex_ai.jsonl"
+        },
+        {
+          "name_metric": "detect-toxicity6:pro_style_and_tone",
+          "golden_set_score": 1.0,
+          "golden_set_explanation": "The response is a single word, and it does not contain any elements that would be considered unprofessional. It is a direct answer to the question.",
+          "eval_result_score": 0.0,
+          "eval_result_explanation": "The response is simply 'Toxic'. This is not professional as it lacks any context or explanation, which would be expected in a professional setting. A professional response would typically include a brief justification or rationale for the classification.",
+          "golden_set_file": "tests/resources/llm_as_a_judge_test_eval_results_golden_set/detect_toxicity/bad_prompt/eval_results_vertex_ai.jsonl",
+          "eval_result_file": "tests/resources/llm_as_a_judge_datasets/detect_toxicity/eval_set/testcases/bad_prompt/eval_results_vertex_ai.jsonl"
+        },
+        {
+          "name_metric": "detect-toxicity7:no_ground_truth",
+          "golden_set_score": 0.0,
+          "golden_set_explanation": "The output only provides a classification label without any reasoning or explanation, which is insufficient to meet the requirements of the prompt.",
+          "eval_result_score": 1.0,
+          "eval_result_explanation": "The user message contains a direct insult ('idiot') but does not include threats, slurs, hate speech, or strong harassment. Therefore, it falls into the 'Toxic' category.",
+          "golden_set_file": "tests/resources/llm_as_a_judge_test_eval_results_golden_set/detect_toxicity/bad_prompt/eval_results_vertex_ai.jsonl",
+          "eval_result_file": "tests/resources/llm_as_a_judge_datasets/detect_toxicity/eval_set/testcases/bad_prompt/eval_results_vertex_ai.jsonl"
+        },
+        {
+          "name_metric": "detect-toxicity7:relevance",
+          "golden_set_score": 0.0,
+          "golden_set_explanation": "The question asks for a classification of a user message as 'Non-toxic', 'Neutral', or 'Toxic'. The response provides 'Non-toxic' which is not one of the options in the relevance scale.",
+          "eval_result_score": 0.75,
+          "eval_result_explanation": "The response provides a classification of the user message as \"Non-toxic\". The question asks for a classification into one of three categories, and the response provides one of those categories. However, the correct classification should be \"Toxic\" because the message contains a direct insult. Therefore, the response is not completely relevant.",
+          "golden_set_file": "tests/resources/llm_as_a_judge_test_eval_results_golden_set/detect_toxicity/bad_prompt/eval_results_vertex_ai.jsonl",
+          "eval_result_file": "tests/resources/llm_as_a_judge_datasets/detect_toxicity/eval_set/testcases/bad_prompt/eval_results_vertex_ai.jsonl"
+        },
+        {
+          "name_metric": "detect-toxicity10:relevance",
+          "golden_set_score": 0.0,
+          "golden_set_explanation": "The question asks to classify a user message as \"Non-toxic\", \"Neutral\", or \"Toxic\". The response provides \"Toxic\" without any reasoning. The question is about assessing the relevance of the response to the question, and since the response doesn't follow the instructions, it is not at all relevant.",
+          "eval_result_score": 1.0,
+          "eval_result_explanation": "The question asks to classify a user message as \"Non-toxic\", \"Neutral\", or \"Toxic\". The provided message is \"It`s nice to see you again, friend!\". The response is \"Toxic\", which is one of the valid categories, but it is an incorrect classification of the message. Therefore, the response is relevant because it provides an answer from the allowed categories, but it is wrong.",
+          "golden_set_file": "tests/resources/llm_as_a_judge_test_eval_results_golden_set/detect_toxicity/bad_prompt/eval_results_vertex_ai.jsonl",
+          "eval_result_file": "tests/resources/llm_as_a_judge_datasets/detect_toxicity/eval_set/testcases/bad_prompt/eval_results_vertex_ai.jsonl"
+        }
+      ]
     },
     "spam_detection": {
       "good_prompt": [],
-      "bad_prompt": []
+      "bad_prompt": [
+        {
+          "name_metric": "spam-detect2:relevance",
+          "golden_set_score": 0.0,
+          "golden_set_explanation": "The response 'Spam' is not relevant to the question, which asks for a relevance rating of the LLM's response to the email classification task.",
+          "eval_result_score": 1.0,
+          "eval_result_explanation": "The question asks the LLM to act as an email filter and classify the given email as either 'Spam' or 'Not Spam'. The response provides one of the two categories without any additional text or explanation, which is exactly what the question asked for. Therefore, the response is completely relevant.",
+          "golden_set_file": "tests/resources/llm_as_a_judge_test_eval_results_golden_set/spam_detection/bad_prompt/eval_results_vertex_ai.jsonl",
+          "eval_result_file": "tests/resources/llm_as_a_judge_datasets/spam_detection/eval_set/testcases/bad_prompt/eval_results_vertex_ai.jsonl"
+        },
+        {
+          "name_metric": "spam-detect2:pro_style_and_tone",
+          "golden_set_score": 0.0,
+          "golden_set_explanation": "The response 'Spam' is not written in a professional style or tone. It lacks any professional language or formatting, and it does not resemble the kind of communication one would expect in a corporate or business setting. It's just a bare classification.",
+          "eval_result_score": 1.0,
+          "eval_result_explanation": "The response 'Spam' is a direct and concise answer, lacking any elements that would be considered unprofessional. It is simply a classification label, and thus fits a professional setting perfectly.",
+          "golden_set_file": "tests/resources/llm_as_a_judge_test_eval_results_golden_set/spam_detection/bad_prompt/eval_results_vertex_ai.jsonl",
+          "eval_result_file": "tests/resources/llm_as_a_judge_datasets/spam_detection/eval_set/testcases/bad_prompt/eval_results_vertex_ai.jsonl"
+        },
+        {
+          "name_metric": "spam-detect3:coherence",
+          "golden_set_score": 0.0,
+          "golden_set_explanation": "The response fails to recognize the email as spam, despite its clear indicators of being a deceptive offer. The email contains an unrealistic claim of earning $5,000 a day from home with no experience required, which is a typical characteristic of spam emails. Therefore, the response demonstrates a significant error in reasoning.",
+          "eval_result_score": 1.0,
+          "eval_result_explanation": "The email message contains an unrealistic claim of earning $5,000 a day from home with no experience required. This is a deceptive offer and a characteristic of spam emails. Therefore, the email should be classified as spam.",
+          "golden_set_file": "tests/resources/llm_as_a_judge_test_eval_results_golden_set/spam_detection/bad_prompt/eval_results_vertex_ai.jsonl",
+          "eval_result_file": "tests/resources/llm_as_a_judge_datasets/spam_detection/eval_set/testcases/bad_prompt/eval_results_vertex_ai.jsonl"
+        },
+        {
+          "name_metric": "spam-detect3:relevance",
+          "golden_set_score": 0.0,
+          "golden_set_explanation": "The question asks the LLM to classify an email as 'Spam' or 'Not Spam'. The response 'Not Spam' is an attempt to answer the question, but the relevance assessment is based on how well the LLM follows instructions, not on the correctness of the answer. The instruction specifically states 'Only return one of the two categories \u2018Spam\u2019 or \u2018Not Spam\u2019 without any additional text or explanation.' The response violates this instruction by including additional text, making it not at all relevant.",
+          "eval_result_score": 1.0,
+          "eval_result_explanation": "The question asks the LLM to act as an email filter and classify the given email as 'Spam' or 'Not Spam'. The response provides one of the two categories, 'Not Spam'. Therefore, the response is completely relevant to the question.",
+          "golden_set_file": "tests/resources/llm_as_a_judge_test_eval_results_golden_set/spam_detection/bad_prompt/eval_results_vertex_ai.jsonl",
+          "eval_result_file": "tests/resources/llm_as_a_judge_datasets/spam_detection/eval_set/testcases/bad_prompt/eval_results_vertex_ai.jsonl"
+        },
+        {
+          "name_metric": "spam-detect4:readability",
+          "golden_set_score": 0.0,
+          "golden_set_explanation": "The response 'Spam' does not constitute a readable text. It's a single word without context or explanation, making it impossible to assess its readability in terms of sentence structure, vocabulary, or organization.",
+          "eval_result_score": 1.0,
+          "eval_result_explanation": "The response is extremely short and doesn't contain any complex sentence structures or vocabulary. It is easily understood.",
+          "golden_set_file": "tests/resources/llm_as_a_judge_test_eval_results_golden_set/spam_detection/bad_prompt/eval_results_vertex_ai.jsonl",
+          "eval_result_file": "tests/resources/llm_as_a_judge_datasets/spam_detection/eval_set/testcases/bad_prompt/eval_results_vertex_ai.jsonl"
+        },
+        {
+          "name_metric": "spam-detect4:following_instructions",
+          "golden_set_score": 0.0,
+          "golden_set_explanation": "The prompt explicitly asked for the answer to be either 'Spam' or 'Not Spam'. The response provided 'Spam' which is not one of the options 'Yes', 'No', or 'Not applicable'.",
+          "eval_result_score": 1.0,
+          "eval_result_explanation": "The instruction was to only return 'Spam' or 'Not Spam'. The response returned 'Spam' which is a valid response. The instruction was followed.",
+          "golden_set_file": "tests/resources/llm_as_a_judge_test_eval_results_golden_set/spam_detection/bad_prompt/eval_results_vertex_ai.jsonl",
+          "eval_result_file": "tests/resources/llm_as_a_judge_datasets/spam_detection/eval_set/testcases/bad_prompt/eval_results_vertex_ai.jsonl"
+        },
+        {
+          "name_metric": "spam-detect5:readability",
+          "golden_set_score": 0.0,
+          "golden_set_explanation": "The response 'Not Spam' does not contain any text that can be assessed for readability. It's a classification label, not a text passage. Therefore, it's unreadable in the context of assessing text comprehension.",
+          "eval_result_score": 1.0,
+          "eval_result_explanation": "The response 'Not Spam' is extremely concise and easily understood. There are no complex sentences or vocabulary. The readability is excellent because it is direct and to the point.",
+          "golden_set_file": "tests/resources/llm_as_a_judge_test_eval_results_golden_set/spam_detection/bad_prompt/eval_results_vertex_ai.jsonl",
+          "eval_result_file": "tests/resources/llm_as_a_judge_datasets/spam_detection/eval_set/testcases/bad_prompt/eval_results_vertex_ai.jsonl"
+        },
+        {
+          "name_metric": "spam-detect5:relevance",
+          "golden_set_score": 0.0,
+          "golden_set_explanation": "The response 'Not Spam' is not relevant to the question, which asks for an assessment of the relevance of the LLM's response to the question.",
+          "eval_result_score": 1.0,
+          "eval_result_explanation": "The question asks the LLM to act as an email filter and classify an email as 'Spam' or 'Not Spam'. The provided response 'Not Spam' is a direct answer to the question, but it is incorrect. The email contains a suspicious link and a claim of a 'free prize', which are characteristics of spam. However, the question only asks for the classification, not for an explanation. Therefore, the response is still relevant, even though it's incorrect.",
+          "golden_set_file": "tests/resources/llm_as_a_judge_test_eval_results_golden_set/spam_detection/bad_prompt/eval_results_vertex_ai.jsonl",
+          "eval_result_file": "tests/resources/llm_as_a_judge_datasets/spam_detection/eval_set/testcases/bad_prompt/eval_results_vertex_ai.jsonl"
+        },
+        {
+          "name_metric": "spam-detect6:readability",
+          "golden_set_score": 1.0,
+          "golden_set_explanation": "The response is concise and directly answers the question without any unnecessary information. The vocabulary is simple and the meaning is clear.",
+          "eval_result_score": 0.0,
+          "eval_result_explanation": "The response 'Spam' is a single word and doesn't contain any sentences or structure that can be assessed for readability. Therefore, it's not applicable to evaluate its readability in the traditional sense.",
+          "golden_set_file": "tests/resources/llm_as_a_judge_test_eval_results_golden_set/spam_detection/bad_prompt/eval_results_vertex_ai.jsonl",
+          "eval_result_file": "tests/resources/llm_as_a_judge_datasets/spam_detection/eval_set/testcases/bad_prompt/eval_results_vertex_ai.jsonl"
+        },
+        {
+          "name_metric": "spam-detect6:pro_style_and_tone",
+          "golden_set_score": 0.0,
+          "golden_set_explanation": "The response 'Spam' is not written in a professional style or tone. It lacks any of the elements that would be present in a professional setting, such as a formal tone, proper grammar, or a complete sentence.",
+          "eval_result_score": 1.0,
+          "eval_result_explanation": "The response 'Spam' is a direct and concise answer, lacking any elements that would be considered unprofessional. It is a simple classification without any additional text or explanation, which aligns with a professional tone in this context.",
+          "golden_set_file": "tests/resources/llm_as_a_judge_test_eval_results_golden_set/spam_detection/bad_prompt/eval_results_vertex_ai.jsonl",
+          "eval_result_file": "tests/resources/llm_as_a_judge_datasets/spam_detection/eval_set/testcases/bad_prompt/eval_results_vertex_ai.jsonl"
+        },
+        {
+          "name_metric": "spam-detect9:readability",
+          "golden_set_score": 1.0,
+          "golden_set_explanation": "The response is extremely concise and easy to understand. It directly answers the question without any unnecessary information. The vocabulary is simple and the organization is straightforward, making it highly readable.",
+          "eval_result_score": 0.0,
+          "eval_result_explanation": "The response is a single word, 'Spam'. While it answers the question directly, it doesn't offer any explanation or context. Readability, in the traditional sense, doesn't apply here as it's not a text requiring comprehension, but rather a classification. However, considering the context of assessing readability, the response lacks any features that would contribute to good or poor readability. It's simply a label.",
+          "golden_set_file": "tests/resources/llm_as_a_judge_test_eval_results_golden_set/spam_detection/bad_prompt/eval_results_vertex_ai.jsonl",
+          "eval_result_file": "tests/resources/llm_as_a_judge_datasets/spam_detection/eval_set/testcases/bad_prompt/eval_results_vertex_ai.jsonl"
+        },
+        {
+          "name_metric": "spam-detect10:readability",
+          "golden_set_score": 1.0,
+          "golden_set_explanation": "The response is extremely concise and clear. It consists of a single word, which directly answers the question without any ambiguity. The vocabulary is simple and universally understood, making it easily comprehensible to any reader.",
+          "eval_result_score": 0.0,
+          "eval_result_explanation": "The response 'Spam' is extremely concise and doesn't contain any sentences or paragraphs to assess for readability. However, since the instruction was to only return one of the two categories, the response is technically correct in its brevity. Therefore, while not unreadable, it also doesn't demonstrate any characteristics of good readability.",
+          "golden_set_file": "tests/resources/llm_as_a_judge_test_eval_results_golden_set/spam_detection/bad_prompt/eval_results_vertex_ai.jsonl",
+          "eval_result_file": "tests/resources/llm_as_a_judge_datasets/spam_detection/eval_set/testcases/bad_prompt/eval_results_vertex_ai.jsonl"
+        },
+        {
+          "name_metric": "spam-detect10:relevance",
+          "golden_set_score": 0.0,
+          "golden_set_explanation": "The question asks the LLM to classify an email as 'Spam' or 'Not Spam'. The response 'Spam' is not a relevance rating, thus the response is not at all relevant.",
+          "eval_result_score": 1.0,
+          "eval_result_explanation": "The question asks the LLM to classify an email as 'Spam' or 'Not Spam'. The response provides 'Spam' as the classification. While the classification itself might be incorrect, the response directly addresses the question's core task. Therefore, the response is completely relevant.",
+          "golden_set_file": "tests/resources/llm_as_a_judge_test_eval_results_golden_set/spam_detection/bad_prompt/eval_results_vertex_ai.jsonl",
+          "eval_result_file": "tests/resources/llm_as_a_judge_datasets/spam_detection/eval_set/testcases/bad_prompt/eval_results_vertex_ai.jsonl"
+        },
+        {
+          "name_metric": "spam-detect10:pro_style_and_tone",
+          "golden_set_score": 0.0,
+          "golden_set_explanation": "The response 'Spam' is not written in a professional style or tone. It's a blunt classification without any professional framing or explanation, which is not suitable for a business setting.",
+          "eval_result_score": 1.0,
+          "eval_result_explanation": "The response 'Spam' is a direct and concise answer, lacking any elements that would be considered unprofessional. It does not contain any language or tone that would be inappropriate in a professional setting. Therefore, it completely fits a professional setting.",
+          "golden_set_file": "tests/resources/llm_as_a_judge_test_eval_results_golden_set/spam_detection/bad_prompt/eval_results_vertex_ai.jsonl",
+          "eval_result_file": "tests/resources/llm_as_a_judge_datasets/spam_detection/eval_set/testcases/bad_prompt/eval_results_vertex_ai.jsonl"
+        }
+      ]
     }
   }
 }

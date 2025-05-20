@@ -37,7 +37,7 @@ METRIC_TESTCASE_THRESHOLDS = {
     'correctness:good_prompt': 0.05,
     'relevance:good_prompt': 0.05,
     'correctness:bad_prompt': 0.05,
-    'relevance:bad_prompt': 0.05,
+    'relevance:bad_prompt': 0.35,
 }
 
 

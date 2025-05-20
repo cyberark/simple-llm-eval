@@ -11,7 +11,7 @@ Copyright 2012-2022 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 3)	pydantic / jiter (https://github.com/pydantic/jiter/): MIT License
 Copyright (c) 2022 to present Samuel Colvin.
 
-4)	tqdm (https://pypi.org/project/tqdm/): Mozilla Public Licence (MPL) v. 2.0 and MIT License
+4)	tqdm (https://github.com/tqdm/tqdm): Mozilla Public Licence (MPL) v. 2.0 and MIT License
 MPL-2.0 2015-2024 (c) Casper da Costa-Luis
 MIT 2016 (c) [PR #96] on behalf of Google Inc.
 MIT 2013 (c) Noam Yorav-Raphael, original author.
@@ -22,14 +22,14 @@ Copyright Julien Danjou
 6)  colorama (https://github.com/tartley/colorama): BSD 3-Clause license
 Copyright Jonathan Hartley & Arnon Yaari, 2013-2020.
 
-7)	Jinja2 (https://pypi.org/project/Jinja/): BSD-3-Clause License
+7)	Jinja2 (https://github.com/pallets/jinja/): BSD-3-Clause License
 Copyright (c) 2006 by the respective authors (see AUTHORS file).
 All rights reserved.
 
 8)	pallets / click (https://github.com/pallets/click): BSD-3-Clause License
 Copyright 2014 Pallets
 
-9)	tabulate (https://pypi.org/project/tabulate/): MIT License
+9)	tabulate (https://github.com/astanin/python-tabulate): MIT License
 Copyright (c) 2011-2020 Sergey Astanin and contributors
 
 10) beautifulsoup4 (https://www.crummy.com/software/BeautifulSoup/): MIT License
@@ -38,7 +38,7 @@ Copyright (c) Leonard Richardson
 11) inquirerpy (https://github.com/kazhala/InquirerPy): MIT License
 Copyright (c) 2020 Kevin Zhuang
 
-12)	matplotlib (https://pypi.org/project/matplotlib/): Python Software Foundation License
+12)	matplotlib (https://github.com/matplotlib/matplotlib): Python Software Foundation License
 Copyright (c) 2012- Matplotlib Development Team; All Rights Reserved
 
 13) litellm (https://github.com/BerriAI/litellm): MIT License

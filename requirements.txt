@@ -100,7 +100,7 @@ jsonschema-specifications==2025.4.1
     # via jsonschema
 kiwisolver==1.4.8
     # via matplotlib
-litellm==1.65.4
+litellm==1.70.0
     # via simple-llm-eval (pyproject.toml)
 markupsafe==3.0.2
     # via jinja2
@@ -114,7 +114,7 @@ numpy==2.2.6
     # via
     #   contourpy
     #   matplotlib
-openai==1.79.0
+openai==1.75.0
     # via litellm
 packaging==25.0
     # via

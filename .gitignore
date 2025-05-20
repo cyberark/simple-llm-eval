@@ -284,8 +284,6 @@ $RECYCLE.BIN/
 
 out/
 
-**/cdk.out
-requirements.txt
 /.dmypy.json
 chalice.out/
 

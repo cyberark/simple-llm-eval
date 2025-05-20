@@ -310,3 +310,5 @@ tests/resources/eval_sets/valid/testcases/foo_testcase/llm_task_results.jsonl
 tests/resources/eval_sets/**/eval_results.jsonl
 simpleval/eval_sets/dummy_task/testcases/**/llm_task_results.jsonl
 simpleval/eval_sets/dummy_task/testcases/**/eval_results.jsonl
+
+ci/requirements-temp.txt

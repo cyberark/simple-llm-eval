@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 import argparse
+import hashlib
+from pathlib import Path
+import shutil
 import subprocess
 import sys
 
@@ -14,6 +17,30 @@ def run_command(cmd, description=None):
     except subprocess.CalledProcessError as e:
         print(f'Command failed: {cmd}')
         sys.exit(e.returncode)
+
+def update_requirements_txt():
+    ci_path = Path(__file__).parent
+    simpleval_path = ci_path.parent
+    requirements_path = simpleval_path / 'requirements.txt'
+    requirements_temp_path = simpleval_path / 'requirements-temp.txt'
+
+    run_command(
+        cmd=f'uv pip compile pyproject.toml -o {requirements_temp_path}',
+        description='Updating requirements-temp.txt...'
+    )
+
+    hash_req_temp = hashlib.sha256(open(requirements_temp_path, 'rb').read()).hexdigest()
+    hash_req = hashlib.sha256(open(requirements_path, 'rb').read()).hexdigest()
+    
+    if hash_req_temp != hash_req:
+        print('Updating requirements.txt...')
+        shutil.copyfile(hash_req_temp, hash_req)
+        print('requirements.txt updated, stopping')
+        sys.exit(1)
+    else:
+        print('requirements.txt is up to date')
+
+    
 
 def main():
     parser = argparse.ArgumentParser(description='Run pre-pull-request checks.')
@@ -56,6 +83,8 @@ def main():
         cmd='bandit -r simpleval -lll',
         description='Running bandit security checks...'
     )
+
+    update_requirements_txt()
 
     # Linter
     run_command(

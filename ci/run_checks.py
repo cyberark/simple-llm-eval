@@ -31,16 +31,16 @@ def update_requirements_txt():
 
     hash_req_temp = hashlib.sha256(open(requirements_temp_path, 'rb').read()).hexdigest()
     hash_req = hashlib.sha256(open(requirements_path, 'rb').read()).hexdigest()
-    
+
     if hash_req_temp != hash_req:
         print('Updating requirements.txt...')
         shutil.copyfile(hash_req_temp, hash_req)
-        print('requirements.txt updated, stopping')
+        print('Command failed: requirements.txt updated, stopping')
         sys.exit(1)
     else:
         print('requirements.txt is up to date')
 
-    
+
 
 def main():
     parser = argparse.ArgumentParser(description='Run pre-pull-request checks.')

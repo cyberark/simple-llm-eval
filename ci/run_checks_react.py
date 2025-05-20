@@ -8,6 +8,7 @@ def run_command(cmd, description=None):
         print(description)
     try:
         subprocess.run(cmd, shell=True, check=True, cwd='reports-frontend')
+        print()
     except subprocess.CalledProcessError as e:
         print(f'Command failed: {cmd}')
         sys.exit(e.returncode)

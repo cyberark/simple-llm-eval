@@ -20,12 +20,13 @@ def run_command(cmd, description=None):
 
 def update_requirements_txt():
     ci_path = Path(__file__).parent
+    requirements_temp_path = ci_path / 'requirements-temp.txt'
+    
     simpleval_path = ci_path.parent
     requirements_path = simpleval_path / 'requirements.txt'
-    requirements_temp_path = simpleval_path / 'requirements-temp.txt'
 
     run_command(
-        cmd=f'uv pip compile pyproject.toml -o {requirements_temp_path}',
+        cmd=f'uv pip compile pyproject.toml --no-header -o {requirements_temp_path}',
         description='Updating requirements-temp.txt...'
     )
 
@@ -34,7 +35,7 @@ def update_requirements_txt():
 
     if hash_req_temp != hash_req:
         print('Updating requirements.txt...')
-        shutil.copyfile(hash_req_temp, hash_req)
+        shutil.copyfile(requirements_temp_path, requirements_path)
         print('Command failed: requirements.txt updated, stopping')
         sys.exit(1)
     else:

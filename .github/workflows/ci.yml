@@ -24,14 +24,14 @@ jobs:
       - name: Show versions
         run: python --version && uv --version
 
-      # - name: Run pre-commit
-      #   run: uv run pre-commit run -a --config .config/.pre-commit-config.yaml
+      - name: Run pre-commit
+        run: uv run pre-commit run -a --config .config/.pre-commit-config.yaml
 
-      # - name: Run Radon complexity checks
-      #   run: uv run radon cc -n B simpleval
+      - name: Run Radon complexity checks
+        run: uv run radon cc -n B simpleval
 
-      # - name: Run Xenon complexity checks
-      #   run: uv run xenon --max-absolute B --max-modules B --max-average B simpleval
+      - name: Run Xenon complexity checks
+        run: uv run xenon --max-absolute B --max-modules B --max-average B simpleval
 
       - name: Verify uv.lock <-> requirements.txt sync
         run: |

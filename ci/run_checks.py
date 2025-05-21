@@ -26,7 +26,7 @@ def update_requirements_txt():
     simpleval_path = ci_path.parent
     requirements_path = simpleval_path / 'requirements.txt'
 
-    cmd='uv pip compile pyproject.toml --no-header -o {requirements_path}'
+    cmd = 'uv export --format requirements-txt > {requirements_path}'
 
     run_command(
         cmd=cmd.format(requirements_path=requirements_temp_path),

@@ -25,6 +25,7 @@ class BedrockClaudeSonnetJudge(BaseJudge):
     """
 
     DEFAULT_MODEL_ID = SONNET35_V1_MODEL_ID
+    DEFAULT_REGION = 'us-east-1'
 
     SUPPORTED_MODEL_IDS = {
         SONNET35_V1_MODEL_ID,
@@ -43,7 +44,7 @@ class BedrockClaudeSonnetJudge(BaseJudge):
 
     def __init__(self, model_id: str = None):
         model_id = model_id or self.DEFAULT_MODEL_ID
-        region = boto3.session.Session().region_name
+        region = boto3.session.Session().region_name or self.DEFAULT_REGION
         if AWS_REGION_PLACEHOLDER in model_id:
             model_id = model_id.replace(AWS_REGION_PLACEHOLDER, region)
 

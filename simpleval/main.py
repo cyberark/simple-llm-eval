@@ -32,7 +32,7 @@ from simpleval.commands.reporting.eval.eval_report_command import eval_report_co
 from simpleval.commands.reporting.eval.eval_report_file_command import eval_report_file_command
 from simpleval.commands.reporting.summarize.summarize_command import summarize_command
 from simpleval.commands.run_command import run_command
-from simpleval.consts import EVAL_CONFIG_FILE, EVAL_RESULTS_FILE, LLM_TASKS_RESULT_FILE, ReportFormat, SummaryReportType
+from simpleval.consts import EVAL_CONFIG_FILE, EVAL_RESULTS_FILE, LLM_TASKS_RESULT_FILE, PACKAGE_NAME, ReportFormat, SummaryReportType
 from simpleval.utilities.error_handler import handle_exceptions
 
 
@@ -189,6 +189,7 @@ def summarize(eval_dir: str, config_file: str, primary_metric: str, report_forma
     summarize_command(eval_dir=eval_dir, config_file=config_file, primary_metric=primary_metric, report_format=report_format)
 
 
+@click.version_option(package_name=PACKAGE_NAME)
 @click.group(cls=CustomGroup, invoke_without_command=True)
 @click.pass_context
 def main(ctx):

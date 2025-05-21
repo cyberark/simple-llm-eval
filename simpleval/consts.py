@@ -1,3 +1,4 @@
+PACKAGE_NAME = 'simple-llm-eval'
 LOGGER_NAME = 'simpleval-logger'
 BOOKKEEPING_LOGGER_NAME = 'bookkeeping-simpleval-logger'
 EMPTY_FOLDER_NAME = 'empty'

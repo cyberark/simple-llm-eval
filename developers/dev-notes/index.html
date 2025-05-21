@@ -835,6 +835,21 @@ You're not viewing the latest version.
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Publishing the docs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deploying-the-docs-performed-by-the-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deploying the docs (performed by the pipeline)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1027,6 +1042,21 @@ You're not viewing the latest version.
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Publishing the docs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deploying-the-docs-performed-by-the-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deploying the docs (performed by the pipeline)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1117,8 +1147,16 @@ You're not viewing the latest version.
 <h2 id="publishing-the-docs">Publishing the docs<a class="headerlink" href="#publishing-the-docs" title="Permanent link">&para;</a></h2>
 <p>This project uses mkdocs/mike to publish its docs to GitHub Pages. </p>
 <ul>
-<li>To test the docs locally, run: <code>mkdocs serve</code></li>
+<li>To test the docs locally, run: <code>mike serve</code> or <code>mkdocs serve</code></li>
 <li>The pipeline publishes the docs after a successful merge to main.</li>
+<li>Version support is handled by <code>mike</code>, see the <code>mkdocs.yml</code> file, see: https://github.com/jimporter/mike/blob/master/README.md</li>
+<li>The docs use the [major].[minor] versioning scheme</li>
+</ul>
+<h3 id="deploying-the-docs-performed-by-the-pipeline">Deploying the docs (performed by the pipeline)<a class="headerlink" href="#deploying-the-docs-performed-by-the-pipeline" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>mike deploy [version] [alias]</code>, for example: <code>mike deploy 0.1 latest</code></li>
+<li><code>mike set-default latest</code>, to set the default version to latest</li>
+<li>Test locally with <code>mike serve</code></li>
 </ul>
 <h2 id="cli-dev">CLI Dev<a class="headerlink" href="#cli-dev" title="Permanent link">&para;</a></h2>
 <p>The CLI uses the click library, see commands package for examples.</p>

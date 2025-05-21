@@ -22,13 +22,13 @@ jobs:
         run: uv sync --locked --all-extras --dev
 
       - name: Show versions
-        run: python --version && uv --version # && simpleval --versions
+        run: python --version && uv --version && uv run simpleval --versions
 
       - name: Run pre-commit
-        run: pre-commit run -a --config .config/.pre-commit-config.yaml
+        run: uv run pre-commit run -a --config .config/.pre-commit-config.yaml
 
       - name: Run Radon complexity checks
-        run: radon cc -n B simpleval
+        run: uv run radon cc -n B simpleval
 
       - name: Run Xenon complexity checks
-        run: xenon --max-absolute B --max-modules B --max-average B simpleval
+        run: uv run xenon --max-absolute B --max-modules B --max-average B simpleval

@@ -22,7 +22,7 @@ jobs:
         run: uv sync --locked --all-extras --dev
 
       - name: Show versions
-        run: python --version && uv --version && simpleval --versions
+        run: python --version && uv --version # && simpleval --versions
 
       - name: Run pre-commit
         run: pre-commit run -a --config .config/.pre-commit-config.yaml

@@ -40,6 +40,6 @@ runs:
           DIFF_RANGE=$(git hash-object -t tree /dev/null)
         fi
 
-        CHANGED=$(git diff --name-only $DIFF_RANGE | grep -q "^${{ inputs.path }}/" && echo "true" || echo "false")
+        CHANGED=$(git diff --name-only $DIFF_RANGE | grep -q "^$(printf '%q' "${{ inputs.path }}")/" && echo "true" || echo "false")
 
         echo "changed=$CHANGED" >> $GITHUB_OUTPUT

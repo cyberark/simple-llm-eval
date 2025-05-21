@@ -46,7 +46,7 @@ jobs:
           fi
 
       - name: 🧪 Run tests with coverage
-        run: uv venv exec pytest --cov=simpleval --cov-report=term --cov-report=xml --cov-fail-under=100
+        run: uv run pytest --cov=simpleval --cov-report=term --cov-report=xml --cov-fail-under=100
 
   frontend-build:
     runs-on: ubuntu-latest

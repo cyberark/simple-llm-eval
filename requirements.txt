@@ -38,7 +38,10 @@ click==8.2.0
     #   simple-llm-eval (pyproject.toml)
     #   litellm
 colorama==0.4.6
-    # via simple-llm-eval (pyproject.toml)
+    # via
+    #   simple-llm-eval (pyproject.toml)
+    #   click
+    #   tqdm
 contourpy==1.3.2
     # via matplotlib
 cycler==0.12.1

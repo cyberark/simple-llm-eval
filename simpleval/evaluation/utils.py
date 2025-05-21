@@ -6,8 +6,16 @@ from typing import List
 
 from colorama import Fore, Style
 
-from simpleval.consts import EMPTY_FOLDER_NAME, EVAL_ERROR_FILE_NAME, EVAL_RESULTS_FILE, EVAL_SETS_FOLDER, GROUND_TRUTH_FILE, \
-    LLM_TASKS_ERROR_FILE_NAME, LLM_TASKS_RESULT_FILE, TESTCASES_FOLDER
+from simpleval.consts import (
+    EMPTY_FOLDER_NAME,
+    EVAL_ERROR_FILE_NAME,
+    EVAL_RESULTS_FILE,
+    EVAL_SETS_FOLDER,
+    GROUND_TRUTH_FILE,
+    LLM_TASKS_ERROR_FILE_NAME,
+    LLM_TASKS_RESULT_FILE,
+    TESTCASES_FOLDER,
+)
 from simpleval.evaluation.judges.base_judge import BaseJudge
 from simpleval.evaluation.judges.judge_provider import JudgeProvider
 from simpleval.evaluation.schemas.base_eval_case_schema import GroundTruth
@@ -46,7 +54,8 @@ def get_eval_config(eval_dir: str, config_file: str, verify_metrics: bool = True
         if len(eval_config.eval_metrics) == 0 or not all(metrics in available_metrics for metrics in eval_config.eval_metrics):
             metrics_dir = os.path.join(judge.get_metrics_dir(), eval_config.llm_as_a_judge_name)
             raise ValueError(
-                f'Invalid Metric(s): `{eval_config.eval_metrics}`. Available metrics: {available_metrics}, Metrics dir: {metrics_dir}')
+                f'Invalid Metric(s): `{eval_config.eval_metrics}`. Available metrics: {available_metrics}, Metrics dir: {metrics_dir}'
+            )
 
     return eval_config
 

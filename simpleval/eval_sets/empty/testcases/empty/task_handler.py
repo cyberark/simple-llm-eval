@@ -1,6 +1,7 @@
 import logging
 
 from simpleval.consts import LOGGER_NAME
+
 # from simpleval.logger import log_bookkeeping_data
 from simpleval.testcases.schemas.llm_task_result import LlmTaskResult
 

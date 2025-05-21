@@ -12,8 +12,14 @@ from simpleval.commands.reporting.compare.compare_html import _compare_results_h
 from simpleval.commands.reporting.compare.compare_html2.compare_html2 import _compare_results_html2
 from simpleval.consts import LOGGER_NAME, ReportFormat
 from simpleval.evaluation.metrics.calc import MeanScores, calc_scores
-from simpleval.evaluation.utils import get_all_eval_results, get_all_eval_results_from_file, get_eval_results_sorted_by_name_metric, \
-    get_eval_results_sorted_by_name_metric_from_file, get_eval_set_name, get_llm_task_results_file
+from simpleval.evaluation.utils import (
+    get_all_eval_results,
+    get_all_eval_results_from_file,
+    get_eval_results_sorted_by_name_metric,
+    get_eval_results_sorted_by_name_metric_from_file,
+    get_eval_set_name,
+    get_llm_task_results_file,
+)
 from simpleval.exceptions import TerminationError
 
 

@@ -38,5 +38,5 @@ class DummyJudge(BaseJudge):
         Dummy inference method for testing purposes.
         """
 
-        answer = random.choice(metric.possible_responses)
+        answer = random.choice(metric.possible_responses)  # noqa
         return f'Explanation: Prediction is complete based on prompt analysis, Answer: {answer}'

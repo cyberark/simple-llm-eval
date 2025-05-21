@@ -53,11 +53,13 @@ def get_supported_models(provider_name: str) -> list:
         logger.debug(f'Model: {model}, supports_response_format: {supports_response_format}, supports_json_schema: {supports_json_schema}')
 
         if supports_response_format or supports_json_schema:
-            filtered_models.append({
-                'model': model,
-                'supports_response_format': supports_response_format,
-                'supports_json_schema': supports_json_schema,
-            })
+            filtered_models.append(
+                {
+                    'model': model,
+                    'supports_response_format': supports_response_format,
+                    'supports_json_schema': supports_json_schema,
+                }
+            )
 
     return filtered_models
 

@@ -39,8 +39,8 @@ repos:
         name: Check for type annotations instead of comments
   - repo: local
     hooks:
-      - id: py-isort
-        name: isort (python)
+      - id: ruff
+        name: ruff
         files: ^simpleval/.*\.py$
-        entry: isort --sp .config/.isort.cfg --src simpleval
+        entry: "python ci/run_ruff.py"
         language: system

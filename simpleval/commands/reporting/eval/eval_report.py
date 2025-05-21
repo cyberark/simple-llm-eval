@@ -12,14 +12,20 @@ from simpleval.evaluation.schemas.eval_result_schema import EvalTestResult
 
 
 class ResultsManager:
-
     def __init__(self, red_threshold: float = 0.3, yellow_threshold: float = 0.7):
         self.red_threshold = red_threshold
         self.yellow_threshold = yellow_threshold
         self.logger = logging.getLogger(LOGGER_NAME)
 
-    def display_results(self, name: str, testcase: str, eval_results: List[EvalTestResult], llm_tasks_errors_count: int,
-                        eval_errors_count: int, output_format: str = ReportFormat.HTML):
+    def display_results(
+        self,
+        name: str,
+        testcase: str,
+        eval_results: List[EvalTestResult],
+        llm_tasks_errors_count: int,
+        eval_errors_count: int,
+        output_format: str = ReportFormat.HTML,
+    ):
         # Sort eval_results by "<test_name>-<metric>"
         eval_results.sort(key=lambda x: x.name_metric)
 

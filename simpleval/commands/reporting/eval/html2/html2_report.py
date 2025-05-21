@@ -19,8 +19,14 @@ HIDDEN = 'hidden'
 HIDDEN_ERRORS_BANNER = f'{ERRORS_BANNER_PLACEHOLDER} ${{"{HIDDEN}"}}'
 
 
-def _generate_html_report2(name: str, testcase: str, eval_results: List[EvalTestResult], mean_scores: MeanScores,
-                           llm_task_errors_count: int, eval_errors_count: int) -> str:
+def _generate_html_report2(
+    name: str,
+    testcase: str,
+    eval_results: List[EvalTestResult],
+    mean_scores: MeanScores,
+    llm_task_errors_count: int,
+    eval_errors_count: int,
+) -> str:
     template_path = os.path.join(os.path.dirname(__file__), 'llm_eval_report_template.html')
     with open(template_path, 'r', encoding='utf-8') as file:
         llm_eval_report_template = file.read()

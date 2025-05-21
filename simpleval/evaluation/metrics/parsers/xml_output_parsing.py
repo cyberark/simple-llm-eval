@@ -76,7 +76,7 @@ def parse_xml_response(xml_string: str) -> JudgeParsedOutput:
 
     logger = logging.getLogger(LOGGER_NAME)
     try:
-        root = ET.fromstring(xml_string)
+        root = ET.fromstring(xml_string)  # noqa - xml sanitized prior to this
         reasonings = root.find(REASONINGS_TAG_NAME).text
         reasonings = xml.sax.saxutils.unescape(reasonings)
 

@@ -4,7 +4,6 @@ from simpleval.evaluation.metrics.base_metric import EvaluationMetric
 
 
 class BaseBedrockSonnetMetric(EvaluationMetric):
-
     @property
     @abstractmethod
     def prefill(self) -> str:

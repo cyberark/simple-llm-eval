@@ -3,9 +3,24 @@ import click
 import colorama
 from colorama import Fore
 
-from simpleval.cli_args import CONFIG_FILE_HELP, EVAL_DIR_HELP, EVAL_RESULTS_FILE_HELP, EXISTING_FILE_TYPE, EXISTING_FOLDER_TYPE, \
-    NEW_EVAL_HELP, NEW_FOLDER_TYPE, NEW_TESTCASE_HELP, OVERWRITE_RESULTS_HELP, REPORT_FORMAT_HELP, TESTCASE_COMPARE_FILE_HELP, \
-    TESTCASE_COMPARE_HELP, TESTCASE_HELP, CustomGroup, InNewTestcaseParamType, InTestcaseParamType
+from simpleval.cli_args import (
+    CONFIG_FILE_HELP,
+    EVAL_DIR_HELP,
+    EVAL_RESULTS_FILE_HELP,
+    EXISTING_FILE_TYPE,
+    EXISTING_FOLDER_TYPE,
+    NEW_EVAL_HELP,
+    NEW_FOLDER_TYPE,
+    NEW_TESTCASE_HELP,
+    OVERWRITE_RESULTS_HELP,
+    REPORT_FORMAT_HELP,
+    TESTCASE_COMPARE_FILE_HELP,
+    TESTCASE_COMPARE_HELP,
+    TESTCASE_HELP,
+    CustomGroup,
+    InNewTestcaseParamType,
+    InTestcaseParamType,
+)
 from simpleval.commands.init_command.init_command import init_command
 from simpleval.commands.init_command.init_from_template_command import init_from_template_command
 from simpleval.commands.judge_explorer_command import judge_explorer_command
@@ -26,20 +41,31 @@ from simpleval.utilities.error_handler import handle_exceptions
 @click.option('--config-file', '-c', type=str, default=EVAL_CONFIG_FILE, help=CONFIG_FILE_HELP)
 @click.option('--testcase', '-t', required=True, type=InTestcaseParamType(), help=TESTCASE_HELP)
 @click.option('--overwrite-results', '-o', is_flag=True, default=False, help=OVERWRITE_RESULTS_HELP)
-@click.option('--report-format', '-r', type=click.Choice([ReportFormat.CONSOLE, ReportFormat.HTML, ReportFormat.HTML2],
-                                                         case_sensitive=False), default=ReportFormat.HTML2, help=REPORT_FORMAT_HELP)
+@click.option(
+    '--report-format',
+    '-r',
+    type=click.Choice([ReportFormat.CONSOLE, ReportFormat.HTML, ReportFormat.HTML2], case_sensitive=False),
+    default=ReportFormat.HTML2,
+    help=REPORT_FORMAT_HELP,
+)
 @handle_exceptions
 def run(eval_dir: str, testcase: str, config_file: str, overwrite_results: bool, report_format: str):
-    run_command(eval_dir=eval_dir, config_file=config_file, testcase=testcase, overwrite_results=overwrite_results,
-                report_format=report_format)
+    run_command(
+        eval_dir=eval_dir, config_file=config_file, testcase=testcase, overwrite_results=overwrite_results, report_format=report_format
+    )
 
 
 @click.command(help='Generate evaluation report')
 @click.option('--eval-dir', '-e', required=True, type=EXISTING_FOLDER_TYPE, help=EVAL_DIR_HELP)
 @click.option('--config-file', '-c', type=str, default=EVAL_CONFIG_FILE, help=CONFIG_FILE_HELP)
 @click.option('--testcase', '-t', required=True, type=InTestcaseParamType(), help=TESTCASE_HELP)
-@click.option('--report-format', '-r', type=click.Choice([ReportFormat.CONSOLE, ReportFormat.HTML, ReportFormat.HTML2],
-                                                         case_sensitive=False), default=ReportFormat.HTML2, help=REPORT_FORMAT_HELP)
+@click.option(
+    '--report-format',
+    '-r',
+    type=click.Choice([ReportFormat.CONSOLE, ReportFormat.HTML, ReportFormat.HTML2], case_sensitive=False),
+    default=ReportFormat.HTML2,
+    help=REPORT_FORMAT_HELP,
+)
 @handle_exceptions
 def eval_report(eval_dir: str, config_file: str, testcase: str, report_format: str):
     eval_report_command(eval_dir=eval_dir, config_file=config_file, testcase=testcase, report_format=report_format)
@@ -48,8 +74,13 @@ def eval_report(eval_dir: str, config_file: str, testcase: str, report_format: s
 @click.command(help='Generate evaluation report from results file')
 @click.option('--name', '-n', required=True, type=str, help='Evaluation name')
 @click.option('--eval-results-file', '-f', required=True, type=EXISTING_FILE_TYPE, help=EVAL_RESULTS_FILE_HELP)
-@click.option('--report-format', '-r', type=click.Choice([ReportFormat.CONSOLE, ReportFormat.HTML, ReportFormat.HTML2],
-                                                         case_sensitive=False), default=ReportFormat.HTML2, help=REPORT_FORMAT_HELP)
+@click.option(
+    '--report-format',
+    '-r',
+    type=click.Choice([ReportFormat.CONSOLE, ReportFormat.HTML, ReportFormat.HTML2], case_sensitive=False),
+    default=ReportFormat.HTML2,
+    help=REPORT_FORMAT_HELP,
+)
 @handle_exceptions
 def eval_report_file(name: str, eval_results_file: str, report_format: str):
     eval_report_file_command(name=name, eval_results_file=eval_results_file, report_format=report_format)
@@ -89,30 +120,49 @@ def judge_explorer():
 
 @click.command(help='Compare results of two evaluation runs')
 @click.option('--eval-dir', '-e', required=True, type=EXISTING_FOLDER_TYPE, help=EVAL_DIR_HELP)
-@click.option('--testcase1', '-t1', required=True, type=InTestcaseParamType(),
-              help=TESTCASE_COMPARE_HELP.format(id=1, file_name=EVAL_RESULTS_FILE))
-@click.option('--testcase2', '-t2', required=True, type=InTestcaseParamType(),
-              help=TESTCASE_COMPARE_HELP.format(id=2, file_name=EVAL_RESULTS_FILE))
-@click.option('--report-format', '-r', type=click.Choice([ReportFormat.CONSOLE, ReportFormat.HTML, ReportFormat.HTML2],
-                                                         case_sensitive=False), default=ReportFormat.HTML2, help=REPORT_FORMAT_HELP)
-@click.option('--ignore-missing-llm-results', '-i', is_flag=True, default=False,
-              help=f'Ignore missing LLM result files ({LLM_TASKS_RESULT_FILE})')
+@click.option(
+    '--testcase1', '-t1', required=True, type=InTestcaseParamType(), help=TESTCASE_COMPARE_HELP.format(id=1, file_name=EVAL_RESULTS_FILE)
+)
+@click.option(
+    '--testcase2', '-t2', required=True, type=InTestcaseParamType(), help=TESTCASE_COMPARE_HELP.format(id=2, file_name=EVAL_RESULTS_FILE)
+)
+@click.option(
+    '--report-format',
+    '-r',
+    type=click.Choice([ReportFormat.CONSOLE, ReportFormat.HTML, ReportFormat.HTML2], case_sensitive=False),
+    default=ReportFormat.HTML2,
+    help=REPORT_FORMAT_HELP,
+)
+@click.option(
+    '--ignore-missing-llm-results', '-i', is_flag=True, default=False, help=f'Ignore missing LLM result files ({LLM_TASKS_RESULT_FILE})'
+)
 @handle_exceptions
 def compare(eval_dir: str, testcase1: str, testcase2: str, report_format: str, ignore_missing_llm_results: bool):
-    compare_results(eval_set_dir=eval_dir, testcase1=testcase1, testcase2=testcase2, report_format=report_format,
-                    ignore_missing_llm_results=ignore_missing_llm_results)
+    compare_results(
+        eval_set_dir=eval_dir,
+        testcase1=testcase1,
+        testcase2=testcase2,
+        report_format=report_format,
+        ignore_missing_llm_results=ignore_missing_llm_results,
+    )
 
 
 @click.command(help='Compare results of two eval results files')
 @click.option('--name', '-n', required=True, type=str, help='Evaluation name')
 @click.option('--eval-results-file1', '-f1', required=True, type=EXISTING_FILE_TYPE, help=TESTCASE_COMPARE_FILE_HELP)
 @click.option('--eval-results-file2', '-f2', required=True, type=EXISTING_FILE_TYPE, help=TESTCASE_COMPARE_FILE_HELP)
-@click.option('--report-format', '-r', type=click.Choice([ReportFormat.CONSOLE, ReportFormat.HTML, ReportFormat.HTML2],
-                                                         case_sensitive=False), default=ReportFormat.HTML2, help=REPORT_FORMAT_HELP)
+@click.option(
+    '--report-format',
+    '-r',
+    type=click.Choice([ReportFormat.CONSOLE, ReportFormat.HTML, ReportFormat.HTML2], case_sensitive=False),
+    default=ReportFormat.HTML2,
+    help=REPORT_FORMAT_HELP,
+)
 @handle_exceptions
 def compare_files(name: str, eval_results_file1: str, eval_results_file2: str, report_format: str):
-    compare_results_files(name=name, eval_results_file1=eval_results_file1, eval_results_file2=eval_results_file2,
-                          report_format=report_format)
+    compare_results_files(
+        name=name, eval_results_file1=eval_results_file1, eval_results_file2=eval_results_file2, report_format=report_format
+    )
 
 
 @click.command(help='Metrics Explorer')
@@ -124,10 +174,16 @@ def metrics_explorer():
 @click.command(help='Summarize All Eval Testcases')
 @click.option('--eval-dir', '-e', required=True, type=EXISTING_FOLDER_TYPE, help=EVAL_DIR_HELP)
 @click.option('--config-file', '-c', type=str, default=EVAL_CONFIG_FILE, help=CONFIG_FILE_HELP)
-@click.option('--primary-metric', '-p', required=False, default='', type=str,
-              help='Your primary metric - To show first (v2) or sort by (v1)')
-@click.option('--report-format', '-r', type=click.Choice([SummaryReportType.PY, SummaryReportType.HTML], case_sensitive=False),
-              default=SummaryReportType.HTML, help='Report format: py: python lot, html: fancy html plot')
+@click.option(
+    '--primary-metric', '-p', required=False, default='', type=str, help='Your primary metric - To show first (v2) or sort by (v1)'
+)
+@click.option(
+    '--report-format',
+    '-r',
+    type=click.Choice([SummaryReportType.PY, SummaryReportType.HTML], case_sensitive=False),
+    default=SummaryReportType.HTML,
+    help='Report format: py: python lot, html: fancy html plot',
+)
 @handle_exceptions
 def summarize(eval_dir: str, config_file: str, primary_metric: str, report_format: str):
     summarize_command(eval_dir=eval_dir, config_file=config_file, primary_metric=primary_metric, report_format=report_format)

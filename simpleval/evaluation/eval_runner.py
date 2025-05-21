@@ -9,8 +9,16 @@ from simpleval.evaluation.metrics.metric_result_schema import MetricResult
 from simpleval.evaluation.schemas.eva_task_schema import EvalTask
 from simpleval.evaluation.schemas.eval_result_schema import EvalTestResult
 from simpleval.evaluation.schemas.eval_task_config_schema import EvalTaskConfig
-from simpleval.evaluation.utils import eval_result_found, get_all_eval_results, get_eval_config, get_eval_ground_truth, \
-    get_eval_result_file, get_llm_task_result, get_testcase_folder, highlight_regex
+from simpleval.evaluation.utils import (
+    eval_result_found,
+    get_all_eval_results,
+    get_eval_config,
+    get_eval_ground_truth,
+    get_eval_result_file,
+    get_llm_task_result,
+    get_testcase_folder,
+    highlight_regex,
+)
 from simpleval.parallel_runner.parallel_runner import BaseRunner
 from simpleval.parallel_runner.schemas import TaskParams, TaskResult
 
@@ -95,18 +103,23 @@ def _run_llm_as_a_judge(task: EvalTask, eval_dir: str, testcase: str, eval_confi
     llm_task_result = get_llm_task_result(eval_set_dir=eval_dir, testcase=testcase, llm_task_name=test_name)
     ground_truth = llm_task_result.expected_prediction
 
-    result: MetricResult = judge.evaluate(metric_name=task.metric, prompt=llm_task_result.prompt, prediction=llm_task_result.prediction,
-                                          ground_truth=ground_truth)
+    result: MetricResult = judge.evaluate(
+        metric_name=task.metric, prompt=llm_task_result.prompt, prediction=llm_task_result.prediction, ground_truth=ground_truth
+    )
     logger.debug(f'Eval result: {result}')
 
-    eval_result = EvalTestResult(metric=task.metric, result=result.result, explanation=result.explanation,
-                                 normalized_score=result.normalized_score, llm_run_result=llm_task_result)
+    eval_result = EvalTestResult(
+        metric=task.metric,
+        result=result.result,
+        explanation=result.explanation,
+        normalized_score=result.normalized_score,
+        llm_run_result=llm_task_result,
+    )
 
     return TaskResult(task_name=eval_result.name_metric, result=eval_result)
 
 
 class EvalRunner(BaseRunner):
-
     def __init__(self, max_concurrent_tasks: int):
         super().__init__(max_concurrent_tasks)
         self.logger = logging.getLogger(LOGGER_NAME)

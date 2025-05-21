@@ -10,7 +10,6 @@ from simpleval.evaluation.metrics.calc import MeanScores
 
 
 def plot_scores_py(testcases: List[str], scores: List[MeanScores], primary_metric: str):
-
     logger = logging.getLogger(LOGGER_NAME)
 
     if primary_metric:

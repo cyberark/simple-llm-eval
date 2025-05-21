@@ -13,7 +13,6 @@ from simpleval.parallel_runner.schemas import TaskParams, TaskResult
 
 
 class BaseRunner(ABC):
-
     def __init__(self, max_concurrent_tasks):
         self.max_concurrent_tasks = max_concurrent_tasks
         self.logger = logging.getLogger(LOGGER_NAME)
@@ -43,8 +42,9 @@ class BaseRunner(ABC):
                     exception_details += f' | {future.exception().last_attempt.exception()}'
 
                 if self.logger.isEnabledFor(logging.DEBUG) or os.environ.get('LOG_LEVEL') == 'DEBUG':
-                    exception_details += '\n' + \
-                        '\n'.join(traceback.TracebackException.from_exception(future.exception()).format()) + '\n' + '*' * 80 + '\n'
+                    exception_details += (
+                        '\n' + '\n'.join(traceback.TracebackException.from_exception(future.exception()).format()) + '\n' + '*' * 80 + '\n'
+                    )
                 errors.append(exception_details)
                 progress_bar.update(1)
             else:

@@ -8,7 +8,7 @@ def task_logic(name: str, payload: dict) -> LlmTaskResult:
     result = LlmTaskResult(
         name=name,
         prompt=DUMMY_TASK_PROMPT,
-        prediction=f"User says: {payload['user_input']}",
+        prediction=f'User says: {payload["user_input"]}',
         payload=payload,
     )
 

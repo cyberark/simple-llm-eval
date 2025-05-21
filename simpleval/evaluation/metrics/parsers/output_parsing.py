@@ -24,7 +24,7 @@ def parse_explanation_answer_output(output_string: str) -> JudgeParsedOutput:
     answer_start = output_string.find(answer_prefix)
 
     explanation = output_string[explanation_start:answer_start].strip().strip(',')
-    answer = output_string[answer_start + len(answer_prefix):].strip()
+    answer = output_string[answer_start + len(answer_prefix) :].strip()
 
     return JudgeParsedOutput(reasonings=explanation, answer=answer)
 

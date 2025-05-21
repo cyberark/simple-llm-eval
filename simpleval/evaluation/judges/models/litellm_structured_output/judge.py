@@ -46,8 +46,10 @@ class LiteLLMJudge(BaseJudge):
         self.logger.debug(f'Model params: {self.model_supports_response_format=}, {self.model_supports_json_schema=}')
 
         if not self.model_params:
-            models_providers_info = ('Provider List: https://docs.litellm.ai/docs/providers and '
-                                     'Models: https://github.com/BerriAI/litellm/blob/main/model_prices_and_context_window.json')
+            models_providers_info = (
+                'Provider List: https://docs.litellm.ai/docs/providers and '
+                'Models: https://github.com/BerriAI/litellm/blob/main/model_prices_and_context_window.json'
+            )
             raise ValueError(f'Model ID {model_id} not supported by litellm. Please provide a valid model ID. See {models_providers_info}')
 
     @property
@@ -62,16 +64,20 @@ class LiteLLMJudge(BaseJudge):
             raise ValueError(f'Model ID is not set correctly. Please provide a valid model ID (Model ID: {self.model_id})')
 
         if not self.model_supports_response_format and not self.model_supports_json_schema:
-            raise ValueError(f'Model ID {self.model_id} does not support structured output. Please provide a valid model ID. '
-                             'Model must support either "response_format" or "json_schema".'
-                             'See https://docs.litellm.ai/docs/completion/json_mode for more details.')
+            raise ValueError(
+                f'Model ID {self.model_id} does not support structured output. Please provide a valid model ID. '
+                'Model must support either "response_format" or "json_schema".'
+                'See https://docs.litellm.ai/docs/completion/json_mode for more details.'
+            )
 
     def preliminary_checks_explanation(self):
-        return ('The LiteLLM judge requires that the model id provided supports structured output.\n'
-                "The model must support either 'response_format' or 'json_schema'.\n"
-                'See https://docs.litellm.ai/docs/completion/json_mode for more details.\n\n'
-                'It also requires an authentication, depending on the provider\n'
-                'See Lite LLM documentation for more details\n')
+        return (
+            'The LiteLLM judge requires that the model id provided supports structured output.\n'
+            "The model must support either 'response_format' or 'json_schema'.\n"
+            'See https://docs.litellm.ai/docs/completion/json_mode for more details.\n\n'
+            'It also requires an authentication, depending on the provider\n'
+            'See Lite LLM documentation for more details\n'
+        )
 
     def _model_inference(self, eval_prompt: str, metric: LiteLLMMetric) -> str:
         """
@@ -91,11 +97,12 @@ class LiteLLMJudge(BaseJudge):
             self.logger.debug('LiteLLM judge initialized with json schema validation enabled')
 
         try:
-
-            messages = [{
-                'role': 'user',
-                'content': eval_prompt,
-            }]
+            messages = [
+                {
+                    'role': 'user',
+                    'content': eval_prompt,
+                }
+            ]
 
             self.logger.debug(f'Calling LiteLLM completion, {self.model_id=}, {messages=}')
 

@@ -177,20 +177,20 @@ def _generate_html_summary_table(headers, table):
 
 
 def _generate_html_detailed_table(headers, table):
-    html = '''
+    html = """
     <table><thead><tr>
-    '''
+    """
     for header in headers:
         html += f'<th>{header}</th>'
-    html += '''
+    html += """
     </tr></thead><tbody>
-    '''
+    """
     for row_idx, row in enumerate(table):
         html += '<tr>'
         for col_idx, cell in enumerate(row):
             if col_idx == 2 and cell:
                 prompt = cell
-                html += f'''
+                html += f"""
                 <td>
                     <a href="#" onclick="showPopup('popup-prompt-{row_idx}', event)">show</a>
                     <div id="popup-prompt-{row_idx}" class="popup">
@@ -201,11 +201,11 @@ def _generate_html_detailed_table(headers, table):
                         </div>
                     </div>
                 </td>
-                '''
+                """
             elif col_idx == 6 and isinstance(cell, dict):  # Eval Result
                 eval_result = cell.get('eval_result', 'N/A')
                 result_explanation = cell.get('result_explanation', 'N/A')
-                html += f'''
+                html += f"""
                 <td>
                     <a href="#" onclick="showPopup('popup-eval-{row_idx}', event)">show</a>
                     <div id="popup-eval-{row_idx}" class="popup">
@@ -218,13 +218,13 @@ def _generate_html_detailed_table(headers, table):
                         </div>
                     </div>
                 </td>
-                '''
+                """
             else:
                 html += f'<td>{cell}</td>'
         html += '</tr>'
-    html += '''
+    html += """
     </tbody></table>
-    '''
+    """
     return html
 
 

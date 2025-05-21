@@ -31,10 +31,9 @@ def is_valid_testcase(testcase: str) -> bool:
 
 
 class CustomGroup(click.Group):
-
     def parse_args(self, ctx, args):
         console_log_level = DEFAULT_LOGLEVEL
-        if ('--verbose' in args or '-v' in args):
+        if '--verbose' in args or '-v' in args:
             console_log_level = VERBOSE_LOGLEVEL
             args = [arg for arg in args if arg not in ('--verbose', '-v')]
 
@@ -55,10 +54,15 @@ class InTestcaseParamType(click.ParamType):
 
         expected_testcase_folder = os.path.join(eval_dir, TESTCASES_FOLDER, value)
         if not os.path.isdir(expected_testcase_folder):
-            all_testcases = [
-                f for f in os.listdir(os.path.join(eval_dir, TESTCASES_FOLDER))
-                if os.path.isdir(os.path.join(eval_dir, TESTCASES_FOLDER, f))
-            ] if os.path.isdir(os.path.join(eval_dir, TESTCASES_FOLDER)) else []
+            all_testcases = (
+                [
+                    f
+                    for f in os.listdir(os.path.join(eval_dir, TESTCASES_FOLDER))
+                    if os.path.isdir(os.path.join(eval_dir, TESTCASES_FOLDER, f))
+                ]
+                if os.path.isdir(os.path.join(eval_dir, TESTCASES_FOLDER))
+                else []
+            )
 
             print(f'{Fore.CYAN}Available testcases: {all_testcases}{Fore.RESET}')
             self.fail(f'{value} must be a dir under {eval_dir}, see available testcases above', param, ctx)

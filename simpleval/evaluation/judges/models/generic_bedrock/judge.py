@@ -27,5 +27,4 @@ class GenericBedrockJudge(LiteLLMJudge):
         bedrock_preliminary_checks()
 
     def preliminary_checks_explanation(self):
-        return ('The Bedrock judge requires working AWS credentials\n'
-                'for example, with environment variables or in a ~/.aws/credentials file')
+        return 'The Bedrock judge requires working AWS credentials\nfor example, with environment variables or in a ~/.aws/credentials file'

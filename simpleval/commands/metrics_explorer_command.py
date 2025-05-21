@@ -9,13 +9,15 @@ def select_item(items, prompt_message, add_quit=False):
     if add_quit:
         choices.append({'name': '->quit', 'value': None})
 
-    questions = [{
-        'type': 'list',
-        'name': 'selected_item',
-        'message': prompt_message,
-        'choices': choices,
-        'default': items[0] if items else None  # Set the first item as the default
-    }]
+    questions = [
+        {
+            'type': 'list',
+            'name': 'selected_item',
+            'message': prompt_message,
+            'choices': choices,
+            'default': items[0] if items else None,  # Set the first item as the default
+        }
+    ]
 
     answers = prompt(questions)
     return answers['selected_item']

@@ -29,11 +29,13 @@ class AzureJudge(LiteLLMJudge):
         verify_env_var('AZURE_API_VERSION')
 
     def preliminary_checks_explanation(self):
-        return ('The Azure judge requires the following environment variables to be set:\n'
-                '- AZURE_OPENAI_API_KEY: Your Azure OpenAI API key.\n'
-                '- AZURE_API_BASE: The base URL for the Azure OpenAI API.\n'
-                '- AZURE_API_VERSION: The version of the Azure OpenAI API.\n\n'
-                'Example:\n'
-                'AZURE_OPENAI_API_KEY=<your_api_key>\n'
-                'AZURE_API_BASE=https://<your_resource_name>.openai.azure.com/\n'
-                'AZURE_API_VERSION=2024-04-01-preview\n')
+        return (
+            'The Azure judge requires the following environment variables to be set:\n'
+            '- AZURE_OPENAI_API_KEY: Your Azure OpenAI API key.\n'
+            '- AZURE_API_BASE: The base URL for the Azure OpenAI API.\n'
+            '- AZURE_API_VERSION: The version of the Azure OpenAI API.\n\n'
+            'Example:\n'
+            'AZURE_OPENAI_API_KEY=<your_api_key>\n'
+            'AZURE_API_BASE=https://<your_resource_name>.openai.azure.com/\n'
+            'AZURE_API_VERSION=2024-04-01-preview\n'
+        )

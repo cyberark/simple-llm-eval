@@ -6,8 +6,12 @@ from colorama import Fore
 
 from simpleval.evaluation.judges.base_judge import BaseJudge
 from simpleval.evaluation.judges.judge_utils import bedrock_preliminary_checks
-from simpleval.evaluation.judges.models.bedrock_claude_sonnet.consts import AWS_REGION_PLACEHOLDER, SONNET35_V1_MODEL_ID, \
-    SONNET35_V2_MODEL_ID, SONNET37_V1_MODEL_ID
+from simpleval.evaluation.judges.models.bedrock_claude_sonnet.consts import (
+    AWS_REGION_PLACEHOLDER,
+    SONNET35_V1_MODEL_ID,
+    SONNET35_V2_MODEL_ID,
+    SONNET37_V1_MODEL_ID,
+)
 from simpleval.evaluation.metrics.base_metric import EvaluationMetric
 from simpleval.evaluation.metrics.models.bedrock_claude_sonnet.base.base_metric import BaseBedrockSonnetMetric
 from simpleval.logger import log_bookkeeping_data
@@ -21,6 +25,7 @@ class BedrockClaudeSonnetJudge(BaseJudge):
     Concrete Judge class using Bedrock Claude Sonnet (or similar) models.
     retries call_claude_completion on retryable errors like rate limits.
     """
+
     DEFAULT_MODEL_ID = SONNET35_V1_MODEL_ID
 
     SUPPORTED_MODEL_IDS = {
@@ -58,8 +63,7 @@ class BedrockClaudeSonnetJudge(BaseJudge):
         bedrock_preliminary_checks()
 
     def preliminary_checks_explanation(self):
-        return ('The Bedrock judge requires working AWS credentials\n'
-                'for example, with environment variables or in a ~/.aws/credentials file')
+        return 'The Bedrock judge requires working AWS credentials\nfor example, with environment variables or in a ~/.aws/credentials file'
 
     def _model_inference(self, eval_prompt: str, metric: EvaluationMetric) -> str:
         """
@@ -106,33 +110,27 @@ class BedrockClaudeSonnetJudge(BaseJudge):
             raise
 
     def __get_claude_body_dict(self, sys_prompt: str, prefill: str) -> dict:
-
         user_prompt = 'You are a helpful agent tasked with evaluating LLM responses based on a specific metric. Your goal is to assess the quality of the response according to the provided evaluation criteria.'  # pylint: disable=line-too-long
 
         body_dict = {
-            'anthropic_version':
-                'bedrock-2023-05-31',
-            'system':
-                sys_prompt,
-            'max_tokens':
-                self.MAX_TOKENS_TO_SAMPLE,
+            'anthropic_version': 'bedrock-2023-05-31',
+            'system': sys_prompt,
+            'max_tokens': self.MAX_TOKENS_TO_SAMPLE,
             'messages': [
                 {
                     'role': 'user',
-                    'content': [{
-                        'type': 'text',
-                        'text': user_prompt
-                    }],
+                    'content': [{'type': 'text', 'text': user_prompt}],
                 },
                 {
-                    'role':
-                        'assistant',
-                    'content': [{
-                        'type': 'text',
-                        # see https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/prefill-claudes-response
-                        'text': f'[LLM As a judge] {prefill}'.strip()
-                    }],
-                }
+                    'role': 'assistant',
+                    'content': [
+                        {
+                            'type': 'text',
+                            # see https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/prefill-claudes-response
+                            'text': f'[LLM As a judge] {prefill}'.strip(),
+                        }
+                    ],
+                },
             ],
         }
 

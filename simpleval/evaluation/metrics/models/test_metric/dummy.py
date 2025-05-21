@@ -5,15 +5,16 @@ from simpleval.evaluation.metrics.parsers.output_parsing import parse_explanatio
 
 
 class DummyMetric(EvaluationMetric):
-
     def __init__(self):
         super().__init__()
 
     @property
     def eval_prompt(self) -> str:
-        return ('Evaluate whether the prediction: "{prediction}" is complete with respect to the prompt: "{prompt}". '
-                'Rate on a scale of 1 to 10, where 1 is very incomplete and 10 is fully complete. '
-                'Explain your reasoning.')
+        return (
+            'Evaluate whether the prediction: "{prediction}" is complete with respect to the prompt: "{prompt}". '
+            'Rate on a scale of 1 to 10, where 1 is very incomplete and 10 is fully complete. '
+            'Explain your reasoning.'
+        )
 
     @property
     def possible_responses(self) -> List[str]:

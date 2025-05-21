@@ -26,6 +26,7 @@ nav:
     - Reporting Dev: 'developers/reporting-dev.md'
 theme:
   name: material
+  color_mode: dark
   custom_dir: docs/overrides
   font:
     text: Montserrat
@@ -87,6 +88,15 @@ plugins:
   - git-revision-date
   - search
   - render_swagger
+  - mike:
+      # These fields are all optional; the defaults are as below...
+      alias_type: symlink
+      redirect_template: null
+      deploy_prefix: ''
+      canonical_version: null
+      version_selector: true
+      css_dir: css
+      javascript_dir: js
 extra_css:
   - stylesheets/extra.css
 

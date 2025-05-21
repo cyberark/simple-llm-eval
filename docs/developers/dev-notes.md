@@ -39,8 +39,16 @@ These scripts will run in the pipeline as well.
 ## Publishing the docs
 This project uses mkdocs/mike to publish its docs to GitHub Pages. 
 
-* To test the docs locally, run: `mkdocs serve`
+* To test the docs locally, run: `mike serve` or `mkdocs serve`
 * The pipeline publishes the docs after a successful merge to main.
+* Version support is handled by `mike`, see the `mkdocs.yml` file, see: https://github.com/jimporter/mike/blob/master/README.md
+* The docs use the [major].[minor] versioning scheme
+
+### Deploying the docs (performed by the pipeline)
+* `mike deploy [version] [alias]`, for example: `mike deploy 0.1 latest`
+* `mike set-default latest`, to set the default version to latest
+* Test locally with `mike serve`
+* To push the changes: `mike deploy --push --update-aliases <version> latest`
 
 ## CLI Dev
 The CLI uses the click library, see commands package for examples.

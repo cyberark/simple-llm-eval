@@ -48,6 +48,9 @@ jobs:
       - name: 🧪 Run tests with coverage
         run: uv run pytest --cov=simpleval --cov-report=term --cov-report=xml --cov-fail-under=90
 
+      - name: 📦 Build Project Package
+        run: uv build
+
   frontend-build:
     runs-on: ubuntu-latest
     defaults:

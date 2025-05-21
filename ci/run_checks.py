@@ -26,8 +26,10 @@ def update_requirements_txt():
     simpleval_path = ci_path.parent
     requirements_path = simpleval_path / 'requirements.txt'
 
+    cmd='uv pip compile pyproject.toml --no-header -o {requirements_path}'
+
     run_command(
-        cmd=f'uv pip compile pyproject.toml --no-header -o {requirements_temp_path}',
+        cmd=cmd.format(requirements_temp_path),
         description='Updating requirements-temp.txt...'
     )
 
@@ -38,6 +40,8 @@ def update_requirements_txt():
         print('Updating requirements.txt...')
         shutil.copyfile(requirements_temp_path, requirements_path)
         print('Command failed: requirements.txt updated, stopping')
+        sync_cmd = cmd.format(requirements_path)
+        print(f'You must sync requirements.txt by calling: {sync_cmd}')
         sys.exit(1)
     else:
         print('requirements.txt is up to date')

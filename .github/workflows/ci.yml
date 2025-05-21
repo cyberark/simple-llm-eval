@@ -12,7 +12,23 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install uv
+      - name: Install uv with caching
         uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+          cache-dependency-glob: "uv.lock"
 
-      - run: echo "this is a build"
+      - name: Install the project
+        run: uv sync --locked --all-extras --dev
+
+      - name: Show versions
+        run: python --version && uv --version && simpleval --versions
+
+      - name: Run pre-commit
+        run: pre-commit run -a --config .config/.pre-commit-config.yaml
+
+      - name: Run Radon complexity checks
+        run: radon cc -n B simpleval
+
+      - name: Run Xenon complexity checks
+        run: xenon --max-absolute B --max-modules B --max-average B simpleval

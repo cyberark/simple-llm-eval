@@ -31,7 +31,16 @@ jobs:
       - name: Detect folder changes
         id: detect
         run: |
-          git fetch origin ${{ github.base_ref }} --depth=1
+          git fetch origin ${{ github.base_ref }} --depth=1 || true
+
+          # Safe fallback: check if HEAD^ exists
+          if git rev-parse HEAD^ >/dev/null 2>&1; then
+            DIFF_RANGE="HEAD^ HEAD"
+          else
+            # Only one commit exists, compare against empty tree
+            DIFF_RANGE=$(git hash-object -t tree /dev/null)
+          fi
+
           CHANGED_FILES=$(git diff --name-only $DIFF_RANGE)
 
           echo "frontend_changed=false" >> $GITHUB_OUTPUT
@@ -43,6 +52,7 @@ jobs:
           if echo "$CHANGED_FILES" | grep -q "^docs/"; then
             echo "docs_changed=true" >> $GITHUB_OUTPUT
           fi
+
 
   python-build:
     needs: detect-changes

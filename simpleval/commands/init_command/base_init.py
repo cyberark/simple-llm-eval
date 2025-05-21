@@ -43,12 +43,12 @@ class BaseInit(ABC):
         os.makedirs(new_testcases_folder)
 
         rc = 0
-        rc += os.system(f'cp {os.path.join(empty_eval_set_folder, EVAL_CONFIG_FILE)} {new_eval_set_folder}')  # nosec
-        rc += os.system(f'cp {os.path.join(empty_eval_set_folder, GROUND_TRUTH_FILE)} {new_eval_set_folder}')  # nosec
-        rc += os.system(f'cp {os.path.join(empty_eval_set_folder, "README.md")} {new_eval_set_folder}')  # nosec
+        rc += os.system(f'cp {os.path.join(empty_eval_set_folder, EVAL_CONFIG_FILE)} {new_eval_set_folder}')  # noqa
+        rc += os.system(f'cp {os.path.join(empty_eval_set_folder, GROUND_TRUTH_FILE)} {new_eval_set_folder}')  # noqa
+        rc += os.system(f'cp {os.path.join(empty_eval_set_folder, "README.md")} {new_eval_set_folder}')  # noqa
 
-        rc += os.system(f'cp {os.path.join(empty_testcase_folder, "__init__.py")} {new_testcases_folder}')  # nosec
-        rc += os.system(f'cp {os.path.join(empty_testcase_folder, PLUGIN_FILE_NAME)} {new_testcases_folder}')  # nosec
+        rc += os.system(f'cp {os.path.join(empty_testcase_folder, "__init__.py")} {new_testcases_folder}')  # noqa
+        rc += os.system(f'cp {os.path.join(empty_testcase_folder, PLUGIN_FILE_NAME)} {new_testcases_folder}')  # noqa
 
         if rc != 0:
             raise TerminationError(f'{Fore.RED}Error occurred during creating new evaluation{Fore.RESET}')

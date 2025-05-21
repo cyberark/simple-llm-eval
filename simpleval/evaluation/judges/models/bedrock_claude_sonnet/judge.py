@@ -17,6 +17,7 @@ from simpleval.evaluation.metrics.models.bedrock_claude_sonnet.base.base_metric 
 from simpleval.logger import log_bookkeeping_data
 from simpleval.utilities.retryables import BEDROCK_LIMITS_EXCEPTIONS, bedrock_limits_retry
 
+
 class BedrockClaudeSonnetJudge(BaseJudge):
     """
     Concrete Judge class using Bedrock Claude Sonnet (or similar) models.

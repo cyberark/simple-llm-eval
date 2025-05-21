@@ -16,7 +16,7 @@ def run_command(cmd, description=None):
         subprocess.run(cmd, shell=True, check=True)
         print()
     except subprocess.CalledProcessError as e:
-        print(f'Command failed: {cmd}')
+        print(f'Command failed, if fixes attempted, run again: {cmd}')
         sys.exit(e.returncode)
 
 def update_requirements_txt():

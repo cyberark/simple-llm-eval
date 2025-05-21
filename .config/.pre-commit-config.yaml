@@ -39,14 +39,8 @@ repos:
         name: Check for type annotations instead of comments
   - repo: local
     hooks:
-      - id: ruff-check
-        name: ruff check
+      - id: ruff
+        name: ruff
         files: ^simpleval/.*\.py$
-        entry: ruff check simpleval --fix
-        language: system
-    hooks:
-      - id: ruff-format
-        name: ruff format
-        files: ^simpleval/.*\.py$
-        entry: "python ci/run_ruff_format.py"
+        entry: "python ci/run_ruff.py"
         language: system

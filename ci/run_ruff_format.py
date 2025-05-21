@@ -10,7 +10,7 @@ def run_command(cmd, description=None):
     except subprocess.CalledProcessError as e:
         print(f'Command failed: {cmd}')
         return e.returncode
-    
+
 def main():
     rc_diff = run_command(
         cmd='ruff format simpleval --diff',

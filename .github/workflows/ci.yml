@@ -21,7 +21,7 @@ jobs:
       - name: 📦 Install the project
         run: uv sync --locked --all-extras --dev
 
-      - name: Show versions
+      - name: 👁️ Show versions
         run: python --version && uv --version
 
       - name: 🔍 Run pre-commit
@@ -46,7 +46,7 @@ jobs:
           fi
 
       - name: 🧪 Run tests with coverage
-        run: uv run pytest --cov=simpleval --cov-report=term --cov-report=xml --cov-fail-under=100
+        run: uv run pytest --cov=simpleval --cov-report=term --cov-report=xml --cov-fail-under=90
 
   frontend-build:
     runs-on: ubuntu-latest

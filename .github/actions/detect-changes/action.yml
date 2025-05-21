@@ -1,0 +1,45 @@
+name: "Detect Changes"
+description: "Detect if files in a given path have changed"
+inputs:
+  path:
+    description: "Path to check for changes"
+    required: true
+
+outputs:
+  changed:
+    description: "Whether the path has changed"
+    value: ${{ steps.detect.outputs.changed }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Set diff range
+      id: diff
+      shell: bash
+      run: |
+        if [ "${{ github.event_name }}" = "pull_request" ]; then
+          echo "DIFF_RANGE=origin/${{ github.base_ref }}...HEAD" >> $GITHUB_ENV
+        else
+          echo "DIFF_RANGE=HEAD^ HEAD" >> $GITHUB_ENV
+        fi
+
+    - name: Detect changes in path
+      id: detect
+      shell: bash
+      run: |
+        git fetch origin ${{ github.base_ref }} --depth=1 || true
+
+        if git rev-parse HEAD^ >/dev/null 2>&1; then
+          DIFF_RANGE="HEAD^ HEAD"
+        else
+          DIFF_RANGE=$(git hash-object -t tree /dev/null)
+        fi
+
+        CHANGED=$(git diff --name-only $DIFF_RANGE | grep -q "^${{ inputs.path }}/" && echo "true" || echo "false")
+
+        echo "changed=$CHANGED" >> $GITHUB_OUTPUT

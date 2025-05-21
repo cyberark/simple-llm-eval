@@ -7,7 +7,45 @@ on:
     branches: [main, ci-test]
 
 jobs:
+  detect-changes:
+    runs-on: ubuntu-latest
+    outputs:
+      frontend_changed: ${{ steps.detect.outputs.frontend_changed }}
+      docs_changed: ${{ steps.detect.outputs.docs_changed }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set diff range
+        id: diff
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            echo "DIFF_RANGE=origin/${{ github.base_ref }}...HEAD" >> $GITHUB_ENV
+          else
+            echo "DIFF_RANGE=HEAD^ HEAD" >> $GITHUB_ENV
+          fi
+
+      - name: Detect folder changes
+        id: detect
+        run: |
+          git fetch origin ${{ github.base_ref }} --depth=1
+          CHANGED_FILES=$(git diff --name-only $DIFF_RANGE)
+
+          echo "frontend_changed=false" >> $GITHUB_OUTPUT
+          echo "docs_changed=false" >> $GITHUB_OUTPUT
+
+          if echo "$CHANGED_FILES" | grep -q "^frontend/"; then
+            echo "frontend_changed=true" >> $GITHUB_OUTPUT
+          fi
+          if echo "$CHANGED_FILES" | grep -q "^docs/"; then
+            echo "docs_changed=true" >> $GITHUB_OUTPUT
+          fi
+
   python-build:
+    needs: detect-changes
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -51,7 +89,14 @@ jobs:
       - name: 📦 Build Project Package
         run: uv build
 
+      - name: 📚 Publish Docs
+        if: needs.detect-changes.outputs.docs_changed == 'true'
+        run: echo "Publishing book"
+        
+
   frontend-build:
+    needs: detect-changes
+    if: needs.detect-changes.outputs.frontend_changed == 'true'
     runs-on: ubuntu-latest
     defaults:
       run:

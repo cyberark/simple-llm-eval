@@ -37,8 +37,8 @@ jobs:
         run: |
           uv pip compile pyproject.toml --no-header -o requirements-temp.txt
           if ! cmp -s requirements.txt requirements-temp.txt; then
-            echo "❌ requirements.txt is out of date. Run 'uv pip compile pyproject.toml --no-header -o requirements.txt' and commit the changes."
             diff -u requirements.txt requirements-temp.txt || true
+            echo "❌ requirements.txt is out of date. Run 'uv pip compile pyproject.toml --no-header -o requirements.txt' and commit the changes."
             exit 1
           else
             echo "✅ requirements.txt is up to date."

@@ -1,13 +1,8 @@
 import random
 from typing import Set
 
-import boto3
-
 from simpleval.evaluation.judges.base_judge import BaseJudge
 from simpleval.evaluation.metrics.base_metric import EvaluationMetric
-
-BEDROCK = boto3.client(service_name='bedrock-runtime')
-STS = boto3.client('sts')
 
 
 class DummyJudge(BaseJudge):

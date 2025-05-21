@@ -5,8 +5,6 @@ import boto3
 
 from simpleval.consts import LOGGER_NAME
 
-bedrock = boto3.client(service_name='bedrock-runtime')
-
 model_id = 'anthropic.claude-3-5-sonnet-20240620-v1:0'
 accept = 'application/json'
 content_type = 'application/json'
@@ -20,6 +18,7 @@ def call_claude_completion(role: str, system_prompt: str, user_prompt: str, pref
                                       temperature=temperature, max_tokens_to_sample=max_tokens_to_sample)
     body = json.dumps(body_dict)
 
+    bedrock = boto3.client(service_name='bedrock-runtime')
     response = bedrock.invoke_model(body=body, modelId=model_id, accept=accept, contentType=content_type)
 
     result = json.loads(response.get('body').read())

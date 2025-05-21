@@ -17,9 +17,6 @@ from simpleval.evaluation.metrics.models.bedrock_claude_sonnet.base.base_metric 
 from simpleval.logger import log_bookkeeping_data
 from simpleval.utilities.retryables import BEDROCK_LIMITS_EXCEPTIONS, bedrock_limits_retry
 
-BEDROCK = boto3.client(service_name='bedrock-runtime')
-
-
 class BedrockClaudeSonnetJudge(BaseJudge):
     """
     Concrete Judge class using Bedrock Claude Sonnet (or similar) models.
@@ -85,7 +82,8 @@ class BedrockClaudeSonnetJudge(BaseJudge):
 
             self.logger.debug(f'Calling Claude completion, {self.model_id=}, {body=}')
 
-            response = BEDROCK.invoke_model(body=body, modelId=self.model_id, accept=accept, contentType=content_type)
+            bedrock = boto3.client(service_name='bedrock-runtime')
+            response = bedrock.invoke_model(body=body, modelId=self.model_id, accept=accept, contentType=content_type)
 
             result = json.loads(response.get('body').read())
             input_tokens = result.get('usage', {}).get('input_tokens', '')

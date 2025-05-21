@@ -45,6 +45,9 @@ jobs:
             echo "✅ requirements.txt is up to date."
           fi
 
+      - name: 🧪 Run tests with coverage
+        run: uv venv exec pytest --cov=simpleval --cov-report=term --cov-report=xml --cov-fail-under=100
+
   frontend-build:
     runs-on: ubuntu-latest
     defaults:
@@ -71,12 +74,3 @@ jobs:
 
       - name: 🧪 Run tests
         run: npm run test-no-watch
-
-    # # Run only if files in `reports-frontend/` are changed
-    # if: |
-    #     github.event_name == 'push' &&
-    #     (contains(join(github.event.commits.*.modified, ','), 'reports-frontend/') ||
-    #      contains(join(github.event.commits.*.added, ','), 'reports-frontend/') ||
-    #      contains(join(github.event.commits.*.removed, ','), 'reports-frontend/'))
-    #     ||
-    #     github.event_name == 'pull_request'

@@ -30,7 +30,7 @@
 ## Running all checks 🔍
 
 !!! info "Main checks"
-    Run the the `ci/pre_pull_request_checks.py` script
+    Run the the `ci/run_checks.py` script
     This will run the following checks:
     
     * pre-commit hooks: formatting and ruff
@@ -40,7 +40,7 @@
     * Verify uv.lock and requirements.txt are synced
 
 !!! info "React checks"
-      If you made changes to the `reports-frontend` reports, run the `ci/pre_pull_request_checks_react.py` script
+      If you made changes to the `reports-frontend` reports, run the `ci/run_checks_react.py` script
       This will run the following steps:
 
       * npm install, build

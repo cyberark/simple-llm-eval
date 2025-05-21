@@ -27,5 +27,4 @@ class AnthropicJudge(LiteLLMJudge):
         verify_env_var('ANTHROPIC_API_KEY')
 
     def preliminary_checks_explanation(self):
-        return ('The Anthropic judge requires the following environment variables to be set:\n'
-                '- ANTHROPIC_API_KEY: Your Anthropic API key.')
+        return 'The Anthropic judge requires the following environment variables to be set:\n- ANTHROPIC_API_KEY: Your Anthropic API key.'

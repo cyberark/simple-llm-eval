@@ -18,8 +18,15 @@ HELPFULNESS_POSSIBLE_RESPONSES = [
 
 class HelpfulnessStructuredResponse(BaseModel):
     reasoning: str
-    answer: Literal['not helpful at all', 'very unhelpful', 'somewhat unhelpful', 'neither helpful nor unhelpful', 'somewhat helpful',
-                    'very helpful', 'above and beyond']
+    answer: Literal[
+        'not helpful at all',
+        'very unhelpful',
+        'somewhat unhelpful',
+        'neither helpful nor unhelpful',
+        'somewhat helpful',
+        'very helpful',
+        'above and beyond',
+    ]
 
 
 class HelpfulnessMetric(LiteLLMMetric):

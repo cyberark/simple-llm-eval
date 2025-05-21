@@ -6,8 +6,13 @@ from colorama import Fore
 from InquirerPy import prompt
 
 from simpleval.commands.init_command.base_init import BaseInit
-from simpleval.commands.init_command.consts import DEFAULT_CONCURRENT_JUDGE_TASKS, DEFAULT_CONCURRENT_LLM_TASKS, PICK_YOUR_OWN_METRICS, \
-    RECOMMENDED_START_METRICS, RECOMMENDED_START_METRICS_MENU_VALUE
+from simpleval.commands.init_command.consts import (
+    DEFAULT_CONCURRENT_JUDGE_TASKS,
+    DEFAULT_CONCURRENT_LLM_TASKS,
+    PICK_YOUR_OWN_METRICS,
+    RECOMMENDED_START_METRICS,
+    RECOMMENDED_START_METRICS_MENU_VALUE,
+)
 from simpleval.consts import LOGGER_NAME
 from simpleval.evaluation.judges.base_judge import BaseJudge
 from simpleval.evaluation.judges.judge_provider import JudgeProvider
@@ -29,7 +34,6 @@ def get_eval_dir_from_user() -> str:
 
     eval_dir_set = False
     while not eval_dir_set:
-
         logger.info(f'{Fore.CYAN}Enter the name of the new evaluation folder - relative or absolute path that does not exist.{Fore.RESET}')
         logger.info(f'{Fore.CYAN}The folder name should describe the evaluation you are going to perform.{Fore.RESET}')
         logger.info(f'{Fore.CYAN}For example: {Fore.YELLOW}my_eval{Fore.CYAN} or {Fore.YELLOW}{_example_dir()}{Fore.RESET}')
@@ -110,12 +114,14 @@ def get_model_id_from_user(judge: BaseJudge) -> str:
 
     models_to_select.insert(0, f'{judge.model_id} {RECOMMENDED_INDICATION}')
 
-    questions = [{
-        'type': 'list',
-        'name': 'selected_model',
-        'message': f'Select a model (default: {judge.model_id}):',
-        'choices': models_to_select,
-    }]
+    questions = [
+        {
+            'type': 'list',
+            'name': 'selected_model',
+            'message': f'Select a model (default: {judge.model_id}):',
+            'choices': models_to_select,
+        }
+    ]
 
     answers = prompt(questions)
     selected_model = answers['selected_model'].replace(RECOMMENDED_INDICATION, '').strip()
@@ -127,23 +133,27 @@ def get_metrics_from_user(metrics: List[str]) -> List[str]:
     logger = logging.getLogger(LOGGER_NAME)
     logger.info(f'{Fore.CYAN}To learn more about each metric run {Fore.YELLOW}`simpleval metrics-explorer`{Fore.RESET}')
 
-    questions = [{
-        'type': 'list',
-        'name': 'selected_metrics',
-        'message': 'Select the recommended metrics to start with, or pick your own:',
-        'choices': [RECOMMENDED_START_METRICS_MENU_VALUE, PICK_YOUR_OWN_METRICS],
-    }]
+    questions = [
+        {
+            'type': 'list',
+            'name': 'selected_metrics',
+            'message': 'Select the recommended metrics to start with, or pick your own:',
+            'choices': [RECOMMENDED_START_METRICS_MENU_VALUE, PICK_YOUR_OWN_METRICS],
+        }
+    ]
     answers = prompt(questions)
     selected_metrics = answers['selected_metrics']
     if selected_metrics == RECOMMENDED_START_METRICS_MENU_VALUE:
         return RECOMMENDED_START_METRICS
 
-    questions = [{
-        'type': 'checkbox',
-        'name': 'selected_metrics',
-        'message': 'Select metrics to evaluate (space to select):',
-        'choices': metrics,
-    }]
+    questions = [
+        {
+            'type': 'checkbox',
+            'name': 'selected_metrics',
+            'message': 'Select metrics to evaluate (space to select):',
+            'choices': metrics,
+        }
+    ]
     answers = prompt(questions)
     selected_metrics = answers['selected_metrics']
 

@@ -11,7 +11,6 @@ from simpleval.logger import debug_logging_enabled
 
 
 def handle_exceptions(func):
-
     @wraps(func)
     def wrapper(*args, **kwargs):
         try:

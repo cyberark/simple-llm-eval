@@ -12,12 +12,12 @@ class StructuredResponse(BaseModel):
     It is used during the general metric parsing step, at which point the metric specific model parsing was already done
     see litellm_structured_output_parser.
     """
+
     reasoning: str
     answer: str
 
 
 class LiteLLMMetric(EvaluationMetric):
-
     @property
     @abstractmethod
     def output_model(self) -> BaseModel:

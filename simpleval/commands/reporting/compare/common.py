@@ -28,7 +28,6 @@ def _generate_details_table(left_side: CompareArgs, right_side: CompareArgs):
     table = []
     headers = ['llm-task:metric', 'eval-set:testcase:test', 'score', 'expected result', 'actual llm result']
     for left_result, right_result in zip(left_side.sorted_results, right_side.sorted_results):
-
         _validate_metrics(left_result, right_result)
 
         table.append([left_result.metric, '', '', '', ''])
@@ -67,7 +66,6 @@ def _generate_details_table2(left_side, right_side):
     table = []
     headers = ['Metric', 'Eval set:testcase:test', 'Prompt To LLM', 'LLM Response', 'Expected Response', 'Score', 'Eval Result']
     for left_result, right_result in zip(left_side.sorted_results, right_side.sorted_results):
-
         _validate_metrics(left_result, right_result)
 
         table.append([left_result.metric, '', '', '', '', '', ''])
@@ -84,14 +82,28 @@ def _generate_details_table2(left_side, right_side):
         right_llm_details = _get_llm_details_for_detailed_table2(right_result)
         right_eval_result = _get_eval_result_for_detailed_table2(right_result)
 
-        table.append([
-            '', left_test_detailed_name, left_llm_details['prompt'], left_llm_details['prediction'],
-            left_llm_details['expected_prediction'], left_score, left_eval_result
-        ])
-        table.append([
-            '', right_test_detailed_name, right_llm_details['prompt'], right_llm_details['prediction'],
-            right_llm_details['expected_prediction'], right_score, right_eval_result
-        ])
+        table.append(
+            [
+                '',
+                left_test_detailed_name,
+                left_llm_details['prompt'],
+                left_llm_details['prediction'],
+                left_llm_details['expected_prediction'],
+                left_score,
+                left_eval_result,
+            ]
+        )
+        table.append(
+            [
+                '',
+                right_test_detailed_name,
+                right_llm_details['prompt'],
+                right_llm_details['prediction'],
+                right_llm_details['expected_prediction'],
+                right_score,
+                right_eval_result,
+            ]
+        )
 
     return headers, table
 

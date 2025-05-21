@@ -1,6 +1,7 @@
 """
 CLI Command to run the eval process
 """
+
 import logging
 import time
 
@@ -10,8 +11,18 @@ from simpleval.commands.reporting.eval.eval_report import ResultsManager
 from simpleval.consts import LOGGER_NAME
 from simpleval.evaluation.eval_runner import run_eval
 from simpleval.evaluation.llm_task_runner import run_llm_tasks
-from simpleval.evaluation.utils import get_all_eval_results, get_all_llm_task_results, get_eval_config, get_eval_errors_file, \
-    get_eval_ground_truth, get_eval_name, get_eval_result_file, get_llm_task_errors_file, get_llm_task_results_file, get_testcase_folder
+from simpleval.evaluation.utils import (
+    get_all_eval_results,
+    get_all_llm_task_results,
+    get_eval_config,
+    get_eval_errors_file,
+    get_eval_ground_truth,
+    get_eval_name,
+    get_eval_result_file,
+    get_llm_task_errors_file,
+    get_llm_task_results_file,
+    get_testcase_folder,
+)
 from simpleval.exceptions import NoWorkToDo, TerminationError
 from simpleval.utilities.files import delete_file
 from simpleval.validations import validate_eval_input
@@ -135,7 +146,7 @@ def _handle_errors(eval_dir: str, testcase: str, llm_task_errors: list, eval_err
     if llm_task_errors:
         logger.error(f'{Fore.RED}Errors occurred during llm tasks run. {len(llm_task_errors)} error(s) found. Terminating evaluation.')
         with open(get_llm_task_errors_file(eval_set_dir=eval_dir, testcase=testcase), 'w', encoding='utf-8') as file:
-            file.writelines(f'{error}\n{"-"*120}\n' for error in llm_task_errors)
+            file.writelines(f'{error}\n{"-" * 120}\n' for error in llm_task_errors)
 
     if eval_errors:
         logger.error(f'{Fore.RED}Errors occurred during evaluation. {len(eval_errors)} error(s) found. Terminating evaluation.')
@@ -143,7 +154,7 @@ def _handle_errors(eval_dir: str, testcase: str, llm_task_errors: list, eval_err
         logger.error(f'{Fore.CYAN}If temporary failures, run again without overwriting (no -o) to run only the failures{Fore.RESET}')
 
         with open(get_eval_errors_file(eval_set_dir=eval_dir, testcase=testcase), 'w', encoding='utf-8') as file:
-            file.writelines(f'{error}\n{"-"*120}\n' for error in eval_errors)
+            file.writelines(f'{error}\n{"-" * 120}\n' for error in eval_errors)
 
 
 def print_exec_time(elapsed_time_testcases: float, elapsed_time_runeval: float):

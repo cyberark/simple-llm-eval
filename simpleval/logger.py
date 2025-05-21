@@ -69,8 +69,9 @@ def init_bookkeeping_logger():
     bk_logger.setLevel(logging.INFO)
     bk_file_handler = logging.FileHandler(file_path)
     bk_file_handler.setLevel(logging.INFO)
-    bk_formatter = logging.Formatter('%(asctime)s, %(levelname)s, %(source)s, %(model)s, %(input_tokens)s, %(output_tokens)s',
-                                     datefmt='%Y-%m-%d %H:%M:%S')
+    bk_formatter = logging.Formatter(
+        '%(asctime)s, %(levelname)s, %(source)s, %(model)s, %(input_tokens)s, %(output_tokens)s', datefmt='%Y-%m-%d %H:%M:%S'
+    )
     bk_file_handler.setFormatter(bk_formatter)
     bk_logger.addHandler(bk_file_handler)
 
@@ -78,12 +79,14 @@ def init_bookkeeping_logger():
 def log_bookkeeping_data(source: str, model_name: str, input_tokens: int, output_tokens: int):
     bk_logger = logging.getLogger(BOOKKEEPING_LOGGER_NAME)
     bk_logger.info(
-        'msg', extra={
+        'msg',
+        extra={
             'source': source.replace(',', ''),
             'model': model_name.replace(',', ''),
             'input_tokens': input_tokens,
-            'output_tokens': output_tokens
-        })
+            'output_tokens': output_tokens,
+        },
+    )
 
 
 def debug_logging_enabled(logger=None) -> bool:

@@ -15,7 +15,6 @@ DATA_ITEMS_PLACEHOLDER = '"DATA_ITEMS_PLACEHOLDER"'
 
 
 def _compare_results_html2(eval_set: str, left_side: CompareArgs, right_side: CompareArgs):
-
     template_path = os.path.join(os.path.dirname(__file__), 'compare_report_template.html')
     with open(template_path, 'r', encoding='utf-8') as file:
         compare_report_template = file.read()
@@ -50,7 +49,6 @@ def _validate_compare_html_template(template: str):
 
 
 def _populate_template(eval_set: str, template: str, left_side: CompareArgs, right_side: CompareArgs):
-
     html_content = template.replace(EVAL_SET_NAME_PLACEHOLDER, eval_set)
     html_content = html_content.replace(AGGREGATE_DATA_LEFT_SIDE_PLACEHOLDER, _get_js_aggregate_scores(left_side))
     html_content = html_content.replace(AGGREGATE_DATA_RIGHT_SIDE_PLACEHOLDER, _get_js_aggregate_scores(right_side))
@@ -60,7 +58,6 @@ def _populate_template(eval_set: str, template: str, left_side: CompareArgs, rig
 
 
 def _get_js_aggregate_scores(comparable: CompareArgs) -> str:
-
     left_testcase = _testcase_name_from_comparable_name(comparable.name)
     comparable_dict = dict(
         testcase=left_testcase,
@@ -73,29 +70,31 @@ def _get_js_aggregate_scores(comparable: CompareArgs) -> str:
 
 
 def _get_js_data_items_list(left_side: CompareArgs, right_side: CompareArgs) -> str:
-
     left_testcase = _testcase_name_from_comparable_name(left_side.name)
     right_testcase = _testcase_name_from_comparable_name(right_side.name)
 
     data = []
     for left_result, right_result in zip(left_side.sorted_results, right_side.sorted_results):
-        rows = [{
-            'testCaseTest': f'{left_testcase}:{left_result.llm_run_result.name}',
-            'promptToLLM': left_result.llm_run_result.prompt,
-            'llmResponse': html.escape(left_result.llm_run_result.prediction),
-            'expectedLLMResponse': left_result.llm_run_result.expected_prediction,
-            'normalizedScore': left_result.normalized_score,
-            'evalResult': html.escape(left_result.result),
-            'explanation': html.escape(left_result.explanation),
-        }, {
-            'testCaseTest': f'{right_testcase}:{right_result.llm_run_result.name}',
-            'promptToLLM': right_result.llm_run_result.prompt,
-            'llmResponse': html.escape(right_result.llm_run_result.prediction),
-            'expectedLLMResponse': right_result.llm_run_result.expected_prediction,
-            'normalizedScore': right_result.normalized_score,
-            'evalResult': html.escape(right_result.result),
-            'explanation': html.escape(right_result.explanation),
-        }]
+        rows = [
+            {
+                'testCaseTest': f'{left_testcase}:{left_result.llm_run_result.name}',
+                'promptToLLM': left_result.llm_run_result.prompt,
+                'llmResponse': html.escape(left_result.llm_run_result.prediction),
+                'expectedLLMResponse': left_result.llm_run_result.expected_prediction,
+                'normalizedScore': left_result.normalized_score,
+                'evalResult': html.escape(left_result.result),
+                'explanation': html.escape(left_result.explanation),
+            },
+            {
+                'testCaseTest': f'{right_testcase}:{right_result.llm_run_result.name}',
+                'promptToLLM': right_result.llm_run_result.prompt,
+                'llmResponse': html.escape(right_result.llm_run_result.prediction),
+                'expectedLLMResponse': right_result.llm_run_result.expected_prediction,
+                'normalizedScore': right_result.normalized_score,
+                'evalResult': html.escape(right_result.result),
+                'explanation': html.escape(right_result.explanation),
+            },
+        ]
         data.append({'metric': left_result.metric, 'rows': rows})
 
     return json.dumps(data)

@@ -38,7 +38,9 @@ class VertexAIJudge(LiteLLMJudge):
         verify_env_var('VERTEXAI_PROJECT')
 
     def preliminary_checks_explanation(self):
-        return ('The Vertex AI judge requires the following environment variables to be set:\n'
-                '- GOOGLE_APPLICATION_CREDENTIALS: Path to your Google Cloud service account key file.\n'
-                '- VERTEXAI_LOCATION: The location of your Vertex AI resources.\n'
-                '- VERTEXAI_PROJECT: Your Google Cloud project ID.\n')
+        return (
+            'The Vertex AI judge requires the following environment variables to be set:\n'
+            '- GOOGLE_APPLICATION_CREDENTIALS: Path to your Google Cloud service account key file.\n'
+            '- VERTEXAI_LOCATION: The location of your Vertex AI resources.\n'
+            '- VERTEXAI_PROJECT: Your Google Cloud project ID.\n'
+        )

@@ -27,5 +27,4 @@ class OpenAIJudge(LiteLLMJudge):
         verify_env_var('OPENAI_API_KEY')
 
     def preliminary_checks_explanation(self):
-        return ('The OpenAI judge requires the following environment variable to be set:\n'
-                '- OPENAI_API_KEY: Your OpenAI API key.\n')
+        return 'The OpenAI judge requires the following environment variable to be set:\n- OPENAI_API_KEY: Your OpenAI API key.\n'

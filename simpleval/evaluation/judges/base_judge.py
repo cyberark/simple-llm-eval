@@ -19,7 +19,6 @@ from simpleval.evaluation.metrics.parsers.parsed_output_schema import JudgeParse
 
 
 class BaseJudge(ABC):
-
     def __init__(self, model_id: str, supported_model_ids: Set[str]):
         """
         Base class for all judges.

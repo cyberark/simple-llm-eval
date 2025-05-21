@@ -13,6 +13,7 @@ class LlmTaskResult(BaseModel):
         prediction (str): The generator model's responses.
         payload (dict): Additional data related to the testcase run.
     """
+
     name: str
     prompt: str
     prediction: str

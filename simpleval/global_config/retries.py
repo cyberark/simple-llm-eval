@@ -13,6 +13,7 @@ class WaitRandExpRetryConfig(BaseModel):
     All retry decorators use tenacity's wait_random_exponential function. See:
     https://tenacity.readthedocs.io/en/latest/api.html#tenacity.wait.wait_random_exponential
     """
+
     stop_after_attempt: int = Field(..., ge=1)
     multiplier: float = Field(..., ge=0)
     min: float = Field(..., ge=0)

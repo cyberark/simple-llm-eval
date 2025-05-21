@@ -6,7 +6,11 @@ from simpleval.evaluation.metrics.models.litellm_structured_output.base.base_met
 from simpleval.evaluation.metrics.parsers.output_parsing import litellm_structured_output_parser
 
 FAITHFULNESS_POSSIBLE_RESPONSES = [
-    'none is faithful', 'some is faithful', 'approximately half is faithful', 'most is faithful', 'all is faithful'
+    'none is faithful',
+    'some is faithful',
+    'approximately half is faithful',
+    'most is faithful',
+    'all is faithful',
 ]
 
 

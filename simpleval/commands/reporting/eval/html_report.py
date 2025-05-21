@@ -322,8 +322,17 @@ REPORT_TEMPLATE = """
 """
 
 
-def _generate_html_report(name: str, testcase: str, eval_results: List[EvalTestResult], metric_means: dict, aggregate_mean: float,
-                          llm_task_errors_count: int, eval_errors_count: int, yellow_threshold: float, red_threshold: float) -> str:
+def _generate_html_report(
+    name: str,
+    testcase: str,
+    eval_results: List[EvalTestResult],
+    metric_means: dict,
+    aggregate_mean: float,
+    llm_task_errors_count: int,
+    eval_errors_count: int,
+    yellow_threshold: float,
+    red_threshold: float,
+) -> str:
     logger = logging.getLogger(LOGGER_NAME)
 
     logger.warning(f'{Fore.YELLOW}NOTICE: `html` format is obsolete, use `html2` instead')
@@ -340,8 +349,16 @@ def _generate_html_report(name: str, testcase: str, eval_results: List[EvalTestR
 
     metric_means_values = {metric: {'mean': scores.mean, 'std_dev': scores.std_dev} for metric, scores in metric_means.items()}
 
-    html_content = template.render(title=name, testcase=testcase, eval_results=eval_results, red_threshold=red_threshold,
-                                   yellow_threshold=yellow_threshold, metric_means=metric_means_values, aggregate_mean=aggregate_mean,
-                                   error_style=error_style, error_message=error_message)
+    html_content = template.render(
+        title=name,
+        testcase=testcase,
+        eval_results=eval_results,
+        red_threshold=red_threshold,
+        yellow_threshold=yellow_threshold,
+        metric_means=metric_means_values,
+        aggregate_mean=aggregate_mean,
+        error_style=error_style,
+        error_message=error_message,
+    )
 
     return save_html_report(name=name, testcase=testcase, html_content=html_content)

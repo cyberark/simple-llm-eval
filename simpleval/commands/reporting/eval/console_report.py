@@ -13,31 +13,49 @@ NARROW_COLUMN_WIDTH = 10
 WIDE_COLUMN_WIDTH = 20
 
 
-def _print_to_console(name: str, testcase, eval_results: List[EvalTestResult], metric_means: dict, aggregate_mean: float,
-                      llm_task_errors_count: int, eval_errors_count: int, yellow_threshold: float, red_threshold: float):
+def _print_to_console(
+    name: str,
+    testcase,
+    eval_results: List[EvalTestResult],
+    metric_means: dict,
+    aggregate_mean: float,
+    llm_task_errors_count: int,
+    eval_errors_count: int,
+    yellow_threshold: float,
+    red_threshold: float,
+):
     if not eval_results:
         raise ValueError('No eval results to print when printing console report.')
 
     headers = [
-        '#', 'LLM Task:Metric', 'Prompt To LLM', 'LLM Response', 'Expected LLM Response', 'Eval Result', 'Score', 'Std dev',
-        'Eval Explanation'
+        '#',
+        'LLM Task:Metric',
+        'Prompt To LLM',
+        'LLM Response',
+        'Expected LLM Response',
+        'Eval Result',
+        'Score',
+        'Std dev',
+        'Eval Explanation',
     ]
     table = []
 
     for idx, eval_result in enumerate(eval_results, 1):
         color = _get_color_by_score(score=eval_result.normalized_score, yellow_threshold=yellow_threshold, red_threshold=red_threshold)
         std_dev = metric_means[eval_result.metric].std_dev if eval_result.metric in metric_means else 'N/A'
-        table.append([
-            f'{color}{idx}{Fore.RESET}',  # None
-            f'{color}{textwrap.fill(eval_result.name_metric, width=NARROW_COLUMN_WIDTH)}{Fore.RESET}',
-            f'{color}{textwrap.fill(eval_result.llm_run_result.prompt, width=NARROW_COLUMN_WIDTH)}{Fore.RESET}',
-            f'{color}{textwrap.fill(eval_result.llm_run_result.prediction, width=NARROW_COLUMN_WIDTH)}{Fore.RESET}'
-            f'{color}{textwrap.fill(eval_result.llm_run_result.expected_prediction, width=NARROW_COLUMN_WIDTH)}{Fore.RESET}',
-            f'{color}{textwrap.fill(eval_result.result, width=WIDE_COLUMN_WIDTH)}{Fore.RESET}',
-            f'{color}{eval_result.normalized_score:.3}{Fore.RESET}',
-            f'{color}{std_dev}{Fore.RESET}',
-            f'{color}{textwrap.fill(eval_result.explanation, width=WIDE_COLUMN_WIDTH)}{Fore.RESET}',
-        ])
+        table.append(
+            [
+                f'{color}{idx}{Fore.RESET}',  # None
+                f'{color}{textwrap.fill(eval_result.name_metric, width=NARROW_COLUMN_WIDTH)}{Fore.RESET}',
+                f'{color}{textwrap.fill(eval_result.llm_run_result.prompt, width=NARROW_COLUMN_WIDTH)}{Fore.RESET}',
+                f'{color}{textwrap.fill(eval_result.llm_run_result.prediction, width=NARROW_COLUMN_WIDTH)}{Fore.RESET}'
+                f'{color}{textwrap.fill(eval_result.llm_run_result.expected_prediction, width=NARROW_COLUMN_WIDTH)}{Fore.RESET}',
+                f'{color}{textwrap.fill(eval_result.result, width=WIDE_COLUMN_WIDTH)}{Fore.RESET}',
+                f'{color}{eval_result.normalized_score:.3}{Fore.RESET}',
+                f'{color}{std_dev}{Fore.RESET}',
+                f'{color}{textwrap.fill(eval_result.explanation, width=WIDE_COLUMN_WIDTH)}{Fore.RESET}',
+            ]
+        )
 
     print(f'\n{name} - Evaluation Results, Testcase: {testcase}\n')
     print(tabulate(table, headers=headers, tablefmt='heavy_grid'))

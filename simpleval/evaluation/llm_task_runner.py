@@ -9,8 +9,14 @@ from colorama import Fore
 
 from simpleval.consts import LOGGER_NAME
 from simpleval.evaluation.schemas.base_eval_case_schema import GroundTruth
-from simpleval.evaluation.utils import get_all_llm_task_results, get_eval_config, get_eval_ground_truth, get_llm_task_results_file, \
-    get_testcase_folder, is_llm_task_result_found
+from simpleval.evaluation.utils import (
+    get_all_llm_task_results,
+    get_eval_config,
+    get_eval_ground_truth,
+    get_llm_task_results_file,
+    get_testcase_folder,
+    is_llm_task_result_found,
+)
 from simpleval.parallel_runner.parallel_runner import BaseRunner
 from simpleval.parallel_runner.schemas import TaskParams, TaskResult
 from simpleval.testcases.schemas.llm_task_result import LlmTaskResult
@@ -117,7 +123,6 @@ def _run_llm_task(ground_truth: GroundTruth, plugin_function):  # -> Any | LlmRu
 
 
 class LlmTaskRunner(BaseRunner):
-
     def __init__(self, max_concurrent_tasks: int):
         super().__init__(max_concurrent_tasks)
         self.logger = logging.getLogger(LOGGER_NAME)

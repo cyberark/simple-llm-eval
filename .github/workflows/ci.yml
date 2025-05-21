@@ -35,11 +35,11 @@ jobs:
 
       - name: Verify uv.lock <-> requirements.txt sync
         run: |
-          # uv pip compile pyproject.toml --no-header --universal --no-cache -o ci/requirements-temp.txt
+          # https://github.com/astral-sh/uv/issues/6007
           uv export --format requirements-txt > ci/requirements-temp.txt
           if ! cmp -s requirements.txt ci/requirements-temp.txt; then
             diff -u requirements.txt ci/requirements-temp.txt || true
-            echo "❌ requirements.txt is out of date. Run 'uv pip compile pyproject.toml --no-header --universal -o requirements.txt' and commit the changes."
+            echo "❌ requirements.txt is out of date. Run 'uv export --format requirements-txt > requirements' and commit the changes."
             exit 1
           else
             echo "✅ requirements.txt is up to date."

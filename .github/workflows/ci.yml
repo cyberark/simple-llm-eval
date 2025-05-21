@@ -14,8 +14,8 @@ jobs:
       docs_changed: ${{ steps.docs.outputs.changed }}
 
     steps:
-      # - name: Checkout repository
-      #   uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       - name: Detect changes in frontend/
         id: frontend

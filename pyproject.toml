@@ -68,3 +68,13 @@ include = ["simpleval"]
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
+
+[tool.ruff]
+line-length = 140
+indent-width = 4
+
+[tool.ruff.format]
+quote-style = "single"
+indent-style = "space"
+docstring-code-format = true
+exclude = [".git,__pycache__,.venv,build,dist,tests,reports-frontend,tools,ci"]

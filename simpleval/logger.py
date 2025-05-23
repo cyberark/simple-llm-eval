@@ -49,7 +49,6 @@ def init_logger(console_loglevel: int = DEFAULT_LOGLEVEL):
     file_formatter = StripColorFormatter('%(asctime)s [%(levelname)s] %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
     add_debug_file_handler(logger, file_formatter)
 
-    logger.info(f'Logging level: {logging.getLevelName(console_loglevel)}')
     logger.debug(f'DEBUG: Settings verbose: True, LOGLEVEL: {logging.getLevelName(console_loglevel)}')
 
     init_bookkeeping_logger()

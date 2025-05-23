@@ -1,0 +1,123 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main, ci-test]
+
+jobs:
+  detect-changes:
+    runs-on: ubuntu-latest
+    outputs:
+      frontend_changed: ${{ steps.frontend.outputs.changed }}
+      docs_changed: ${{ steps.docs.outputs.changed }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Detect changes in frontend/
+        id: frontend
+        uses: ./.github/actions/detect-changes
+        with:
+          path: reports-frontend
+
+      - name: Detect changes in docs/
+        id: docs
+        uses: ./.github/actions/detect-changes
+        with:
+          path: docs
+
+
+  python-build:
+    needs: detect-changes
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 🐍 Install uv with caching
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+          cache-dependency-glob: "uv.lock"
+
+      - name: 📦 Install the project
+        run: uv sync --locked --all-extras --dev
+
+      - name: 👁️ Show versions
+        run: python --version && uv --version
+
+      - name: 🔍 Run pre-commit
+        run: uv run pre-commit run -a --config .config/.pre-commit-config.yaml
+
+      - name: 🔍 Run Radon complexity checks
+        run: uv run radon cc -n B simpleval
+
+      - name: 🔍 Run Xenon complexity checks
+        run: uv run xenon --max-absolute B --max-modules B --max-average B simpleval
+
+      - name: 🔍 Verify uv.lock <-> requirements.txt sync
+        run: |
+          # https://github.com/astral-sh/uv/issues/6007
+          uv export --format requirements-txt > ci/requirements-temp.txt
+          if ! cmp -s requirements.txt ci/requirements-temp.txt; then
+            diff -u requirements.txt ci/requirements-temp.txt || true
+            echo "❌ requirements.txt is out of date. Run 'uv export --format requirements-txt > requirements.txt' and commit the changes."
+            exit 1
+          else
+            echo "✅ requirements.txt is up to date."
+          fi
+
+      - name: 🧪 Run tests with coverage
+        run: uv run pytest --cov=simpleval --cov-report=term --cov-report=xml --cov-fail-under=90
+
+      - name: 📦 Build Project Package
+        run: uv build
+
+  frontend-build:
+    needs: detect-changes
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: reports-frontend
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: ⬇️ Setup Node.js
+        if: needs.detect-changes.outputs.frontend_changed == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'  # or your preferred version
+          cache: 'npm'
+          cache-dependency-path: reports-frontend/package-lock.json
+
+      - name: 📦 Install dependencies
+        if: needs.detect-changes.outputs.frontend_changed == 'true'
+        run: npm install
+
+      - name: 🛠️ Build project
+        if: needs.detect-changes.outputs.frontend_changed == 'true'
+        run: npm run build
+
+      - name: 🔍 Audit for vulnerabilities
+        if: needs.detect-changes.outputs.frontend_changed == 'true'
+        run: npm audit --audit-level=low
+
+      - name: 🧪 Run tests
+        if: needs.detect-changes.outputs.frontend_changed == 'true'
+        run: npm run test-no-watch
+
+  publish-docs:
+      needs: [detect-changes, python-build, frontend-build]
+      if: |
+        github.event_name == 'push' &&
+        github.ref == 'refs/heads/main' &&
+        needs.detect-changes.outputs.docs_changed == 'true'
+      runs-on: ubuntu-latest
+
+      steps:
+        - uses: actions/checkout@v4
+
+        - name: 📚 Publish Docs
+          run: echo "Publishing docs because docs/ changed on push to main"

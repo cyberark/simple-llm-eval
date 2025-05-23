@@ -28,16 +28,39 @@
 <br>`.venv\Scripts\activate` (Windows)
 
 ## Running all checks 🔍
-* Run the the `ci/pre_pull_request_checks.py` script
-* If you made changes to the `reports-frontend` reports, run the `ci/pre_pull_request_checks_react.py` script
 
-These scripts will run in the pipeline as well.
+!!! info "Main checks"
+    Run the the `ci/run_checks.py` script
+    This will run the following checks:
+    
+    * pre-commit hooks: formatting and ruff
+    * ruff covers linting, formatting, isort and seurity checks
+    * radon and xenon for code complexity
+    * Code coverage checks - must be above 90%
+    * Verify uv.lock and requirements.txt are synced
+
+!!! info "React checks"
+      If you made changes to the `reports-frontend` reports, run the `ci/run_checks_react.py` script
+      This will run the following steps:
+
+      * npm install, build
+      * run the tests
+      * npm audit
+
+**The same checks will run in the pipeline as well.**
+
+### Update the pre-commit hooks
+Once in a while update the pre-commit hooks to the latest version:
+
+`pre-commit autoupdate --repo https://github.com/pre-commit/pre-commit-hooks --config .config/.pre-commit-config.yaml`
 
 ## Building the Package 🏗️
 * Build the package using: `uv build`
 
 ## Publishing the docs
-This project uses mkdocs/mike to publish its docs to GitHub Pages. 
+This project uses mkdocs/mike to publish its docs to GitHub Pages on a release.
+
+Here are some details on how to use mike and mkdocs:
 
 * To test the docs locally, run: `mike serve` or `mkdocs serve`
 * The pipeline publishes the docs after a successful merge to main.
@@ -49,6 +72,7 @@ This project uses mkdocs/mike to publish its docs to GitHub Pages.
 * `mike set-default latest`, to set the default version to latest
 * Test locally with `mike serve`
 * To push the changes: `mike deploy --push --update-aliases <version> latest`
+* To delete a version: `mike delete [version-or-alias]`
 
 ## CLI Dev
 The CLI uses the click library, see commands package for examples.

@@ -90,8 +90,10 @@ def test_max_tokens_constant():
 
 
 def test_call_claude_completion_success(mocker, judge):
-    mock_bedrock = mocker.patch('simpleval.evaluation.judges.models.bedrock_claude_sonnet.judge.BEDROCK')
-    mock_bedrock.invoke_model.return_value.get.return_value.read.return_value = json.dumps({
+
+    mock_bedrock_client = mocker.patch('boto3.client')
+    mock_bedrock_instance = mock_bedrock_client.return_value
+    mock_bedrock_instance.invoke_model.return_value.get.return_value.read.return_value = json.dumps({
         'usage': {
             'input_tokens': 10,
             'output_tokens': 20
@@ -103,7 +105,7 @@ def test_call_claude_completion_success(mocker, judge):
 
     result = judge.call_claude_completion(eval_prompt='test prompt', prefill='{')
     assert result == '{response text'
-    mock_bedrock.invoke_model.assert_called_once()
+    mock_bedrock_instance.invoke_model.assert_called_once()
 
 
 def test_get_claude_body_dict(judge):

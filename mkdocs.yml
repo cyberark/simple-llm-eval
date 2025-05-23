@@ -24,6 +24,9 @@ nav:
     - Debugging: 'developers/debugging.md'
     - Judging The Judges: 'developers/testing-judges.md'
     - Reporting Dev: 'developers/reporting-dev.md'
+  - Maintainers:
+    - Version Release: 'maintainers/version-release.md'
+
 theme:
   name: material
   color_mode: dark

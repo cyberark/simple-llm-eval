@@ -1,5 +1,5 @@
 [project]
-name = "simple-llm-eval"
+name = "simpleval"
 version = "0.4"
 description = "Simple Evaluation Framework for LLM use cases"
 authors = [{ name = "Roy Ben Yosef", email = "roy.benyosef@cyberark.com" }]
@@ -47,6 +47,7 @@ dev = [
     "pytest-metadata>=3.1.1,<4",
     "mkdocs-render-swagger-plugin>=0.1.2,<0.2",
     "ruff>=0.11.10",
+    "pylint>=3.3.7",
 ]
 
 [tool.uv]

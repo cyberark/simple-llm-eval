@@ -11,8 +11,6 @@ def _get_retry_config():
 
 retry_config = _get_retry_config()
 
-bedrock = boto3.client(service_name='bedrock-runtime')
-
 
 def create_retry_with_exceptions(exceptions):
     """
@@ -38,6 +36,7 @@ def create_retry_with_exceptions(exceptions):
 
 
 # Random wait with exponentially widening window.
+bedrock = boto3.client(service_name='bedrock-runtime', region_name='us-east-1')
 BEDROCK_LIMITS_EXCEPTIONS = (bedrock.exceptions.ThrottlingException, bedrock.exceptions.ServiceQuotaExceededException)
 bedrock_limits_retry = create_retry_with_exceptions(BEDROCK_LIMITS_EXCEPTIONS)
 

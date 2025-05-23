@@ -25,6 +25,7 @@ You can use simpleval to evaluate your LLMs with a simple and easy-to-use CLI.
 ### What's In The Box? 🎁
 The built-in evaluation is using the "LLM As a Judge" technique, based on the [AWS Bedrock LLM As a Judge](https://docs.aws.amazon.com/bedrock/latest/userguide/model-evaluation-type-judge-prompt.html) implemented with various LLM providers.
 
+
 ### Why Simple-Eval?
 It is dead simple and easily customizable.
 

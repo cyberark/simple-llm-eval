@@ -17,8 +17,6 @@ from simpleval.evaluation.metrics.models.bedrock_claude_sonnet.base.base_metric 
 from simpleval.logger import log_bookkeeping_data
 from simpleval.utilities.retryables import BEDROCK_LIMITS_EXCEPTIONS, bedrock_limits_retry
 
-BEDROCK = boto3.client(service_name='bedrock-runtime')
-
 
 class BedrockClaudeSonnetJudge(BaseJudge):
     """
@@ -27,6 +25,7 @@ class BedrockClaudeSonnetJudge(BaseJudge):
     """
 
     DEFAULT_MODEL_ID = SONNET35_V1_MODEL_ID
+    DEFAULT_REGION = 'us-east-1'
 
     SUPPORTED_MODEL_IDS = {
         SONNET35_V1_MODEL_ID,
@@ -45,7 +44,7 @@ class BedrockClaudeSonnetJudge(BaseJudge):
 
     def __init__(self, model_id: str = None):
         model_id = model_id or self.DEFAULT_MODEL_ID
-        region = boto3.session.Session().region_name
+        region = boto3.session.Session().region_name or self.DEFAULT_REGION
         if AWS_REGION_PLACEHOLDER in model_id:
             model_id = model_id.replace(AWS_REGION_PLACEHOLDER, region)
 
@@ -85,7 +84,8 @@ class BedrockClaudeSonnetJudge(BaseJudge):
 
             self.logger.debug(f'Calling Claude completion, {self.model_id=}, {body=}')
 
-            response = BEDROCK.invoke_model(body=body, modelId=self.model_id, accept=accept, contentType=content_type)
+            bedrock = boto3.client(service_name='bedrock-runtime')
+            response = bedrock.invoke_model(body=body, modelId=self.model_id, accept=accept, contentType=content_type)
 
             result = json.loads(response.get('body').read())
             input_tokens = result.get('usage', {}).get('input_tokens', '')

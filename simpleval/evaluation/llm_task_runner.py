@@ -4,7 +4,6 @@ import logging
 import os
 from typing import List
 
-import boto3
 from colorama import Fore
 
 from simpleval.consts import LOGGER_NAME
@@ -20,8 +19,6 @@ from simpleval.evaluation.utils import (
 from simpleval.parallel_runner.parallel_runner import BaseRunner
 from simpleval.parallel_runner.schemas import TaskParams, TaskResult
 from simpleval.testcases.schemas.llm_task_result import LlmTaskResult
-
-BEDROCK = boto3.client(service_name='bedrock-runtime')
 
 PLUGIN_FILE_NAME = 'task_handler.py'
 PLUGIN_FUNCTION_NAME = 'task_logic'

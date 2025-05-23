@@ -1,6 +1,6 @@
 # Contributing
 
-Thank you for considering contributing to SimplEval! We welcome contributions to improve this project.
+Thank you for considering contributing to this project! We welcome contributions to improve this project.
 For general contribution and community guidelines, please see the [community repo](https://github.com/cyberark/community).
 
 Go over this guide to learn how to contribute to the project. 

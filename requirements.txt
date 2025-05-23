@@ -97,11 +97,11 @@ backrefs==5.8 \
 beautifulsoup4==4.13.3 \
     --hash=sha256:1bd32405dacc920b42b83ba01644747ed77456a65760e285fbc47633ceddaf8b \
     --hash=sha256:99045d7d3f08f91f0d656bc9b7efbae189426cd913d830294a15eefa0ea4df16
-    # via simple-llm-eval
+    # via simpleval
 boto3==1.37.31 \
     --hash=sha256:cf8997be0742a5cab9d33a138ef56e423a8ebd8881f6f73e95076b26656b36dc \
     --hash=sha256:dfee02b2f8f632a239a2f4ba6a2d568e2edd7f7464e9afd8a487fdb3fa9a0ad3
-    # via simple-llm-eval
+    # via simpleval
 botocore==1.37.31 \
     --hash=sha256:598a33a7a0e5a014bd1416c999a0b9c634fbbba3d1363e2368e6a92da4544df4 \
     --hash=sha256:eb3dfa44a87187bd82c3b493d568d8436270d4d000f237b49b669a01fcd8a21c
@@ -172,7 +172,7 @@ click==8.1.8 \
     # via
     #   litellm
     #   mkdocs
-    #   simple-llm-eval
+    #   simpleval
 colorama==0.4.6 \
     --hash=sha256:08695f5cb7ed6e0531a20572697297273c47b8cae5a63ffc6d6ed5c201be6e44 \
     --hash=sha256:4f1d9991f5acc0ca119f9d443620b77f9d6b33703e51011c16baf57afb285fc6
@@ -183,7 +183,7 @@ colorama==0.4.6 \
     #   pylint
     #   pytest
     #   radon
-    #   simple-llm-eval
+    #   simpleval
     #   tqdm
 contourpy==1.3.1 \
     --hash=sha256:041b640d4ec01922083645a94bb3b2e777e6b626788f4095cf21abbe266413c1 \
@@ -397,7 +397,7 @@ google-auth==2.40.0 \
 google-genai==1.13.0 \
     --hash=sha256:de7b4960d361c7ea85b715ce0e07fe34903d94affa82d566d9eb04e8f92512b9 \
     --hash=sha256:e88417c95f333827ed051282803db627192fd8e5fdf5b49b6f26644a67775d1a
-    # via simple-llm-eval
+    # via simpleval
 h11==0.14.0 \
     --hash=sha256:8f19fbbe99e72420ff35c00b27a34cb9937e902a8b810e2c88300c6f0a3b699d \
     --hash=sha256:e3fe4ac4b851c468cc8363d500db52c2ead036020723024a109d37346efaa761
@@ -407,7 +407,7 @@ httpcore==1.0.7 \
     --hash=sha256:a3fff8f43dc260d5bd363d9f9cf1830fa3a458b332856f34282de498ed420edd
     # via
     #   httpx
-    #   simple-llm-eval
+    #   simpleval
 httpx==0.28.1 \
     --hash=sha256:75e98c5f16b0f35b567856f597f06ff2270a374470a5c2392242528e3e3e42fc \
     --hash=sha256:d909fcccc110f8c7faf814ca82a9a4d816bc5a6dbfea25d6591d6985b8ba59ad
@@ -448,7 +448,7 @@ iniconfig==2.1.0 \
 inquirerpy==0.3.4 \
     --hash=sha256:89d2ada0111f337483cb41ae31073108b2ec1e618a49d7110b0d7ade89fc197e \
     --hash=sha256:c65fdfbac1fa00e3ee4fb10679f4d3ed7a012abf4833910e63c295827fe2a7d4
-    # via simple-llm-eval
+    # via simpleval
 isort==6.0.1 \
     --hash=sha256:1cb5df28dfbc742e490c5e41bad6da41b805b0a8be7bc93cd0fb2a8a890ac450 \
     --hash=sha256:2dc5d7f65c9678d94c88dfc29161a320eec67328bc97aad576874cb4be1e9615
@@ -463,7 +463,7 @@ jinja2==3.1.6 \
     #   mkdocs-git-revision-date-plugin
     #   mkdocs-material
     #   pytest-html
-    #   simple-llm-eval
+    #   simpleval
 jiter==0.9.0 \
     --hash=sha256:04e8ffa3c353b1bc4134f96f167a2082494351e42888dfcf06e944f2729cbe1d \
     --hash=sha256:062b756ceb1d40b0b28f326cba26cfd575a4918415b036464a52f08632731e5a \
@@ -584,7 +584,7 @@ kiwisolver==1.4.8 \
 litellm==1.70.0 \
     --hash=sha256:357f3891e38f23a12f0932c235ed860dc41bc5880afaee7229e6d25318652706 \
     --hash=sha256:7e094057b38ddb1d77f61452895835aa5d376db1850e9a1bc0342c5631d89638
-    # via simple-llm-eval
+    # via simpleval
 mando==0.7.1 \
     --hash=sha256:18baa999b4b613faefb00eac4efadcf14f510b59b924b66e08289aa1de8c3500 \
     --hash=sha256:26ef1d70928b6057ee3ca12583d73c63e05c49de8972d620c278a7b206581a8a
@@ -667,7 +667,7 @@ matplotlib==3.10.1 \
     --hash=sha256:dc6ab14a7ab3b4d813b88ba957fc05c79493a037f54e246162033591e770de6f \
     --hash=sha256:e8d2d0e3881b129268585bf4765ad3ee73a4591d77b9a18c214ac7e3a79fb2ba \
     --hash=sha256:e9b4bb156abb8fa5e5b2b460196f7db7264fc6d62678c03457979e7d5254b7be
-    # via simple-llm-eval
+    # via simpleval
 mccabe==0.7.0 \
     --hash=sha256:348e0240c33b60bbdf4e523192ef919f28cb2c3d7d5c7794f74009290f236325 \
     --hash=sha256:6c2d30ab6be0e4a46919781807b4f0d834ebdd6c6e3dca0bda5a15f863427b6e
@@ -1022,7 +1022,7 @@ pydantic==2.11.3 \
     #   google-genai
     #   litellm
     #   openai
-    #   simple-llm-eval
+    #   simpleval
 pydantic-core==2.33.1 \
     --hash=sha256:048831bd363490be79acdd3232f74a0e9951b11b2b4cc058aeb72b22fdc3abe1 \
     --hash=sha256:08530b8ac922003033f399128505f513e30ca770527cc8bbacf75a84fcc2c74b \
@@ -1366,11 +1366,11 @@ soupsieve==2.6 \
 tabulate==0.9.0 \
     --hash=sha256:0095b12bf5966de529c0feb1fa08671671b3368eec77d7ef7ab114be2c068b3c \
     --hash=sha256:024ca478df22e9340661486f85298cff5f6dcdba14f3813e8830015b9ed1948f
-    # via simple-llm-eval
+    # via simpleval
 tenacity==9.1.2 \
     --hash=sha256:1169d376c297e7de388d18b4481760d478b0e99a777cad3a9c86e556f4b697cb \
     --hash=sha256:f77bf36710d8b73a50b2dd155c97b870017ad21afe6ab300326b0371b3b05138
-    # via simple-llm-eval
+    # via simpleval
 tiktoken==0.9.0 \
     --hash=sha256:03935988a91d6d3216e2ec7c645afbb3d870b37bcb67ada1943ec48678e7ee33 \
     --hash=sha256:11a20e67fdf58b0e2dea7b8654a288e481bb4fc0289d3ad21291f8d0849915fb \
@@ -1453,7 +1453,7 @@ tqdm==4.67.1 \
     # via
     #   huggingface-hub
     #   openai
-    #   simple-llm-eval
+    #   simpleval
 typing-extensions==4.13.1 \
     --hash=sha256:4b6cf02909eb5495cfbc3f6e8fd49217e6cc7944e145cdda8caa3734777f9e69 \
     --hash=sha256:98795af00fb9640edec5b8e31fc647597b4691f099ad75f469a2616be1a76dff

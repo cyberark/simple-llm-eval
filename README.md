@@ -9,7 +9,7 @@
 
 ![Simpleval Banner](docs/media/simpleval-banner.jpeg)
 
-Welcome to the simple llm evaluation framework, or SimplEval for short.
+Welcome to the simple llm evaluation framework, or simpleval for short.
 
 ## Getting Started
 
@@ -23,11 +23,11 @@ See [📚 Project Documentation 📚](https://cyberark.github.io/simple-llm-eval
 
 Contributions are welcome!
 
-If you would like to contribute to the SimplEval, please follow the guidelines outlined in the [CONTRIBUTING.md](https://github.com/cyberark/simple-llm-eval/blob/main/CONTRIBUTING.md) file.
+If you would like to contribute to this project, please follow the guidelines outlined in the [CONTRIBUTING.md](https://github.com/cyberark/simple-llm-eval/blob/main/CONTRIBUTING.md) file.
 
 ## License
 
-SimplEval is released under the [Apache License](https://www.apache.org/licenses/LICENSE-2.0). See the [LICENSE](https://github.com/cyberark/simple-llm-eval/blob/main/LICENSE) file for more details.
+simpleval is released under the [Apache License](https://www.apache.org/licenses/LICENSE-2.0). See the [LICENSE](https://github.com/cyberark/simple-llm-eval/blob/main/LICENSE) file for more details.
 
 ## Contact
 

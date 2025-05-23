@@ -26,7 +26,7 @@ If applicable, add screenshots to help explain your problem.
 **Environment (please complete the following information):**
  - OS: [e.g. iOS]
  - Python version:
- - SimplEval version:
+ - simpleval version:
 
 **Additional context**
 Add any other context about the problem here.

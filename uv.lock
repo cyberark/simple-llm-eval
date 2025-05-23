@@ -2065,7 +2065,7 @@ wheels = [
 ]
 
 [[package]]
-name = "simple-llm-eval"
+name = "simpleval"
 version = "0.4"
 source = { editable = "." }
 dependencies = [

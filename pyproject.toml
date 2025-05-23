@@ -1,5 +1,5 @@
 [project]
-name = "simple-llm-eval"
+name = "simpleval"
 version = "0.4"
 description = "Simple Evaluation Framework for LLM use cases"
 authors = [{ name = "Roy Ben Yosef", email = "roy.benyosef@cyberark.com" }]

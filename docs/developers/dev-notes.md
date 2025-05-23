@@ -58,7 +58,9 @@ Once in a while update the pre-commit hooks to the latest version:
 * Build the package using: `uv build`
 
 ## Publishing the docs
-This project uses mkdocs/mike to publish its docs to GitHub Pages. 
+This project uses mkdocs/mike to publish its docs to GitHub Pages on a release.
+
+Here are some details on how to use mike and mkdocs:
 
 * To test the docs locally, run: `mike serve` or `mkdocs serve`
 * The pipeline publishes the docs after a successful merge to main.
@@ -70,6 +72,7 @@ This project uses mkdocs/mike to publish its docs to GitHub Pages.
 * `mike set-default latest`, to set the default version to latest
 * Test locally with `mike serve`
 * To push the changes: `mike deploy --push --update-aliases <version> latest`
+* To delete a version: `mike delete [version-or-alias]`
 
 ## CLI Dev
 The CLI uses the click library, see commands package for examples.

@@ -6,17 +6,20 @@ import shutil
 import subprocess
 import sys
 
+from colorama import Fore
+
+
 COVERAGE_FAIL_UNDER = 90
 
 
 def run_command(cmd, description=None):
     if description:
-        print(description)
+        print(f'{Fore.CYAN}{description}{Fore.RESET}')
     try:
         subprocess.run(cmd, shell=True, check=True)
         print()
     except subprocess.CalledProcessError as e:
-        print(f'Command failed, if fixes attempted, run again: {cmd}')
+        print(f'{Fore.RED}Command failed, if fixes attempted, run again: {cmd}{Fore.RESET}')
         sys.exit(e.returncode)
 
 def update_requirements_txt():
@@ -37,14 +40,12 @@ def update_requirements_txt():
     hash_req = hashlib.sha256(open(requirements_path, 'rb').read()).hexdigest()
 
     if hash_req_temp != hash_req:
-        print('Updating requirements.txt...')
+        print(f'{Fore.CYAN}Updating requirements.txt...{Fore.RESET}')
         shutil.copyfile(requirements_temp_path, requirements_path)
-        print('Command failed: requirements.txt updated, stopping')
-        sync_cmd = cmd.format(requirements_path=requirements_path)
-        print(f'You must sync requirements.txt by calling: {sync_cmd}')
+        print(f'{Fore.RED}Command failed: requirements.txt updated, stopping, run again to verify.{Fore.RESET}')
         sys.exit(1)
     else:
-        print('requirements.txt is up to date')
+        print(f'{Fore.GREEN}requirements.txt is up to date{Fore.RESET}')
 
 
 
@@ -74,7 +75,7 @@ def main():
     update_requirements_txt()
 
     if args.with_coverage:
-        print(f'Running coverage checks with fail-under={COVERAGE_FAIL_UNDER}...')
+        print(f'{Fore.CYAN}Running coverage checks with fail-under={COVERAGE_FAIL_UNDER}...{Fore.RESET}')
         run_command(
             cmd='pytest tests/unit tests/integration -v --durations=0 --junitxml reports/codecov-test-results.xml '
                 '--html=reports/codecov-test-report.html --self-contained-html --cov=. --cov-report html:reports/codecov '

@@ -1,4 +1,28 @@
 # Testing the judges 👩‍⚖️🧑‍⚖️
+
+## Minimal Judge Tests
+
+A minimal test to verify that the main judges are working as expected is include here:
+
+`tests/integration/test_judges_minimal.py:test_judges_minimal`
+
+Since it consumes LLM tokens, it does not run by default.
+It requires credentials for all relevant providers.
+
+To run these tests set this environment variable:
+
+`RUN_ALL_MINIMAL_JUDGE_TESTS=1`
+
+For example:
+
+```bash
+RUN_ALL_MINIMAL_JUDGE_TESTS=1 pytest -v tests/integration/test_judges_minimal.py```
+```
+
+There are also provider specific environment variables (see in code).
+
+## In-Depth Judge Tests
+
 To make sure that the LLM as a judge implementation is working as expected, you can run the judges on a set of evaluation sets for three use cases: "Classify products", "Detect Toxicity" and "Spam Detection".
 
 !!! info

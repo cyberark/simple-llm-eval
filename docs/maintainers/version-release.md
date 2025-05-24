@@ -22,7 +22,7 @@
 
 ## Release Procedure
 
-### Update Version in `pyproject.toml`
+### 1. Update Version in `pyproject.toml`
 
 Using `uv` Update the version in `pyproject.toml` to the new version according to the [Versioning Schema](#versioning-schema) above. Make sure you adhere to the versioning rules and only include alpha, beta, or rc for pre-release versions.
 
@@ -38,7 +38,7 @@ uv version 1.0.1-rc.1 # set to pre-release version
 
 ```
 
-### Create a Release Tag
+### 2. Create a Release Tag
 On the main branch, create a tag using the git cli. Set the tag value to be `v<new-version>` where `<new-version>` is the value you set in `pyproject.toml`, add a message with the release notes, and push the tag to the remote repository.
 
 !!! info "Update Version Example"
@@ -55,6 +55,9 @@ On the main branch, create a tag using the git cli. Set the tag value to be `v<n
 
     For example: `pyproject.toml` version==`1.0.1` 👉 tag name==`v1.0.1`
 
+### 3. Update the Release Notes
+Manually update the release notes, until this process is automated.
+
 ### Release Workflow
 
 The tag creation will trigger the GitHub Actions workflow [Release](https://github.com/cyberark/simple-llm-eval/actions/workflows/ci.yml)
@@ -64,10 +67,11 @@ The tag creation will trigger the GitHub Actions workflow [Release](https://gith
     The release workflow will:
     - Validate the `pyproject.toml` version against the tag name
     - Build the package
-    - Create GitHub release with notes
+    - Create GitHub release
     - Attach binaries to GitHub release
     - *Publish the package to PyPI
     - Publish the docs
+
 
 ### Docs Only Release
 In case you make a docs-only update, see [Publishing the Docs](../developers/dev-notes.md/#publishing-the-docs)

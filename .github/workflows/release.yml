@@ -22,5 +22,33 @@ jobs:
       - name: 📦 Install the project
         run: uv sync --locked --all-extras --dev
 
-      - name: Validate tag value
-        run:
+      - name: 🔎 Validate tag value
+        run: ux run ci/scripts/validate_tag.py
+
+      - name: 📦 Build Project Package
+        run: uv build
+
+      # - name: 🚀 Publish to PyPI
+      #   env:
+      #     UV_PYPI_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
+      #   run: |
+      #     uv publish
+
+      - name: 📚 Publish Docs
+        run: |
+          VERSION=${GITHUB_REF#refs/tags/v}
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          mike deploy $VERSION latest
+          mike set-default latest
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist/*
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    
+    # - Publish the docs

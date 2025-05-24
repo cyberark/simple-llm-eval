@@ -22,13 +22,6 @@ jobs:
         with:
           path: reports-frontend
 
-      - name: Detect changes in docs/
-        id: docs
-        uses: ./.github/actions/detect-changes
-        with:
-          path: docs
-
-
   python-build:
     needs: detect-changes
     runs-on: ubuntu-latest

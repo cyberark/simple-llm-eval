@@ -10,31 +10,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
+      - name: 🐍 Install uv with caching
+        uses: astral-sh/setup-uv@v5
         with:
-          python-version: '3.10'
+          enable-cache: true
+          cache-dependency-glob: "uv.lock"
 
-      - name: Validate tag format
-        run: |
-          if [[ ! "${{ github.ref_name }}" =~ ^v[0-9]+\.[0-9]+\.[0-9]+(rc[0-9]+)?$ ]]; then
-            echo "Invalid tag format"
-            exit 1
-          fi
+      - name: 📦 Install the project
+        run: uv sync --locked --all-extras --dev
 
-  publish-docs: # Make into a step
-      needs: [detect-changes, python-build, frontend-build]
-      if: |
-        github.event_name == 'push' &&
-        github.ref == 'refs/heads/main' &&
-        needs.detect-changes.outputs.docs_changed == 'true'
-      runs-on: ubuntu-latest
-
-      steps:
-        - uses: actions/checkout@v4
-
-        - name: 📚 Publish Docs
-          run: echo "Publishing docs because docs/ changed on push to main"
+      - name: Validate tag value
+        run:

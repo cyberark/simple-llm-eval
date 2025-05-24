@@ -50,7 +50,8 @@ On the main branch, create a tag using the git cli. Set the tag value to be `v<n
     ```
 
 !!! warning
-    The tag name must match the version in `pyproject.toml` exactly prefixed with `v`
+    The tag name must match the version in `pyproject.toml` exactly and it must be prefixed with `v`.<br>
+    Tags without the `v` prefix will not fire the release workflow.
 
     For example: `pyproject.toml` version==`1.0.1` 👉 tag name==`v1.0.1`
 

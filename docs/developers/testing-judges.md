@@ -16,7 +16,7 @@ To run these tests set this environment variable:
 For example:
 
 ```bash
-RUN_ALL_MINIMAL_JUDGE_TESTS=1 pytest -v tests/integration/test_judges_minimal.py```
+RUN_ALL_MINIMAL_JUDGE_TESTS=1 pytest -v tests/integration/test_judges_minimal.py
 ```
 
 There are also provider specific environment variables (see in code).

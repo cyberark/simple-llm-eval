@@ -130,6 +130,7 @@ def test_init_command_creates_folders_and_files(mock_prompt, mock_input, temp_ev
 @patch('builtins.input')
 @patch('simpleval.commands.init_command.user_functions.prompt')
 def test_init_command_stop_due_to_preliminary_errors(mock_prompt, mock_input, temp_eval_folder):
+
     eval_dir = os.path.join(temp_eval_folder, 'test-eval')
     testcase = 'nova-lite'
     continue_with_preliminary_errors_input = 'n'
@@ -149,8 +150,13 @@ def test_init_command_stop_due_to_preliminary_errors(mock_prompt, mock_input, te
         },
     ]
 
-    with pytest.raises(TerminationError, match='Exiting...'):
-        init_command()
+    # Patch JudgeProvider.get_judge to return a mock judge whose run_preliminary_checks raises an Exception
+    with patch('simpleval.commands.init_command.user_functions.JudgeProvider.get_judge') as mock_get_judge:
+        mock_judge = mock_get_judge.return_value
+        mock_judge.run_preliminary_checks.side_effect = Exception('Preliminary check failed')
+
+        with pytest.raises(TerminationError, match='Exiting...'):
+            init_command()
 
 
 @patch('builtins.input')

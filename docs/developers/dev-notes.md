@@ -57,6 +57,11 @@ Once in a while update the pre-commit hooks to the latest version:
 ## Building the Package 🏗️
 * Build the package using: `uv build`
 
+## Useful uv Commands 🛠️
+* Install all dependencies: `uv sync`
+* Update one package: `uv add <existing-package-name>`
+* Update all packages: `uv lock --upgrade && uv sync`
+
 ## Publishing the docs
 This project uses mkdocs/mike to publish its docs to GitHub Pages on a release.
 

@@ -1,6 +1,6 @@
 [project]
 name = "simpleval"
-version = "0.4"
+version = "0.1.0"
 description = "Simple Evaluation Framework for LLM use cases"
 authors = [{ name = "Roy Ben Yosef", email = "roy.benyosef@cyberark.com" }]
 requires-python = ">=3.11"
@@ -19,7 +19,7 @@ dependencies = [
     "matplotlib>=3.10.0,<4",
     "litellm==1.70.0",
     "httpcore>=1.0.7,<2",
-    "google-genai>=1.13.0,<2",
+    "google-genai>=1.16.0,<2",
 ]
 
 [project.urls]

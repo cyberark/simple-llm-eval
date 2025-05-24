@@ -24,7 +24,19 @@
 
 ### Update Version in `pyproject.toml`
 
-Update the version in `pyproject.toml` to the new version according to the [Versioning Schema](#versioning-schema) above. Make sure you adhere to the versioning rules and only include alpha, beta, or rc for pre-release versions.
+Using `uv` Update the version in `pyproject.toml` to the new version according to the [Versioning Schema](#versioning-schema) above. Make sure you adhere to the versioning rules and only include alpha, beta, or rc for pre-release versions.
+
+examples:
+```
+uv version --bump patch # 1.0.1 -> 1.0.2
+uv version --bump minor # 1.0.1 -> 1.1.0
+uv version --bump major # 1.0.1 -> 2.0.0
+
+uv version 1.0.1-alpha.1 # set to pre-release version
+uv version 1.0.1-beta.1 # set to pre-release version
+uv version 1.0.1-rc.1 # set to pre-release version
+
+```
 
 ### Create a Release Tag
 On the main branch, create a tag using the git cli. Set the tag value to be `v<new-version>` where `<new-version>` is the value you set in `pyproject.toml`, add a message with the release notes, and push the tag to the remote repository.

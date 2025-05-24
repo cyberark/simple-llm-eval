@@ -59,7 +59,7 @@ Once in a while update the pre-commit hooks to the latest version:
 
 ## Useful uv Commands 🛠️
 * Install all dependencies: `uv sync`
-* Update one package: `uv add <existing-package-name>`
+* Update one package: `uv lock --upgrade-package <package-name>`
 * Update all packages: `uv lock --upgrade && uv sync`
 
 ## Publishing the docs

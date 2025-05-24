@@ -56,7 +56,7 @@ On the main branch, create a tag using the git cli. Set the tag value to be `v<n
     For example: `pyproject.toml` version==`1.0.1` 👉 tag name==`v1.0.1`
 
 ### 3. Update the Release Notes
-Manually update the release notes, until this process is automated.
+Manually open the release notes, click on "generate release notes" until this process is automated.
 
 ### Release Workflow
 

@@ -7,6 +7,8 @@
 - [ ] Bug Fix
 - [ ] Feature
 - [ ] Documentation
+- [ ] Update Dependencies
+- [ ] CICD / DevOps
 - [ ] Other: <!-- Please specify -->
 
 ## Summary

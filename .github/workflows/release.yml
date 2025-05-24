@@ -23,7 +23,7 @@ jobs:
         run: uv sync --locked --all-extras --dev
 
       - name: 🔎 Validate tag value
-        run: ux run ci/scripts/validate_tag.py
+        run: uv run ci/scripts/validate_tag.py
 
       - name: 📦 Build Project Package
         run: uv build
@@ -39,8 +39,8 @@ jobs:
           VERSION=${GITHUB_REF#refs/tags/v}
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
-          mike deploy $VERSION latest
-          mike set-default latest
+          mike deploy --push --branch gh-pages $VERSION
+          mike deploy --push --update-aliases $VERSION latest
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2

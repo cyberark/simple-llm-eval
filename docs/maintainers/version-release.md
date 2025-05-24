@@ -24,7 +24,7 @@
 
 ### 1. Update Version in `pyproject.toml`
 
-Using `uv` Update the version in `pyproject.toml` to the new version according to the [Versioning Schema](#versioning-schema) above. Make sure you adhere to the versioning rules and only include alpha, beta, or rc for pre-release versions.
+Using `uv` Update the version in `pyproject.toml` to the new version according to the versioning schema above. Make sure you adhere to the versioning rules and only include alpha, beta, or rc for pre-release versions.
 
 examples:
 ```

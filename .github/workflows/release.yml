@@ -23,7 +23,7 @@ jobs:
         run: uv sync --locked --all-extras --dev
 
       - name: 🔎 Validate tag value
-        run: uv run ci/scripts/validate_tag.py
+        run: uv run ci/scripts/validate_tag.py ${GITHUB_REF#refs/tags/v}
 
       - name: 📦 Build Project Package
         run: uv build

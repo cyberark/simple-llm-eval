@@ -24,7 +24,7 @@ jobs:
 
       - name: 🔎 Validate tag value
         run: |
-          VERSION=${GITHUB_REF#refs/tags/}
+          VERSION=${GITHUB_REF#refs/tags/v}
           echo "Validating version: $VERSION"
           uv run ci/scripts/validate_tag.py "$VERSION"
 

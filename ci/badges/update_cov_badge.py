@@ -69,7 +69,7 @@ def main():
     percent = int(round(line_rate * 100))
     color = get_color(percent)
     update_svg(svg_path, percent, color, output_path)
-    
+
     print(f'✅ Updated badge written to {output_path} with {percent}% coverage and color {color}')
 
 if __name__ == '__main__':

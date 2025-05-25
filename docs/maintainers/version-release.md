@@ -56,7 +56,10 @@ On the main branch, create a tag using the git cli. Set the tag value to be `v<n
     For example: `pyproject.toml` version==`1.0.1` 👉 tag name==`v1.0.1`
 
 ### 3. Update the Release Notes
-Manually open the release notes, click on "generate release notes" until this process is automated.
+
+* Wait for the [release workflow](https://github.com/cyberark/simple-llm-eval/actions/workflows/release.yml) to end successfully
+* Manually open the release notes, click on "generate release notes" and update them as needed
+* In the future this will be automated
 
 ### Release Workflow
 

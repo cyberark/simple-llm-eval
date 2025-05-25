@@ -4,8 +4,6 @@
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/simple-llm-eval)
 ![version](https://img.shields.io/github/v/release/cyberark/simple-llm-eval)
 ![Build Status](https://github.com/cyberark/simple-llm-eval/actions/workflows/ci.yml/badge.svg)
-[![codecov](https://codecov.io/gh/cyberark/simple-llm-eval/branch/main/graph/badge.svg)](https://codecov.io/gh/cyberark/simple-llm-eval)
-
 
 ![Simpleval Banner](docs/media/simpleval-banner.jpeg)
 

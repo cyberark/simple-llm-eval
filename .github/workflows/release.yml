@@ -47,7 +47,8 @@ jobs:
 
       - name: 📚 Publish Docs
         run: |
-          VERSION=${GITHUB_REF#refs/tags/v}
+          # VERSION=${GITHUB_REF#refs/tags/v}
+          VERSION="v0.1.0"
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
           uv run mike deploy --push --branch gh-pages $VERSION

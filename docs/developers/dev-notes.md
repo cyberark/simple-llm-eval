@@ -78,7 +78,8 @@ Here are some details on how to use mike and mkdocs:
 * `mike set-default latest`, to set the default version to latest
 * Test locally with `mike serve`
 * To push the changes: `mike deploy --push --update-aliases <version> latest`
-* To delete a version: `mike delete [version-or-alias]`
+* To delete a version: `mike delete 0.1 --push --message "Delete version 0.1" [--update-aliases latest]`
+* clear all docs: `mike delete --all`
 
 ## CLI Dev
 The CLI uses the click library, see commands package for examples.

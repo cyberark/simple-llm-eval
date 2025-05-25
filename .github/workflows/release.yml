@@ -32,7 +32,7 @@ jobs:
           cache-dependency-glob: "uv.lock"
 
       - name: 📦 Install dev packages
-        run: uv sync --locked --all-extras --only-dev
+        run: uv sync --locked --all-extras --dev
 
       - name: 🔎 Validate tag value
         run: |

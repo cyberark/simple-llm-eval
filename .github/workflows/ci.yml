@@ -57,9 +57,6 @@ jobs:
       - name: 🧪 Run tests with coverage
         run: uv run pytest --cov=simpleval --cov-report=term --cov-report=xml --cov-fail-under=90
 
-      - name: 🧪 Debug – List coverage output
-        run: ls && ls -l reports && file reports/coverage.xml
-
       - name: 🏷️ Generate coverage badge
         run: uv run python ./ci/badges/update_cov_badge.py coverage.xml
 

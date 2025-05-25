@@ -6,7 +6,7 @@ import argparse
 
 def main():
     parser = argparse.ArgumentParser(description='Validate tag version against uv version output.')
-    parser.add_argument('tag_value', help='The tag version to validate without the leading v(e.g., 0.1.0)')
+    parser.add_argument('tag_value', help='The tag version to validate including the leading `v` (e.g., v0.1.0)')
     args = parser.parse_args()
 
     try:
@@ -16,7 +16,7 @@ def main():
         if not version:
             raise ValueError("Could not find 'version' in uv output.")
 
-        expected_tag = version
+        expected_tag = f'v{version}'
         if args.tag_value == expected_tag:
             print(f'✅ Tag version matches: {args.tag_value}')
             sys.exit(0)

@@ -1,9 +1,16 @@
-name: Release
+# name: Release
+
+# on:
+#   push:
+#     tags:
+#       - 'v*'  # Trigger only on version tags like v1.2.3
+
+name: Release (Test)
 
 on:
   push:
-    tags:
-      - 'v*'  # Trigger only on version tags like v1.2.3
+    branches:
+      - feature/test-release-workflow  # Change as needed
 
 jobs:
   release:

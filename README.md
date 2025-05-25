@@ -4,7 +4,7 @@
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/simple-llm-eval)
 ![version](https://img.shields.io/github/v/release/cyberark/simple-llm-eval)
 ![Build Status](https://github.com/cyberark/simple-llm-eval/actions/workflows/ci.yml/badge.svg)
-![Code Coverage](https://github.com/cyberark/simple-llm-eval/blob/main/ci/badges/coverage.svg)
+![Code Coverage](https://github.com/cyberark/simple-llm-eval/blob/main/ci/badges/coverage-updated.svg)
 
 ![Simpleval Banner](docs/media/simpleval-banner.jpeg)
 

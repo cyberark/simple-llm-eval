@@ -1,6 +1,6 @@
 [project]
 name = "simpleval"
-version = "0.1.0"
+version = "0.1.1"
 description = "Simple Evaluation Framework for LLM use cases"
 authors = [{ name = "Roy Ben Yosef", email = "roy.benyosef@cyberark.com" }]
 requires-python = ">=3.11"

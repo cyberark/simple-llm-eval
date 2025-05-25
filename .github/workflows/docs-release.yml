@@ -17,8 +17,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: 🔄 Fetch gh-pages branch
-        run: |
-          git fetch origin gh-pages:gh-pages
+        run: git fetch origin gh-pages:gh-pages
 
       - name: 🐍 Install uv with caching
         uses: astral-sh/setup-uv@v5

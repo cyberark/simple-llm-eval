@@ -79,7 +79,7 @@ Here are some details on how to use mike and mkdocs:
 * Test locally with `mike serve`
 * To push the changes: `mike deploy --push --update-aliases <version> latest`
 * To delete a version: `mike delete 0.1 --push --message "Delete version 0.1" [--update-aliases latest]`
-* clear all docs: `mike delete --all`
+* clear all docs: `mike delete --all --push`
 
 ## CLI Dev
 The CLI uses the click library, see commands package for examples.

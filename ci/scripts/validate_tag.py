@@ -9,6 +9,8 @@ def main():
     parser.add_argument('tag_value', help='The tag version to validate without the leading `v` (e.g., 0.1.0)')
     args = parser.parse_args()
 
+    print(f'🔎 Validating tag version: {args.tag_value}')
+
     try:
         result = subprocess.run(['uv', 'version', '--output-format', 'json'], capture_output=True, text=True, check=True)
         data = json.loads(result.stdout)

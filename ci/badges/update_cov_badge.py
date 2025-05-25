@@ -43,12 +43,12 @@ def update_svg(svg_path, percentage, color, output_path):
     # Update percentage text (both occurrences)
     svg = re.sub(
         r'(<text x="95" y="15" [^>]*>)[0-9]+%(<)',
-        lambda m: f"{m.group(1)}{percentage}%{m.group(2)}",
+        lambda m: f'{m.group(1)}{percentage}%{m.group(2)}',
         svg
     )
     svg = re.sub(
         r'(<text x="95" y="14">)[0-9]+%(</text>)',
-        lambda m: f"{m.group(1)}{percentage}%{m.group(2)}",
+        lambda m: f'{m.group(1)}{percentage}%{m.group(2)}',
         svg
     )
     with open(output_path, 'w', encoding='utf-8') as f:

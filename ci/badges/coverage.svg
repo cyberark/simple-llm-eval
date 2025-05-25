@@ -8,11 +8,11 @@
   </mask>
   <g mask="url(#a)">
     <rect width="70" height="20" fill="#555"/>
-    <!-- 
+    <!--
         Green (#4c1) for high (90–100%)
         Yellow (#dfb317) for moderate (70–89%)
         Orange (#fe7d37) for low (50–69%)
-        Red (#e05d44) for poor (<50%) 
+        Red (#e05d44) for poor (<50%)
     -->
     <rect x="70" width="50" height="20" fill="#4c1"/> <!-- Replace this color later based on % -->
     <rect width="120" height="20" fill="url(#b)"/>

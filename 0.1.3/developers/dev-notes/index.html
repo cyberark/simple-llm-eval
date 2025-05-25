@@ -1314,7 +1314,8 @@ This will run the following checks:</p>
 <li><code>mike set-default latest</code>, to set the default version to latest</li>
 <li>Test locally with <code>mike serve</code></li>
 <li>To push the changes: <code>mike deploy --push --update-aliases &lt;version&gt; latest</code></li>
-<li>To delete a version: <code>mike delete [version-or-alias]</code></li>
+<li>To delete a version: <code>mike delete 0.1 --push --message "Delete version 0.1" [--update-aliases latest]</code></li>
+<li>clear all docs: <code>mike delete --all</code></li>
 </ul>
 <h2 id="cli-dev">CLI Dev<a class="headerlink" href="#cli-dev" title="Permanent link">&para;</a></h2>
 <p>The CLI uses the click library, see commands package for examples.</p>

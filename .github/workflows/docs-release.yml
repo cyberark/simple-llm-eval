@@ -1,16 +1,12 @@
-name: Release
+name: DocsRelease
 
 on:
-  push:
-    tags:
-      - 'v*'  # Trigger only on version tags like v1.2.3
-
-# name: Release (Test)
-
-# on:
-#   push:
-#     branches:
-#       - feature/test-release-workflow  # Change as needed
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to deploy (e.g., 1.2.3)'
+        required: true
+        type: string
 
 jobs:
   release:
@@ -33,34 +29,16 @@ jobs:
       - name: 📦 Install dev packages
         run: uv sync --locked --all-extras --only-dev
 
-      - name: 🔎 Validate tag value
+      - name: 🔎 Validate version input
         run: |
-          VERSION=${GITHUB_REF#refs/tags/v}
+          VERSION=${{ github.event.inputs.version }}
           echo "Validating version: $VERSION"
           uv run ci/scripts/validate_tag.py "$VERSION"
 
-      - name: 📦 Build Project Package
-        run: uv build
-
-      - name: 🚀 Publish to PyPI
-        if: false  # Done in a side pipeline
-        env:
-          UV_PYPI_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
-        run: |
-          uv publish
-
       - name: 📚 Publish Docs
         run: |
-          VERSION=${GITHUB_REF#refs/tags/v}
+          VERSION=${{ github.event.inputs.version }}
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
           uv run mike deploy --push --branch gh-pages $VERSION
           uv run mike deploy --push --update-aliases $VERSION latest
-
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
-        with:
-          files: |
-            dist/*
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

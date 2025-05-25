@@ -13,7 +13,7 @@ jobs:
       frontend_changed: ${{ steps.frontend.outputs.changed }}
 
     steps:
-      - name: Checkout repository
+      - name: 🔄 Checkout repository
         uses: actions/checkout@v4
 
       - name: Detect changes in frontend/

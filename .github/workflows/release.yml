@@ -37,7 +37,8 @@ jobs:
       - name: 🔎 Validate tag value
         run: |
           VERSION=${GITHUB_REF#refs/tags/v}
-          echo "Validating version: $VERSION"
+          echo "::debug::VERSION=$VERSION"
+          echo "Command: uv run ci/scripts/validate_tag.py $VERSION"
           uv run ci/scripts/validate_tag.py "$VERSION"
 
       - name: 📦 Build Project Package

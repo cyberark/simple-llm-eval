@@ -61,7 +61,7 @@ jobs:
         run: ls && ls -l reports && file reports/coverage.xml
 
       - name: 🏷️ Generate coverage badge
-        run: uv run python ./ci/badges/update_cov_badge.py $(pwd)/reports/coverage.xml
+        run: uv run python ./ci/badges/update_cov_badge.py coverage.xml
 
       - name: 🚀 Push badge to 'badges' branch
         if: github.ref == 'refs/heads/ci-test' || github.ref == 'refs/heads/main'

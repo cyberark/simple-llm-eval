@@ -61,6 +61,7 @@ Once in a while update the pre-commit hooks to the latest version:
 * Install all dependencies: `uv sync`
 * Update one package: `uv lock --upgrade-package <package-name> && uv sync`
 * Update all packages: `uv lock --upgrade && uv sync`
+* Update dependencies constraints in `pyproject.toml` as needed
 
 ## Publishing the docs
 This project uses mkdocs/mike to publish its docs to GitHub Pages on a release.

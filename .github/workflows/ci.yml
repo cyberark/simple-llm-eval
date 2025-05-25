@@ -27,6 +27,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Needed to push
 
       - name: 🐍 Install uv with caching
         uses: astral-sh/setup-uv@v5
@@ -54,6 +56,23 @@ jobs:
 
       - name: 🧪 Run tests with coverage
         run: uv run pytest --cov=simpleval --cov-report=term --cov-report=xml --cov-fail-under=90
+
+      - name: 🏷️ Generate coverage badge
+        run: uv run python ./ci/badges/update_cov_badge.py reports/coverage.xml
+
+      - name: 🚀 Push badge to 'badges' branch
+        if: github.ref == 'refs/heads/ci-test' || github.ref == 'refs/heads/main'
+        run: |
+          git config --global user.email "ci@github.com"
+          git config --global user.name "GitHub CI"
+
+          git fetch origin badges
+          git switch badges || git switch -c badges origin/badges
+
+          cp ci/badges/coverage-updated.svg ci/badges/coverage.svg
+          git add ci/badges/coverage.svg
+          git commit -m "Update coverage badge [ci skip]" || echo "No changes to commit"
+          git push origin badges
 
       - name: 📦 Build Project Package
         run: uv build

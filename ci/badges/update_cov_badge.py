@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import os
 import sys
 import re
 
@@ -51,6 +52,8 @@ def update_svg(svg_path, percentage, color, output_path):
         lambda m: f'{m.group(1)}{percentage}%{m.group(2)}',
         svg
     )
+
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
     with open(output_path, 'w', encoding='utf-8') as f:
         f.write(svg)
 
@@ -58,14 +61,16 @@ def main():
     if len(sys.argv) != 2:
         print('Usage: update_cov_badge.py <path-to-coverage.xml>')
         sys.exit(1)
+
     cov_xml = sys.argv[1]
     svg_path = 'ci/badges/coverage.svg'
-    output_path = 'ci/badges/coverage-updated.svg'
+    output_path = 'ci/badges/tmp/coverage.svg'
     line_rate = get_line_rate(cov_xml)
     percent = int(round(line_rate * 100))
     color = get_color(percent)
     update_svg(svg_path, percent, color, output_path)
-    print(f'Updated badge written to {output_path} with {percent}% coverage and color {color}')
+
+    print(f'✅ Updated badge written to {output_path} with {percent}% coverage and color {color}')
 
 if __name__ == '__main__':
     main()

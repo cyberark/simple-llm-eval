@@ -60,7 +60,7 @@ def main():
         sys.exit(1)
     cov_xml = sys.argv[1]
     svg_path = 'ci/badges/coverage.svg'
-    output_path = 'ci/badges/coverage-updated.svg'
+    output_path = 'ci/badges/tmp/coverage.svg'
     line_rate = get_line_rate(cov_xml)
     percent = int(round(line_rate * 100))
     color = get_color(percent)

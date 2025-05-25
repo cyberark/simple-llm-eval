@@ -69,6 +69,8 @@ jobs:
           git fetch origin badges
           git switch badges || git switch -c badges origin/badges
 
+          cp ci/badges/tmp/coverage.svg ci/badges/coverage-updated.svg
+
           git add ci/badges/coverage-updated.svg
           git commit -m "Update coverage badge [ci skip]" || echo "No changes to commit"
           git push origin badges

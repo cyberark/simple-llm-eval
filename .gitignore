@@ -313,3 +313,4 @@ simpleval/eval_sets/dummy_task/testcases/**/eval_results.jsonl
 
 ci/requirements-temp.txt
 release_package/*.whl
+ci/badges/tmp/

@@ -2092,7 +2092,7 @@ wheels = [
 
 [[package]]
 name = "simpleval"
-version = "0.1.3"
+version = "1.0.0"
 source = { editable = "." }
 dependencies = [
     { name = "beautifulsoup4" },

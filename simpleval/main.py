@@ -21,17 +21,6 @@ from simpleval.cli_args import (
     InNewTestcaseParamType,
     InTestcaseParamType,
 )
-from simpleval.commands.init_command.init_command import init_command
-from simpleval.commands.init_command.init_from_template_command import init_from_template_command
-from simpleval.commands.judge_explorer_command import judge_explorer_command
-from simpleval.commands.list_models_command import list_models_command
-from simpleval.commands.litellm_models_explorer_command import litellm_models_explorer_command
-from simpleval.commands.metrics_explorer_command import metrics_explorer_command
-from simpleval.commands.reporting.compare.compare_command import compare_results, compare_results_files
-from simpleval.commands.reporting.eval.eval_report_command import eval_report_command
-from simpleval.commands.reporting.eval.eval_report_file_command import eval_report_file_command
-from simpleval.commands.reporting.summarize.summarize_command import summarize_command
-from simpleval.commands.run_command import run_command
 from simpleval.consts import EVAL_CONFIG_FILE, EVAL_RESULTS_FILE, LLM_TASKS_RESULT_FILE, PACKAGE_NAME, ReportFormat, SummaryReportType
 from simpleval.utilities.error_handler import handle_exceptions
 
@@ -50,6 +39,8 @@ from simpleval.utilities.error_handler import handle_exceptions
 )
 @handle_exceptions
 def run(eval_dir: str, testcase: str, config_file: str, overwrite_results: bool, report_format: str):
+    from simpleval.commands.run_command import run_command  # Improve startup time # noqa: I001
+
     run_command(
         eval_dir=eval_dir, config_file=config_file, testcase=testcase, overwrite_results=overwrite_results, report_format=report_format
     )
@@ -68,6 +59,8 @@ def run(eval_dir: str, testcase: str, config_file: str, overwrite_results: bool,
 )
 @handle_exceptions
 def eval_report(eval_dir: str, config_file: str, testcase: str, report_format: str):
+    from simpleval.commands.reporting.eval.eval_report_command import eval_report_command  # Improve startup time # noqa: I001
+
     eval_report_command(eval_dir=eval_dir, config_file=config_file, testcase=testcase, report_format=report_format)
 
 
@@ -83,12 +76,16 @@ def eval_report(eval_dir: str, config_file: str, testcase: str, report_format: s
 )
 @handle_exceptions
 def eval_report_file(name: str, eval_results_file: str, report_format: str):
+    from simpleval.commands.reporting.eval.eval_report_file_command import eval_report_file_command  # Improve startup time # noqa: I001
+
     eval_report_file_command(name=name, eval_results_file=eval_results_file, report_format=report_format)
 
 
 @click.command(help='Interactive creation of a new evaluation set')
 @handle_exceptions
 def init():
+    from simpleval.commands.init_command.init_command import init_command  # Improve startup time # noqa: I001
+
     init_command()
 
 
@@ -97,24 +94,32 @@ def init():
 @click.option('--testcase', '-t', required=True, type=InNewTestcaseParamType(), help=NEW_TESTCASE_HELP)
 @handle_exceptions
 def init_from_template(eval_dir, testcase):
+    from simpleval.commands.init_command.init_from_template_command import init_from_template_command  # Improve startup time # noqa: I001
+
     init_from_template_command(eval_dir=eval_dir, testcase=testcase)
 
 
 @click.command(help='List available llm as a judge models')
 @handle_exceptions
 def list_models():
+    from simpleval.commands.list_models_command import list_models_command  # Improve startup time # noqa: I001
+
     list_models_command()
 
 
 @click.command(help='Explore LiteLLM models')
 @handle_exceptions
 def litellm_models_explorer():
+    from simpleval.commands.litellm_models_explorer_command import litellm_models_explorer_command  # Improve startup time # noqa: I001
+
     litellm_models_explorer_command()
 
 
 @click.command(help='Explore Judges')
 @handle_exceptions
 def judge_explorer():
+    from simpleval.commands.judge_explorer_command import judge_explorer_command  # Improve startup time # noqa: I001
+
     judge_explorer_command()
 
 
@@ -138,6 +143,8 @@ def judge_explorer():
 )
 @handle_exceptions
 def compare(eval_dir: str, testcase1: str, testcase2: str, report_format: str, ignore_missing_llm_results: bool):
+    from simpleval.commands.reporting.compare.compare_command import compare_results  # Improve startup time # noqa: I001
+
     compare_results(
         eval_set_dir=eval_dir,
         testcase1=testcase1,
@@ -160,6 +167,8 @@ def compare(eval_dir: str, testcase1: str, testcase2: str, report_format: str, i
 )
 @handle_exceptions
 def compare_files(name: str, eval_results_file1: str, eval_results_file2: str, report_format: str):
+    from simpleval.commands.reporting.compare.compare_command import compare_results_files  # Improve startup time # noqa: I001
+
     compare_results_files(
         name=name, eval_results_file1=eval_results_file1, eval_results_file2=eval_results_file2, report_format=report_format
     )
@@ -168,6 +177,8 @@ def compare_files(name: str, eval_results_file1: str, eval_results_file2: str, r
 @click.command(help='Metrics Explorer')
 @handle_exceptions
 def metrics_explorer():
+    from simpleval.commands.metrics_explorer_command import metrics_explorer_command  # Improve startup time # noqa: I001
+
     metrics_explorer_command()
 
 
@@ -186,6 +197,8 @@ def metrics_explorer():
 )
 @handle_exceptions
 def summarize(eval_dir: str, config_file: str, primary_metric: str, report_format: str):
+    from simpleval.commands.reporting.summarize.summarize_command import summarize_command  # Improve startup time # noqa: I001
+
     summarize_command(eval_dir=eval_dir, config_file=config_file, primary_metric=primary_metric, report_format=report_format)
 
 

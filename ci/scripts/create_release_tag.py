@@ -23,7 +23,7 @@ def main():
             raise ValueError("Could not find 'version' in uv output.")
 
         tag_name = f'v{py_project_version}'
-        response = input(f"⚠️  Do you want to create a release tag `{tag_name}`? (y/N): ').strip().lower()
+        response = input(f'⚠️  Do you want to create a release tag `{tag_name}`? (y/N): ').strip().lower()
 
         if response != 'y':
             print('✋ Aborted by user.')

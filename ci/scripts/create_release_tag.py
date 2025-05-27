@@ -23,6 +23,12 @@ def main():
             raise ValueError("Could not find 'version' in uv output.")
 
         tag_name = f'v{py_project_version}'
+        response = input(f"⚠️  Do you want to create a release tag `{tag_name}`? (y/N): ').strip().lower()
+
+        if response != 'y':
+            print('✋ Aborted by user.')
+            sys.exit(0)
+
         print(f'🔖 Creating tag: {tag_name}')
 
         run_cmd(['git', 'checkout', 'main'])
@@ -31,7 +37,7 @@ def main():
         run_cmd(['git', 'push', 'origin', tag_name])
 
     except subprocess.CalledProcessError as e:
-        raise RuntimeError(f"Failed to run command: {e}")
+        raise RuntimeError(f'Failed to run command: {e}')
     except json.JSONDecodeError as e:
         raise RuntimeError('Failed to parse JSON output: {e}')
     except RuntimeError as e:

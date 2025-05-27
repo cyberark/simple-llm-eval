@@ -74,7 +74,7 @@ Here are some details on how to use mike and mkdocs:
 * The docs use the [major].[minor] versioning scheme
 
 ### Deploying the docs (performed by the pipeline)
-* `mike deploy [version] [alias]`, for example: `mike deploy 0.1 latest`
+* `mike deploy [version] [alias] --push`, for example: `mike deploy 0.1 latest --push`
 * `mike set-default latest`, to set the default version to latest
 * Test locally with `mike serve`
 * To push the changes: `mike deploy --push --update-aliases <version> latest`

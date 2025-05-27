@@ -5,11 +5,11 @@ import subprocess
 import json
 import argparse
 
-def run_cmd(cmd):
+def run_cmd(cmd, do_not_fail=False):
     print(f"$ {' '.join(cmd)}")
     result = subprocess.run(cmd, capture_output=True, text=True, check=False)
     print(result.stdout)
-    if result.returncode != 0:
+    if not do_not_fail and result.returncode != 0:
         raise RuntimeError(result.stderr)
     return result
 
@@ -35,7 +35,7 @@ def main():
     elif args.bump_major:
         run_cmd(['uv', 'version', '--bump', 'major'])
     else:
-        raise ValueError("No valid version argument provided.")
+        raise ValueError('No valid version argument provided.')
 
     run_cmd(['git', 'checkout', 'main'])
     run_cmd(['git', 'pull', 'origin', 'main'])
@@ -43,7 +43,10 @@ def main():
     result = run_cmd(['uv', 'version', '--output-format', 'json'])
     new_version = json.loads(result.stdout).get('version')
 
-    run_cmd(['git', 'checkout', '-b', f'release/bump-version-{new_version}'])
+    version_branch_name = f'release/bump-version-{new_version}'
+
+    run_cmd(['git', 'branch', '-d', version_branch_name], do_not_fail=True)
+    run_cmd(['git', 'checkout', '-b', version_branch_name])
     result = run_cmd(['uv', 'sync'])
 
     run_cmd(['git', 'add', 'pyproject.toml'])

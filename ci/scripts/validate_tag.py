@@ -18,11 +18,16 @@ def main():
         if not py_project_version:
             raise ValueError("Could not find 'version' in uv output.")
 
-        if args.tag_value == py_project_version:
-            print(f'✅ Tag version matches: {args.tag_value}')
+        if args.tag_value.count('-') > 1:
+            raise ValueError(f'Tag value "{args.tag_value}" contains more than one hyphen.')
+
+        tag_name_no_hyphen = args.tag_value.replace('-', '')
+
+        if tag_name_no_hyphen == py_project_version:
+            print(f'✅ Tag version matches: {tag_name_no_hyphen}')
             sys.exit(0)
         else:
-            raise ValueError(f'Tag version mismatch: got: {args.tag_value}, expected: {py_project_version}')
+            raise ValueError(f'Tag version mismatch: got: {tag_name_no_hyphen}, expected: {py_project_version}')
     except subprocess.CalledProcessError as e:
         raise ValueError(f"Failed to run 'uv version': {e}")
     except json.JSONDecodeError as e:

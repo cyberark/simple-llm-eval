@@ -26,6 +26,8 @@
 
 Using `uv` Update the version in `pyproject.toml` to the new version according to the versioning schema above. Make sure you adhere to the versioning rules and only include alpha, beta, or rc for pre-release versions.
 
+Commit and push the changes to the `main` branch with a pull request.
+
 examples:
 ```
 uv version --bump patch # 1.0.1 -> 1.0.2

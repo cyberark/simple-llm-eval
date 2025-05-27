@@ -76,7 +76,7 @@ def main():
     result = run_cmd(['gh', 'pr', 'create', '--title', pr_title, '--body', pr_body])
     pr_number = result.stdout.strip().split('/')[-1]
 
-    run_cmd(['gh', 'pr', 'check', pr_number, '--watch'])
+    run_cmd(['gh', 'pr', 'checks', pr_number, '--watch'])
     
     # run_cmd(['gh', 'pr', 'merge', pr_number, '--admin'])
 

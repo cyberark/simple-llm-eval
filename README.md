@@ -1,12 +1,12 @@
 # Simple LLM Evaluation
 
-[![license](https://img.shields.io/github/license/cyberark/simple-llm-eval)](https://github.com/cyberark/simple-llm-eval/blob/main/LICENSE)
+[![license](https://img.shields.io/badge/license-Apache%202.0-blue?style=flat-square)](https://www.apache.org/licenses/LICENSE-2.0)
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/simple-llm-eval)
 ![version](https://img.shields.io/github/v/release/cyberark/simple-llm-eval)
 ![Build Status](https://github.com/cyberark/simple-llm-eval/actions/workflows/ci.yml/badge.svg)
 ![Code Coverage](https://github.com/cyberark/simple-llm-eval/blob/badges/ci/badges/coverage-updated.svg)
 
-![Simpleval Banner](docs/media/simpleval-banner.jpeg)
+![Simpleval Banner](https://github.com/cyberark/simple-llm-eval/blob/main/docs/media/simpleval-banner.jpeg)
 
 Welcome to the simple llm evaluation framework, or simpleval for short.
 

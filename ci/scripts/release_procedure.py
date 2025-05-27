@@ -34,11 +34,6 @@ def main():
         group.add_argument('--bump-major', action='store_true', help='Bump major version')
         args = parser.parse_args()
 
-
-        script_dir = os.path.dirname(os.path.abspath(__file__))
-        release_tag_script = os.path.join(script_dir, 'create_release_tag.py')
-        run_cmd([sys.executable, release_tag_script, '--yes'])
-
         print('🔧 Update version in pyproject.toml.')
 
         current_version = get_current_version()

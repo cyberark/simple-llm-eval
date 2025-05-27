@@ -1,5 +1,6 @@
 # Simple LLM Evaluation
 
+[![PyPI version](https://img.shields.io/pypi/v/simpleval)](https://pypi.org/project/simpleval/)
 [![license](https://img.shields.io/badge/license-Apache%202.0-blue?style=flat-square)](https://www.apache.org/licenses/LICENSE-2.0)
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/simpleval)
 ![version](https://img.shields.io/github/v/release/cyberark/simple-llm-eval)

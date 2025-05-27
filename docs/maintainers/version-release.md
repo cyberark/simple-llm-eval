@@ -24,9 +24,7 @@
 
 ### 1. Update Version in `pyproject.toml`
 
-Using `uv` Update the version in `pyproject.toml` to the new version according to the versioning schema above. Make sure you adhere to the versioning rules and only include alpha, beta, or rc for pre-release versions.
-
-Commit and push the changes to the `main` branch with a pull request.
+* Update `pyproject.toml`: Using `uv` Update the version according to the versioning schema above. Make sure you adhere to the versioning rules and only include alpha, beta, or rc for pre-release versions.
 
 examples:
 ```
@@ -39,6 +37,10 @@ uv version 1.0.1-beta.1 # set to pre-release version
 uv version 1.0.1-rc.1 # set to pre-release version
 
 ```
+
+* Run `uv sync` to update `uv.lock`.
+
+* Create a pull request for the changes and merge to main.
 
 ### 2. Create a Release Tag
 On the main branch, create a tag using the `ci/scripts/create_tag.py` script. The script will read the version from `pyproject.toml`

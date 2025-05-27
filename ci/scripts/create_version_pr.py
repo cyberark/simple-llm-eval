@@ -14,6 +14,25 @@ def run_cmd(cmd, do_not_fail=False, error=''):
         raise RuntimeError(f'{result.stderr} | {error}')
     return result
 
+def run_cmd_with_live_output(cmd):
+    proc = subprocess.Popen(
+        cmd,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        text=True,  # ensures output is str, not bytes
+        bufsize=1   # line-buffered
+    )
+
+    # Read and print lines as they arrive
+    try:
+        for line in proc.stdout:
+            print(line, end="")  # already has newline
+    except KeyboardInterrupt:
+        proc.terminate()
+
+    proc.wait()
+
+
 def get_current_version():
     """Run 'uv version --output-format json' and return the current version as a string."""
     result = run_cmd(['uv', 'version', '--output-format', 'json'])
@@ -79,8 +98,9 @@ def main():
 
     print(f'Waiting for PR checks for be published: {pr_number}')
     time.sleep(10)
-    run_cmd(['gh', 'pr', 'checks', pr_number, '--watch'])
-    
+    # result = run_cmd(['gh', 'pr', 'checks', pr_number, '--watch'], do_not_fail=True)
+    run_cmd_with_live_output(['gh', 'pr', 'checks', pr_number, '--watch'])
+
     # run_cmd(['gh', 'pr', 'merge', pr_number, '--admin'])
 
     try:

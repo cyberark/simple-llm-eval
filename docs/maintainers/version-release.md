@@ -24,6 +24,13 @@
 
 ### 1. Update Version in `pyproject.toml`
 
+!!! info "Recommended: Run the create version PR script"
+    ```
+    ./ci/scripts/create_version_pr.py
+    ```
+
+Otherwise follow these steps:
+
 * Update `pyproject.toml`: Using `uv` Update the version according to the versioning schema above. Make sure you adhere to the versioning rules and only include alpha, beta, or rc for pre-release versions.
 
 examples:

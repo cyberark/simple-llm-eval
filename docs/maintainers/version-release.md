@@ -22,6 +22,9 @@
 
 ## Release Procedure
 
+!!! info "The simple way"
+    
+
 ### 1. Update Version in `pyproject.toml`
 
 !!! info "Recommended: Run the create version PR script"

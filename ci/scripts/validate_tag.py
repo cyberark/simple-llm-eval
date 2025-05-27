@@ -20,7 +20,7 @@ def main():
 
         if args.tag_value.count('-') > 1:
             raise ValueError(f'Tag value "{args.tag_value}" contains more than one hyphen.')
-        
+
         tag_name_no_hyphen = args.tag_value.replace('-', '')
 
         if tag_name_no_hyphen == py_project_version:

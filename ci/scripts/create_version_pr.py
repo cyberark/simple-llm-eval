@@ -4,6 +4,7 @@ import sys
 import subprocess
 import json
 import argparse
+import time
 
 def run_cmd(cmd, do_not_fail=False, error=''):
     print(f"$ {' '.join(cmd)}")
@@ -76,6 +77,8 @@ def main():
     result = run_cmd(['gh', 'pr', 'create', '--title', pr_title, '--body', pr_body])
     pr_number = result.stdout.strip().split('/')[-1]
 
+    print(f'Waiting for PR checks for be published: {pr_number}')
+    time.sleep(10)
     run_cmd(['gh', 'pr', 'checks', pr_number, '--watch'])
     
     # run_cmd(['gh', 'pr', 'merge', pr_number, '--admin'])

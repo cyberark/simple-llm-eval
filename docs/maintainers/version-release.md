@@ -34,7 +34,10 @@
     ./ci/scripts/create_version_pr.py --bump-major
     ```
 
-Until this is automated - after the release workflow is complete, update the `CHANGELOG.md` file with the new version and the changes made in this release (take from the release notes).
+Until this is automated:
+
+* Manually open the release notes, click on "generate release notes" and update them as needed
+* After the release workflow is complete, update the `CHANGELOG.md` file with the new version and the changes made in this release (take from the release notes).
 
 ## The Manual Way
 

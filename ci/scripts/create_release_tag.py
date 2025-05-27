@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
+import argparse
+import json
 import sys
 import subprocess
-import json
+
 
 def run_cmd(cmd):
     print(f"$ {' '.join(cmd)}")
@@ -11,9 +13,8 @@ def run_cmd(cmd):
         raise RuntimeError(result.stderr)
     return result
 
-def main():
 
-    import argparse
+def main():
     parser = argparse.ArgumentParser(description='Create a release tag from pyproject.toml version.')
     parser.add_argument('-y', '--yes', action='store_true', help='Automatically approve tag creation without prompting')
     args = parser.parse_args()
@@ -42,8 +43,6 @@ def main():
             sys.exit(0)
 
         print(f'🔖 Creating tag: {tag_name}')
-
-        exit(1)
 
         run_cmd(['git', 'tag', '-a', tag_name, '-m', f'Release version {py_project_version}'])
         run_cmd(['git', 'push', 'origin', tag_name])

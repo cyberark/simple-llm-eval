@@ -70,10 +70,12 @@ def main():
     run_cmd(['git', 'commit', '-m', f'Bump version to {new_version}'])
     run_cmd(['git', 'push'])
 
-    run_cmd(['gh', 'pr', 'create',
-             '--title', f'chore: Bump version to {new_version}',
-             '--body', f'## Summary \n\nBump version to {new_version}',
-            ])
+    pr_title = f'chore: 🤖 Bump version to {new_version}'
+    pr_body = f'## Summary \n\nBump version to {new_version}'
+
+    run_cmd(['gh', 'pr', 'create', '--title', pr_title, '--body', pr_body])
+
+    run_cmd(['gh', 'pr', 'status'])
 
     try:
         # Placeholder for logic using args

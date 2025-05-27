@@ -39,10 +39,15 @@ uv version 1.0.1-rc.1 # set to pre-release version
 ```
 
 ### 2. Create a Release Tag
-On the main branch, create a tag using the git cli. Set the tag value to be `v<new-version>` where `<new-version>` is the value you set in `pyproject.toml`, add a message with the release notes, and push the tag to the remote repository.
+On the main branch, create a tag using the `ci/scripts/create_tag.py` script. The script will read the version from `pyproject.toml`
+and create a tag with the correct format.
+
+Set the tag value to be `v<new-version>` where `<new-version>` is the value you set in `pyproject.toml`, add a message with the release notes, and push the tag to the remote repository.
 
 !!! info "Update Version Example"
     ```bash
+    ci/scripts/create_tag.py --version 1.0.1
+
     git checkout main
     git pull origin main
     git tag -a v1.0.1 -m "Release version 1.0.1"

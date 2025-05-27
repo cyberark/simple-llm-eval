@@ -1,4 +1,4 @@
-name: DocsRelease
+name: Docs Release Manual
 
 on:
   workflow_dispatch:

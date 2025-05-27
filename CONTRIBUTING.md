@@ -19,7 +19,7 @@ From here, your pull request will be reviewed, and once you've responded to all 
 
 ## Development
 
-Go over the [developer's guide](https://cyberark.github.io/simple-llm-eval/developers/dev-notes/) according to the type of contribution you want to make.
+Go over the [developer's guide](https://cyberark.github.io/simple-llm-eval/latest/developers/dev-notes/) according to the type of contribution you want to make.
 
 ## Testing
 

@@ -26,6 +26,9 @@ def main():
 
     print('🔧 Update version in pyproject.toml.')
 
+    run_cmd(['git', 'checkout', 'main'])
+    run_cmd(['git', 'pull', 'origin', 'main'])
+
     if args.version:
         run_cmd(['uv', 'version', args.version])
     elif args.bump_path:
@@ -37,17 +40,12 @@ def main():
     else:
         raise ValueError('No valid version argument provided.')
 
-    run_cmd(['git', 'checkout', 'main'])
-    run_cmd(['git', 'pull', 'origin', 'main'])
-
     result = run_cmd(['uv', 'version', '--output-format', 'json'])
     new_version = json.loads(result.stdout).get('version')
 
     version_branch_name = f'release/bump-version-{new_version}'
 
     run_cmd(['git', 'branch', '-d', version_branch_name], do_not_fail=True)
-    run_cmd(['git', 'push', 'origin', '--delete', version_branch_name], do_not_fail=True)
-
     run_cmd(['git', 'checkout', '-b', version_branch_name])
     result = run_cmd(['uv', 'sync'])
 

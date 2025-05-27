@@ -81,7 +81,7 @@ Here are some details on how to use mike and mkdocs:
 
 ### Deleting docs versions
 * To delete a version: `mike delete 0.1 --push --message "Delete version 0.1" [--update-aliases latest]`
-* clear all docs: `mike delete --all --push`
+* Delete all docs versions: `mike delete --all --push`
 
 ## CLI Dev
 The CLI uses the click library, see commands package for examples.

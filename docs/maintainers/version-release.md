@@ -61,6 +61,10 @@ On the main branch, create a tag using the git cli. Set the tag value to be `v<n
 * Manually open the release notes, click on "generate release notes" and update them as needed
 * In the future this will be automated
 
+### 4. Update the Changelog
+
+* After the release workflow is complete, update the `CHANGELOG.md` file with the new version and the changes made in this release (take from the release notes).
+
 ### Release Workflow
 
 The tag creation will trigger the GitHub Actions workflow [Release](https://github.com/cyberark/simple-llm-eval/actions/workflows/ci.yml)

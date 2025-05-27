@@ -63,23 +63,25 @@ Once in a while update the pre-commit hooks to the latest version:
 * Update all packages: `uv lock --upgrade && uv sync`
 * Update dependencies constraints in `pyproject.toml` as needed
 
-## Publishing the docs
+## Publishing the docs 📚
 This project uses mkdocs/mike to publish its docs to GitHub Pages on a release.
 
 Here are some details on how to use mike and mkdocs:
 
 * To test the docs locally, run: `mike serve` or `mkdocs serve`
 * The pipeline publishes the docs after a successful merge to main.
+* There is also a manual docs publish workflow: `.github/workflows/docs-release.yml`
 * Version support is handled by `mike`, see the `mkdocs.yml` file, see: https://github.com/jimporter/mike/blob/master/README.md
-* The docs use the [major].[minor] versioning scheme
 
 ### Deploying the docs (performed by the pipeline)
-* `mike deploy [version] [alias] --push`, for example: `mike deploy 0.1 latest --push`
-* `mike set-default latest`, to set the default version to latest
-* Test locally with `mike serve`
-* To push the changes: `mike deploy --push --update-aliases <version> latest`
+ 
+* Deploy and push docs changes: `mike deploy [version] [alias] --push`, for example: `mike deploy 0.1 latest --push`
+* Deploy and push alias update: `mike deploy --push --update-aliases <version> latest`
+* **IMPORTANT:** `mike set-default --push latest`, to set the default version to latest
+
+### Deleting docs versions
 * To delete a version: `mike delete 0.1 --push --message "Delete version 0.1" [--update-aliases latest]`
-* clear all docs: `mike delete --all --push`
+* Delete all docs versions: `mike delete --all --push`
 
 ## CLI Dev
 The CLI uses the click library, see commands package for examples.

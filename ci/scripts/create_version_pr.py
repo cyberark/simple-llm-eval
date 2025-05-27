@@ -62,13 +62,18 @@ def main():
 
     new_version = get_current_version()
 
-    result = run_cmd(['uv', 'sync'])
+    run_cmd(['uv', 'sync'])
 
     run_cmd(['git', 'add', 'pyproject.toml'])
     run_cmd(['git', 'add', 'uv.lock'])
 
     run_cmd(['git', 'commit', '-m', f'Bump version to {new_version}'])
     run_cmd(['git', 'push'])
+
+    run_cmd(['gh', 'pr', 'create',
+             '--title', f'chore: Bump version to {new_version}',
+             '--body', f'## Summary \n\nBump version to {new_version}',
+            ])
 
     try:
         # Placeholder for logic using args

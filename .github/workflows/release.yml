@@ -52,7 +52,6 @@ jobs:
           uv publish
 
       - name: 📚 Publish Docs
-        if: ${{ github.event.inputs.version =~ '^\d+\.\d+\.\d+$' }}
         run: |
           VERSION=${GITHUB_REF#refs/tags/v}
           git config user.name "github-actions"

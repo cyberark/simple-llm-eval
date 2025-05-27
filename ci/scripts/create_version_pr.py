@@ -46,6 +46,8 @@ def main():
     version_branch_name = f'release/bump-version-{new_version}'
 
     run_cmd(['git', 'branch', '-d', version_branch_name], do_not_fail=True)
+    run_cmd(['git', 'push', 'origin', '--delete', version_branch_name], do_not_fail=True)
+
     run_cmd(['git', 'checkout', '-b', version_branch_name])
     result = run_cmd(['uv', 'sync'])
 

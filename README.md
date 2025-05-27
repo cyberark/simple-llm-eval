@@ -12,7 +12,7 @@ Welcome to the simple llm evaluation framework, or simpleval for short.
 
 ## Getting Started
 
-See the [📚 Quickstart Guide 📚](https://cyberark.github.io/simple-llm-eval/getting-started/quickstart/)
+See the [📚 Quickstart Guide 📚](https://https://cyberark.github.io/simple-llm-eval/latest/getting-started/quickstart/)
 
 ## Documentation
 

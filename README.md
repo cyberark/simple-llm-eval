@@ -1,9 +1,9 @@
 # Simple LLM Evaluation
 
 [![version](https://img.shields.io/github/v/release/cyberark/simple-llm-eval)]((https://pypi.org/project/simpleval/))
-![PyPI - Python Version](https://img.shields.io/pypi/pyversions/simpleval)
 ![Build Status](https://github.com/cyberark/simple-llm-eval/actions/workflows/ci.yml/badge.svg)
 ![Code Coverage](https://github.com/cyberark/simple-llm-eval/blob/badges/ci/badges/coverage-updated.svg)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/simpleval)
 [![license](https://img.shields.io/badge/license-Apache%202.0-blue?style=flat-square)](https://www.apache.org/licenses/LICENSE-2.0)
 
 ![Simpleval Banner](https://github.com/cyberark/simple-llm-eval/blob/main/docs/media/simpleval-banner.jpeg)

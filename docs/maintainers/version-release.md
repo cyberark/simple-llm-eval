@@ -20,7 +20,26 @@
 
     Examples: `1.0.0-alpha.1`, `1.0.0-beta.1`, `1.0.0-rc.1`
 
-## Release Procedure
+# Release Procedure
+
+## The Simple Way (Recommended)
+
+!!! info "The simple way"
+    Simply run the release procedure script in one of the following ways:
+    
+    ```
+    ./ci/scripts/create_version_pr.py --version 1.0.0-rc5g # Set a specific version (good for pre-release)
+    ./ci/scripts/create_version_pr.py --bump-patch
+    ./ci/scripts/create_version_pr.py --bump-minor
+    ./ci/scripts/create_version_pr.py --bump-major
+    ```
+
+Until this is automated:
+
+* Manually open the release notes, click on "generate release notes" and update them as needed
+* After the release workflow is complete, update the `CHANGELOG.md` file with the new version and the changes made in this release (take from the release notes).
+
+## The Manual Way
 
 ### 1. Update Version in `pyproject.toml`
 

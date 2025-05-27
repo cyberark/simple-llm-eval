@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
+import argparse
+import json
 import sys
 import subprocess
-import json
+
 
 def run_cmd(cmd):
     print(f"$ {' '.join(cmd)}")
@@ -11,7 +13,11 @@ def run_cmd(cmd):
         raise RuntimeError(result.stderr)
     return result
 
+
 def main():
+    parser = argparse.ArgumentParser(description='Create a release tag from pyproject.toml version.')
+    parser.add_argument('-y', '--yes', action='store_true', help='Automatically approve tag creation without prompting')
+    args = parser.parse_args()
 
     print('🏷️ Create tag from pyproject.toml version.')
 
@@ -26,7 +32,11 @@ def main():
             raise ValueError("Could not find 'version' in uv output.")
 
         tag_name = f'v{py_project_version}'
-        response = input(f'⚠️  Do you want to create a release tag `{tag_name}`? (y/N): ').strip().lower()
+
+        if args.yes:
+            response = 'y'
+        else:
+            response = input(f'⚠️  Do you want to create a release tag `{tag_name}`? (y/N): ').strip().lower()
 
         if response != 'y':
             print('✋ Aborted by user.')
@@ -40,7 +50,7 @@ def main():
     except subprocess.CalledProcessError as e:
         raise RuntimeError(f'Failed to run command: {e}')
     except json.JSONDecodeError as e:
-        raise RuntimeError('Failed to parse JSON output: {e}')
+        raise RuntimeError(f'Failed to parse JSON output: {e}')
     except RuntimeError as e:
         print(f'❌ {e}')
         sys.exit(1)

@@ -16,6 +16,9 @@ def main():
     print('🏷️ Create tag from pyproject.toml version.')
 
     try:
+        run_cmd(['git', 'checkout', 'main'])
+        run_cmd(['git', 'pull', 'origin', 'main'])
+
         result = run_cmd(['uv', 'version', '--output-format', 'json'])
         data = json.loads(result.stdout)
         py_project_version = data.get('version')
@@ -31,8 +34,6 @@ def main():
 
         print(f'🔖 Creating tag: {tag_name}')
 
-        run_cmd(['git', 'checkout', 'main'])
-        run_cmd(['git', 'pull', 'origin', 'main'])
         run_cmd(['git', 'tag', '-a', tag_name, '-m', f'Release version {py_project_version}'])
         run_cmd(['git', 'push', 'origin', tag_name])
 

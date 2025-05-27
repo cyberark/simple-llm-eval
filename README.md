@@ -6,7 +6,7 @@
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/simpleval)
 [![license](https://img.shields.io/badge/license-Apache%202.0-blue?style=flat-square)](https://www.apache.org/licenses/LICENSE-2.0)
 
-![Simpleval Banner](https://github.com/cyberark/simple-llm-eval/blob/main/docs/media/simpleval-banner.jpeg)
+![Simpleval Banner](https://raw.githubusercontent.com/cyberark/simple-llm-eval/main/docs/media/simpleval-banner.jpeg)
 
 Welcome to the simple llm evaluation framework, or simpleval for short.
 

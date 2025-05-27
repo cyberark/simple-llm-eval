@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import os
 import sys
 import subprocess
 import json
@@ -90,7 +91,12 @@ def main():
 
         time.sleep(2)
 
-        
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        release_tag_script = os.path.join(script_dir, 'create_release_tag.py')
+        run_cmd([sys.executable, release_tag_script, '--yes'])
+
+        print('🚀 Release tag created successfully!')
+        print('Check out the release workflow: https://github.com/cyberark/simple-llm-eval/actions/workflows/release.yml')
 
     except subprocess.CalledProcessError as e:
         raise RuntimeError(f'Failed to run command: {e}')

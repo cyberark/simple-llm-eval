@@ -85,7 +85,7 @@ def main():
         run_cmd(['gh', 'pr', 'checks', pr_number, '--watch', '--fail-fast'], error='PR checks failed, please fix the issues and try again.')
 
         print(f'🦖 PR checks passed, merging like a boss')
-        run_cmd(['gh', 'pr', 'merge', pr_number, '--admin'])
+        run_cmd(['gh', 'pr', 'merge', pr_number, '--squash', '--admin'])
         print('🎉 Version PR created and merged successfully!')
 
         time.sleep(2)

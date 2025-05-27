@@ -86,7 +86,7 @@ def main():
 
     print(f'Waiting for PR checks for be published, check PR to see status: {result.stdout.strip()}')
     time.sleep(10)
-    result = run_cmd(['gh', 'pr', 'checks', pr_number, '--watch'])
+    run_cmd(['gh', 'pr', 'checks', pr_number, '--watch'], do_not_fail=True)
     run_cmd(['gh', 'pr', 'checks', pr_number, '--watch', '--fail-fast'])
     
     # run_cmd(['gh', 'pr', 'merge', pr_number, '--admin'])

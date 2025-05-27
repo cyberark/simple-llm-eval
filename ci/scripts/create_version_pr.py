@@ -14,24 +14,6 @@ def run_cmd(cmd, do_not_fail=False, error=''):
         raise RuntimeError(f'{result.stderr} | {error}')
     return result
 
-def run_cmd_with_live_output(cmd):
-    proc = subprocess.Popen(
-        cmd,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.STDOUT,
-        text=True,  # ensures output is str, not bytes
-        bufsize=1   # line-buffered
-    )
-
-    # Read and print lines as they arrive
-    try:
-        for line in proc.stdout:
-            print(line, end="")  # already has newline
-    except KeyboardInterrupt:
-        proc.terminate()
-
-    proc.wait()
-
 
 def get_current_version():
     """Run 'uv version --output-format json' and return the current version as a string."""
@@ -87,6 +69,12 @@ def main():
     run_cmd(['git', 'add', 'pyproject.toml'])
     run_cmd(['git', 'add', 'uv.lock'])
 
+    # add a double quote string to the main.py file, do it in code here
+    with open('main.py', 'a') as f:
+        f.write(f'"this should fail linting"')
+        
+    run_cmd(['git', 'add', 'main.py'])
+
     run_cmd(['git', 'commit', '-m', f'Bump version to {new_version}'])
     run_cmd(['git', 'push'])
 
@@ -96,10 +84,9 @@ def main():
     result = run_cmd(['gh', 'pr', 'create', '--title', pr_title, '--body', pr_body])
     pr_number = result.stdout.strip().split('/')[-1]
 
-    print(f'Waiting for PR checks for be published: {pr_number}')
+    print(f'Waiting for PR checks for be published, check PR to see status: {result.stdout.strip()}')
     time.sleep(10)
-    # result = run_cmd(['gh', 'pr', 'checks', pr_number, '--watch'], do_not_fail=True)
-    run_cmd_with_live_output(['gh', 'pr', 'checks', pr_number, '--watch'])
+    result = run_cmd(['gh', 'pr', 'checks', pr_number, '--watch'], do_not_fail=True)
 
     # run_cmd(['gh', 'pr', 'merge', pr_number, '--admin'])
 

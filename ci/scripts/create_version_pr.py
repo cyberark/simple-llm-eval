@@ -73,11 +73,12 @@ def main():
     pr_title = f'chore: 🤖 Bump version to {new_version}'
     pr_body = f'## Summary \n\nBump version to {new_version}'
 
-    run_cmd(['gh', 'pr', 'create', '--title', pr_title, '--body', pr_body])
+    result = run_cmd(['gh', 'pr', 'create', '--title', pr_title, '--body', pr_body])
+    pr_number = result.stdout.strip().split('/')[-1]
+
     run_cmd(['gh', 'pr', 'review', '--approve'])
 
-    run_cmd(['gh', 'pr', 'status'])
-
+    run_cmd(['gh', 'pr', 'check', pr_number, '--watch'])
 
     try:
         # Placeholder for logic using args

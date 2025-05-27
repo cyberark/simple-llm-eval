@@ -5,13 +5,21 @@ import subprocess
 import json
 import argparse
 
-def run_cmd(cmd, do_not_fail=False):
+def run_cmd(cmd, do_not_fail=False, error=''):
     print(f"$ {' '.join(cmd)}")
     result = subprocess.run(cmd, capture_output=True, text=True, check=False)
     print(result.stdout)
     if not do_not_fail and result.returncode != 0:
-        raise RuntimeError(result.stderr)
+        raise RuntimeError(f'{result.stderr} | {error}')
     return result
+
+def get_current_version():
+    """Run 'uv version --output-format json' and return the current version as a string."""
+    result = run_cmd(['uv', 'version', '--output-format', 'json'])
+    try:
+        return json.loads(result.stdout).get('version')
+    except json.JSONDecodeError as e:
+        raise RuntimeError(f'Failed to parse JSON output: {e}')
 
 def main():
 
@@ -26,15 +34,20 @@ def main():
 
     print('🔧 Update version in pyproject.toml.')
 
-    # run_cmd(['git', 'checkout', 'main'])
-    # run_cmd(['git', 'pull', 'origin', 'main'])
+    current_version = get_current_version()
+    version_branch_name = f'release/bump-version-{current_version}'
+
+    run_cmd(['git', 'diff', '--quiet'], error='There are uncommitted changes, cannot proceed.')
+
+    run_cmd(['git', 'checkout', 'main'])
+    run_cmd(['git', 'pull', 'origin', 'main'])
 
     # Delete the version branch if it exists
     run_cmd(['git', 'branch', '-d', version_branch_name], do_not_fail=True)
     run_cmd(['git', 'push', 'origin', '--delete', version_branch_name], do_not_fail=True)
 
-    run_cmd(['git', 'checkout', '-b', version_branch_name])
-
+    # Create a new version branch
+    run_cmd(['git', 'checkout', '-b', version_branch_name], do_not_fail=True)
 
     if args.version:
         run_cmd(['uv', 'version', args.version])
@@ -47,10 +60,7 @@ def main():
     else:
         raise ValueError('No valid version argument provided.')
 
-    result = run_cmd(['uv', 'version', '--output-format', 'json'])
-    new_version = json.loads(result.stdout).get('version')
-
-    version_branch_name = f'release/bump-version-{new_version}'
+    new_version = get_current_version()
 
     result = run_cmd(['uv', 'sync'])
 
@@ -65,8 +75,6 @@ def main():
         pass
     except subprocess.CalledProcessError as e:
         raise RuntimeError(f'Failed to run command: {e}')
-    except json.JSONDecodeError as e:
-        raise RuntimeError(f'Failed to parse JSON output: {e}')
     except RuntimeError as e:
         print(f'❌ {e}')
         sys.exit(1)

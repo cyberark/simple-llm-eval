@@ -26,8 +26,8 @@ def main():
 
     print('🔧 Update version in pyproject.toml.')
 
-    run_cmd(['git', 'checkout', 'main'])
-    run_cmd(['git', 'pull', 'origin', 'main'])
+    # run_cmd(['git', 'checkout', 'main'])
+    # run_cmd(['git', 'pull', 'origin', 'main'])
 
     # Delete the version branch if it exists
     run_cmd(['git', 'branch', '-d', version_branch_name], do_not_fail=True)

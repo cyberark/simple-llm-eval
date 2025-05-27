@@ -71,7 +71,7 @@ def main():
 
     # add a double quote string to the main.py file, do it in code here
     with open('main.py', 'a') as f:
-        f.write(f'"this should fail linting"')
+        f.write(f'"this should fail linting"') # TODO CHANGE THIS
         
     run_cmd(['git', 'add', 'main.py'])
 
@@ -86,8 +86,9 @@ def main():
 
     print(f'Waiting for PR checks for be published, check PR to see status: {result.stdout.strip()}')
     time.sleep(10)
-    result = run_cmd(['gh', 'pr', 'checks', pr_number, '--watch'], do_not_fail=True)
-
+    result = run_cmd(['gh', 'pr', 'checks', pr_number, '--watch'])
+    run_cmd(['gh', 'pr', 'checks', pr_number, '--watch', '--fail-fast'])
+    
     # run_cmd(['gh', 'pr', 'merge', pr_number, '--admin'])
 
     try:

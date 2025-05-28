@@ -110,6 +110,8 @@ jobs:
 
           git push --set-upstream origin $branch
 
+          git status
+
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7
         with:
@@ -122,6 +124,7 @@ jobs:
           labels: |
             release-me
           draft: false
+          assignees: roybeny
 
 # FOR TESTING REMOVE
 env:

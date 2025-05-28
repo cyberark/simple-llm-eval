@@ -6,9 +6,9 @@ on:
       - closed
 
   # FOR TESTING REMOVE
-  # push:
-  #   branches:
-  #     - 'release/rc6'
+  push:
+    branches:
+      - 'release/rc6'
   # FOR TESTING REMOVE ^^^^
 
 jobs:

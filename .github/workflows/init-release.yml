@@ -74,7 +74,7 @@ jobs:
           # Commend this in:
           # uv run ci/scripts/bump_version.py --version-bump ${{ github.event.inputs.version_bump }} --version ${{ github.event.inputs.provide_version }}
           # Remove this:
-          uv run ci/scripts/bump_version.py --version-bump "provide-version" --version "2.0.0-koko5"
+          uv run ci/scripts/bump_version.py --version-bump "provide-version" --version "2.0.0-rc8"
 
       - name: Get version from uv
         id: get_version

@@ -36,8 +36,8 @@ jobs:
       - name: 🔄 Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0   # Fetch all history for all branches and tags      
-      
+          fetch-depth: 0   # Fetch all history for all branches and tags
+
       - name: 🐍 Init uv with caching
         uses: astral-sh/setup-uv@v5
         with:

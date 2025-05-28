@@ -90,7 +90,8 @@ jobs:
           git add uv.lock
           git commit -m "release: version update"
 
-          git push --set-upstream origin "${{ github.event.inputs.release_branch }}"
+          # Can't push, otherwise peter-evans/create-pull-request@v7 will not detect changes
+          # git push --set-upstream origin "${{ github.event.inputs.release_branch }}"
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7

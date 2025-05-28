@@ -25,6 +25,7 @@ DEFAULT_CATEGORIES={
 DEFAULT_EXCLUDE_PREFIXES = [
     'chore',
     'ci',
+    'release'
 ]
 
 def update_changelog_from_commits(version: str, commit_message_by_category: Dict[str, List[str]]):

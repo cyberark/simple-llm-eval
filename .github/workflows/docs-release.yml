@@ -41,4 +41,4 @@ jobs:
           git config user.email "github-actions@github.com"
           uv run mike deploy --push --branch gh-pages $VERSION
           uv run mike deploy --push --update-aliases $VERSION latest
-          uv run mike set-default --push $VERSION
+          uv run mike set-default --push latest

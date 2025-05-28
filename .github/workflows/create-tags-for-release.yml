@@ -5,9 +5,16 @@ on:
     types:
       - closed
 
+  # FOR TESTING REMOVE
+  # push:
+  #   branches:
+  #     - 'release/rc6'
+  # FOR TESTING REMOVE ^^^^
+
 jobs:
   check-release-pr:
-    if: github.event.pull_request.merged == true
+    # if: github.event.pull_request.merged == true # Bring this back
+    if: true # Remove this
     runs-on: ubuntu-latest
     steps:
       - name: Check PR Title and Label
@@ -18,9 +25,11 @@ jobs:
             const pr = context.payload.pull_request;
             const hasReleaseTitle = pr.title.includes('## FOR RELEASE ##');
             const hasReleaseLabel = pr.labels.some(label => label.name === 'release-me');
-            if (!(hasReleaseTitle && hasReleaseLabel)) {
-              core.setFailed('PR does not have the required title and label');
-            }
+
+            # Bring this back
+            # if (!(hasReleaseTitle && hasReleaseLabel)) {
+            #   core.setFailed('PR does not have the required title and label');
+            # }
       
       - name: 🐍 Install uv with caching
         uses: astral-sh/setup-uv@v5
@@ -29,5 +38,8 @@ jobs:
           cache-dependency-glob: "uv.lock"
 
       - name: 🏷️ Create Tags for Release
-        run: uv run ci/scripts/create_release_tag.py --yes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          uv run ci/scripts/create_release_tag.py --yes
   

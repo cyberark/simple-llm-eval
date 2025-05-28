@@ -110,7 +110,7 @@ jobs:
 
           git push --set-upstream origin $branch
 
-          git status
+          git status # Remove this
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7
@@ -128,7 +128,7 @@ jobs:
 
 # FOR TESTING REMOVE
 env:
-  VERSION_BUMP: bump-patch           # hardcoded for testing
+  VERSION_BUMP: bump-minot           # hardcoded for testing
   PROVIDE_VERSION: ''                # hardcoded for testing
   RELEASE_BRANCH: release/test-branch # hardcoded for testing
 # FOR TESTING REMOVE ^^^^

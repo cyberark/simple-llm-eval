@@ -66,6 +66,11 @@ Once in a while update the pre-commit hooks to the latest version:
 ## Publishing the docs 📚
 This project uses mkdocs/mike to publish its docs to GitHub Pages on a release.
 
+!!! info "What is Published Automatically"
+    The release workflow will publish the docs but only for release versions, not for pre-release versions.
+    
+    To publish docs for pre-release versions, you can trigger the `Docs Release Manual` workflow manually.
+
 Here are some details on how to use mike and mkdocs:
 
 * To test the docs locally, run: `mike serve` or `mkdocs serve`

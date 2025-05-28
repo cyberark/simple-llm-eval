@@ -22,10 +22,48 @@
 
 # Release Procedure
 
-## The Simple Way (Recommended)
+## Release Automation
 
-!!! info "The simple way"
-    Simply run the release procedure script in one of the following ways:
+!!! info "Automatic Release Procedure (Recommended)"
+    Run the `Init Release Process` workflow which will:
+
+    - [ ] Create a release branch named `release/auto-next-version` (or provide your own branch name)
+    - [ ] Bump patch/minor/major or specific version (set `version_bump` and optionally `version`)
+    - [ ] Update `CHANGELOG.md` for this release
+    - [ ] Create a pull request with the changes
+    
+    You need to:
+
+    - [ ] Optionally tweak CHANGELOG.md to your liking
+    - [ ] Merge the pull request to main
+
+    **This will trigger the creation of the release tag and the release workflow.**
+
+    - [ ] Manually publish the release to PyPI
+
+## Release Workflow
+
+The tag creation will trigger the GitHub Actions workflow [Release](https://github.com/cyberark/simple-llm-eval/actions/workflows/ci.yml)
+
+
+!!! Abstract "Release Workflow"
+    The release workflow will:
+    
+    - Validate the `pyproject.toml` version against the tag name
+    - Build the package
+    - Create GitHub release
+    - Attach binaries to GitHub release
+    - Publish the docs
+
+
+### Docs Only Release
+In case you make a docs-only update, see [Publishing the Docs](../developers/dev-notes.md/#publishing-the-docs)
+
+
+## Run the Release Procedure with Scripts (Not Recommended)
+
+!!! info "Using the Release Scripts"
+    - [ ] Run the release procedure script in one of the following ways:
     
     ```
     ./ci/scripts/create_version_pr.py --version 1.0.0-rc5g # Set a specific version (good for pre-release)
@@ -34,13 +72,11 @@
     ./ci/scripts/create_version_pr.py --bump-major
     ```
 
-Until this is automated:
+    - [ ] Manually open the release notes, click on "generate release notes" and update them as needed
+    - [ ] After the release workflow is complete, update the `CHANGELOG.md` file with the new version and the changes made in this release (take from the release notes)
+    - [ ] Publish the package to PyPI
 
-* Manually open the release notes, click on "generate release notes" and update them as needed
-* After the release workflow is complete, update the `CHANGELOG.md` file with the new version and the changes made in this release (take from the release notes).
-* Run the publish pipeline
-
-## The Manual Way
+## ❌ The Manual Way (Even less Recommended)
 
 ### 1. Update Version in `pyproject.toml`
 
@@ -85,23 +121,5 @@ and create a tag with the correct format.
 
 ### 5. Run the Publish Pipeline
 Do it
-
-## Release Workflow
-
-The tag creation will trigger the GitHub Actions workflow [Release](https://github.com/cyberark/simple-llm-eval/actions/workflows/ci.yml)
-
-
-!!! Abstract "Release Workflow"
-    The release workflow will:
-    - Validate the `pyproject.toml` version against the tag name
-    - Build the package
-    - Create GitHub release
-    - Attach binaries to GitHub release
-    - *Publish the package to PyPI
-    - Publish the docs
-
-
-### Docs Only Release
-In case you make a docs-only update, see [Publishing the Docs](../developers/dev-notes.md/#publishing-the-docs)
 
 <br>

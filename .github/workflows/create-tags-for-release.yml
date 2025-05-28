@@ -26,7 +26,8 @@ jobs:
             const isMain = pr.base.ref === 'main';
 
             if (!(hasReleaseTitle && hasReleaseLabel && isMain)) {
-              core.setFailed('PR must have the required title, label, and be merged to main');
+              core.info('PR does not meet release requirements. Skipping release.');
+              return;
             }
 
       - name: 🐍 Init uv with caching

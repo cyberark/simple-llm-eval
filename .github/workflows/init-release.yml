@@ -23,6 +23,10 @@ on:
           type: string
           default: 'release/auto-next-version'
 
+  push:
+    branches:
+      - 'release/rc6'
+
 jobs:
   create-pr:
     runs-on: ubuntu-latest
@@ -90,3 +94,8 @@ jobs:
           labels: |
             release-me
           draft: false
+
+env:
+  VERSION_BUMP: bump-patch           # hardcoded for testing
+  PROVIDE_VERSION: ''                # hardcoded for testing
+  RELEASE_BRANCH: release/test-branch # hardcoded for testing

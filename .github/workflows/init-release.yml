@@ -61,13 +61,20 @@ jobs:
           branch="${{ github.event.inputs.release_branch }}"
 
           branch="$RELEASE_BRANCH" # REMOVE THIS
-          git checkout -b $branch origin/main
+          # Bring this back
+          # git checkout -b $branch origin/main
+          
+          # Remove this:
+          git checkout -b $branch
 
       - name: Bump version
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          uv run ci/scripts/bump_version.py --version-bump ${{ github.event.inputs.version_bump }} --version ${{ github.event.inputs.provide_version }}
+          # Commend this in:
+          # uv run ci/scripts/bump_version.py --version-bump ${{ github.event.inputs.version_bump }} --version ${{ github.event.inputs.provide_version }}
+          # Remove this:
+          # uv run ci/scripts/bump_version.py --version-bump "bump-patch" --version ""
 
       - name: Get version from uv
         id: get_version

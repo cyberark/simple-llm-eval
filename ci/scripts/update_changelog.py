@@ -19,7 +19,7 @@ def update_changelog_from_commits(version: str, commit_message_by_category: Dict
 
     with open(changelog_path, 'r+', encoding='utf-8') as changelog_file:
         changelog_content = changelog_file.readlines()
-        
+
     new_changelog_content = []
     remaining_content = []
 
@@ -35,11 +35,11 @@ def update_changelog_from_commits(version: str, commit_message_by_category: Dict
     new_changelog_content.append(f'## [{version}] - {today}\n')
 
     new_changelog_content.append('\n')
-    
+
     for category in commit_message_by_category:
         if not commit_message_by_category[category]:
             continue
-        
+
         new_changelog_content.append(f'### {category}\n\n')
         for commit in commit_message_by_category[category]:
             commit = commit.strip()
@@ -55,7 +55,7 @@ def update_changelog_from_commits(version: str, commit_message_by_category: Dict
     with open(changelog_path, 'w', encoding='utf-8') as changelog_file:
         changelog_file.writelines(new_changelog_content)
 
-    
+
 def get_pr_link(commit_message: str) -> str:
     url = None
     pr_number = None
@@ -69,7 +69,7 @@ def get_pr_link(commit_message: str) -> str:
     except:
         url = None
         print(f'Failed to get PR link for commit message: {commit_message}')
-    
+
     return url, pr_number
 
 
@@ -86,7 +86,7 @@ def update_changelog(version: str, categories: Dict[str, str], exclude_prefixes:
     if not commit_messages:
         raise RuntimeError('No commit messages found since the last release.')
 
-    commit_messages = [msg for msg in commit_messages 
+    commit_messages = [msg for msg in commit_messages
                        if not any(msg.strip().startswith(prefix) for prefix in exclude_prefixes)]
 
     commit_message_by_category = {cat: [] for cat in categories}
@@ -129,5 +129,5 @@ if __name__ == '__main__':
         update_changelog(version='v1.1.1', categories=categories, exclude_prefixes=exclude_prefixes)
 
     except RuntimeError as e:
-        print(f"Error: {e}")
+        print(f'Error: {e}')
         exit(1)

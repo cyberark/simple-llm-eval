@@ -1,0 +1,106 @@
+name: Init Release Process
+
+on:
+  workflow_dispatch:
+    inputs:
+      version_bump:
+        description: 'How to apply the new version'
+        required: true
+        type: choice
+        default: 'bump-patch'
+        options:
+            - bump-patch
+            - bump-minor
+            - bump-major
+            - provide-version
+      provide_version:
+        description: 'Release version in case of `provide-version`'
+        required: false
+        type: string
+        default: ''
+      release_branch:
+          description: 'Branch name for the release PR'
+          type: string
+          default: 'release/auto-next-version'
+
+  # FOR TESTING
+  # push:
+  #   branches:
+  #     - 'release/rc6'
+  # FOR TESTING  ^^^^
+
+jobs:
+  create-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🔄 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🐍 Init uv with caching
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+          cache-dependency-glob: "uv.lock"
+
+      - name: 🧹 Delete remote release branch if it exists
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          branch="${{ github.event.inputs.release_branch }}"
+
+          if git ls-remote --exit-code --heads origin $branch; then
+            git push origin --delete $branch
+          fi
+
+      - name: 🌱 Create release branch from main
+        run: |
+          git fetch origin
+          branch="${{ github.event.inputs.release_branch }}"
+          git checkout -b $branch origin/main
+
+      - name: Bump version
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          uv run ci/scripts/bump_version.py --version-bump ${{ github.event.inputs.version_bump }} --version ${{ github.event.inputs.provide_version }}
+
+      - name: Get version from uv
+        id: get_version
+        run: |
+          version=$(uv version --output-format json | jq -r '.version')
+          echo "version=$version" >> $GITHUB_OUTPUT
+
+      - name: Update changelog
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          uv run ci/scripts/update_changelog.py --version ${{ steps.get_version.outputs.version }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Commit Changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add CHANGELOG.md
+          git commit -m "release: update changelog for version ${{ steps.get_version.outputs.version }}"
+
+          git add pyproject.toml
+          git add uv.lock
+          git commit -m "release: version update"
+
+          git push --set-upstream origin "${{ github.event.inputs.release_branch }}"
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.event.inputs.release_branch }}
+          base: 'main'
+          title: "PR from ${{ github.event.inputs.release_branch }} - ## FOR RELEASE ##"
+          body: "This PR was created by a workflow from branch `${{ github.event.inputs.release_branch }}`."
+          labels: |
+            release-me
+          draft: false
+          assignees: roybeny

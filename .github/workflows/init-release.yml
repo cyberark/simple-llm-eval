@@ -48,8 +48,8 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           branch="${{ github.event.inputs.release_branch }}"
           
-          branch="$RELEASE_BRANCH" # REMOVE THIS
-          echo "$RELEASE_BRANCH" # REMOVE THIS
+          branch=$RELEASE_BRANCH # REMOVE THIS
+          echo $RELEASE_BRANCH # REMOVE THIS
 
           if git ls-remote --exit-code --heads origin $branch; then
             git push origin --delete $branch
@@ -60,7 +60,7 @@ jobs:
           git fetch origin
           branch="${{ github.event.inputs.release_branch }}"
 
-          branch="$RELEASE_BRANCH" # REMOVE THIS
+          branch=$RELEASE_BRANCH # REMOVE THIS
           # Bring this back
           # git checkout -b $branch origin/main
           
@@ -99,13 +99,13 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           
-          cat CHANGELOG.md
-
           git add CHANGELOG.md
           git commit -m "docs: update changelog for version ${{ steps.get_version.outputs.version }}"
           
-          branch="${{ github.event.inputs.release_branch }}"
-          branch="$RELEASE_BRANCH" # REMOVE THIS
+          # branch="${{ github.event.inputs.release_branch }}" # Bring this back
+          branch=$RELEASE_BRANCH # REMOVE THIS
+
+          git status
 
           git push origin $branch
 

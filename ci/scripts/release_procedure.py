@@ -7,8 +7,11 @@ import json
 import argparse
 import time
 
+from colorama import Fore
+
+
 def run_cmd(cmd, do_not_fail=False, error=''):
-    print(f"$ {' '.join(cmd)}")
+    print(f"{Fore.CYAN}$ {' '.join(cmd)}{Fore.RESET}")
     result = subprocess.run(cmd, capture_output=True, text=True, check=False)
     print(result.stdout)
     if not do_not_fail and result.returncode != 0:
@@ -22,7 +25,40 @@ def get_current_version():
     try:
         return json.loads(result.stdout).get('version')
     except json.JSONDecodeError as e:
-        raise RuntimeError(f'Failed to parse JSON output: {e}')
+        raise RuntimeError(f'{Fore.RED}Failed to parse JSON output: {e}{Fore.RESET}')
+
+
+def open_link(link):
+    if sys.platform == 'darwin':
+        run_cmd(['open', link])
+    elif sys.platform == 'win32':
+        run_cmd(['start', link], do_not_fail=True)
+    else:
+        run_cmd(['xdg-open', link], do_not_fail=True)
+
+def wait_for_human_approval_and_merge(pr_link, pr_number):
+    print(f'{Fore.GREEN}🦖 PR checks passed, merging like a peasant{Fore.RESET}')
+    print(f'{Fore.YELLOW}🔄 Waiting for PR human approval and merge, approve, merge and come back here...{Fore.RESET}')
+
+    open_link(pr_link)
+    
+    pr_state = 'OPEN'
+    while pr_state == 'OPEN':
+        time.sleep(10)
+        pr_state = get_pr_info(pr_number, 'state')
+
+    if pr_state != 'MERGED':
+        raise RuntimeError(f'{Fore.RED}PR was not merged, please try again.{Fore.RESET}')
+
+
+def get_pr_info(pr_number: str, field: str):
+    result = run_cmd(['gh', 'pr', 'view', pr_number, '--json', field])
+    try:
+        data = json.loads(result.stdout)
+        return data.get(field)
+    except json.JSONDecodeError as e:
+        raise RuntimeError(f'{Fore.RED}Failed to parse JSON output: {e}{Fore.RESET}')
+
 
 def main():
     try:
@@ -34,7 +70,7 @@ def main():
         group.add_argument('--bump-major', action='store_true', help='Bump major version')
         args = parser.parse_args()
 
-        print('🔧 Update version in pyproject.toml.')
+        print(f"{Fore.YELLOW}🔧 Update version in pyproject.toml.{Fore.RESET}")
 
         current_version = get_current_version()
         version_branch_name = f'release/bump-version-{current_version}'
@@ -75,18 +111,23 @@ def main():
         pr_title = f'chore: 🤖 Bump version to {new_version}'
         pr_body = f'## Summary \n\nBump version to {new_version}'
 
-        print(f'📝 Creating PR with title: {pr_title}')
+        print(f'{Fore.YELLOW}📝 Creating PR with title: {pr_title}{Fore.RESET}')
         result = run_cmd(['gh', 'pr', 'create', '--title', pr_title, '--body', pr_body])
         pr_number = result.stdout.strip().split('/')[-1]
 
-        print(f'⏰ Waiting for PR checks for be published, check PR to see status: {result.stdout.strip()}')
+        pr_link = result.stdout.strip()
+        print(f'{Fore.YELLOW}⏰ Waiting for PR checks for be published, check PR to see status: {pr_link}{Fore.RESET}')
         time.sleep(10)
         run_cmd(['gh', 'pr', 'checks', pr_number, '--watch'], do_not_fail=True)
         run_cmd(['gh', 'pr', 'checks', pr_number, '--watch', '--fail-fast'], error='PR checks failed, please fix the issues and try again.')
 
-        print(f'🦖 PR checks passed, merging like a boss')
-        run_cmd(['gh', 'pr', 'merge', pr_number, '--squash', '--admin'])
-        print('🎉 Version PR created and merged successfully!')
+        if os.environ.get('BOSS_MODE', '0') == '1':
+            print(f'🦖 PR checks passed, merging like a boss')
+            run_cmd(['gh', 'pr', 'merge', pr_number, '--squash', '--admin'])
+        else:
+            wait_for_human_approval_and_merge(pr_link, pr_number) 
+
+        print(f'{Fore.GREEN}🎉 Version PR created and merged successfully!{Fore.RESET}')
 
         time.sleep(2)
 
@@ -94,14 +135,15 @@ def main():
         release_tag_script = os.path.join(script_dir, 'create_release_tag.py')
         run_cmd([sys.executable, release_tag_script, '--yes'])
 
-        print('🚀 Release tag created successfully!')
-        print('Check out the release workflow: https://github.com/cyberark/simple-llm-eval/actions/workflows/release.yml')
+        print(f'{Fore.GREEN}🚀 Release tag created successfully!{Fore.RESET}')
+        print(f'{Fore.CYAN}Check out the release workflow: https://github.com/cyberark/simple-llm-eval/actions/workflows/release.yml{Fore.RESET}')
 
     except subprocess.CalledProcessError as e:
         raise RuntimeError(f'Failed to run command: {e}')
     except RuntimeError as e:
-        print(f'❌ {e}')
+        print(f'{Fore.RED}❌ {e}{Fore.RESET}')
         sys.exit(1)
 
 if __name__ == '__main__':
-    main()
+    wait_for_human_approval_and_merge('https://github.com/cyberark/simple-llm-eval/pull/139', '139')
+    # main()

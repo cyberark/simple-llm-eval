@@ -43,7 +43,7 @@ def main():
         args = parser.parse_args()
 
         if args.version_bump == 'provide-version':
-            validate_version()
+            validate_version(args.version)
 
         print(f'{Fore.YELLOW}🔧 Update version in pyproject.toml.{Fore.RESET}')
 

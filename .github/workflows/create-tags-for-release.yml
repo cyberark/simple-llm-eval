@@ -11,6 +11,7 @@ on:
       - 'release/rc6'
   # FOR TESTING REMOVE ^^^^
 
+
 jobs:
   check-release-pr:
     # if: github.event.pull_request.merged == true # Bring this back

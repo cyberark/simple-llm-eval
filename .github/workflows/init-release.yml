@@ -88,9 +88,9 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           # Bring this back
-          # uv run ci/scripts/update_changelog.py ${{ steps.get_version.outputs.version }}
+          # uv run ci/scripts/update_changelog.py --version ${{ steps.get_version.outputs.version }}
           # remove this
-          uv run ci/scripts/update_changelog.py 0.0.2
+          uv run ci/scripts/update_changelog.py --version 0.0.2
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

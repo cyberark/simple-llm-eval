@@ -9,6 +9,10 @@ from colorama import Fore
 
 from run_commands import run_cmd
 
+
+ALLOWED_VERSION_BUMPS = ['bump-patch', 'bump-minor', 'bump-major', 'provide-version']
+
+
 def validate_version(version):
 
     if not version:
@@ -29,7 +33,6 @@ def get_current_version():
     except json.JSONDecodeError as e:
         raise RuntimeError(f'{Fore.RED}Failed to parse JSON output: {e}{Fore.RESET}')
 
-ALLOWED_VERSION_BUMPS = ['bump-path', 'bump-minor', 'bump-major', 'provide-version']
 
 def main():
     try:

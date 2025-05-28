@@ -9,14 +9,9 @@ import time
 
 from colorama import Fore
 
-
-def run_cmd(cmd, do_not_fail=False, error=''):
-    print(f"{Fore.CYAN}$ {' '.join(cmd)}{Fore.RESET}")
-    result = subprocess.run(cmd, capture_output=True, text=True, check=False)
-    print(result.stdout)
-    if not do_not_fail and result.returncode != 0:
-        raise RuntimeError(f'{result.stderr} | {error}')
-    return result
+from gh_utils import get_pr_info
+from run_commands import run_cmd
+from update_changelog import update_changelog
 
 
 def get_current_version():
@@ -41,7 +36,7 @@ def wait_for_human_approval_and_merge(pr_link, pr_number):
     print(f'{Fore.YELLOW}🔄 Waiting for PR human approval and merge, approve, merge and come back here...{Fore.RESET}')
 
     open_link(pr_link)
-    
+
     pr_state = 'OPEN'
     while pr_state == 'OPEN':
         time.sleep(10)
@@ -50,14 +45,6 @@ def wait_for_human_approval_and_merge(pr_link, pr_number):
     if pr_state != 'MERGED':
         raise RuntimeError(f'{Fore.RED}PR was not merged, please try again.{Fore.RESET}')
 
-
-def get_pr_info(pr_number: str, field: str):
-    result = run_cmd(['gh', 'pr', 'view', pr_number, '--json', field])
-    try:
-        data = json.loads(result.stdout)
-        return data.get(field)
-    except json.JSONDecodeError as e:
-        raise RuntimeError(f'{Fore.RED}Failed to parse JSON output: {e}{Fore.RESET}')
 
 
 def main():
@@ -70,7 +57,7 @@ def main():
         group.add_argument('--bump-major', action='store_true', help='Bump major version')
         args = parser.parse_args()
 
-        print(f"{Fore.YELLOW}🔧 Update version in pyproject.toml.{Fore.RESET}")
+        print(f'{Fore.YELLOW}🔧 Update version in pyproject.toml.{Fore.RESET}')
 
         current_version = get_current_version()
         version_branch_name = f'release/bump-version-{current_version}'
@@ -125,7 +112,7 @@ def main():
             print(f'🦖 PR checks passed, merging like a boss')
             run_cmd(['gh', 'pr', 'merge', pr_number, '--squash', '--admin'])
         else:
-            wait_for_human_approval_and_merge(pr_link, pr_number) 
+            wait_for_human_approval_and_merge(pr_link, pr_number)
 
         print(f'{Fore.GREEN}🎉 Version PR created and merged successfully!{Fore.RESET}')
 
@@ -145,5 +132,5 @@ def main():
         sys.exit(1)
 
 if __name__ == '__main__':
-    wait_for_human_approval_and_merge('https://github.com/cyberark/simple-llm-eval/pull/139', '139')
+    update_changelog()
     # main()

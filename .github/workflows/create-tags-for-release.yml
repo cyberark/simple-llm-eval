@@ -36,15 +36,43 @@ jobs:
       #         core.setFailed('PR does not have the required title and label');
       #       }
 
-      - name: 🐍 Install uv with caching
+      - name: 🐍 Init uv with caching
         uses: astral-sh/setup-uv@v5
         with:
           enable-cache: true
           cache-dependency-glob: "uv.lock"
 
+      - name: Get version from uv
+        id: get_version
+        run: |
+          version=$(uv version --output-format json | jq -r '.version')
+          echo "version=$version" >> $GITHUB_OUTPUT
+
       - name: 🏷️ Create Tags for Release
         run: |
+          set -e  # Stop on error
+
+          # Set up git
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          uv run ci/scripts/create_release_tag.py --yes
+
+          # Checkout and update main
+          git fetch origin main
+          git checkout main
+          git pull origin main
+
+          # Get version from previous step
+          version="${{ steps.get_version.outputs.version }}"
+          tag_name="v$version"
+
+          # Check if tag already exists
+          if git rev-parse "$tag_name" >/dev/null 2>&1; then
+            echo "Tag $tag_name already exists. Exiting."
+            exit 0
+          fi
+
+          # Create and push annotated tag
+          git tag -a "$tag_name" -m "Release version $tag_name"
+          git push origin "$tag_name"
+
   

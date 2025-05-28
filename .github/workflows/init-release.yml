@@ -74,7 +74,7 @@ jobs:
           # Commend this in:
           # uv run ci/scripts/bump_version.py --version-bump ${{ github.event.inputs.version_bump }} --version ${{ github.event.inputs.provide_version }}
           # Remove this:
-          uv run ci/scripts/bump_version.py --version-bump "bump-minot" --version ""
+          uv run ci/scripts/bump_version.py --version-bump "bump-minor" --version ""
 
       - name: Get version from uv
         id: get_version

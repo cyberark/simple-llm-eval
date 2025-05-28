@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import argparse
 import os
 import re
 from typing import Dict, List
@@ -11,6 +12,20 @@ from run_commands import run_cmd
 OTHER_CATEGORY = 'Other'
 CHANGE_LOG_FILE = 'CHANGELOG.md'
 CHANGE_LOG_LAST_HEADER_LINE = 'and this project adheres to [Semantic Versioning](http://semver.org/)'
+
+DEFAULT_CATEGORIES={
+    'feat': '🎁 New Features',
+    'fix': '🐛 Bug Fixes',
+    'docs': '📚 Documentation',
+    'refactor': '🚜 Refactoring',
+    'test': '🧪 Tests',
+    'perf': '🚀 Performance Improvements',
+},
+
+DEFAULT_EXCLUDE_PREFIXES = [
+    'chore',
+    'ci',
+]
 
 def update_changelog_from_commits(version: str, commit_message_by_category: Dict[str, List[str]]):
     root_path = run_cmd(['git', 'rev-parse', '--show-toplevel'], error='Failed to get root path of the repository.').stdout.strip()
@@ -73,10 +88,11 @@ def get_pr_link(commit_message: str) -> str:
     return url, pr_number
 
 
-def update_changelog(version: str, categories: Dict[str, str], exclude_prefixes: List[str]=None):
-    exclude_prefixes = exclude_prefixes or []
-    print('🔄 Updating changelog...'
-          )
+def update_changelog(version: str, categories: Dict[str, str]=None, exclude_prefixes: List[str]=None):
+    categories = categories or DEFAULT_CATEGORIES
+    exclude_prefixes = exclude_prefixes or DEFAULT_EXCLUDE_PREFIXES
+
+    print('🔄 Updating changelog...')
     latest_release_tag = get_release_view('tagName')
     print(f'Latest release tag: {latest_release_tag}')
 
@@ -108,26 +124,16 @@ def update_changelog(version: str, categories: Dict[str, str], exclude_prefixes:
 
 
     update_changelog_from_commits(version, commit_message_by_category)
+    print(f'✅ Changelog updated for version {version}.')
 
 
 if __name__ == '__main__':
     try:
-        categories={
-                'feat': '🎁 New Features',
-                'fix': '🐛 Bug Fixes',
-                'docs': '📚 Documentation',
-                'refactor': '🚜 Refactoring',
-                'test': '🧪 Tests',
-                'perf': '🚀 Performance Improvements',
-            }
+        parser = argparse.ArgumentParser(description='Update changelog from commit messages since the last release.')
+        parser.add_argument('--version', required=True, type=str, help=f'New changelog version')
+        args = parser.parse_args()
 
-        exclude_prefixes = [
-            # 'chore',
-            # 'ci',
-        ]
-
-        update_changelog(version='v1.1.1', categories=categories, exclude_prefixes=exclude_prefixes)
-
+        update_changelog(version=args.version)
     except RuntimeError as e:
         print(f'Error: {e}')
         exit(1)

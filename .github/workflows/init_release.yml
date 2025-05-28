@@ -77,6 +77,8 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ github.event.inputs.release_branch }}
           base: 'main'
-          title: "PR from ${{ github.event.inputs.release_branch }} - "
+          title: "PR from ${{ github.event.inputs.release_branch }} - ## FOR RELEASE ##"
           body: "This PR was created by a workflow from branch `${{ github.event.inputs.release_branch }}`."
+          labels: |
+            release-me
           draft: false

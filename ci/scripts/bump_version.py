@@ -39,6 +39,7 @@ def main():
         parser = argparse.ArgumentParser(description='Bump or set version in pyproject.toml')
         parser.add_argument('--version-bump', type=str, choices=ALLOWED_VERSION_BUMPS, help=f'One of {ALLOWED_VERSION_BUMPS}')
         parser.add_argument('--version', required=False, default='', type=str, help=f'Specific version to set (requires version-bump="provide-version"')
+        parser.add_argument('--commit-changes', action='store_true', default=False, help='Commit and push changes after bumping version')
         args = parser.parse_args()
 
         if args.version_bump == 'provide-version':
@@ -61,11 +62,12 @@ def main():
 
         run_cmd(['uv', 'sync'])
 
-        run_cmd(['git', 'add', 'pyproject.toml'])
-        run_cmd(['git', 'add', 'uv.lock'])
+        if args.commit_changes:
+            run_cmd(['git', 'add', 'pyproject.toml'])
+            run_cmd(['git', 'add', 'uv.lock'])
 
-        run_cmd(['git', 'commit', '-m', f'Bump version to {new_version}'])
-        run_cmd(['git', 'push'])
+            run_cmd(['git', 'commit', '-m', f'Bump version to {new_version}'])
+            run_cmd(['git', 'push'])
 
     except subprocess.CalledProcessError as e:
         raise RuntimeError(f'Failed to run command: {e}')

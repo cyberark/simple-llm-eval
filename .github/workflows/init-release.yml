@@ -93,18 +93,22 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Commit changelog.md
+      - name: Commit Changes
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           
           git add CHANGELOG.md
-          git commit -m "docs: update changelog for version ${{ steps.get_version.outputs.version }}"
+          git commit -m "release: update changelog for version ${{ steps.get_version.outputs.version }}"
           
+          git add pyproject.toml
+          git add uv.lock
+          git commit -m "release: version update"
+
           # branch="${{ github.event.inputs.release_branch }}" # Bring this back
           branch=$RELEASE_BRANCH # REMOVE THIS
 
-          git push origin $branch
+          git push --set-upstream origin $branch
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7

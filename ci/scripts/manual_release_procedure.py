@@ -99,7 +99,7 @@ def main():
         pr_body = f'## Summary \n\nBump version to {new_version}'
 
         update_changelog(version=new_version)
-        
+
         print(f'{Fore.YELLOW}📝 Creating PR with title: {pr_title}{Fore.RESET}')
         result = run_cmd(['gh', 'pr', 'create', '--title', pr_title, '--body', pr_body])
         pr_number = result.stdout.strip().split('/')[-1]

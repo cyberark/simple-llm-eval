@@ -17,10 +17,10 @@ def validate_version(version):
 
     if not version:
         raise ValueError(f'Version is required when using --version-bump="provide-version"')
-    
+
     if len(version) > 30:
         raise ValueError(f'Version is too long, must be less than 30 characters.')
-    
+
     if not re.match(r'^\d+\.\d+\.\d+.*$', version):
         raise ValueError(f'Invalid version: allowed format: x.y.z or x.y.z<pre-release-name>')
 

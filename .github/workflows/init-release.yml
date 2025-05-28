@@ -113,7 +113,8 @@ jobs:
         uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.event.inputs.release_branch }}
+          # branch: ${{ github.event.inputs.release_branch }} # Bring this back
+          branch: $RELEASE_BRANCH # Remove this
           base: 'main'
           title: "PR from ${{ github.event.inputs.release_branch }} - ## FOR RELEASE ##"
           body: "This PR was created by a workflow from branch `${{ github.event.inputs.release_branch }}`."

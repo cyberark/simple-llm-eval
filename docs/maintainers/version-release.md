@@ -38,6 +38,7 @@ Until this is automated:
 
 * Manually open the release notes, click on "generate release notes" and update them as needed
 * After the release workflow is complete, update the `CHANGELOG.md` file with the new version and the changes made in this release (take from the release notes).
+* Run the publish pipeline
 
 ## The Manual Way
 
@@ -82,7 +83,10 @@ and create a tag with the correct format.
 
 * After the release workflow is complete, update the `CHANGELOG.md` file with the new version and the changes made in this release (take from the release notes).
 
-### Release Workflow
+### 5. Run the Publish Pipeline
+Do it
+
+## Release Workflow
 
 The tag creation will trigger the GitHub Actions workflow [Release](https://github.com/cyberark/simple-llm-eval/actions/workflows/ci.yml)
 

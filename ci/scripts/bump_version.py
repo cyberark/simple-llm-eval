@@ -53,8 +53,10 @@ def main():
             run_cmd(['uv', 'version', '--bump', 'minor'])
         elif args.version_bump == 'bump-major':
             run_cmd(['uv', 'version', '--bump', 'major'])
-        else:
+        elif args.version_bump == 'provide-version':
             run_cmd(['uv', 'version', '--set', args.version_bump])
+        else:
+            raise ValueError(f'Invalid version bump type: {args.version_bump}. Allowed values are: {ALLOWED_VERSION_BUMPS}')
 
         print(f'{Fore.GREEN}✅ Version updated successfully.{Fore.RESET}')
 

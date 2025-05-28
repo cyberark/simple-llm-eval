@@ -38,6 +38,8 @@ jobs:
 
       - name: 🧹 Delete remote release branch if it exists
         run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
           branch="${{ github.event.inputs.release_branch }}"
           if git ls-remote --exit-code --heads origin $branch; then
             git push origin --delete $branch
@@ -49,7 +51,10 @@ jobs:
           git checkout -b "${{ github.event.inputs.release_branch }}" origin/main
 
       - name: Bump version
-        run: uv run ci/scripts/bump_version.py --version-bump ${{ github.event.inputs.version_bump }} --version ${{ github.event.inputs.provide_version }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          uv run ci/scripts/bump_version.py --version-bump ${{ github.event.inputs.version_bump }} --version ${{ github.event.inputs.provide_version }}
 
       - name: Get version from uv
         id: get_version
@@ -59,7 +64,10 @@ jobs:
           echo "version=$version" >> $GITHUB_OUTPUT
 
       - name: Update changelog
-        run: uv run ci/scripts/update_changelog.py ${{ steps.get_version.outputs.version }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          uv run ci/scripts/update_changelog.py ${{ steps.get_version.outputs.version }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

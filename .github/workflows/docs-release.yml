@@ -1,4 +1,4 @@
-name: Docs Release Manual
+name: 📚 Docs Release Manual
 
 on:
   workflow_dispatch:

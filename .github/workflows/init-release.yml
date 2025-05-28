@@ -54,11 +54,11 @@ jobs:
       #       git push origin --delete $branch
       #     fi
 
-      - name: 🌱 Create release branch from main
-        run: |
-          git fetch origin
-          branch="${{ github.event.inputs.release_branch }}"
-          git checkout -b $branch origin/main
+      # - name: 🌱 Create release branch from main
+      #   run: |
+      #     git fetch origin
+      #     branch="${{ github.event.inputs.release_branch }}"
+      #     git checkout -b $branch origin/main
 
       - name: Bump version
         run: |

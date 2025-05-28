@@ -46,7 +46,9 @@ jobs:
         id: get_version
         run: |
           version=$(uv version --output-format json | jq -r '.version')
-          echo "version=$version" >> $GITHUB_OUTPUT
+          # echo "version=$version" >> $GITHUB_OUTPUT # Bring this back
+          echo "version=0.0.5" >> $GITHUB_OUTPUT # Remove this
+          
 
       - name: 🏷️ Create Tags for Release
         run: |

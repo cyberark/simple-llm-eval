@@ -105,7 +105,7 @@ def update_changelog(version: str, categories: Dict[str, str]=None, exclude_pref
     commit_messages = [msg for msg in commit_messages
                        if not any(msg.strip().startswith(prefix) for prefix in exclude_prefixes)]
 
-    commit_message_by_category = {cat: [] for cat in categories}
+    commit_message_by_category = {}
     commit_message_by_category[OTHER_CATEGORY] = []
     for commit_message in commit_messages:
         # Extract prefix until colon or '('

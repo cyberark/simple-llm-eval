@@ -5,36 +5,26 @@ on:
     types:
       - closed
 
-  # FOR TESTING REMOVE
-  push:
-    branches:
-      - 'release/rc6'
-  # FOR TESTING REMOVE ^^^^
-
-
 jobs:
   check-release-pr:
-    # if: github.event.pull_request.merged == true # Bring this back
-    if: true # Remove this
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
 
       - name: 🔄 Checkout repository
         uses: actions/checkout@v4
 
-      # bring this back
-      # - name: 👀 Check PR Title and Label
-      #   uses: actions/github-script@v7
-      #   with:
-      #     script: |
-      #       const pr = context.payload.pull_request;
-      #       const hasReleaseTitle = pr.title.includes('## FOR RELEASE ##');
-      #       const hasReleaseLabel = pr.labels.some(label => label.name === 'release-me');
+      - name: 👀 Check PR Title and Label
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const pr = context.payload.pull_request;
+            const hasReleaseTitle = pr.title.includes('## FOR RELEASE ##');
+            const hasReleaseLabel = pr.labels.some(label => label.name === 'release-me');
 
-      #       Bring this back
-      #       if (!(hasReleaseTitle && hasReleaseLabel)) {
-      #         core.setFailed('PR does not have the required title and label');
-      #       }
+            if (!(hasReleaseTitle && hasReleaseLabel)) {
+              core.setFailed('PR does not have the required title and label');
+            }
 
       - name: 🐍 Init uv with caching
         uses: astral-sh/setup-uv@v5
@@ -46,9 +36,7 @@ jobs:
         id: get_version
         run: |
           version=$(uv version --output-format json | jq -r '.version')
-          # echo "version=$version" >> $GITHUB_OUTPUT # Bring this back
-          echo "version=0.0.5" >> $GITHUB_OUTPUT # Remove this
-          
+          echo "version=$version" >> $GITHUB_OUTPUT
 
       - name: 🏷️ Create Tags for Release
         run: |

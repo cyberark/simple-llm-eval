@@ -23,9 +23,11 @@ on:
           type: string
           default: 'release/auto-next-version'
 
+  # FOR TESTING REMOVE
   push:
     branches:
       - 'release/rc6'
+# FOR TESTING REMOVE ^^^^
 
 jobs:
   create-pr:
@@ -45,6 +47,10 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           branch="${{ github.event.inputs.release_branch }}"
+          
+          branch="$RELEASE_BRANCH" # REMOVE THIS
+          echo "$RELEASE_BRANCH" # REMOVE THIS
+
           if git ls-remote --exit-code --heads origin $branch; then
             git push origin --delete $branch
           fi
@@ -52,7 +58,10 @@ jobs:
       - name: 🌱 Create release branch from main
         run: |
           git fetch origin
-          git checkout -b "${{ github.event.inputs.release_branch }}" origin/main
+          branch="${{ github.event.inputs.release_branch }}"
+
+          branch="$RELEASE_BRANCH" # REMOVE THIS
+          git checkout -b $branch origin/main
 
       - name: Bump version
         run: |
@@ -81,7 +90,11 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add changelog.md
           git commit -m "docs: update changelog for version ${{ steps.get_version.outputs.version }}"
-          git push origin "${{ github.event.inputs.release_branch }}"
+          
+          branch="${{ github.event.inputs.release_branch }}"
+          branch="$RELEASE_BRANCH" # REMOVE THIS
+
+          git push origin $branch
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7
@@ -95,7 +108,9 @@ jobs:
             release-me
           draft: false
 
+# FOR TESTING REMOVE
 env:
   VERSION_BUMP: bump-patch           # hardcoded for testing
   PROVIDE_VERSION: ''                # hardcoded for testing
   RELEASE_BRANCH: release/test-branch # hardcoded for testing
+# FOR TESTING REMOVE ^^^^

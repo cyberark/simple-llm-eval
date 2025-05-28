@@ -13,17 +13,20 @@ jobs:
 
       - name: 🔄 Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # To ensure all tags/branches are fetched
 
-      - name: 👀 Check PR Title and Label
+      - name: 👀 Check PR Title, Label, and Base Branch
         uses: actions/github-script@v7
         with:
           script: |
             const pr = context.payload.pull_request;
             const hasReleaseTitle = pr.title.includes('## FOR RELEASE ##');
             const hasReleaseLabel = pr.labels.some(label => label.name === 'release-me');
+            const isMain = pr.base.ref === 'main';
 
-            if (!(hasReleaseTitle && hasReleaseLabel)) {
-              core.setFailed('PR does not have the required title and label');
+            if (!(hasReleaseTitle && hasReleaseLabel && isMain)) {
+              core.setFailed('PR must have the required title, label, and be merged to main');
             }
 
       - name: 🐍 Init uv with caching
@@ -40,29 +43,20 @@ jobs:
 
       - name: 🏷️ Create Tags for Release
         run: |
-          set -e  # Stop on error
-
-          # Set up git
+          set -e
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-
-          # Checkout and update main
-          git fetch origin main
+          git fetch origin main --tags
           git checkout main
           git pull origin main
 
-          # Get version from previous step
           version="${{ steps.get_version.outputs.version }}"
           tag_name="v$version"
 
-          # Check if tag already exists
           if git rev-parse "$tag_name" >/dev/null 2>&1; then
             echo "Tag $tag_name already exists. Exiting."
             exit 0
           fi
 
-          # Create and push annotated tag
           git tag -a "$tag_name" -m "Release version $tag_name"
           git push origin "$tag_name"
-
-  

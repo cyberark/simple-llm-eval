@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 import os
+import re
 from typing import Dict, List
 from datetime import datetime
 
-from gh_utils import get_release_view
+from gh_utils import get_pr_info, get_release_view
 from run_commands import run_cmd
 
 
@@ -31,22 +32,46 @@ def update_changelog_from_commits(version: str, commit_message_by_category: Dict
     remaining_content = changelog_content[header_index + 1:]
 
     today = datetime.now().strftime('%Y-%m-%d')
-    new_changelog_content.append(f'## [{version}] - {today}\n\n')
+    new_changelog_content.append(f'## [{version}] - {today}\n')
 
     new_changelog_content.append('\n')
     
     for category in commit_message_by_category:
+        if not commit_message_by_category[category]:
+            continue
+        
         new_changelog_content.append(f'### {category}\n\n')
         for commit in commit_message_by_category[category]:
+            commit = commit.strip()
+            pr_link, pr_number = get_pr_link(commit)
+            if pr_link and pr_number:
+                commit = commit.replace(pr_number, f'[{pr_number}]({pr_link})')
             new_changelog_content.append(f'- {commit}\n')
 
-    new_changelog_content.append('\n')
+        new_changelog_content.append('\n')
+
     new_changelog_content.extend(remaining_content)
 
     with open(changelog_path, 'w', encoding='utf-8') as changelog_file:
         changelog_file.writelines(new_changelog_content)
 
     
+def get_pr_link(commit_message: str) -> str:
+    url = None
+    pr_number = None
+
+    try:
+        match = re.search(r'#(\d+)', commit_message)
+        if match:
+            pr_number = match.group(0)
+            print(f'Found PR number: {pr_number} in commit message: {commit_message}')
+            url = get_pr_info(pr_number, 'url')
+    except:
+        url = None
+        print(f'Failed to get PR link for commit message: {commit_message}')
+    
+    return url, pr_number
+
 
 def update_changelog(version: str, categories: Dict[str, str], exclude_prefixes: List[str]=None):
     exclude_prefixes = exclude_prefixes or []
@@ -87,7 +112,6 @@ def update_changelog(version: str, categories: Dict[str, str], exclude_prefixes:
 
 if __name__ == '__main__':
     try:
-
         categories={
                 'feat': '🎁 New Features',
                 'fix': '🐛 Bug Fixes',
@@ -98,11 +122,11 @@ if __name__ == '__main__':
             }
 
         exclude_prefixes = [
-            'chore',
-            'ci',
+            # 'chore',
+            # 'ci',
         ]
 
-        update_changelog(categories=categories, exclude_prefixes=exclude_prefixes)
+        update_changelog(version='v1.1.1', categories=categories, exclude_prefixes=exclude_prefixes)
 
     except RuntimeError as e:
         print(f"Error: {e}")

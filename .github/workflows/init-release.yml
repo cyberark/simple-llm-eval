@@ -36,7 +36,7 @@ jobs:
       - name: 🔄 Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0   # Fetch all history for all branches and tags
+          fetch-depth: 0
 
       - name: 🐍 Init uv with caching
         uses: astral-sh/setup-uv@v5
@@ -44,15 +44,15 @@ jobs:
           enable-cache: true
           cache-dependency-glob: "uv.lock"
 
-      - name: 🧹 Delete remote release branch if it exists
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          branch="${{ github.event.inputs.release_branch }}"
+      # - name: 🧹 Delete remote release branch if it exists
+      #   run: |
+      #     git config user.name "github-actions[bot]"
+      #     git config user.email "github-actions[bot]@users.noreply.github.com"
+      #     branch="${{ github.event.inputs.release_branch }}"
 
-          if git ls-remote --exit-code --heads origin $branch; then
-            git push origin --delete $branch
-          fi
+      #     if git ls-remote --exit-code --heads origin $branch; then
+      #       git push origin --delete $branch
+      #     fi
 
       - name: 🌱 Create release branch from main
         run: |

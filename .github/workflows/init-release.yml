@@ -128,7 +128,7 @@ jobs:
 
 # FOR TESTING REMOVE
 env:
-  VERSION_BUMP: bump-minot           # hardcoded for testing
+  VERSION_BUMP: bump-minor           # hardcoded for testing
   PROVIDE_VERSION: ''                # hardcoded for testing
   RELEASE_BRANCH: release/test-branch # hardcoded for testing
 # FOR TESTING REMOVE ^^^^

@@ -23,11 +23,11 @@ on:
           type: string
           default: 'release/auto-next-version'
 
-  # FOR TESTING REMOVE
-  push:
-    branches:
-      - 'release/rc6'
-# FOR TESTING REMOVE ^^^^
+  # FOR TESTING
+  # push:
+  #   branches:
+  #     - 'release/rc6'
+  # FOR TESTING  ^^^^
 
 jobs:
   create-pr:
@@ -48,9 +48,6 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           branch="${{ github.event.inputs.release_branch }}"
           
-          branch=$RELEASE_BRANCH # REMOVE THIS
-          echo $RELEASE_BRANCH # REMOVE THIS
-
           if git ls-remote --exit-code --heads origin $branch; then
             git push origin --delete $branch
           fi
@@ -59,22 +56,13 @@ jobs:
         run: |
           git fetch origin
           branch="${{ github.event.inputs.release_branch }}"
-
-          branch=$RELEASE_BRANCH # REMOVE THIS
-          # Bring this back
-          # git checkout -b $branch origin/main
-          
-          # Remove this:
-          git checkout -b $branch
+          git checkout -b $branch origin/main
 
       - name: Bump version
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          # Commend this in:
-          # uv run ci/scripts/bump_version.py --version-bump ${{ github.event.inputs.version_bump }} --version ${{ github.event.inputs.provide_version }}
-          # Remove this:
-          uv run ci/scripts/bump_version.py --version-bump "provide-version" --version "2.0.0-rc8"
+          uv run ci/scripts/bump_version.py --version-bump ${{ github.event.inputs.version_bump }} --version ${{ github.event.inputs.provide_version }}
 
       - name: Get version from uv
         id: get_version
@@ -86,10 +74,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          # Bring this back
-          # uv run ci/scripts/update_changelog.py --version ${{ steps.get_version.outputs.version }}
-          # remove this
-          uv run ci/scripts/update_changelog.py --version 0.0.2
+          uv run ci/scripts/update_changelog.py --version ${{ steps.get_version.outputs.version }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -105,19 +90,13 @@ jobs:
           git add uv.lock
           git commit -m "release: version update"
 
-          # branch="${{ github.event.inputs.release_branch }}" # Bring this back
-          branch=$RELEASE_BRANCH # REMOVE THIS
-
-          git push --set-upstream origin $branch
-
-          git status # Remove this
+          git push --set-upstream origin "${{ github.event.inputs.release_branch }}"
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          # branch: ${{ github.event.inputs.release_branch }} # Bring this back
-          branch: $RELEASE_BRANCH # Remove this
+          branch: ${{ github.event.inputs.release_branch }}
           base: 'main'
           title: "PR from ${{ github.event.inputs.release_branch }} - ## FOR RELEASE ##"
           body: "This PR was created by a workflow from branch `${{ github.event.inputs.release_branch }}`."
@@ -125,8 +104,3 @@ jobs:
             release-me
           draft: false
           assignees: roybeny
-
-# FOR TESTING REMOVE
-env:
-  RELEASE_BRANCH: release/test-branch # hardcoded for testing
-# FOR TESTING REMOVE ^^^^

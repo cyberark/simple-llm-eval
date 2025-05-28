@@ -74,13 +74,12 @@ jobs:
           # Commend this in:
           # uv run ci/scripts/bump_version.py --version-bump ${{ github.event.inputs.version_bump }} --version ${{ github.event.inputs.provide_version }}
           # Remove this:
-          # uv run ci/scripts/bump_version.py --version-bump "bump-patch" --version ""
+          uv run ci/scripts/bump_version.py --version-bump "bump-patch" --version ""
 
       - name: Get version from uv
         id: get_version
         run: |
-          uv version --output-format json > version.json
-          version=$(jq -r '.version' version.json)
+          version=$(uv version --output-format json | jq -r '.version')
           echo "version=$version" >> $GITHUB_OUTPUT
 
       - name: Update changelog
@@ -104,8 +103,6 @@ jobs:
           
           # branch="${{ github.event.inputs.release_branch }}" # Bring this back
           branch=$RELEASE_BRANCH # REMOVE THIS
-
-          git status
 
           git push origin $branch
 

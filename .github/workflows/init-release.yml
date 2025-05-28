@@ -98,7 +98,10 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add changelog.md
+          
+          cat CHANGELOG.md
+
+          git add CHANGELOG.md
           git commit -m "docs: update changelog for version ${{ steps.get_version.outputs.version }}"
           
           branch="${{ github.event.inputs.release_branch }}"

@@ -54,11 +54,7 @@ jobs:
       - name: 📚 Publish Docs
         run: |
           VERSION=${GITHUB_REF#refs/tags/v}
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
-          uv run mike deploy --push --branch gh-pages $VERSION
-          uv run mike deploy --push --update-aliases $VERSION latest
-          uv run mike set-default --push latest
+          ci/scripts/publish_docs.sh "$VERSION"
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2

@@ -6,10 +6,11 @@ import argparse
 
 def main():
     parser = argparse.ArgumentParser(description='Validate tag version against uv version output.')
-    parser.add_argument('tag_value', help='The tag version to validate without the leading `v` (e.g., 0.1.0)')
+    parser.add_argument('tag_value', help='The tag version to validate with or without the leading `v` (0.1.0/v0.1.0).')
     args = parser.parse_args()
 
-    print(f'🔎 Validating tag version: {args.tag_value}')
+    tag_value = args.tag_value.lstrip('v')
+    print(f'🔎 Validating tag version: {tag_value} (from cli: {args.tag_value})')
 
     try:
         result = subprocess.run(['uv', 'version', '--output-format', 'json'], capture_output=True, text=True, check=True)
@@ -18,10 +19,10 @@ def main():
         if not py_project_version:
             raise ValueError("Could not find 'version' in uv output.")
 
-        if args.tag_value.count('-') > 1:
-            raise ValueError(f'Tag value "{args.tag_value}" contains more than one hyphen.')
+        if tag_value.count('-') > 1:
+            raise ValueError(f'Tag value "{tag_value}" contains more than one hyphen.')
 
-        tag_name_no_hyphen = args.tag_value.replace('-', '')
+        tag_name_no_hyphen = tag_value.replace('-', '')
 
         if tag_name_no_hyphen == py_project_version:
             print(f'✅ Tag version matches: {tag_name_no_hyphen}')

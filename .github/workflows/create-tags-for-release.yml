@@ -43,8 +43,6 @@ jobs:
           echo "version=$version" >> $GITHUB_OUTPUT
 
       - name: 🏷️ Create Tags for Release
-        env:
-          PAT_TOKEN: ${{ secrets.ACTIONS_PAT }}
         run: |
           set -e
           git config user.name "github-actions[bot]"
@@ -62,4 +60,4 @@ jobs:
           fi
 
           git tag -a "$tag_name" -m "Release version $tag_name"
-          git push "https://${PAT_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "$tag_name"
+          git push origin "$tag_name"

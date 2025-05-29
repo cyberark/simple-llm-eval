@@ -1,4 +1,4 @@
-name: 🚀 Init Release Process
+name: 🎬 Init Release Process
 
 on:
   workflow_dispatch:

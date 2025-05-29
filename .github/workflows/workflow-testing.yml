@@ -1,0 +1,23 @@
+name: Workflow Testing
+
+on:
+  workflow_dispatch:
+    inputs:
+      some_value:
+        description: 'Some test value'
+        required: false
+        type: string
+
+  push:
+    branches: [release/rc8]
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🔄 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Test Scripts
+        run: echo ${{ github.event.inputs.some_value }}

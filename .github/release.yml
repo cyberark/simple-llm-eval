@@ -8,6 +8,7 @@ changelog:
       - dependencies
     authors:
       - octocat
+      - github-actions[bot]
   categories:
     - title: Breaking Changes 🛠
       labels:

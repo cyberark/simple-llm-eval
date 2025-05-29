@@ -8,8 +8,8 @@ if [[ -z "$VERSION" ]]; then
   exit 1
 fi
 
-git config user.name "github-actions"
-git config user.email "github-actions@github.com"
+git config user.name "github-actions[bot]"
+git config user.email "github-actions[bot]@users.noreply.github.com"
 
 uv run mike deploy --push --branch gh-pages "$VERSION"
 uv run mike deploy --push --update-aliases "$VERSION" latest

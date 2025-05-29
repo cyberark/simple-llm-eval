@@ -24,3 +24,4 @@ jobs:
           ci/scripts/validate_tag.py "1.2.3"
           ci/scripts/bump_version.py --version-bump koko
           ci/scripts/update_changelog.py --version 1.2.3
+

@@ -36,7 +36,7 @@ jobs:
           enable-cache: true
           cache-dependency-glob: "uv.lock"
 
-      - name: Get version from uv
+      - name: 🤓 Get version from uv
         id: get_version
         run: |
           version=$(uv version --output-format json | jq -r '.version')

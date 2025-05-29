@@ -28,7 +28,7 @@ jobs:
       - name: 📦 Install dev packages
         run: uv sync --locked --all-extras --only-dev
 
-      - name: 🔎 Validate version input
+      - name: 🔎 Validate version input against pyproject.toml
         run: |
           VERSION=${{ github.event.inputs.version }}
           echo "Validating version: $VERSION"

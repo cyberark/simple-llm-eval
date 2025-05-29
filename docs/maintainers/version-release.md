@@ -25,7 +25,7 @@
 ### Release Automation
 
 !!! info "Automatic Release Procedure (Recommended)"
-    - [ ] Run the [Init Release Workflow](https://github.com/cyberark/simple-llm-eval/actions/workflows/init-release.yml) workflow and wait for it to complete.
+    - [ ] Run the [Init Release Workflow](https://github.com/cyberark/simple-llm-eval/actions/workflows/init-release.yml){target="_blank"} workflow and wait for it to complete.
 
     ???- note "Init Release Workflow - Under the Hood"
         The *Init Release Workflow* will:
@@ -38,8 +38,8 @@
     - [ ] Review the pull request created by the workflow
     - [ ] Optionally tweak `CHANGELOG.md` to your liking
     - [ ] Merge the pull request to main - This will trigger the tag creation workflow
-    - [ ] Wait for the [version tag creation workflow](https://github.com/cyberark/simple-llm-eval/actions/workflows/create-tags-for-release.yml) to complete
-    - [ ] Trigger the [Release Workflow](https://github.com/cyberark/simple-llm-eval/actions/workflows/release.yml)
+    - [ ] Wait for the [version tag creation workflow](https://github.com/cyberark/simple-llm-eval/actions/workflows/create-tags-for-release.yml){target="_blank"} to complete
+    - [ ] Trigger the [Release Workflow](https://github.com/cyberark/simple-llm-eval/actions/workflows/release.yml){target="_blank"} 
     - [ ] Manually publish the release to PyPI
 
     ???- note "Release Workflow - Under the Hood"

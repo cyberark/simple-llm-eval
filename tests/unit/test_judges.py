@@ -128,7 +128,7 @@ def test_get_judge_module_not_found():
         JudgeProvider.get_judge(judge_name)
 
 
-@patch("time.sleep", return_value=None)
+@patch('time.sleep', return_value=None)
 def test_parsing_retry(mock_sleep):
     judge_name = 'dummy_judge'
     judge: BaseJudge = JudgeProvider.get_judge(judge_name)

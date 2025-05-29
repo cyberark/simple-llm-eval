@@ -126,7 +126,7 @@ def test_call_litellm_judge_eval_success(judge):
         assert metric_result.explanation == 'The response consists of only the answer with no surrounding text. The answer also does not contain any punctuation or capitalization problems. The tone is strictly neutral.'
 
 
-@patch("time.sleep", return_value=None)
+@patch('time.sleep', return_value=None)
 def test_call_litellm_completion_retryable_error(mock_sleep, judge, mock_metric):
     # Create a fast retry decorator with minimal wait time and fewer attempts
     fast_retry = tenacity.retry(

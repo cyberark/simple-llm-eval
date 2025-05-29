@@ -74,8 +74,10 @@ def test_init_command_from_template_raises_error_if_folder_exists(temp_eval_fold
     # Create the folder to simulate it already exists
     os.makedirs(eval_dir)
 
-    with pytest.raises(TerminationError, match=f'Folder already exists: {eval_dir}'):
+    with pytest.raises(TerminationError) as exc_info:
         init_from_template_command(eval_dir=eval_dir, testcase=testcase)
+
+    assert f'Folder already exists: {eval_dir}' in str(exc_info.value)
 
 
 @patch('builtins.input')

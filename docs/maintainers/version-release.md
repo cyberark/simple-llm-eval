@@ -20,45 +20,48 @@
 
     Examples: `1.0.0-alpha.1`, `1.0.0-beta.1`, `1.0.0-rc.1`
 
-# Release Procedure
+## Release Procedure
 
-## Release Automation
+### Release Automation
 
 !!! info "Automatic Release Procedure (Recommended)"
-    Run the `Init Release Process` workflow which will:
+    - [ ] Run the [Init Release Workflow](https://github.com/cyberark/simple-llm-eval/actions/workflows/init-release.yml) workflow and wait for it to complete.
 
-    - [ ] Create a release branch named `release/auto-next-version` (or provide your own branch name)
-    - [ ] Bump patch/minor/major or specific version (set `version_bump` and optionally `version`)
-    - [ ] Update `CHANGELOG.md` for this release
-    - [ ] Create a pull request with the changes
+    ???- note "Init Release Workflow - Under the Hood"
+        The *Init Release Workflow* will:
+
+        - Creates a release branch named `release/auto-next-version` (or provide your own branch name)
+        - Bump patch/minor/major or specific version (set `version_bump` and optionally `version`)
+        - Update `CHANGELOG.md` for this release
+        - Create a pull request with the changes
     
-    You need to:
-
-    - [ ] Optionally tweak CHANGELOG.md to your liking
-    - [ ] Merge the pull request to main
-
-    **This will trigger the creation of the release tag and the release workflow.**
-
+    - [ ] Review the pull request created by the workflow
+    - [ ] Optionally tweak `CHANGELOG.md` to your liking
+    - [ ] Merge the pull request to main - This will trigger the tag creation workflow
+    - [ ] Wait for the [version tag creation workflow](https://github.com/cyberark/simple-llm-eval/actions/workflows/create-tags-for-release.yml) to complete
+    - [ ] Trigger the [Release Workflow](https://github.com/cyberark/simple-llm-eval/actions/workflows/release.yml)
     - [ ] Manually publish the release to PyPI
 
-## Release Workflow
+    ???- note "Release Workflow - Under the Hood"
 
-The tag creation will trigger the GitHub Actions workflow [Release](https://github.com/cyberark/simple-llm-eval/actions/workflows/ci.yml)
+        Since operations done with internal tokens will not by default trigger workflows, the [Release](https://github.com/cyberark/simple-llm-eval/actions/workflows/ci.yml) workflow is triggered manually.
 
+        The release workflow will:
+            
+        - Validate the `pyproject.toml` version against the tag name
+        - Build the package
+        - Create GitHub release
+        - Attach binaries to GitHub release
+        - Publish the docs in case of release version (pre-release versions will not publish the docs)
 
-!!! Abstract "Release Workflow"
-    The release workflow will:
-    
-    - Validate the `pyproject.toml` version against the tag name
-    - Build the package
-    - Create GitHub release
-    - Attach binaries to GitHub release
-    - Publish the docs
-
-
-### Docs Only Release
+## 📚 Docs Only Release
 In case you make a docs-only update, see [Publishing the Docs](../developers/dev-notes.md/#publishing-the-docs)
+This is useful if you want to publish pre-release version docs.
 
+**NOTE: Docs publishing is done only for the top level version (release or pre-release)**
+
+
+## 💀 Obsolete Release Procedure - Go No Further 💀
 
 ## Run the Release Procedure with Scripts (Not Recommended)
 

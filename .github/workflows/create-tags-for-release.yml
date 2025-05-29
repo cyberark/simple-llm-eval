@@ -1,4 +1,4 @@
-name: Release on PR Merge
+name: Create Tags for Release
 
 on:
   pull_request:

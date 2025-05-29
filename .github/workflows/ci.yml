@@ -25,7 +25,11 @@ jobs:
 
   python-build:
     needs: detect-changes
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        python-version: [3.11, 3.12, 3.13]
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -36,6 +40,7 @@ jobs:
         with:
           enable-cache: true
           cache-dependency-glob: "uv.lock"
+          python-version: ${{ matrix.python-version }}
 
       - name: 📦 Install the project
         run: uv sync --locked --all-extras --dev
@@ -81,18 +86,22 @@ jobs:
 
   frontend-build:
     needs: detect-changes
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        node-version: [18, 20, 22]
+    runs-on: ${{ matrix.os }}
     defaults:
       run:
         working-directory: reports-frontend
     steps:
       - uses: actions/checkout@v4
 
-      - name: ⬇️ Setup Node.js
+      - name: ⬇️ Setup Node.js ${{ matrix.node-version }}
         if: needs.detect-changes.outputs.frontend_changed == 'true'
         uses: actions/setup-node@v4
         with:
-          node-version: '18'  # or your preferred version
+          node-version: ${{ matrix.node-version }}
           cache: 'npm'
           cache-dependency-path: reports-frontend/package-lock.json
 

@@ -21,4 +21,3 @@ jobs:
 
       - name: Test Scripts
         run: echo ${{ github.event.inputs.some_value }}
-

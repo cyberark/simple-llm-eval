@@ -1,13 +1,12 @@
 # pylint: disable=too-many-arguments
 
-import logging
 import textwrap
 from typing import List
 
 from colorama import Fore
-from tabulate import tabulate
 
-from simpleval.consts import EVAL_ERROR_FILE_NAME, LLM_TASKS_ERROR_FILE_NAME, LOGGER_NAME
+from simpleval.commands.reporting.utils import print_table
+from simpleval.consts import EVAL_ERROR_FILE_NAME, LLM_TASKS_ERROR_FILE_NAME
 from simpleval.evaluation.schemas.eval_result_schema import EvalTestResult
 
 NARROW_COLUMN_WIDTH = 10
@@ -59,11 +58,7 @@ def _print_to_console(
         )
 
     print(f'\n{name} - Evaluation Results, Testcase: {testcase}\n')
-    try:
-        print(tabulate(table, headers=headers, tablefmt='heavy_grid'))
-    except UnicodeEncodeError as e:
-        logging.getLogger(LOGGER_NAME).debug(f'Error printing table: {e}. Using plain text format instead.')
-        print(tabulate(table, headers=headers))
+    print_table(table=table, headers=headers)
 
     print('\nScores\n')
     for metric, scores in metric_means.items():

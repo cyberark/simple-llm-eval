@@ -1,6 +1,6 @@
 import logging
 
-import tabulate
+from tabulate import tabulate
 
 from simpleval.consts import LOGGER_NAME
 

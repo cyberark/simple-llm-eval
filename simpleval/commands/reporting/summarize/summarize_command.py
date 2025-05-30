@@ -1,7 +1,5 @@
 import logging
 
-from colorama import Fore
-
 from simpleval.commands.reporting.summarize.summarize_html import plot_scores_html
 from simpleval.consts import LOGGER_NAME
 from simpleval.evaluation.metrics.calc import calc_scores

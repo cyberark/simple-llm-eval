@@ -103,8 +103,6 @@ def _verify_input(sorted_results1: List, sorted_results2: List):
 
 
 def _compare_results_report(eval_set: str, left_side: CompareArgs, right_side: CompareArgs, output_format: str):
-    logger = logging.getLogger(LOGGER_NAME)
-
     if output_format == ReportFormat.CONSOLE:
         _compare_results_console(left_side=left_side, right_side=right_side)
     elif output_format == ReportFormat.HTML:

@@ -6,7 +6,7 @@ def main():
 
     try:
         export_cmd = ['uv', 'export', '--format', 'requirements-txt']
-        with open('ci/requirements-temp.txt', 'w') as temp_file:
+        with open('ci/requirements-temp.txt', 'w', encoding='utf-8') as temp_file:
             result = subprocess.run(export_cmd, stdout=temp_file, stderr=subprocess.PIPE, text=True)
         if result.returncode != 0:
             raise RuntimeError(f'Failed to export requirements: {result.stderr}')

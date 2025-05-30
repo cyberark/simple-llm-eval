@@ -80,7 +80,7 @@ def test_html_escape():
     with mock.patch('webbrowser.open', return_value=True):
         report_file_path = _generate_html_report2(name='test_name', testcase='test_case', eval_results=eval_results,
                                                   mean_scores=metric_means, llm_task_errors_count=0, eval_errors_count=0)
-        with open(report_file_path, 'r') as file:
+        with open(report_file_path, 'r', encoding='utf-8') as file:
             written_content = file.read()
 
         assert xss_string not in written_content

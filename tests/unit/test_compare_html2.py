@@ -38,7 +38,7 @@ def test_validate_compare_html_template_missing_data_items():
     </body>
     </html>
     """
-    with pytest.raises(ValueError, match='HTML2 Report: Compare template does not contain data items placeholder'):
+    with pytest.raises(ValueError, match='HTML Report: Compare template does not contain data items placeholder'):
         _validate_compare_html_template(template)
 
 
@@ -51,7 +51,7 @@ def test_validate_compare_html_template_missing_left_side():
     </body>
     </html>
     """
-    with pytest.raises(ValueError, match='HTML2 Report: Compare template does not contain left side aggregate data placeholders'):
+    with pytest.raises(ValueError, match='HTML Report: Compare template does not contain left side aggregate data placeholders'):
         _validate_compare_html_template(template)
 
 
@@ -64,7 +64,7 @@ def test_validate_compare_html_template_missing_right_side():
     </body>
     </html>
     """
-    with pytest.raises(ValueError, match='HTML2 Report: Compare template does not contain right side aggregate data placeholders'):
+    with pytest.raises(ValueError, match='HTML Report: Compare template does not contain right side aggregate data placeholders'):
         _validate_compare_html_template(template)
 
 
@@ -114,7 +114,7 @@ def test_compare_results_html2(left_side, right_side):
     with mock.patch('webbrowser.open', return_value=True):
         report_file_path = _compare_results_html2(eval_set=eval_set, left_side=left_side, right_side=right_side)
 
-        with open(report_file_path, 'r') as file:
+        with open(report_file_path, 'r', encoding='utf-8') as file:
             written_content = file.read()
 
         assert eval_set in written_content
@@ -144,7 +144,7 @@ def test_html_escape(left_side, right_side):
     with mock.patch('webbrowser.open', return_value=True):
         report_file_path = _compare_results_html2(eval_set=eval_set, left_side=left_side, right_side=right_side)
 
-        with open(report_file_path, 'r') as file:
+        with open(report_file_path, 'r', encoding='utf-8') as file:
             written_content = file.read()
 
         assert xss_string not in written_content

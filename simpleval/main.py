@@ -21,7 +21,7 @@ from simpleval.cli_args import (
     InNewTestcaseParamType,
     InTestcaseParamType,
 )
-from simpleval.consts import EVAL_CONFIG_FILE, EVAL_RESULTS_FILE, LLM_TASKS_RESULT_FILE, PACKAGE_NAME, ReportFormat, SummaryReportType
+from simpleval.consts import EVAL_CONFIG_FILE, EVAL_RESULTS_FILE, LLM_TASKS_RESULT_FILE, PACKAGE_NAME, ReportFormat
 from simpleval.utilities.error_handler import handle_exceptions
 
 
@@ -33,8 +33,8 @@ from simpleval.utilities.error_handler import handle_exceptions
 @click.option(
     '--report-format',
     '-r',
-    type=click.Choice([ReportFormat.CONSOLE, ReportFormat.HTML, ReportFormat.HTML2], case_sensitive=False),
-    default=ReportFormat.HTML2,
+    type=click.Choice([ReportFormat.CONSOLE, ReportFormat.HTML], case_sensitive=False),
+    default=ReportFormat.HTML,
     help=REPORT_FORMAT_HELP,
 )
 @handle_exceptions
@@ -53,8 +53,8 @@ def run(eval_dir: str, testcase: str, config_file: str, overwrite_results: bool,
 @click.option(
     '--report-format',
     '-r',
-    type=click.Choice([ReportFormat.CONSOLE, ReportFormat.HTML, ReportFormat.HTML2], case_sensitive=False),
-    default=ReportFormat.HTML2,
+    type=click.Choice([ReportFormat.CONSOLE, ReportFormat.HTML], case_sensitive=False),
+    default=ReportFormat.HTML,
     help=REPORT_FORMAT_HELP,
 )
 @handle_exceptions
@@ -70,8 +70,8 @@ def eval_report(eval_dir: str, config_file: str, testcase: str, report_format: s
 @click.option(
     '--report-format',
     '-r',
-    type=click.Choice([ReportFormat.CONSOLE, ReportFormat.HTML, ReportFormat.HTML2], case_sensitive=False),
-    default=ReportFormat.HTML2,
+    type=click.Choice([ReportFormat.CONSOLE, ReportFormat.HTML], case_sensitive=False),
+    default=ReportFormat.HTML,
     help=REPORT_FORMAT_HELP,
 )
 @handle_exceptions
@@ -134,8 +134,8 @@ def judge_explorer():
 @click.option(
     '--report-format',
     '-r',
-    type=click.Choice([ReportFormat.CONSOLE, ReportFormat.HTML, ReportFormat.HTML2], case_sensitive=False),
-    default=ReportFormat.HTML2,
+    type=click.Choice([ReportFormat.CONSOLE, ReportFormat.HTML], case_sensitive=False),
+    default=ReportFormat.HTML,
     help=REPORT_FORMAT_HELP,
 )
 @click.option(
@@ -161,8 +161,8 @@ def compare(eval_dir: str, testcase1: str, testcase2: str, report_format: str, i
 @click.option(
     '--report-format',
     '-r',
-    type=click.Choice([ReportFormat.CONSOLE, ReportFormat.HTML, ReportFormat.HTML2], case_sensitive=False),
-    default=ReportFormat.HTML2,
+    type=click.Choice([ReportFormat.CONSOLE, ReportFormat.HTML], case_sensitive=False),
+    default=ReportFormat.HTML,
     help=REPORT_FORMAT_HELP,
 )
 @handle_exceptions
@@ -188,18 +188,11 @@ def metrics_explorer():
 @click.option(
     '--primary-metric', '-p', required=False, default='', type=str, help='Your primary metric - To show first (v2) or sort by (v1)'
 )
-@click.option(
-    '--report-format',
-    '-r',
-    type=click.Choice([SummaryReportType.PY, SummaryReportType.HTML], case_sensitive=False),
-    default=SummaryReportType.HTML,
-    help='Report format: py: python lot, html: fancy html plot',
-)
 @handle_exceptions
-def summarize(eval_dir: str, config_file: str, primary_metric: str, report_format: str):
+def summarize(eval_dir: str, config_file: str, primary_metric: str):
     from simpleval.commands.reporting.summarize.summarize_command import summarize_command  # Improve startup time # noqa: I001
 
-    summarize_command(eval_dir=eval_dir, config_file=config_file, primary_metric=primary_metric, report_format=report_format)
+    summarize_command(eval_dir=eval_dir, config_file=config_file, primary_metric=primary_metric)
 
 
 @click.version_option(package_name=PACKAGE_NAME)

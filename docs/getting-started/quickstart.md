@@ -55,7 +55,9 @@
         ```
 ### Usage
 
-✅ Run `simpleval` and follow the instructions, or instead, follow the [Tutorial](./tutorial.md) section.
+✅ Run `simpleval init` and follow the instructions, or instead, follow the [Tutorial](./tutorial.md) section.
+
+To see all available commands, run `simpleval`
 
 <br>
 <img src="../media/simpleval.png" alt="Simpleval" width="75%">

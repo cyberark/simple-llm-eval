@@ -651,7 +651,13 @@ simpleval reports compare -e story-q-and-a -t1 prompt1 -t2 prompt2
 <br>
 Your LLM as a judge should detect the pirate language in the second prompt and score it accordingly, usually under the `readability` metric, as you can see here:
 
-<img src="../media/tutorial-readability.png" alt="Simpleval" width="50%">
+<div style="text-align: center;">
+    <img src="../media/tutorial-readability.png" alt="Report" width="75%">
+    <div style="font-size: 0.95em; color: #555; margin-top: 8px;">
+        Figure: Comparison Report highlighting the readability metric
+    </div>
+</div>
+<br>
 
 !!! success "Congratulations!"
     🎉 You have completed the tutorial. Go evaluate some real stuff! 🎉

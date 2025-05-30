@@ -1,5 +1,6 @@
 import os
 from pathlib import Path
+from unittest import mock
 from unittest.mock import patch
 
 import pytest
@@ -24,11 +25,11 @@ def test_run_compare_command_console():
     )
 
 
-@pytest.mark.parametrize('report_format', [ReportFormat.HTML, ReportFormat.HTML2])
+@pytest.mark.parametrize('report_format', [ReportFormat.HTML])
 def test_run_compare_command_htmls(report_format):
     eval_set_name = 'test_eval_set'
 
-    with patch('simpleval.commands.reporting.compare.compare_html.webbrowser.open') as mock_open:
+    with mock.patch('webbrowser.open', return_value=True) as mock_open:
         compare_results_files(
             name=eval_set_name,
             eval_results_file1=EVAL_RESULT_FILE1,

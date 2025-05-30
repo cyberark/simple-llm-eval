@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 
 import pytest
@@ -26,8 +27,8 @@ def test_get_llm_task_result():
 
 
 def test_get_testcase_eval_result_file():
-    result_file = get_eval_result_file('/fake/dir', 'foo-testcase')
-    assert result_file == f'/fake/dir/testcases/foo-testcase/{EVAL_RESULTS_FILE}'
+    result_file = get_eval_result_file(os.path.join('fake', 'dir'), 'foo-testcase')
+    assert result_file == os.path.join('fake', 'dir', 'testcases', 'foo-testcase', EVAL_RESULTS_FILE)
 
 
 def test_get_all_eval_results():

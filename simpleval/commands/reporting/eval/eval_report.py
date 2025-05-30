@@ -1,11 +1,8 @@
 import logging
 from typing import List
 
-from colorama import Fore
-
 from simpleval.commands.reporting.eval.console_report import _print_to_console
 from simpleval.commands.reporting.eval.html2.html2_report import _generate_html_report2
-from simpleval.commands.reporting.eval.html_report import _generate_html_report
 from simpleval.consts import LOGGER_NAME, ReportFormat
 from simpleval.evaluation.metrics.calc import MeanScores, calc_scores
 from simpleval.evaluation.schemas.eval_result_schema import EvalTestResult
@@ -33,20 +30,6 @@ class ResultsManager:
 
         html_report_file = ''
         if output_format == ReportFormat.HTML:
-            self.logger.info(f'{Fore.RED}DEPRECATION: html reports will be removed in future versions, use html2 instead{Fore.RESET}')
-
-            html_report_file = _generate_html_report(
-                name=name,
-                testcase=testcase,
-                eval_results=eval_results,
-                metric_means=mean_scores.metrics,
-                aggregate_mean=mean_scores.aggregate_mean,
-                llm_task_errors_count=llm_tasks_errors_count,
-                eval_errors_count=eval_errors_count,
-                yellow_threshold=self.yellow_threshold,
-                red_threshold=self.red_threshold,
-            )
-        elif output_format == ReportFormat.HTML2:
             html_report_file = _generate_html_report2(
                 name=name,
                 testcase=testcase,

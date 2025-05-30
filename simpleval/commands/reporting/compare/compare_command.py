@@ -8,7 +8,6 @@ from pydantic import ValidationError
 
 from simpleval.commands.reporting.compare.common import CompareArgs
 from simpleval.commands.reporting.compare.compare_console import _compare_results_console
-from simpleval.commands.reporting.compare.compare_html import _compare_results_html
 from simpleval.commands.reporting.compare.compare_html2.compare_html2 import _compare_results_html2
 from simpleval.consts import LOGGER_NAME, ReportFormat
 from simpleval.evaluation.metrics.calc import MeanScores, calc_scores
@@ -49,7 +48,7 @@ def compare_results(eval_set_dir: str, testcase1: str, testcase2: str, report_fo
 
         eval_set_name = get_eval_set_name(eval_set_dir)
 
-        # html2 compare report requires the testcase name in this format:
+        # html compare report requires the testcase name in this format:
         name1 = f'{eval_set_name}:{testcase1}'
         name2 = f'{eval_set_name}:{testcase2}'
         left_side = CompareArgs(name=name1, mean_scores=mean_scores1, sorted_results=eval_results1_sorted)
@@ -81,7 +80,7 @@ def compare_results_files(name: str, eval_results_file1: str, eval_results_file2
         testcase1 = str(Path(eval_results_file1).stem)
         testcase2 = str(Path(eval_results_file2).stem)
 
-        # html2 compare report requires the testcase name in this format:
+        # html compare report requires the testcase name in this format:
         name1 = f'{name}:{testcase1}'
         name2 = f'{name}:{testcase2}'
         left_side = CompareArgs(name=name1, mean_scores=mean_scores1, sorted_results=eval_results1_sorted)
@@ -104,14 +103,9 @@ def _verify_input(sorted_results1: List, sorted_results2: List):
 
 
 def _compare_results_report(eval_set: str, left_side: CompareArgs, right_side: CompareArgs, output_format: str):
-    logger = logging.getLogger(LOGGER_NAME)
-
     if output_format == ReportFormat.CONSOLE:
         _compare_results_console(left_side=left_side, right_side=right_side)
     elif output_format == ReportFormat.HTML:
-        logger.info(f'{Fore.RED}DEPRECATION: html reports will be removed in future versions, use html2 instead{Fore.RESET}')
-        _compare_results_html(left_side=left_side, right_side=right_side)
-    elif output_format == ReportFormat.HTML2:
         _compare_results_html2(eval_set=eval_set, left_side=left_side, right_side=right_side)
     else:
         raise ValueError(f'Invalid report format: {output_format}')

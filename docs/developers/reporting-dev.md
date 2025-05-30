@@ -95,21 +95,3 @@ Going through all the points here let you know about the important elements of t
 * If you want an example of a react native component, look at `LLMEvalReport.jsx` or `CompareReport.jsx`
 * If you want an example of a Material UI component, look at `SummaryReport.jsx`
 * Implement tests - see `LLMEvalReport.test.jsx` for an example of a react native component test, as a minimum , test that the component renders correctly.
-
-## Old Format Reports 👴📊
-
-!!! danger "Deprecated"
-    The old reports are deprecated and will be removed in future releases.
-    You should never invest time in them and instead use the new reports.
-
-The old reports are implemented as a Jinja HTML template and are deprecated. 
-You should never invest time in them and instead use the new reports.
-They will be removed in future releases.
-
-The old implementations are:
-
-* `simpleval/commands/reporting/eval_report/html_report.py`
-* `simpleval/commands/reporting/compare/compare_html.py`.
-* `simpleval/commands/reporting/summarize/summarize_py.py`
-
-<br>

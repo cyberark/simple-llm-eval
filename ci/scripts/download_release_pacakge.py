@@ -30,7 +30,7 @@ def download_latest_release_assets(owner, repo, download_dir='release_package'):
     print(f'Downloading {asset_name}...')
     asset_response = requests.get(asset_url, stream=True)
     if asset_response.status_code == 200:
-        with open(asset_path, 'wb') as f:
+        with open(asset_path, 'wb', encoding='utf-8') as f:
             for chunk in asset_response.iter_content(chunk_size=8192):
                 f.write(chunk)
         print(f'Downloaded: {asset_path}')

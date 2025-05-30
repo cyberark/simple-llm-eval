@@ -17,9 +17,8 @@ simpleval reports
 ## Report Format
 Usually you can select the report format with the `--report-format console` (`-r console`) argument:
 
-* `html2` - React based HTML report (default)
+* `html` - React based HTML report (default)
 * `console` - Console report
-* `html` - Deprecated HTML report, will be removed in future versions
 
 ## Output Directory
 Reports are saved to `results` directory and can be considered as temporary files (they can be regenerated easily again)
@@ -41,24 +40,13 @@ simpleval reports eval-file -n <eval-name> -f <eval_file>
 
 <br>
 <div style="text-align: center;">
-    <img id="reportImage" src="../media/report2.png" alt="Report" width="75%">
-</div>
-<div style="text-align: center;">
-    <button onclick="toggleReportImage()">[See alternative report format]</button>
+    <img src="../media/report2.png" alt="Report" width="100%">
+    <div style="font-size: 0.95em; color: #555; margin-top: 8px;">
+        Figure: Example of an Eval Run Report in HTML format
+    </div>
 </div>
 
-<script>
-function toggleReportImage() {
-    var img = document.getElementById('reportImage');
-    if (img.src.includes('report.png')) {
-        img.src = '../media/report2.png';
-    } else {
-        img.src = '../media/report.png';
-    }
-}
-</script>
-
-## Comparing Results Report 🔬
+## Results Comparison Report 🔬
 
 After you run more than one testcase evaluation, you can compare the results by running the compare command:
 
@@ -81,24 +69,13 @@ simpleval reports compare-files -n <eval-name> -f1 <eval_file1> -f2 <eval_file2>
 ```
 
 <br>
-<br>
 <div style="text-align: center;">
-    <img id="compareReportImage" src="../media/compare2.png" alt="Report" width="75%">
-</div>
-<div style="text-align: center;">
-    <button onclick="toggleCompareReportImage()">[See alternative report format]</button>
+    <img src="../media/compare2.png" alt="Report" width="100%">
+    <div style="font-size: 0.95em; color: #555; margin-top: 8px;">
+        Figure: Example of a Result Comparison in HTML format
+    </div>
 </div>
 
-<script>
-function toggleCompareReportImage() {
-    var img = document.getElementById('compareReportImage');
-    if (img.src.includes('compare.png')) {
-        img.src = '../media/compare2.png';
-    } else {
-        img.src = '../media/compare.png';
-    }
-}
-</script>
 
 ## Summary Report 📊
 
@@ -108,28 +85,12 @@ You can also generate an overview summary of all testcases results by running:
 simpleval reports summarize -e <eval_dir> -p <metric name>
 ```
 
-
-It supports two formats: `html` and `py` (deprecated).
-The `-p` or `--primary-metric` is the main metric (will be shown first).
-
-<br>
 <br>
 <div style="text-align: center;">
-    <img id="summaryReportImage" src="../media/summary2.png" alt="Summary Report" width="75%">
+    <img src="../media/summary2.png" alt="Report" width="75%">
+    <div style="font-size: 0.95em; color: #555; margin-top: 8px;">
+        Figure: Example of a summary report in HTML format
+    </div>
 </div>
-<div style="text-align: center;">
-    <button onclick="toggleSummaryReportImage()">[See alternative report format]</button>
-</div>
-
-<script>
-function toggleSummaryReportImage() {
-    var img = document.getElementById('summaryReportImage');
-    if (img.src.includes('summary.png')) {
-        img.src = '../media/summary2.png';
-    } else {
-        img.src = '../media/summary.png';
-    }
-}
-</script>
 
 <br>

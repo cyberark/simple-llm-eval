@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - name: 🔄 Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # 4.2.2
         with:
           fetch-depth: 0 # Include tag info
 
@@ -23,7 +23,7 @@ jobs:
         run: git fetch origin gh-pages:gh-pages
 
       - name: 🐍 Install uv with caching
-        uses: astral-sh/setup-uv@v5
+        uses: astral-sh/setup-uv@f0ec1fc3b38f5e7cd731bb6ce540c5af426746bb # 6.1.0
         with:
           enable-cache: true
           cache-dependency-glob: "uv.lock"
@@ -60,7 +60,7 @@ jobs:
           fi
 
       - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@da05d552573ad5aba039eaac05058a918a7bf631 # 2.2.2
         with:
           tag_name: ${{ steps.get_tag.outputs.tag }}
           files: |

@@ -364,9 +364,9 @@ httpx==0.28.1 \
     #   google-genai
     #   litellm
     #   openai
-huggingface-hub==0.32.0 \
-    --hash=sha256:dd66c9365ea43049ec9b939bdcdb21a0051e1bd70026fc50304e4fb1bb6a15ba \
-    --hash=sha256:e56e94109649ce6ebdb59b4e393ee3543ec0eca2eab4f41b269e1d885c88d08c
+huggingface-hub==0.32.3 \
+    --hash=sha256:752c889ebf3a63cbd39803f6d87ccc135a463bbcb36abfa2faff0ccbf1cec087 \
+    --hash=sha256:e46f7ea7fe2b5e5f67cc4e37eb201140091946a314d7c2b134a9673dadd80b6a
     # via tokenizers
 identify==2.6.12 \
     --hash=sha256:ad9672d5a72e0d2ff7c5c8809b62dfa60458626352fb0eb7b55e69bdc45334a2 \

@@ -1,8 +1,6 @@
 import logging
 from typing import List
 
-from colorama import Fore
-
 from simpleval.commands.reporting.eval.console_report import _print_to_console
 from simpleval.commands.reporting.eval.html2.html2_report import _generate_html_report2
 from simpleval.consts import LOGGER_NAME, ReportFormat

@@ -1,3 +1,4 @@
+from unittest import mock
 from unittest.mock import patch
 
 import pytest
@@ -19,7 +20,7 @@ def test_run_compare_command_console():
 
 
 def test_run_compare_command_html():
-    with patch('simpleval.commands.reporting.compare.compare_html.webbrowser.open') as mock_open:
+    with mock.patch('webbrowser.open', return_value=True) as mock_open:
         compare_results(
             eval_set_dir=TEST_EVAL_SET_VALID_FOLDER,
             testcase1=TEST_FOO_TESTCASE_NAME,

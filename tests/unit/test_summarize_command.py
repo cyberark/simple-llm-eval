@@ -1,3 +1,4 @@
+from unittest import mock
 from unittest.mock import patch
 
 import matplotlib.pyplot as plt
@@ -65,7 +66,7 @@ def test_summarize_command_html(mock_html_get_eval_name, mock_get_all_testcases,
         ],
     ]
 
-    with patch('simpleval.commands.reporting.compare.compare_html.webbrowser.open') as mock_open:
+    with mock.patch('webbrowser.open', return_value=True):
         summarize_command(eval_dir='dummy_eval_dir', config_file=CONFIG_FILE_HELP, primary_metric='metric2')
 
     # Assertions

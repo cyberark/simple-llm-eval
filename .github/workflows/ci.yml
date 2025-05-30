@@ -32,8 +32,6 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0  # Needed to push
 
       - name: 🐍 Install uv with caching
         uses: astral-sh/setup-uv@v5
@@ -64,24 +62,12 @@ jobs:
       - name: 🧪 Run tests with coverage
         run: uv run pytest --cov=simpleval --cov-report=term --cov-report=xml --cov-fail-under=90
 
-      - name: 🏷️ Generate coverage badge
-        if: github.event_name == 'pull_request'
-        run: uv run python ./ci/badges/update_cov_badge.py coverage.xml
-
-      - name: 🚀 Push badge to 'badges' branch
-        if: github.event_name == 'pull_request' && (github.ref == 'refs/heads/ci-test' || github.ref == 'refs/heads/main')
-        run: |
-          git config --global user.email "ci@github.com"
-          git config --global user.name "GitHub CI"
-
-          git fetch origin badges
-          git switch badges || git switch -c badges origin/badges
-
-          cp ci/badges/tmp/coverage.svg ci/badges/coverage-updated.svg
-
-          git add ci/badges/coverage-updated.svg
-          git commit -m "Update coverage badge [ci skip]" || echo "No changes to commit"
-          git push origin badges
+      - name: ⬆️ Upload coverage report
+        if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.11'
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage.xml
 
       - name: 📦 Build Project Package
         run: uv build
@@ -122,3 +108,35 @@ jobs:
       - name: 🧪 Run tests
         if: needs.detect-changes.outputs.frontend_changed == 'true'
         run: npm run test-no-watch
+
+  update-badge:
+    name: 🏷️ Update Coverage Badge
+    needs: python-build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: ⬇️ Download coverage report
+        uses: actions/download-artifact@v4
+        with:
+          name: coverage-report
+
+      - name: 🏷️ Generate coverage badge
+        run: uv run python ./ci/badges/update_cov_badge.py coverage.xml
+
+      - name: 🚀 Push badge to 'badges' branch
+        run: |
+          git config --global user.email "ci@github.com"
+          git config --global user.name "GitHub CI"
+
+          git fetch origin badges
+          git switch badges || git switch -c badges origin/badges
+
+          cp ci/badges/tmp/coverage.svg ci/badges/coverage-updated.svg
+
+          git add ci/badges/coverage-updated.svg
+          git commit -m "Update coverage badge [ci skip]" || echo "No changes to commit"
+          git push origin badges

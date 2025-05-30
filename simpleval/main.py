@@ -33,7 +33,7 @@ from simpleval.utilities.error_handler import handle_exceptions
 @click.option(
     '--report-format',
     '-r',
-    type=click.Choice([ReportFormat.CONSOLE, ReportFormat.HTML, ReportFormat.HTML2], case_sensitive=False),
+    type=click.Choice([ReportFormat.CONSOLE, ReportFormat.HTML2], case_sensitive=False),
     default=ReportFormat.HTML2,
     help=REPORT_FORMAT_HELP,
 )
@@ -53,7 +53,7 @@ def run(eval_dir: str, testcase: str, config_file: str, overwrite_results: bool,
 @click.option(
     '--report-format',
     '-r',
-    type=click.Choice([ReportFormat.CONSOLE, ReportFormat.HTML, ReportFormat.HTML2], case_sensitive=False),
+    type=click.Choice([ReportFormat.CONSOLE, ReportFormat.HTML2], case_sensitive=False),
     default=ReportFormat.HTML2,
     help=REPORT_FORMAT_HELP,
 )
@@ -70,7 +70,7 @@ def eval_report(eval_dir: str, config_file: str, testcase: str, report_format: s
 @click.option(
     '--report-format',
     '-r',
-    type=click.Choice([ReportFormat.CONSOLE, ReportFormat.HTML, ReportFormat.HTML2], case_sensitive=False),
+    type=click.Choice([ReportFormat.CONSOLE, ReportFormat.HTML2], case_sensitive=False),
     default=ReportFormat.HTML2,
     help=REPORT_FORMAT_HELP,
 )
@@ -134,7 +134,7 @@ def judge_explorer():
 @click.option(
     '--report-format',
     '-r',
-    type=click.Choice([ReportFormat.CONSOLE, ReportFormat.HTML, ReportFormat.HTML2], case_sensitive=False),
+    type=click.Choice([ReportFormat.CONSOLE, ReportFormat.HTML2], case_sensitive=False),
     default=ReportFormat.HTML2,
     help=REPORT_FORMAT_HELP,
 )
@@ -161,7 +161,7 @@ def compare(eval_dir: str, testcase1: str, testcase2: str, report_format: str, i
 @click.option(
     '--report-format',
     '-r',
-    type=click.Choice([ReportFormat.CONSOLE, ReportFormat.HTML, ReportFormat.HTML2], case_sensitive=False),
+    type=click.Choice([ReportFormat.CONSOLE, ReportFormat.HTML2], case_sensitive=False),
     default=ReportFormat.HTML2,
     help=REPORT_FORMAT_HELP,
 )

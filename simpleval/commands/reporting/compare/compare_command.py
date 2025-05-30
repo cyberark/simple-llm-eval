@@ -108,9 +108,6 @@ def _compare_results_report(eval_set: str, left_side: CompareArgs, right_side: C
 
     if output_format == ReportFormat.CONSOLE:
         _compare_results_console(left_side=left_side, right_side=right_side)
-    elif output_format == ReportFormat.HTML:
-        logger.info(f'{Fore.RED}DEPRECATION: html reports will be removed in future versions, use html2 instead{Fore.RESET}')
-        _compare_results_html(left_side=left_side, right_side=right_side)
     elif output_format == ReportFormat.HTML2:
         _compare_results_html2(eval_set=eval_set, left_side=left_side, right_side=right_side)
     else:

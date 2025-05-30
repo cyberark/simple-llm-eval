@@ -10,7 +10,12 @@ simpleval run -e <eval_dir> -t <testcase>
 A report with the results and calculated scores will open and saved to `results` directory.
 It includes mean score (normalized) for each test and metric.
 
-<img src="../media/report2.png" alt="Report" width="75%">
+<div style="text-align: center;">
+    <img src="../media/report2.png" alt="Report" width="75%">
+    <div style="font-size: 0.95em; color: #555; margin-top: 8px;">
+        Figure: Example of eval results report in HTML format
+    </div>
+</div>
 
 Results are saved to:
 

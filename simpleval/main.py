@@ -21,7 +21,7 @@ from simpleval.cli_args import (
     InNewTestcaseParamType,
     InTestcaseParamType,
 )
-from simpleval.consts import EVAL_CONFIG_FILE, EVAL_RESULTS_FILE, LLM_TASKS_RESULT_FILE, PACKAGE_NAME, ReportFormat, SummaryReportType
+from simpleval.consts import EVAL_CONFIG_FILE, EVAL_RESULTS_FILE, LLM_TASKS_RESULT_FILE, PACKAGE_NAME, ReportFormat
 from simpleval.utilities.error_handler import handle_exceptions
 
 
@@ -188,18 +188,11 @@ def metrics_explorer():
 @click.option(
     '--primary-metric', '-p', required=False, default='', type=str, help='Your primary metric - To show first (v2) or sort by (v1)'
 )
-@click.option(
-    '--report-format',
-    '-r',
-    type=click.Choice([SummaryReportType.PY, SummaryReportType.HTML], case_sensitive=False),
-    default=SummaryReportType.HTML,
-    help='Report format: py: python lot, html: fancy html plot',
-)
 @handle_exceptions
-def summarize(eval_dir: str, config_file: str, primary_metric: str, report_format: str):
+def summarize(eval_dir: str, config_file: str, primary_metric: str):
     from simpleval.commands.reporting.summarize.summarize_command import summarize_command  # Improve startup time # noqa: I001
 
-    summarize_command(eval_dir=eval_dir, config_file=config_file, primary_metric=primary_metric, report_format=report_format)
+    summarize_command(eval_dir=eval_dir, config_file=config_file, primary_metric=primary_metric)
 
 
 @click.version_option(package_name=PACKAGE_NAME)

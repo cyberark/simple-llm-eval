@@ -35,7 +35,7 @@ def test_eval_html_report():
                                                   output_format='html')
 
     # Read and parse the HTML file
-    with open(result_file, 'r') as file:
+    with open(result_file, 'r', encoding='utf-8') as file:
         html_content = file.read()
     soup = BeautifulSoup(html_content, 'html.parser')
 
@@ -131,7 +131,7 @@ def test_compare_html_report():
     result_file = _compare_results_html(left_side, right_side)
 
     # Read and parse the HTML file
-    with open(result_file, 'r') as file:
+    with open(result_file, 'r', encoding='utf-8') as file:
         html_content = file.read()
     soup = BeautifulSoup(html_content, 'html.parser')
 

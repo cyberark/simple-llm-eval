@@ -26,6 +26,6 @@ def test_verify_empty_eval_set():
     assert len(result) > 0
     assert isinstance(result[0], GroundTruth)
 
-    with open(os.path.join(eval_dir, EVAL_CONFIG_FILE), 'r') as file:
+    with open(os.path.join(eval_dir, EVAL_CONFIG_FILE), 'r', encoding='utf-8') as file:
         config_data = json.load(file)
         eval_config = EvalTaskConfig(**config_data)

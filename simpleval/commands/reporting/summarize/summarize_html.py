@@ -57,7 +57,7 @@ def _write_summary_report(eval_name: str, datasets: Dict):
     logger = logging.getLogger(LOGGER_NAME)
 
     template_path = os.path.join(os.path.dirname(__file__), 'llm_summary_report_template.html')
-    with open(template_path, 'r') as file:
+    with open(template_path, 'r', encoding='utf-8') as file:
         report_template = file.read()
 
     _validate_summary_html_template(report_template)
@@ -70,7 +70,7 @@ def _write_summary_report(eval_name: str, datasets: Dict):
     file_path = os.path.join(folder, file_name)
     os.makedirs(folder, exist_ok=True)
 
-    with open(file_path, 'w') as f:
+    with open(file_path, 'w', encoding='utf-8') as f:
         f.write(html_content)
 
     logger.info(f'Report saved to {file_path}')

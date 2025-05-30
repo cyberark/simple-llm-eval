@@ -114,7 +114,7 @@ def test_compare_results_html2(left_side, right_side):
     with mock.patch('webbrowser.open', return_value=True):
         report_file_path = _compare_results_html2(eval_set=eval_set, left_side=left_side, right_side=right_side)
 
-        with open(report_file_path, 'r') as file:
+        with open(report_file_path, 'r', encoding='utf-8') as file:
             written_content = file.read()
 
         assert eval_set in written_content
@@ -144,7 +144,7 @@ def test_html_escape(left_side, right_side):
     with mock.patch('webbrowser.open', return_value=True):
         report_file_path = _compare_results_html2(eval_set=eval_set, left_side=left_side, right_side=right_side)
 
-        with open(report_file_path, 'r') as file:
+        with open(report_file_path, 'r', encoding='utf-8') as file:
             written_content = file.read()
 
         assert xss_string not in written_content

@@ -106,10 +106,10 @@ def test_llm_as_a_judge_results(setup, judge_type: BaseJudge):
             golden_set_eval_results_file = Path(LLM_AS_A_JUDGE_GOLDEN_SET_ROOT, dataset, testcase, results_file)
             eval_results_path = Path(LLM_AS_A_JUDGE_DATASETS_ROOT, dataset, 'eval_set', 'testcases', testcase, results_file)
 
-            with open(golden_set_eval_results_file, 'r') as f:
+            with open(golden_set_eval_results_file, 'r', encoding='utf-8') as f:
                 golden_set_eval_results = [EvalTestResult(**json.loads(line)) for line in f.readlines()]
 
-            with open(eval_results_path, 'r') as f:
+            with open(eval_results_path, 'r', encoding='utf-8') as f:
                 eval_results = [EvalTestResult(**json.loads(line)) for line in f.readlines()]
 
             for golden_set_result in golden_set_eval_results:
@@ -175,7 +175,7 @@ def test_llm_as_a_judge_results(setup, judge_type: BaseJudge):
 
     # Write final summary to file
     summary_file_name = TEST_RESULT_SUMMARY_FILE.format(judge_name=judge.name)
-    with open(Path(Path(__file__).parent, summary_file_name), 'w') as f:
+    with open(Path(Path(__file__).parent, summary_file_name), 'w', encoding='utf-8') as f:
         json.dump(final_summary, f, indent=2)
 
     assert total_diff_percent < GLOBAL_METRIC_FAIL_THRESHOLD, f'Overall difference percentage failed, See {summary_file_name} for details.'

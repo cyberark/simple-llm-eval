@@ -22,12 +22,12 @@ def pytest_configure():
         eval_error_file_name = os.path.join(TEST_EVAL_SET_VALID_FOLDER, 'testcases', TEST_FOO_TESTCASE_NAME, EVAL_ERROR_FILE_NAME)
 
         if os.path.exists(llm_error_file):
-            with open(llm_error_file, 'r') as f:
+            with open(llm_error_file, 'r', encoding='utf-8') as f:
                 llm_errors = f.read()
             print(f'Error found during llm task run: {llm_error_file}, set LOG_LEVEL=DEBUG to see more details')
 
         if os.path.exists(eval_error_file_name):
-            with open(eval_error_file_name, 'r') as f:
+            with open(eval_error_file_name, 'r', encoding='utf-8') as f:
                 eval_errors = f.read()
             print(f'Error found during eval run: {eval_error_file_name}, set LOG_LEVEL=DEBUG to see more details')
             print(eval_errors)

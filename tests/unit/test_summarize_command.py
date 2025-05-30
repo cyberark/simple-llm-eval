@@ -1,13 +1,11 @@
 from unittest import mock
 from unittest.mock import patch
 
-import matplotlib.pyplot as plt
 import pytest
 
 from simpleval.cli_args import CONFIG_FILE_HELP
 from simpleval.commands.reporting.summarize.summarize_command import summarize_command
 from simpleval.evaluation.schemas.eval_result_schema import EvalTestResult
-from simpleval.exceptions import TerminationError
 from simpleval.testcases.schemas.llm_task_result import LlmTaskResult
 
 

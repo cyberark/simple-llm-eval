@@ -105,15 +105,3 @@ All Lite LLM-based judges use the same prompts for metrics.
 !!! note
     * Lite LLM judges must use models that support structured outputs. Use the `simpleval litellm-models-explorer` to find such models by provider.
     * If you implement a new judge type, make sure you implement a retry decorator (see existing judges for examples).
-
-## Reports 📊
-
-There are three types of report implementations:
-
-
-- ✅ The new reports are React-based, are feature-rich, and look much better. See [Reporting Dev](reporting-dev.md) for more details.
-- ❌ Simple HTML reports, which are deprecated. They are based on an HTML template and are implemented in `simpleval/commands/reporting/eval_report/html_report.py` and `simpleval/commands/reporting/compare/compare_html.py`. 
-  <br>**You should refrain from making changes to these files and keep to the new formats.**
-- ❌ A matplotlib-based summary report, which is also deprecated. **Use the new formats instead.**
-
-<br>

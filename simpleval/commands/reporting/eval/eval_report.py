@@ -5,7 +5,6 @@ from colorama import Fore
 
 from simpleval.commands.reporting.eval.console_report import _print_to_console
 from simpleval.commands.reporting.eval.html2.html2_report import _generate_html_report2
-from simpleval.commands.reporting.eval.html_report import _generate_html_report
 from simpleval.consts import LOGGER_NAME, ReportFormat
 from simpleval.evaluation.metrics.calc import MeanScores, calc_scores
 from simpleval.evaluation.schemas.eval_result_schema import EvalTestResult
@@ -24,7 +23,7 @@ class ResultsManager:
         eval_results: List[EvalTestResult],
         llm_tasks_errors_count: int,
         eval_errors_count: int,
-        output_format: str = ReportFormat.HTML2,
+        output_format: str = ReportFormat.HTML,
     ):
         # Sort eval_results by "<test_name>-<metric>"
         eval_results.sort(key=lambda x: x.name_metric)
@@ -32,7 +31,7 @@ class ResultsManager:
         mean_scores: MeanScores = calc_scores(eval_results)
 
         html_report_file = ''
-        if output_format == ReportFormat.HTML2:
+        if output_format == ReportFormat.HTML:
             html_report_file = _generate_html_report2(
                 name=name,
                 testcase=testcase,

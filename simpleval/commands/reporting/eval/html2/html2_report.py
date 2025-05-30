@@ -51,22 +51,22 @@ def _generate_html_report2(
 
 def _validate_eval_html_template(llm_eval_report_template: str) -> None:
     if EVAL_TESTCASE_TITLE_PLACEHOLDER not in llm_eval_report_template:
-        raise ValueError('HTML2 Report: Eval template does not contain testcase title placeholder')
+        raise ValueError('HTML Report: Eval template does not contain testcase title placeholder')
 
     if DATA_ITEMS_PLACEHOLDER not in llm_eval_report_template:
-        raise ValueError('HTML2 Report: Eval template does not contain data items placeholder')
+        raise ValueError('HTML Report: Eval template does not contain data items placeholder')
 
     if AGGREGATE_METRIC_PLACEHOLDER not in llm_eval_report_template:
-        raise ValueError('HTML2 Report: Eval template does not contain aggregate metric placeholder')
+        raise ValueError('HTML Report: Eval template does not contain aggregate metric placeholder')
 
     if LLM_ERRORS_PLACEHOLDER not in llm_eval_report_template:
-        raise ValueError('HTML2 Report: Eval template does not contain the llm errors placeholder')
+        raise ValueError('HTML Report: Eval template does not contain the llm errors placeholder')
 
     if EVAL_ERRORS_PLACEHOLDER not in llm_eval_report_template:
-        raise ValueError('HTML2 Report: Eval template does not contain the eval errors placeholder')
+        raise ValueError('HTML Report: Eval template does not contain the eval errors placeholder')
 
     if HIDDEN_ERRORS_BANNER not in llm_eval_report_template:
-        raise ValueError('HTML2 Report: Eval template does not contain hidden errors banner placeholder')
+        raise ValueError('HTML Report: Eval template does not contain hidden errors banner placeholder')
 
 
 def _escape_quotes(text: str) -> str:

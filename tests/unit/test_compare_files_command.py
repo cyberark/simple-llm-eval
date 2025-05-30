@@ -24,7 +24,7 @@ def test_run_compare_command_console():
     )
 
 
-@pytest.mark.parametrize('report_format', [ReportFormat.HTML2])
+@pytest.mark.parametrize('report_format', [ReportFormat.HTML])
 def test_run_compare_command_htmls(report_format):
     eval_set_name = 'test_eval_set'
 

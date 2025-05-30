@@ -17,9 +17,8 @@ simpleval reports
 ## Report Format
 Usually you can select the report format with the `--report-format console` (`-r console`) argument:
 
-* `html2` - React based HTML report (default)
+* `html` - React based HTML report (default)
 * `console` - Console report
-* `html` - Deprecated HTML report, will be removed in future versions
 
 ## Output Directory
 Reports are saved to `results` directory and can be considered as temporary files (they can be regenerated easily again)

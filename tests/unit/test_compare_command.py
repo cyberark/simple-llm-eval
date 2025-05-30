@@ -24,7 +24,7 @@ def test_run_compare_command_html():
             eval_set_dir=TEST_EVAL_SET_VALID_FOLDER,
             testcase1=TEST_FOO_TESTCASE_NAME,
             testcase2=TEST_FOO_TESTCASE_NAME,
-            report_format=ReportFormat.HTML2,
+            report_format=ReportFormat.HTML,
         )
         mock_open.assert_called_once()
 

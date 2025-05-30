@@ -38,7 +38,7 @@ def test_validate_compare_html_template_missing_data_items():
     </body>
     </html>
     """
-    with pytest.raises(ValueError, match='HTML2 Report: Compare template does not contain data items placeholder'):
+    with pytest.raises(ValueError, match='HTML Report: Compare template does not contain data items placeholder'):
         _validate_compare_html_template(template)
 
 
@@ -51,7 +51,7 @@ def test_validate_compare_html_template_missing_left_side():
     </body>
     </html>
     """
-    with pytest.raises(ValueError, match='HTML2 Report: Compare template does not contain left side aggregate data placeholders'):
+    with pytest.raises(ValueError, match='HTML Report: Compare template does not contain left side aggregate data placeholders'):
         _validate_compare_html_template(template)
 
 
@@ -64,7 +64,7 @@ def test_validate_compare_html_template_missing_right_side():
     </body>
     </html>
     """
-    with pytest.raises(ValueError, match='HTML2 Report: Compare template does not contain right side aggregate data placeholders'):
+    with pytest.raises(ValueError, match='HTML Report: Compare template does not contain right side aggregate data placeholders'):
         _validate_compare_html_template(template)
 
 

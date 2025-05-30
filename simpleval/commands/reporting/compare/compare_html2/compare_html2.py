@@ -39,13 +39,13 @@ def _compare_results_html2(eval_set: str, left_side: CompareArgs, right_side: Co
 
 def _validate_compare_html_template(template: str):
     if DATA_ITEMS_PLACEHOLDER not in template:
-        raise ValueError('HTML2 Report: Compare template does not contain data items placeholder')
+        raise ValueError('HTML Report: Compare template does not contain data items placeholder')
 
     if AGGREGATE_DATA_LEFT_SIDE_PLACEHOLDER not in template:
-        raise ValueError('HTML2 Report: Compare template does not contain left side aggregate data placeholders')
+        raise ValueError('HTML Report: Compare template does not contain left side aggregate data placeholders')
 
     if AGGREGATE_DATA_RIGHT_SIDE_PLACEHOLDER not in template:
-        raise ValueError('HTML2 Report: Compare template does not contain right side aggregate data placeholders')
+        raise ValueError('HTML Report: Compare template does not contain right side aggregate data placeholders')
 
 
 def _populate_template(eval_set: str, template: str, left_side: CompareArgs, right_side: CompareArgs):

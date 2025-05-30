@@ -49,7 +49,7 @@ def main():
                 eval_dir=str(eval_set_dir),
                 config_file=f'config_{selected_judge}.json',
                 testcase=testcase,
-                report_format=ReportFormat.HTML2,
+                report_format=ReportFormat.HTML,
             )
 
 

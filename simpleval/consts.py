@@ -22,7 +22,7 @@ BOOKKEEPING_LOG_FILE_NAME = 'tokens-bookkeeping.log'
 
 class ReportFormat:
     CONSOLE = 'console'
-    HTML2 = 'html2'
+    HTML = 'html'
 
 
 class SummaryReportType:

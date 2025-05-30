@@ -65,10 +65,11 @@ jobs:
         run: uv run pytest --cov=simpleval --cov-report=term --cov-report=xml --cov-fail-under=90
 
       - name: 🏷️ Generate coverage badge
+        if: github.event_name == 'pull_request'
         run: uv run python ./ci/badges/update_cov_badge.py coverage.xml
 
       - name: 🚀 Push badge to 'badges' branch
-        if: github.ref == 'refs/heads/ci-test' || github.ref == 'refs/heads/main'
+        if: github.event_name == 'pull_request' && (github.ref == 'refs/heads/ci-test' || github.ref == 'refs/heads/main')
         run: |
           git config --global user.email "ci@github.com"
           git config --global user.name "GitHub CI"

@@ -21,7 +21,7 @@
      font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">
     <text x="35" y="15" fill="#010101" fill-opacity=".3">coverage</text>
     <text x="35" y="14">coverage</text>
-    <text x="95" y="15" fill="#010101" fill-opacity=".3">94%</text> <!-- Replace this text with dynamic value -->
-    <text x="95" y="14">94%</text>
+    <text x="95" y="15" fill="#010101" fill-opacity=".3">93%</text> <!-- Replace this text with dynamic value -->
+    <text x="95" y="14">93%</text>
   </g>
 </svg>

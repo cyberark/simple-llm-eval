@@ -24,3 +24,9 @@ jobs:
 
       - name: Test Scripts
         run: echo "${{ github.event.inputs.some_value }}"
+
+      - name: List Files
+        run: ls
+
+      - name: Check GPG version
+        run: gpg --version

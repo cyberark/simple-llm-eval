@@ -78,11 +78,14 @@ jobs:
       - name: List dist content
         run: ls dist
 
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@da05d552573ad5aba039eaac05058a918a7bf631 # 2.2.2
-        with:
-          tag_name: ${{ steps.get_tag.outputs.tag }}
-          files: |
+      - name: 📝 Create GitHub Release
+        run: |
+          TAG=${{ steps.get_tag.outputs.tag }}
+          gh release create "$TAG" \
+            --title "$TAG" \
+            --generate-notes \
+            --target "${GITHUB_SHA}" \
+            --verify-tag \
             dist/*
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

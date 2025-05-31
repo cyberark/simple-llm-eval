@@ -20,4 +20,4 @@ jobs:
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # 4.2.2
 
       - name: Test Scripts
-        run: echo ${{ github.event.inputs.some_value }}
+        run: echo "${{ github.event.inputs.some_value }}"

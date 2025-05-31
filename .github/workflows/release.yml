@@ -64,6 +64,20 @@ jobs:
             echo "Skipping docs publish: $VERSION is not a release version (x.y.z)"
           fi
 
+      - name: 🔑 Import GPG Key
+        run: |
+          echo "${{ secrets.GPG_PRIVATE_KEY }}" | gpg --batch --import
+          echo "${{ secrets.GPG_OWNERTRUST }}" | gpg --import-ownertrust || true
+
+      - name: 🔏 Sign the wheel(s)
+        run: |
+          for f in dist/*.{whl,tar.gz}; do
+            gpg --batch --yes --armor --detach-sign "$f"
+          done
+
+      - name: List dist content
+        run: ls dist
+
       - name: Create GitHub Release
         uses: softprops/action-gh-release@da05d552573ad5aba039eaac05058a918a7bf631 # 2.2.2
         with:

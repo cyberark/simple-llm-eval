@@ -37,22 +37,37 @@
 
 ???- note "uv package manager"
 
-        **Recommended to use a virtual environment:**
+    **Using a virtual environment:**
 
-        ```bash
-        uv .venv
-        ```
-        
-        # Activate the virtual environment according to your OS:
-        source .venv/bin/activate # Linux/Mac
-        .venv\Scripts\activate # Windows
-        ```
+    ```bash
+    uv .venv
+    ```
+    
+    **Activate the virtual environment according to your OS:**
+    
+    ```bash
+    source .venv/bin/activate # Linux/Mac
+    ```
 
-        **Install the package:**
+    ```bat
+    .venv\Scripts\activate # Windows
+    ```
 
-        ```bash
-        uv add simpleval
-        ```
+    **Install the package:**
+
+    ```bash
+    uv add simpleval
+    ```
+
+
+???- note "uvx"
+    
+    **Run all commands using `uvx`** 
+    ```bash
+    uvx simpleval
+    ```
+
+
 ### Usage
 
 ✅ Run `simpleval init` and follow the instructions, or instead, follow the [Tutorial](./tutorial.md) section.

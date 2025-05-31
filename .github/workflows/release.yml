@@ -81,7 +81,6 @@ jobs:
       - name: 📝 Create GitHub Release
         run: |
           TAG=${{ steps.get_tag.outputs.tag }}
-          TAG=v0.0.0
           gh release create "$TAG" \
             --title "$TAG" \
             --generate-notes \

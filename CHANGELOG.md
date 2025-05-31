@@ -8,44 +8,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Other
 
-- refactor: Remove old logs ([#164](https://github.com/cyberark/simple-llm-eval/pull/164))
+- refactor: Remove old reports ([#164](https://github.com/cyberark/simple-llm-eval/pull/164))
 - fix: update cov badge workflow ([#165](https://github.com/cyberark/simple-llm-eval/pull/165))
-- Workflows updates ([#179](https://github.com/cyberark/simple-llm-eval/pull/179))
-- Create scorecard.yml ([#183](https://github.com/cyberark/simple-llm-eval/pull/183))
-
-
-## [1.0.0rc9] - 2025-05-29
-
-### Other
-
-- test: Optimize tests ([#159](https://github.com/cyberark/simple-llm-eval/pull/159))
-
-
-## [1.0.0rc8] - 2025-05-29
-
-### Other
-
-- 
-
-
-## [1.0.0rc7] - 2025-05-29
-
-### Other
-
-- docs: update release procedure ([#137](https://github.com/cyberark/simple-llm-eval/pull/137))
-- docs: update docs workflow and docs ([#138](https://github.com/cyberark/simple-llm-eval/pull/138))
-
-
-## [1.0.0rc6] - 2025-05-28
-
-### Other
-
-- docs: update release procedure ([#137](https://github.com/cyberark/simple-llm-eval/pull/137))
-- docs: update docs workflow and docs ([#138](https://github.com/cyberark/simple-llm-eval/pull/138))
-
   
-## [1.0.0] - 2025-06-01
-   
-### Added
- 
-First release of simpleval 🎉

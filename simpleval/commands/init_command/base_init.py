@@ -10,6 +10,7 @@ from simpleval.evaluation.llm_task_runner import PLUGIN_FILE_NAME, PLUGIN_FUNCTI
 from simpleval.evaluation.schemas.eval_task_config_schema import EvalTaskConfig
 from simpleval.evaluation.utils import get_empty_eval_set_folder, get_empty_testcase_folder
 from simpleval.exceptions import TerminationError
+from simpleval.utilities.console import print_boxed_message
 
 
 class BaseInit(ABC):
@@ -142,10 +143,5 @@ class BaseInit(ABC):
         print(f'{Fore.YELLOW}         you can also pass -o/--overwrite to overwrite all existing results{Fore.RESET}')
         print()
 
-        bordered_text = 'Follow the instructions above to get started with your new eval set'
-        border_wide = len(bordered_text) + 3
-        print(f'{Fore.YELLOW}  {"=" * border_wide}')
-        print(f'{Fore.YELLOW}  |{" " * (border_wide - 1)}|')
-        print(f'{Fore.YELLOW}  | {bordered_text} |')
-        print(f'{Fore.YELLOW}  |{" " * (border_wide - 1)}|')
-        print(f'{Fore.YELLOW}  {"=" * border_wide}{Fore.RESET}')
+        print_boxed_message('Follow the instructions above to get started with your new eval set')
+

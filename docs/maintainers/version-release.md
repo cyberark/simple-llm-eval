@@ -41,7 +41,6 @@
     - [ ] Wait for the [version tag creation workflow](https://github.com/cyberark/simple-llm-eval/actions/workflows/create-tags-for-release.yml){target="_blank"} to complete
     - [ ] Trigger the [Release Workflow](https://github.com/cyberark/simple-llm-eval/actions/workflows/release.yml){target="_blank"} 
     - [ ] Manually publish the release to PyPI
-
     ???- note "Release Workflow - Under the Hood"
 
         Since operations done with internal tokens will not by default trigger workflows, the [Release](https://github.com/cyberark/simple-llm-eval/actions/workflows/ci.yml) workflow is triggered manually.
@@ -55,8 +54,9 @@
         - Publish the docs in case of release version (pre-release versions will not publish the docs)
 
 ## 📚 Docs Only Release
-In case you make a docs-only update, see [Publishing the Docs](../developers/dev-notes.md/#publishing-the-docs)
-This is useful if you want to publish pre-release version docs.
+The release workflow will deploy the docs automatically for stable releases, so if you want to publish the docs for a pre-release version, you can do so by running the [Publish Docs Workflow](https://github.com/cyberark/simple-llm-eval/actions/workflows/docs-release.yml)
+
+To learn more about the docs publishing, see [Publishing the Docs](../developers/dev-notes.md/#publishing-the-docs)).
 
 **NOTE: Docs publishing is done only for the top level version (release or pre-release)**
 

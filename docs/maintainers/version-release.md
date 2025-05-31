@@ -77,6 +77,7 @@ To learn more about the docs publishing, see [Publishing the Docs](../developers
 
     - [ ] Manually open the release notes, click on "generate release notes" and update them as needed
     - [ ] After the release workflow is complete, update the `CHANGELOG.md` file with the new version and the changes made in this release (take from the release notes)
+    - [ ] Optionally review and update the release note in the release
     - [ ] Publish the package to PyPI
 
 ## ❌ The Manual Way (Even less Recommended)

@@ -78,7 +78,7 @@ jobs:
 
       - name: 🔏 Sign the wheel(s)
         run: |
-          for f in dist/*.whl; do
+          for f in dist/*.{whl,tar.gz}; do
             gpg --batch --yes --armor --detach-sign "$f"
           done
 

@@ -1,0 +1,27 @@
+import re
+
+import click
+from colorama import Fore, Style
+
+def visible_length(s):
+    # Strip ANSI color codes
+    return len(re.sub(r'\x1b\[[0-9;]*m', '', s))
+
+def print_boxed_message(message, color=Fore.BLUE):
+    lines = message.split('\n')
+    width = max(visible_length(line) for line in lines)
+    # +2 for single space padding left and right of each line
+    box_width = width + 2
+
+    tl, tr, bl, br, hor, ver = '┌', '┐', '└', '┘', '─', '│'
+    click.echo(color + tl + (hor * box_width) + tr)
+    for line in lines:
+        vis_len = visible_length(line)
+        pad_right = ' ' * (width - vis_len)
+        click.echo(
+            color + ver + Style.RESET_ALL +
+            ' ' + line + pad_right + ' ' +
+            color + ver
+        )
+    click.echo(color + bl + (hor * box_width) + br + Style.RESET_ALL)
+    click.echo('')

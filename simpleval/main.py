@@ -22,6 +22,7 @@ from simpleval.cli_args import (
     InTestcaseParamType,
 )
 from simpleval.consts import EVAL_CONFIG_FILE, EVAL_RESULTS_FILE, LLM_TASKS_RESULT_FILE, PACKAGE_NAME, ReportFormat
+from simpleval.utilities.console import print_boxed_message
 from simpleval.utilities.error_handler import handle_exceptions
 
 
@@ -202,11 +203,7 @@ def main(ctx):
     colorama.init(autoreset=True)
     if not ctx.invoked_subcommand:
         click.echo('')
-        welcome_message = '| Welcome to Simple LLM Eval! Use --help to see available commands. |'
-        click.echo(Fore.BLUE + '+' + ('-' * (len(welcome_message) - 2)) + '+' + Fore.RESET)
-        click.echo(Fore.BLUE + '| Welcome to Simple LLM Eval! Use --help to see available commands. |' + Fore.RESET)
-        click.echo(Fore.BLUE + '+' + ('-' * (len(welcome_message) - 2)) + '+' + Fore.RESET)
-        click.echo('')
+        print_boxed_message('Welcome to Simple LLM Eval! Use --help to see available commands')
 
         click.echo('Available commands:')
         for command in ctx.command.list_commands(ctx):
@@ -214,11 +211,11 @@ def main(ctx):
             click.echo(f'  - {Fore.CYAN}{command}{Fore.RESET}: {cmd.help}')
         click.echo('')
 
-        click.echo('To get started:')
-        click.echo('')
-        click.echo(f'1. Create a new evaluation: {Fore.CYAN}`simpleval init`{Fore.RESET}')
-        click.echo(f'2. Follow the on-screen instructions or run {Fore.CYAN}`simpleval --help`{Fore.RESET} for command line options')
-        click.echo('3. Happy evaluation!')
+        message = 'To get started:\n' + \
+                  f'1. Create a new evaluation: {Fore.CYAN}`simpleval init`{Fore.RESET}\n' + \
+                  f'2. Follow the on-screen instructions or run {Fore.CYAN}`simpleval --help`{Fore.RESET} for command line options\n' + \
+                  '3. Happy evaluation!'
+        print_boxed_message(message)
 
 
 @click.group(help='Commands related to reporting')

@@ -63,6 +63,10 @@ Once in a while update the pre-commit hooks to the latest version:
 * Update all packages: `uv lock --upgrade && uv sync`
 * Update dependencies constraints in `pyproject.toml` as needed
 
+## Update npm packages 📦
+* `cd reports-frontend`
+* `npm update`
+
 ## Publishing the docs 📚
 This project uses mkdocs/mike to publish its docs to GitHub Pages on a release.
 

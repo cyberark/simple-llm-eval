@@ -1,5 +1,8 @@
 name: Create Tags for Release
 
+permissions:
+  contents: read
+
 on:
   pull_request:
     types:
@@ -9,6 +12,8 @@ jobs:
   check-release-pr:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
 
       - name: 🔄 Checkout repository

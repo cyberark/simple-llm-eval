@@ -1,5 +1,8 @@
 name: 📚 Docs Release Manual
 
+permissions:
+  contents: read
+
 on:
   workflow_dispatch:
     inputs:
@@ -11,6 +14,8 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       - name: 🔄 Checkout repository

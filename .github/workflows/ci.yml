@@ -98,7 +98,7 @@ jobs:
 
       - name: 📦 Install dependencies
         if: needs.detect-changes.outputs.frontend_changed == 'true'
-        run: npm install
+        run: npm ci
 
       - name: 🛠️ Build project
         if: needs.detect-changes.outputs.frontend_changed == 'true'

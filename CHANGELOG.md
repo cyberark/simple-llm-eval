@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.0.0rc10] - 2025-05-31
+
+### Other
+
+- refactor: Remove old logs ([#164](https://github.com/cyberark/simple-llm-eval/pull/164))
+- fix: update cov badge workflow ([#165](https://github.com/cyberark/simple-llm-eval/pull/165))
+- Workflows updates ([#179](https://github.com/cyberark/simple-llm-eval/pull/179))
+- Create scorecard.yml ([#183](https://github.com/cyberark/simple-llm-eval/pull/183))
+
+
 ## [1.0.0rc9] - 2025-05-29
 
 ### Other

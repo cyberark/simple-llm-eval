@@ -64,11 +64,34 @@ jobs:
             echo "Skipping docs publish: $VERSION is not a release version (x.y.z)"
           fi
 
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@da05d552573ad5aba039eaac05058a918a7bf631 # 2.2.2
-        with:
-          tag_name: ${{ steps.get_tag.outputs.tag }}
-          files: |
-            dist/*
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # TODO REMOVE THIS
+      - name: List dist before
+        run: ls dist
+
+      # TODO REMOVE THIS ^^^^
+
+
+      - name: 🔑 Import GPG Key
+        run: |
+          echo "${{ secrets.GPG_PRIVATE_KEY }}" | gpg --batch --import
+          echo "${{ secrets.GPG_OWNERTRUST }}" | gpg --import-ownertrust || true
+
+      - name: 🔏 Sign the wheel(s)
+        run: |
+          for f in dist/*.whl; do
+            gpg --batch --yes --armor --detach-sign "$f"
+          done
+
+      - name: List dist after
+        run: ls dist
+
+
+      # TODO - bring this back
+      # - name: Create GitHub Release
+      #   uses: softprops/action-gh-release@da05d552573ad5aba039eaac05058a918a7bf631 # 2.2.2
+      #   with:
+      #     tag_name: ${{ steps.get_tag.outputs.tag }}
+      #     files: |
+      #       dist/*
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

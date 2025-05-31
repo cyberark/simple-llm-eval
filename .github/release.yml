@@ -9,6 +9,7 @@ changelog:
     authors:
       - octocat
       - github-actions[bot]
+      - github-actions
   categories:
     - title: Breaking Changes 🛠
       labels:

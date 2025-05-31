@@ -12,12 +12,12 @@ jobs:
     steps:
 
       - name: 🔄 Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # 4.2.2
         with:
           fetch-depth: 0  # To ensure all tags/branches are fetched
 
       - name: 👀 Check PR Title, Label, and Base Branch
-        uses: actions/github-script@v7
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # 7.0.1
         with:
           script: |
             const pr = context.payload.pull_request;
@@ -31,7 +31,7 @@ jobs:
             }
 
       - name: 🐍 Init uv with caching
-        uses: astral-sh/setup-uv@v5
+        uses: astral-sh/setup-uv@f0ec1fc3b38f5e7cd731bb6ce540c5af426746bb # 6.1.0
         with:
           enable-cache: true
           cache-dependency-glob: "uv.lock"

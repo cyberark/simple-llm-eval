@@ -1,6 +1,6 @@
 import re
-from typing import List
 import sys
+from typing import List
 
 import click
 from colorama import Fore, Style
@@ -9,7 +9,6 @@ from colorama import Fore, Style
 def visible_length(s):
     # Strip ANSI color codes
     return len(re.sub(r'\x1b\[[0-9;]*m', '', s))
-
 
 
 def _get_box_chars():

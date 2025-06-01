@@ -1,5 +1,3 @@
-
-
 from simpleval.evaluation.judges.judge_provider import JudgeProvider
 from simpleval.utilities.console import print_list
 

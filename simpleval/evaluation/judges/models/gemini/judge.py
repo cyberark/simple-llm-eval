@@ -27,4 +27,4 @@ class GeminiJudge(LiteLLMJudge):
         verify_env_var('GEMINI_API_KEY')
 
     def preliminary_checks_explanation(self):
-        return 'The Gemini judge requires the following environment variable to be set:\n- GEMINI_API_KEY: Your Gemini API key.\n'
+        return 'The Gemini judge requires the following environment variable to be set:\n- GEMINI_API_KEY: Your Gemini API key.'

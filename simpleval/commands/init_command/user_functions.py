@@ -88,7 +88,9 @@ def run_preliminary_checks(judge: BaseJudge):
     try:
         judge.run_preliminary_checks()
     except Exception as e:
+        print()
         logger.error(f'{Fore.RED}Error occurred during judge preliminary checks\n{e}{Fore.RESET}')
+        print()
         logger.info(f'{Fore.YELLOW}{judge.preliminary_checks_explanation()}{Fore.RESET}')
         ans = input(f'{Fore.CYAN}\nDo you want to ignore and continue (Y/n)? {Fore.RESET}')
         if ans and ans.lower() != 'y':

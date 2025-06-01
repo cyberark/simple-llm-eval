@@ -62,4 +62,4 @@ def list_metrics(judge_model: str):
         )
 
         print()
-        cont = input(f'{Fore.MAGENTA}Continue? (y/n): {Fore.RESET}').strip().lower()
+        cont = input(f'{Fore.MAGENTA}Continue? (y/N): {Fore.RESET}').strip().lower()

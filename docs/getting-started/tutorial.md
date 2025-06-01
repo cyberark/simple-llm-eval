@@ -41,7 +41,7 @@ simpleval init
 
 
 - [ ] Select the recommended model id to use
-- [ ] Select `Pick your own metrics` and select: <br>`"correctness", "relevance", "completeness", "readability"`
+- [ ] Select `Pick your own metrics` and select: <br>`"correctness", "relevance", "completeness", "readability"` (if you make a mistake, you can always edit the `config.json` file before you run)
       <br>Press `Enter` to continue.
 - [ ] Skip `Do you want to configure concurrency` by hitting `enter`
 
@@ -582,7 +582,7 @@ The simple prompt is set at `prompt`, instructing the LLM to answer the question
 ### ✅ Implement `prompt2` handler
 Now we will implement `prompt2`: a pirate who answers the question about the story.
 
-- [ ] Copy the `prompt1` handler to `prompt2`.
+- [ ] Copy the `prompt1` directory to `prompt2`.
 
 - [ ] Update `prompt` in `story-q-and-a/testcases/prompt2/task_handler.py` to:
 
@@ -647,6 +647,13 @@ Fix the issues and run again. simpleval will only run the failing tests.
 ```bash
 simpleval reports compare -e story-q-and-a -t1 prompt1 -t2 prompt2
 ```
+
+- [ ] You can also create a summary report to see all testcases (you can optionally specify a primary metric to focus on, such as `readability`):
+
+```bash
+simpleval reports summarize -e story-q-and-a [--primary-metric readability]
+```
+
 
 <br>
 Your LLM as a judge should detect the pirate language in the second prompt and score it accordingly, usually under the `readability` metric, as you can see here:

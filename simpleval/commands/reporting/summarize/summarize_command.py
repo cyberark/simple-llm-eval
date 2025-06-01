@@ -10,7 +10,7 @@ from simpleval.utilities.console import print_boxed_message
 
 def summarize_command(eval_dir: str, config_file: str, primary_metric: str):
     logger = logging.getLogger(LOGGER_NAME)
-    
+
     print_boxed_message('Evaluation Results Summary Report')
 
     logger.info(f'Summarizing evaluation results in {eval_dir}')

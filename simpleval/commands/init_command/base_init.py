@@ -1,6 +1,7 @@
 import json
 import logging
 import os
+import shutil
 from abc import ABC, abstractmethod
 
 from colorama import Fore
@@ -45,16 +46,15 @@ class BaseInit(ABC):
         new_testcases_folder = os.path.join(eval_dir, TESTCASES_FOLDER, testcase)
         os.makedirs(new_testcases_folder)
 
-        rc = 0
-        rc += os.system(f'cp {os.path.join(empty_eval_set_folder, EVAL_CONFIG_FILE)} {new_eval_set_folder}')  # noqa
-        rc += os.system(f'cp {os.path.join(empty_eval_set_folder, GROUND_TRUTH_FILE)} {new_eval_set_folder}')  # noqa
-        rc += os.system(f'cp {os.path.join(empty_eval_set_folder, "README.md")} {new_eval_set_folder}')  # noqa
+        try:
+            shutil.copy(os.path.join(empty_eval_set_folder, EVAL_CONFIG_FILE), new_eval_set_folder)
+            shutil.copy(os.path.join(empty_eval_set_folder, GROUND_TRUTH_FILE), new_eval_set_folder)
+            shutil.copy(os.path.join(empty_eval_set_folder, 'README.md'), new_eval_set_folder)
 
-        rc += os.system(f'cp {os.path.join(empty_testcase_folder, "__init__.py")} {new_testcases_folder}')  # noqa
-        rc += os.system(f'cp {os.path.join(empty_testcase_folder, PLUGIN_FILE_NAME)} {new_testcases_folder}')  # noqa
-
-        if rc != 0:
-            raise TerminationError(f'{Fore.RED}Error occurred during creating new evaluation{Fore.RESET}')
+            shutil.copy(os.path.join(empty_testcase_folder, '__init__.py'), new_testcases_folder)
+            shutil.copy(os.path.join(empty_testcase_folder, PLUGIN_FILE_NAME), new_testcases_folder)
+        except Exception as e:
+            raise TerminationError(f'{Fore.RED}Error occurred creating the new evaluation: {e}{Fore.RESET}')
 
         with open(os.path.join(new_eval_set_folder, EVAL_CONFIG_FILE), 'w', encoding='utf-8') as file:
             json.dump(new_config.model_dump(exclude_none=True), file, indent=4)

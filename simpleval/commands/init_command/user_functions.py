@@ -100,7 +100,10 @@ def run_preliminary_checks(judge: BaseJudge):
 
 
 def get_judge_from_user() -> BaseJudge:
+    logger = logging.getLogger(LOGGER_NAME)
+
     judge = pick_judge()
+    logger.info(f'{Fore.YELLOW}Checking judge authentication...{Fore.RESET}')
     judge = JudgeProvider.get_judge(judge)
 
     run_preliminary_checks(judge)

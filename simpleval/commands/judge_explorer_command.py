@@ -5,11 +5,14 @@ from InquirerPy import prompt
 
 from simpleval.consts import LOGGER_NAME
 from simpleval.evaluation.judges.judge_provider import JudgeProvider
+from simpleval.utilities.console import print_boxed_message, print_list
 
 
 def judge_explorer_command():
     logger = logging.getLogger(LOGGER_NAME)
-    logger.info(f'{Fore.GREEN}Explore judge information{Fore.RESET}')
+
+    print('')
+    print_boxed_message('Explore judge information')
 
     judges = JudgeProvider.list_judges(filter_internal=True)
     if not judges:
@@ -28,8 +31,10 @@ def judge_explorer_command():
 
     logger.info(f'{Fore.CYAN}Judge name: {Fore.YELLOW}{judge.name}{Fore.RESET}')
     logger.info(f'{Fore.CYAN}Default model id: {Fore.YELLOW}{judge.model_id}{Fore.RESET}')
-    logger.info(f'{Fore.CYAN}Supported metrics: \n{Fore.YELLOW}{judge.list_metrics()}{Fore.RESET}')
+    logger.info('')
+    
+    print_list(title='Supported metrics', items=judge.list_metrics())
     logger.info(f'{Fore.CYAN}Authentication requirements: \n{Fore.YELLOW}{judge.preliminary_checks_explanation()}{Fore.RESET}')
-
-    logger.info(f'{Fore.CYAN}Supported model ids: {Fore.YELLOW}{judge.supported_model_ids}{Fore.RESET}')
+    logger.info('')
+    print_list(title='Supported model ids', items=judge.supported_model_ids)
     logger.info(f'{Fore.CYAN}NOTE: It is possible to use unsupported model ids, just make sure they are compatible{Fore.RESET}')

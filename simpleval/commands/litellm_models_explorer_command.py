@@ -6,6 +6,7 @@ from colorama import Fore
 from InquirerPy import prompt
 
 from simpleval.consts import LOGGER_NAME
+from simpleval.utilities.console import print_boxed_message, print_list
 
 UNSUPPORTED_PROVIDERS = []
 
@@ -88,10 +89,12 @@ def supported_models_by_provider() -> Dict[str, str]:
 
 
 def litellm_models_explorer_command():
-    logger = logging.getLogger(LOGGER_NAME)
-    logger.info(f'{Fore.GREEN}Find LiteLLM models by provider{Fore.RESET}')
-    logger.info(f'{Fore.GREEN}Only models that support "response format" or "json schema" are supported {Fore.RESET}')
-    logger.info(f'{Fore.GREEN}See https://docs.litellm.ai/docs/completion/json_mode for more details{Fore.RESET}')
+
+    print_boxed_message("""
+Find LiteLLM models by provider
+Only models that support "response format" or "json schema" are supported
+See https://docs.litellm.ai/docs/completion/json_mode for more details
+            """)
 
     models_by_provider = supported_models_by_provider()
 
@@ -102,9 +105,11 @@ def litellm_models_explorer_command():
     selected_provider = answers['selected_provider']
 
     models = models_by_provider.get(selected_provider)
-    logger.info(f"Models available for provider '{selected_provider}':")
-    for model in models:
-        logger.info(model.get('model'))
+    
+    model_names = [model.get('model') for model in models]
+    
+    print()
+    print_list(title=f'Models available for provider `{selected_provider}`', items=model_names)
 
 
 if __name__ == '__main__':

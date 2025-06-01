@@ -5,6 +5,7 @@ from simpleval.consts import EVAL_CONFIG_FILE, EVAL_ERROR_FILE_NAME, LLM_TASKS_E
 from tests.unit.test_testcases import TEST_EVAL_SET_VALID_FOLDER, TEST_FOO_TESTCASE_NAME
 
 
+# Test
 def pytest_configure():
     try:
         # os.environ['LOG_LEVEL'] = 'DEBUG'

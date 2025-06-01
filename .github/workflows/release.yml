@@ -56,12 +56,12 @@ jobs:
       - name: 📚 Publish Docs
         run: |
           VERSION=${{ steps.get_tag.outputs.tag }}
-          # Only publish docs on releases
-          if [[ "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+          # Only publish docs on releases, e.g., 1.2.3 or v1.2.3
+          if [[ "$VERSION" =~ ^v?[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
             echo "Publishing docs for version $VERSION"
             ci/scripts/publish_docs.sh "$VERSION"
           else
-            echo "Skipping docs publish: $VERSION is not a release version (x.y.z)"
+            echo "Skipping docs publish: $VERSION is not a release version ([v]x.y.z)"
           fi
 
       - name: 🔑 Import GPG Key

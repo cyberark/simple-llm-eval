@@ -92,11 +92,11 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
           git add CHANGELOG.md
-          git commit -m "release: update changelog for version ${{ steps.get_version.outputs.version }}"
+          git commit -m "release: update changelog for version ${{ steps.get_version.outputs.version }}" || true
 
           git add pyproject.toml
           git add uv.lock
-          git commit -m "release: version update"
+          git commit -m "release: version update" || true
 
           # Can't push, otherwise peter-evans/create-pull-request@v7 will not detect changes
           # git push --set-upstream origin "${{ github.event.inputs.release_branch }}"

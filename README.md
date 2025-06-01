@@ -11,27 +11,26 @@
 Welcome to the simple llm evaluation framework, or simpleval for short.
 
 ## Getting Started
-
-See the [📚 Quickstart Guide 📚](https://cyberark.github.io/simple-llm-eval/latest/getting-started/quickstart/)
+See the [📚 Quickstart Guide 📚](https://cyberark.github.io/simple-llm-eval/latest/getting-started/quickstart/){:target="_blank"}
 
 ## Documentation
 
-See [📚 Project Documentation 📚](https://cyberark.github.io/simple-llm-eval/)
+See [📚 Project Documentation 📚](https://cyberark.github.io/simple-llm-eval/){:target="_blank"}
 
 ## Contributing
 
 Contributions are welcome!
 
-If you would like to contribute to this project, please follow the guidelines outlined in the [CONTRIBUTING.md](https://github.com/cyberark/simple-llm-eval/blob/main/CONTRIBUTING.md) file.
+If you would like to contribute to this project, please follow the guidelines outlined in the [CONTRIBUTING.md](https://github.com/cyberark/simple-llm-eval/blob/main/CONTRIBUTING.md){:target="_blank"} file.
 
 ## License
 
-simpleval is released under the [Apache License](https://www.apache.org/licenses/LICENSE-2.0). See the [LICENSE](https://github.com/cyberark/simple-llm-eval/blob/main/LICENSE) file for more details.
+simpleval is released under the [Apache License](https://www.apache.org/licenses/LICENSE-2.0){:target="_blank"}. See the [LICENSE](https://github.com/cyberark/simple-llm-eval/blob/main/LICENSE){:target="_blank"} file for more details.
 
 ## Contact
 
-If you have any questions or suggestions, feel free to join our [GitHub discussions forum](https://github.com/cyberark/simple-llm-eval/discussions) 💬
+If you have any questions or suggestions, feel free to join our [GitHub discussions forum](https://github.com/cyberark/simple-llm-eval/discussions){:target="_blank"} 💬
 
-If you want to report a bug or request a feature, please open an issue in the [GitHub issues tracker](https://github.com/cyberark/simple-llm-eval/issues) 🐛
+If you want to report a bug or request a feature, please open an issue in the [GitHub issues tracker](https://github.com/cyberark/simple-llm-eval/issues){:target="_blank"} 🐛
 
 <br>

@@ -2,7 +2,6 @@ import logging
 from typing import Dict
 
 import litellm
-from colorama import Fore
 from InquirerPy import prompt
 
 from simpleval.consts import LOGGER_NAME

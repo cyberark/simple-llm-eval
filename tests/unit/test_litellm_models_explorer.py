@@ -33,7 +33,7 @@ def test_litellm_models_explorer_command(mock_logger, mock_supported_models_by_p
 
     litellm_models_explorer_command()
 
-    assert any("Models available for provider `provider1`" in str(call) for call in mock_print.call_args_list)
+    assert any('Models available for provider `provider1`' in str(call) for call in mock_print.call_args_list)
     assert any('- model1' in str(call) for call in mock_print.call_args_list)
     assert any('- model2' in str(call) for call in mock_print.call_args_list)
 

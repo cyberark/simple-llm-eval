@@ -33,3 +33,5 @@ simpleval is released under the [Apache License](https://www.apache.org/licenses
 If you have any questions or suggestions, feel free to join our [GitHub discussions forum](https://github.com/cyberark/simple-llm-eval/discussions) 💬
 
 If you want to report a bug or request a feature, please open an issue in the [GitHub issues tracker](https://github.com/cyberark/simple-llm-eval/issues) 🐛
+
+<br>

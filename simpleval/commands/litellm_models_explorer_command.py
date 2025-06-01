@@ -49,7 +49,7 @@ def get_supported_models(provider_name: str) -> list:
 
         model_params = litellm.get_supported_openai_params(model=model, custom_llm_provider=provider_name)
         supports_response_format = model_params and 'response_format' in model_params
-        supports_json_schema = litellm.supports_response_schema(model)
+        supports_json_schema = litellm.supports_response_schema(model=model, custom_llm_provider=provider_name)
 
         logger.debug(f'Model: {model}, supports_response_format: {supports_response_format}, supports_json_schema: {supports_json_schema}')
 

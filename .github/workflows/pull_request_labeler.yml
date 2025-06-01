@@ -30,6 +30,7 @@ jobs:
         PR_TITLE: ${{ github.event.pull_request.title }}
         PR_BODY: ${{ github.event.pull_request.body }}
       run: |
+        set -e
         LABELS=$(python3 ./ci/scripts/propose_pull_request_labels.py | jq -c .)
         echo "labels=$LABELS" >> $GITHUB_OUTPUT
 

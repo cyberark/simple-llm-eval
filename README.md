@@ -20,7 +20,7 @@ See [📚 Project Documentation 📚](https://cyberark.github.io/simple-llm-eval
 
 ## Contributing
 
-Contributions are welcome!
+We appreciate your help in making this project better! ✨
 
 If you would like to contribute to this project, please follow the guidelines outlined in the [CONTRIBUTING.md](https://github.com/cyberark/simple-llm-eval/blob/main/CONTRIBUTING.md) file.
 

@@ -32,7 +32,7 @@ def judge_explorer_command():
     logger.info(f'{Fore.CYAN}Judge name: {Fore.YELLOW}{judge.name}{Fore.RESET}')
     logger.info(f'{Fore.CYAN}Default model id: {Fore.YELLOW}{judge.model_id}{Fore.RESET}')
     logger.info('')
-    
+
     print_list(title='Supported metrics', items=judge.list_metrics())
     logger.info(f'{Fore.CYAN}Authentication requirements: \n{Fore.YELLOW}{judge.preliminary_checks_explanation()}{Fore.RESET}')
     logger.info('')

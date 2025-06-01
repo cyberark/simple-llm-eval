@@ -144,4 +144,3 @@ class BaseInit(ABC):
         print()
 
         print_boxed_message('Follow the instructions above to get started with your new eval set')
-

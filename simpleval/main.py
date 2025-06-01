@@ -211,10 +211,12 @@ def main(ctx):
             click.echo(f'  - {Fore.CYAN}{command}{Fore.RESET}: {cmd.help}')
         click.echo('')
 
-        message = 'To get started:\n' + \
-                  f'1. Create a new evaluation: {Fore.CYAN}`simpleval init`{Fore.RESET}\n' + \
-                  f'2. Follow the on-screen instructions or run {Fore.CYAN}`simpleval --help`{Fore.RESET} for command line options\n' + \
-                  '3. Happy evaluation!'
+        message = (
+            'To get started:\n'
+            + f'1. Create a new evaluation: {Fore.CYAN}`simpleval init`{Fore.RESET}\n'
+            + f'2. Follow the on-screen instructions or run {Fore.CYAN}`simpleval --help`{Fore.RESET} for command line options\n'
+            + '3. Happy evaluation!'
+        )
         print_boxed_message(message)
 
 

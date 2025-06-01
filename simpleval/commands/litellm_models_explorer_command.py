@@ -89,7 +89,6 @@ def supported_models_by_provider() -> Dict[str, str]:
 
 
 def litellm_models_explorer_command():
-
     print_boxed_message("""
 Find LiteLLM models by provider
 Only models that support "response format" or "json schema" are supported
@@ -105,9 +104,9 @@ See https://docs.litellm.ai/docs/completion/json_mode for more details
     selected_provider = answers['selected_provider']
 
     models = models_by_provider.get(selected_provider)
-    
+
     model_names = [model.get('model') for model in models]
-    
+
     print()
     print_list(title=f'Models available for provider `{selected_provider}`', items=model_names)
 

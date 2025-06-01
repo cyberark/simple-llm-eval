@@ -49,7 +49,6 @@ def list_metrics(judge_model: str):
         if selected_metric is None:
             return
 
-        
         print()
         print_boxed_message(f'Selected metric: {selected_metric}')
         # print(f'Selected metric: {Fore.YELLOW}{selected_metric}{Fore.RESET}')
@@ -57,11 +56,13 @@ def list_metrics(judge_model: str):
         print(f'{Fore.BLUE}{selected_metric} description:{Fore.RESET}')
         metric = judge.get_metric(selected_metric)
         print(f'{Fore.WHITE}{metric.__doc__}{Fore.RESET}')
-        print_list(title='    Possible responses', 
-                   items=metric.possible_responses,
-                   title_color=Fore.WHITE, 
-                   items_color=Fore.WHITE,
-                   tab_size=6,)
+        print_list(
+            title='    Possible responses',
+            items=metric.possible_responses,
+            title_color=Fore.WHITE,
+            items_color=Fore.WHITE,
+            tab_size=6,
+        )
 
         print()
         cont = input(f'{Fore.MAGENTA}Continue? (y/n): {Fore.RESET}').strip().lower()

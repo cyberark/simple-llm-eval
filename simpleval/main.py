@@ -202,7 +202,6 @@ def summarize(eval_dir: str, config_file: str, primary_metric: str):
 def main(ctx):
     colorama.init(autoreset=True)
     if not ctx.invoked_subcommand:
-        click.echo('')
         print_boxed_message('Welcome to Simple LLM Eval! Use --help to see available commands')
 
         click.echo('Available commands:')

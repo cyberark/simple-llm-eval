@@ -21,6 +21,8 @@ class BaseInit(ABC):
         """
         self.post_instructions_start_index = post_instructions_start_index
 
+        print_boxed_message('Create a New Evaluation-Set')
+
     def run_init_command(self):
         logger = logging.getLogger(LOGGER_NAME)
 

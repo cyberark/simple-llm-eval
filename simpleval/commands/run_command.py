@@ -24,12 +24,16 @@ from simpleval.evaluation.utils import (
     get_testcase_folder,
 )
 from simpleval.exceptions import NoWorkToDo, TerminationError
+from simpleval.utilities.console import print_boxed_message
 from simpleval.utilities.files import delete_file
 from simpleval.validations import validate_eval_input
 
 
 def run_command(eval_dir: str, config_file: str, testcase: str, overwrite_results: bool, report_format: str):
     logger = logging.getLogger(LOGGER_NAME)
+
+    print_boxed_message('Running Evaluation Process')
+
     logger.info(f'{Fore.CYAN}Running evaluation, {eval_dir=}, {testcase=}, {overwrite_results=}{Fore.RESET}')
 
     validate_input_data(eval_dir=eval_dir, config_file=config_file)

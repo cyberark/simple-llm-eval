@@ -20,10 +20,13 @@ from simpleval.evaluation.utils import (
     get_llm_task_results_file,
 )
 from simpleval.exceptions import TerminationError
+from simpleval.utilities.console import print_boxed_message
 
 
 def compare_results(eval_set_dir: str, testcase1: str, testcase2: str, report_format: str, ignore_missing_llm_results: bool = False):
     logger = logging.getLogger(LOGGER_NAME)
+
+    print_boxed_message('Evaluation Results Comparison Report')
 
     try:
         results1 = get_llm_task_results_file(eval_set_dir=eval_set_dir, testcase=testcase1)

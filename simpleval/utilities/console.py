@@ -11,6 +11,7 @@ def visible_length(s):
 
 
 def print_boxed_message(message, color=Fore.BLUE, text_color=Fore.YELLOW):
+    click.echo('')
     lines = message.split('\n')
     width = max(visible_length(line) for line in lines)
     # +2 for single space padding left and right of each line

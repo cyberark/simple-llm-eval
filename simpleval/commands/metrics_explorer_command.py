@@ -25,7 +25,6 @@ def select_item(items, prompt_message, add_quit=False):
 
 
 def metrics_explorer_command():
-    print()
     print_boxed_message('Welcome to the metrics explorer')
 
     judges = JudgeProvider.list_judges()
@@ -49,9 +48,7 @@ def list_metrics(judge_model: str):
         if selected_metric is None:
             return
 
-        print()
         print_boxed_message(f'Selected metric: {selected_metric}')
-        # print(f'Selected metric: {Fore.YELLOW}{selected_metric}{Fore.RESET}')
 
         print(f'{Fore.BLUE}{selected_metric} description:{Fore.RESET}')
         metric = judge.get_metric(selected_metric)

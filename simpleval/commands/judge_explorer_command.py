@@ -10,8 +10,6 @@ from simpleval.utilities.console import print_boxed_message, print_list
 
 def judge_explorer_command():
     logger = logging.getLogger(LOGGER_NAME)
-
-    print('')
     print_boxed_message('Explore judge information')
 
     judges = JudgeProvider.list_judges(filter_internal=True)

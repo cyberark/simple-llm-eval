@@ -37,5 +37,5 @@ class AzureJudge(LiteLLMJudge):
             'Example:\n'
             'AZURE_OPENAI_API_KEY=<your_api_key>\n'
             'AZURE_API_BASE=https://<your_resource_name>.openai.azure.com/\n'
-            'AZURE_API_VERSION=2024-04-01-preview\n'
+            'AZURE_API_VERSION=2024-04-01-preview'
         )

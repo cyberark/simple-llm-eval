@@ -76,7 +76,7 @@ class LiteLLMJudge(BaseJudge):
             "The model must support either 'response_format' or 'json_schema'.\n"
             'See https://docs.litellm.ai/docs/completion/json_mode for more details.\n\n'
             'It also requires an authentication, depending on the provider\n'
-            'See Lite LLM documentation for more details\n'
+            'See Lite LLM documentation for more details'
         )
 
     def _model_inference(self, eval_prompt: str, metric: LiteLLMMetric) -> str:

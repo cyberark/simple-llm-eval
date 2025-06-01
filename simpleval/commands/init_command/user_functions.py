@@ -90,8 +90,8 @@ def run_preliminary_checks(judge: BaseJudge):
     except Exception as e:
         logger.error(f'{Fore.RED}Error occurred during judge preliminary checks\n{e}{Fore.RESET}')
         logger.info(f'{Fore.YELLOW}{judge.preliminary_checks_explanation()}{Fore.RESET}')
-        ans = input(f'{Fore.CYAN}\nDo you want to ignore and continue (y/n)? {Fore.RESET}')
-        if ans.lower() != 'y':
+        ans = input(f'{Fore.CYAN}\nDo you want to ignore and continue (Y/n)? {Fore.RESET}')
+        if ans and ans.lower() != 'y':
             raise TerminationError(f'{Fore.YELLOW}Exiting...{Fore.RESET}')
         else:
             logger.info(f'{Fore.YELLOW}\nContinuing with errors - fix this later before you run{Fore.RESET}')
@@ -100,7 +100,10 @@ def run_preliminary_checks(judge: BaseJudge):
 
 
 def get_judge_from_user() -> BaseJudge:
+    logger = logging.getLogger(LOGGER_NAME)
+
     judge = pick_judge()
+    logger.info(f'{Fore.YELLOW}Checking judge authentication...{Fore.RESET}')
     judge = JudgeProvider.get_judge(judge)
 
     run_preliminary_checks(judge)

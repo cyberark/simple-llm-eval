@@ -2,6 +2,7 @@ from colorama import Fore
 from InquirerPy import prompt
 
 from simpleval.evaluation.judges.judge_provider import JudgeProvider
+from simpleval.utilities.console import print_boxed_message, print_list
 
 
 def select_item(items, prompt_message, add_quit=False):
@@ -24,10 +25,7 @@ def select_item(items, prompt_message, add_quit=False):
 
 
 def metrics_explorer_command():
-    print(f'{Fore.BLUE}Welcome to the metrics explorer{Fore.RESET}')
-    print()
-    print('Available llm as a judge models:')
-    print()
+    print_boxed_message('Welcome to the metrics explorer')
 
     judges = JudgeProvider.list_judges()
     judge_model = select_item(judges, 'Select a judge-model to explore metrics: ')
@@ -50,12 +48,18 @@ def list_metrics(judge_model: str):
         if selected_metric is None:
             return
 
-        print(f'Selected metric: {Fore.YELLOW}{selected_metric}{Fore.RESET}')
-        print()
+        print_boxed_message(f'Selected metric: {selected_metric}')
 
         print(f'{Fore.BLUE}{selected_metric} description:{Fore.RESET}')
         metric = judge.get_metric(selected_metric)
         print(f'{Fore.WHITE}{metric.__doc__}{Fore.RESET}')
-        print(f'{Fore.WHITE}    Possible responses: {metric.possible_responses}{Fore.RESET}')
+        print_list(
+            title='    Possible responses',
+            items=metric.possible_responses,
+            title_color=Fore.WHITE,
+            items_color=Fore.WHITE,
+            tab_size=6,
+        )
 
+        print()
         cont = input(f'{Fore.MAGENTA}Continue? (y/n): {Fore.RESET}').strip().lower()

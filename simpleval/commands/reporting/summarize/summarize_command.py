@@ -5,10 +5,14 @@ from simpleval.consts import LOGGER_NAME
 from simpleval.evaluation.metrics.calc import calc_scores
 from simpleval.evaluation.utils import get_all_eval_results, get_all_testcases
 from simpleval.exceptions import TerminationError
+from simpleval.utilities.console import print_boxed_message
 
 
 def summarize_command(eval_dir: str, config_file: str, primary_metric: str):
     logger = logging.getLogger(LOGGER_NAME)
+
+    print_boxed_message('Evaluation Results Summary Report')
+
     logger.info(f'Summarizing evaluation results in {eval_dir}')
     testcases = get_all_testcases(eval_dir)
     logger.info(f'Found {len(testcases)} testcases: {testcases}')

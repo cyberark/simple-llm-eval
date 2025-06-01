@@ -4,8 +4,9 @@ changelog:
   exclude:
     labels:
       - ignore-for-release
-      - cicd
+      - ci
       - dependencies
+      - chore
     authors:
       - octocat
       - github-actions[bot]

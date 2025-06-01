@@ -2,7 +2,7 @@
 name: "CI/CD Issue ⚡"
 about: Report issues with continuous integration or deployment
 title: ''
-labels: 'cicd'
+labels: 'ci'
 assignees: ''
 
 ---

@@ -6,6 +6,7 @@ from simpleval.commands.reporting.eval.html2.html2_report import _generate_html_
 from simpleval.consts import LOGGER_NAME, ReportFormat
 from simpleval.evaluation.metrics.calc import MeanScores, calc_scores
 from simpleval.evaluation.schemas.eval_result_schema import EvalTestResult
+from simpleval.utilities.console import print_boxed_message
 
 
 class ResultsManager:
@@ -13,6 +14,8 @@ class ResultsManager:
         self.red_threshold = red_threshold
         self.yellow_threshold = yellow_threshold
         self.logger = logging.getLogger(LOGGER_NAME)
+
+        print_boxed_message('Evaluation Results Report')
 
     def display_results(
         self,

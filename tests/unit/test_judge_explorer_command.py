@@ -5,10 +5,11 @@ import pytest
 from simpleval.commands.judge_explorer_command import judge_explorer_command
 
 
+@patch('builtins.print')
 @patch('simpleval.commands.judge_explorer_command.logging.getLogger')
 @patch('simpleval.commands.judge_explorer_command.prompt')
 @patch('simpleval.commands.judge_explorer_command.JudgeProvider')
-def test_judge_explorer_command_with_judges(mock_judge_provider, mock_prompt, mock_get_logger):
+def test_judge_explorer_command_with_judges(mock_judge_provider, mock_prompt, mock_get_logger, mock_print):
     # Setup mocks
     mock_logger = MagicMock()
     mock_get_logger.return_value = mock_logger
@@ -29,8 +30,9 @@ def test_judge_explorer_command_with_judges(mock_judge_provider, mock_prompt, mo
     assert mock_logger.info.call_count > 0
     assert any('TestJudge' in str(call) for call in mock_logger.info.call_args_list)
     assert any('test-model' in str(call) for call in mock_logger.info.call_args_list)
-    assert any('accuracy' in str(call) for call in mock_logger.info.call_args_list)
     assert any('No auth required.' in str(call) for call in mock_logger.info.call_args_list)
+
+    assert any('- accuracy' in str(call) for call in mock_print.call_args_list)
 
 
 @patch('simpleval.commands.judge_explorer_command.logging.getLogger')

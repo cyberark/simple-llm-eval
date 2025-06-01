@@ -22,19 +22,20 @@ def test_get_model_info_failure(mock_logger, mock_get_model_info):
     assert result == {}
 
 
+@patch('builtins.print')
 @patch('simpleval.commands.litellm_models_explorer_command.prompt')
 @patch('simpleval.commands.litellm_models_explorer_command.supported_models_by_provider')
 @patch('simpleval.commands.litellm_models_explorer_command.logging.getLogger')
-def test_litellm_models_explorer_command(mock_logger, mock_supported_models_by_provider, mock_prompt):
+def test_litellm_models_explorer_command(mock_logger, mock_supported_models_by_provider, mock_prompt, mock_print):
     mock_logger.return_value = MagicMock()
     mock_supported_models_by_provider.return_value = {'provider1': [{'model': 'model1'}, {'model': 'model2'}]}
     mock_prompt.return_value = {'selected_provider': 'provider1'}
 
     litellm_models_explorer_command()
 
-    mock_logger.return_value.info.assert_any_call("Models available for provider 'provider1':")
-    mock_logger.return_value.info.assert_any_call('model1')
-    mock_logger.return_value.info.assert_any_call('model2')
+    assert any('Models available for provider `provider1`' in str(call) for call in mock_print.call_args_list)
+    assert any('- model1' in str(call) for call in mock_print.call_args_list)
+    assert any('- model2' in str(call) for call in mock_print.call_args_list)
 
 
 @patch('simpleval.commands.litellm_models_explorer_command.prompt')

@@ -1,0 +1,13 @@
+# Add 'Documentation' label to any changes within 'docs' folder or any subfolders
+documentation:
+- changed-files:
+  - any-glob-to-any-file: docs/**
+
+python:
+- changed-files:
+  - any-glob-to-any-file: simpleval/**
+  - any-glob-to-any-file: tests/**
+
+javascript:
+- changed-files:
+  - any-glob-to-any-file: reports-frontend/**

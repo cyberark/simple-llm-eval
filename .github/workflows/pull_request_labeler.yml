@@ -1,0 +1,49 @@
+name: "Pull Request Labeler"
+
+permissions:
+  contents: read
+
+on:
+- pull_request_target
+
+jobs:
+  labeler:
+    permissions:
+      contents: read
+      pull-requests: write
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.x"
+
+    - name: 🏷️ File Based PR Labeling
+      uses: actions/labeler@8558fd74291d67161a8a78ce36a881fa63b766a9 # v5.0.0
+
+    - name: 🏷️ Keyword PR Labeling - Propose labels
+      id: propose_labels
+      env:
+        PR_TITLE: ${{ github.event.pull_request.title }}
+        PR_BODY: ${{ github.event.pull_request.body }}
+      run: |
+        LABELS=$(python3 ./ci/scripts/propose_pull_request_labels.py | jq -c .)
+        echo "labels=$LABELS" >> $GITHUB_OUTPUT
+
+    - name: 🏷️ Apply labels to PR
+      if: ${{ steps.propose_labels.outputs.labels != '[]' }}
+      uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # 7.0.1
+      with:
+        script: |
+          const labels = JSON.parse(process.env.LABELS);
+          if (labels.length) {
+            await github.rest.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              labels,
+            });
+          }
+      env:
+        LABELS: ${{ steps.propose_labels.outputs.labels }}

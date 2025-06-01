@@ -1,7 +1,7 @@
 import json
-import shutil
 import logging
 import os
+import shutil
 from abc import ABC, abstractmethod
 
 from colorama import Fore
@@ -49,9 +49,9 @@ class BaseInit(ABC):
         try:
             shutil.copy(os.path.join(empty_eval_set_folder, EVAL_CONFIG_FILE), new_eval_set_folder)
             shutil.copy(os.path.join(empty_eval_set_folder, GROUND_TRUTH_FILE), new_eval_set_folder)
-            shutil.copy(os.path.join(empty_eval_set_folder, "README.md"), new_eval_set_folder)
+            shutil.copy(os.path.join(empty_eval_set_folder, 'README.md'), new_eval_set_folder)
 
-            shutil.copy(os.path.join(empty_testcase_folder, "__init__.py"), new_testcases_folder)
+            shutil.copy(os.path.join(empty_testcase_folder, '__init__.py'), new_testcases_folder)
             shutil.copy(os.path.join(empty_testcase_folder, PLUGIN_FILE_NAME), new_testcases_folder)
         except Exception as e:
             raise TerminationError(f'{Fore.RED}Error occurred creating the new evaluation: {e}{Fore.RESET}')

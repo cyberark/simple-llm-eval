@@ -8,6 +8,7 @@ TITLE_PREFIXES_TO_LABELS = {
     'refactor': 'refactoring',
     'test': 'testing',
     'chore': 'maintenance',
+    'release': 'ignore-for-release',
 }
 BODY_TEXT_TO_LABELS = {
     '[x] Bug Fix': 'bug',

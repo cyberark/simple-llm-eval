@@ -39,6 +39,8 @@
     * Code coverage checks - must be above 90%
     * Verify uv.lock and requirements.txt are synced
 
+    Optionally also run `./ci/run_code_cov.py` to make sure the code coverage is adequate.
+
 !!! info "React checks"
       If you made changes to the `reports-frontend` reports, run the `ci/run_checks_react.py` script
       This will run the following steps:

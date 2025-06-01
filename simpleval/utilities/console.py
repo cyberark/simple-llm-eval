@@ -1,5 +1,6 @@
 import re
 from typing import List
+import sys
 
 import click
 from colorama import Fore, Style
@@ -10,6 +11,15 @@ def visible_length(s):
     return len(re.sub(r'\x1b\[[0-9;]*m', '', s))
 
 
+
+def _get_box_chars():
+    try:
+        '┌'.encode(sys.stdout.encoding)
+        return '┌', '┐', '└', '┘', '─', '│'
+    except UnicodeEncodeError:
+        return '+', '+', '+', '+', '-', '|'
+
+
 def print_boxed_message(message, color=Fore.BLUE, text_color=Fore.YELLOW):
     click.echo('')
     lines = message.split('\n')
@@ -17,7 +27,7 @@ def print_boxed_message(message, color=Fore.BLUE, text_color=Fore.YELLOW):
     # +2 for single space padding left and right of each line
     box_width = width + 2
 
-    tl, tr, bl, br, hor, ver = '┌', '┐', '└', '┘', '─', '│'
+    tl, tr, bl, br, hor, ver = _get_box_chars()
     click.echo(color + tl + (hor * box_width) + tr)
     for line in lines:
         vis_len = visible_length(line)

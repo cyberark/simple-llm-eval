@@ -11,13 +11,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - fix: fix docs publishing ([#202](https://github.com/cyberark/simple-llm-eval/pull/202))
 
 
-## [1.1.0] - 2025-06-01
-
-### Other
-
-- fix: fix docs publishing ([#202](https://github.com/cyberark/simple-llm-eval/pull/202))
-
-
 ## [1.0.0] - 2025-06-01
 
 First release of simpleval 🎉

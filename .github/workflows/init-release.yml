@@ -16,12 +16,11 @@ on:
             - bump-minor
             - bump-major
             - provide-version
-              default: 'none'
       provide_version:
         description: 'Release version in case of `provide-version`'
         required: false
         type: string
-        default: ''
+        default: 'none'
       release_branch:
           description: 'Branch name for the release PR'
           type: string

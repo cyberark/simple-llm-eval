@@ -65,7 +65,7 @@ def get_testcase_name_from_user() -> str:
     logger.info(f'{Fore.CYAN}Enter the name of your first testcase.{Fore.RESET}')
     logger.info(f'{Fore.CYAN}This should reflect the conditions that you want to run.{Fore.RESET}')
     logger.info(f'{Fore.CYAN}This can be: using different model, different set of prompts, etc.{Fore.RESET}')
-    logger.info(f'{Fore.CYAN}For example: {Fore.YELLOW}sonnet37{Fore.CYAN}, {Fore.YELLOW}prompt_v1`{Fore.RESET}')
+    logger.info(f'{Fore.CYAN}For example: {Fore.YELLOW}sonnet37-prompt-v1{Fore.CYAN}')
 
     testcase_name = ''
     while not testcase_name:

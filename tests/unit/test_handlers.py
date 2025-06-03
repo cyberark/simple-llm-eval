@@ -11,8 +11,8 @@ def test_empty_task_logic():
     result = empty_task_logic('test_empty', payload)
     assert isinstance(result, LlmTaskResult)
     assert result.name == 'test_empty'
-    assert result.prompt == 'this is what you send to your llm'
-    assert result.prediction == 'hi there!'
+    assert result.prompt == 'Hi LLM, please respond to this prompt, replace with your own prompt'
+    assert result.prediction == 'Is is the response from the LLM'
     assert result.payload == payload
 
 

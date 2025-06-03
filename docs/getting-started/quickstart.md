@@ -19,15 +19,16 @@
 
     Activate the virtual environment:
     
+    ???- note "Linux/Mac"
+        ```bash
+        source .venv/bin/activate 
+        ```
+
     ???- note "Windows"
         ```bat
         .venv\Scripts\activate
         ```
 
-    ???- note "Linux/Mac"
-        ```bash
-        source .venv/bin/activate 
-        ```
 
     **Install the package:**
 
@@ -43,30 +44,24 @@
     uv .venv
     ```
     
-    **Activate the virtual environment according to your OS:**
+    **Activate the virtual environment:**
     
-    ```bash
-    source .venv/bin/activate # Linux/Mac
-    ```
+    ???- note "Linux/Mac"
+        ```bash
+        source .venv/bin/activate 
+        ```
 
-    ```bat
-    .venv\Scripts\activate # Windows
-    ```
+    ???- note "Windows"
+        ```bat
+        .venv\Scripts\activate
+        ```
+
 
     **Install the package:**
 
     ```bash
     uv add simpleval
     ```
-
-
-???- note "uvx"
-    
-    **Run all commands using `uvx`** 
-    ```bash
-    uvx simpleval
-    ```
-
 
 ### Usage
 

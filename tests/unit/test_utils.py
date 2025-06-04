@@ -16,4 +16,4 @@ def test_is_subpath_same_path():
     path = '/parent'
     parent = '/parent'
 
-    assert is_subpath(path, parent) is True
+    assert is_subpath(path, parent) is False

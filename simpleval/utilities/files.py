@@ -25,6 +25,10 @@ def delete_file(file_path: str, log: bool = True):
 def is_subpath(child_path: str, parent_path: str):
     child = Path(child_path).resolve()
     parent = Path(parent_path).resolve()
+
+    if child == parent:
+        return False
+
     try:
         child.relative_to(parent)
         return True

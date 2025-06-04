@@ -154,8 +154,9 @@ def _handle_errors(eval_dir: str, testcase: str, llm_task_errors: list, eval_err
         llm_task_error_file = get_llm_task_errors_file(eval_set_dir=eval_dir, testcase=testcase)
         with open(llm_task_error_file, 'w', encoding='utf-8') as file:
             file.writelines(f'{error}\n{"-" * 120}\n' for error in llm_task_errors)
-            logger.error(f'{Fore.YELLOW}LLM task errors saved to {llm_task_error_file}{Fore.RESET}')
-            print()
+
+        logger.error(f'{Fore.YELLOW}LLM task errors saved to {llm_task_error_file}{Fore.RESET}')
+        print()
 
     if eval_errors:
         logger.error(f'{Fore.RED}Errors occurred during evaluation. {len(eval_errors)} error(s) found. Terminating evaluation.{Fore.RESET}')
@@ -163,7 +164,8 @@ def _handle_errors(eval_dir: str, testcase: str, llm_task_errors: list, eval_err
         eval_errors_file = get_eval_errors_file(eval_set_dir=eval_dir, testcase=testcase)
         with open(eval_errors_file, 'w', encoding='utf-8') as file:
             file.writelines(f'{error}\n{"-" * 120}\n' for error in eval_errors)
-            logger.error(f'{Fore.YELLOW}Eval errors saved to {eval_errors_file}{Fore.RESET}')
+
+        logger.error(f'{Fore.YELLOW}Eval errors saved to {eval_errors_file}{Fore.RESET}')
 
     if llm_task_errors or eval_errors:
         print()

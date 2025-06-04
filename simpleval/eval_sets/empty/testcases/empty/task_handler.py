@@ -21,7 +21,7 @@ def task_logic(name: str, payload: dict) -> LlmTaskResult:
     # The user prompt is also returned in LlmTaskResult since the judge will use it when making judgement.
     user_prompt_to_llm = 'Hi LLM, please respond to this prompt, replace with your own prompt'
     # llm_response = call_an_llm_here(user_prompt=user_prompt_to_llm)
-    llm_response = 'Is is the response from the LLM'  # The llm response is returned in LlmTaskResult
+    llm_response = 'This is the response from the LLM'  # The llm response is returned in LlmTaskResult
 
     # To log token usage, call this with your token count, when verbose is on (-v) it will write it to tokens-bookkeeping.log
     # log_bookkeeping_data(source='llm', model_name=model_id, input_tokens=input_tokens, output_tokens=output_tokens)

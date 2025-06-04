@@ -30,7 +30,7 @@ See supported providers and their required credentials in the [Judge Models and 
 simpleval init
 ```
 
-- [ ] For `Enter eval folder (enter to stop):` enter `story-q-and-a`
+- [ ] For `Enter eval folder...:` enter `story-q-and-a`
 - [ ] For `Enter test case name (enter to stop):` enter `prompt1`
 - [ ] Select a judge provider you want to use, which ever you have access to. <br>For example `open-ai`<br>
       Don't worry if you get an error saying that the necessary credentials are not set; you can set them later.

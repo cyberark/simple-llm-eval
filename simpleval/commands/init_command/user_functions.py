@@ -38,7 +38,7 @@ def get_eval_dir_from_user() -> str:
         logger.info(f'{Fore.CYAN}The folder name should describe the evaluation you are going to perform.{Fore.RESET}')
         logger.info(f'{Fore.CYAN}For example: {Fore.YELLOW}my_eval{Fore.CYAN} or {Fore.YELLOW}{_example_dir()}{Fore.RESET}')
 
-        eval_dir = input(f'{Fore.CYAN}\nEnter eval folder (enter to stop): {Fore.RESET}')
+        eval_dir = input(f'{Fore.CYAN}\nEnter eval folder - absolute or relative (enter to stop): {Fore.RESET}')
         if not eval_dir:
             raise TerminationError(f'{Fore.RED}No folder name provided, exiting...{Fore.RESET}')
 
@@ -65,7 +65,7 @@ def get_testcase_name_from_user() -> str:
     logger.info(f'{Fore.CYAN}Enter the name of your first testcase.{Fore.RESET}')
     logger.info(f'{Fore.CYAN}This should reflect the conditions that you want to run.{Fore.RESET}')
     logger.info(f'{Fore.CYAN}This can be: using different model, different set of prompts, etc.{Fore.RESET}')
-    logger.info(f'{Fore.CYAN}For example: {Fore.YELLOW}sonnet37{Fore.CYAN}, {Fore.YELLOW}prompt_v1`{Fore.RESET}')
+    logger.info(f'{Fore.CYAN}For example: {Fore.YELLOW}sonnet37-prompt-v1{Fore.CYAN}')
 
     testcase_name = ''
     while not testcase_name:

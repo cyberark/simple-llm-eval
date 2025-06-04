@@ -1,5 +1,6 @@
 import logging
 import os
+from pathlib import Path
 
 from colorama import Fore
 
@@ -19,3 +20,14 @@ def delete_file(file_path: str, log: bool = True):
         if log:
             logger = logging.getLogger(LOGGER_NAME)
             logger.debug(f'{Fore.YELLOW}`{file_path}` deleted{Fore.RESET}\n')
+
+
+
+def is_subpath(child_path: str, parent_path: str):
+    child = Path(child_path).resolve()
+    parent = Path(parent_path).resolve()
+    try:
+        child.relative_to(parent)
+        return True
+    except ValueError:
+        return False

@@ -38,7 +38,7 @@ def get_eval_dir_from_user() -> str:
         logger.info(f'{Fore.CYAN}The folder name should describe the evaluation you are going to perform.{Fore.RESET}')
         logger.info(f'{Fore.CYAN}For example: {Fore.YELLOW}my_eval{Fore.CYAN} or {Fore.YELLOW}{_example_dir()}{Fore.RESET}')
 
-        eval_dir = input(f'{Fore.CYAN}\nEnter eval folder (enter to stop): {Fore.RESET}')
+        eval_dir = input(f'{Fore.CYAN}\nEnter eval folder - absolute or relative (enter to stop): {Fore.RESET}')
         if not eval_dir:
             raise TerminationError(f'{Fore.RED}No folder name provided, exiting...{Fore.RESET}')
 

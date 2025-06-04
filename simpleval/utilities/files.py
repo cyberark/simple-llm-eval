@@ -22,7 +22,6 @@ def delete_file(file_path: str, log: bool = True):
             logger.debug(f'{Fore.YELLOW}`{file_path}` deleted{Fore.RESET}\n')
 
 
-
 def is_subpath(child_path: str, parent_path: str):
     child = Path(child_path).resolve()
     parent = Path(parent_path).resolve()

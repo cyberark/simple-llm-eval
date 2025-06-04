@@ -17,7 +17,6 @@ from simpleval.utilities.files import is_subpath
 
 
 class BaseInit(ABC):
-
     def __init__(self, post_instructions_start_index: int):
         """
         Args:
@@ -66,8 +65,9 @@ class BaseInit(ABC):
 
         self._print_common_instructions_pre()
         self._print_specific_instructions()
-        self._print_common_instructions_post(new_eval_set_folder=new_eval_set_folder, new_testcases_folder=new_testcases_folder,
-                                             testcase=testcase)
+        self._print_common_instructions_post(
+            new_eval_set_folder=new_eval_set_folder, new_testcases_folder=new_testcases_folder, testcase=testcase
+        )
 
     @staticmethod
     def normalize_testcase_dir_name(testcase: str) -> str:
@@ -118,11 +118,17 @@ class BaseInit(ABC):
             eval_set_folder_to_show = new_eval_set_folder
 
         print()
-        print(f'{Fore.CYAN}{idx}. Populate the ground truth file: {Fore.YELLOW}{os.path.join(new_eval_set_folder, GROUND_TRUTH_FILE)}{Fore.RESET}')
+        print(
+            f'{Fore.CYAN}{idx}. Populate the ground truth file: {Fore.YELLOW}{os.path.join(new_eval_set_folder, GROUND_TRUTH_FILE)}{Fore.RESET}'
+        )
         idx += 1
         print(f'{Fore.CYAN}   This is a jsonl file - each line a valid json representing a test to run{Fore.RESET}')
-        print(f'{Fore.CYAN}   set {Fore.YELLOW}`name`{Fore.RESET}, {Fore.YELLOW}`description`{Fore.CYAN} (optional) and {Fore.YELLOW}`expected_result`{Fore.RESET}')
-        print(f'{Fore.CYAN}   {Fore.YELLOW}`payload`{Fore.CYAN} is whatever you want to pass to the testcase logic (the code you`ll write in {Fore.YELLOW}`task_handler.py`{Fore.CYAN}) as json{Fore.RESET}')
+        print(
+            f'{Fore.CYAN}   set {Fore.YELLOW}`name`{Fore.RESET}, {Fore.YELLOW}`description`{Fore.CYAN} (optional) and {Fore.YELLOW}`expected_result`{Fore.RESET}'
+        )
+        print(
+            f'{Fore.CYAN}   {Fore.YELLOW}`payload`{Fore.CYAN} is whatever you want to pass to the testcase logic (the code you`ll write in {Fore.YELLOW}`task_handler.py`{Fore.CYAN}) as json{Fore.RESET}'
+        )
         print(f'{Fore.CYAN}   e.g. path to image files to use during llm inference{Fore.RESET}')
         print(f'{Fore.YELLOW}   NOTE: `name` is unique{Fore.RESET}')
         print()
@@ -137,13 +143,23 @@ class BaseInit(ABC):
         print(f'{Fore.CYAN}   - Call an llm using the input from payload{Fore.RESET}')
         print(f'{Fore.CYAN}   - When returning LlmTaskResult: ')
         print(f'{Fore.CYAN}      - Set {Fore.YELLOW}`prompt`{Fore.CYAN} with the prompt you called the llm with{Fore.RESET}')
-        print(f'{Fore.CYAN}      - Set {Fore.YELLOW}`prediction`{Fore.CYAN} with the result from your llm call (the llm model prediction){Fore.RESET}')
-        print(f'{Fore.CYAN}      - Set {Fore.YELLOW}`name`{Fore.CYAN} and {Fore.YELLOW}`payload`{Fore.CYAN} from your input args as is - this is used by the framework as metadata{Fore.RESET}')
+        print(
+            f'{Fore.CYAN}      - Set {Fore.YELLOW}`prediction`{Fore.CYAN} with the result from your llm call (the llm model prediction){Fore.RESET}'
+        )
+        print(
+            f'{Fore.CYAN}      - Set {Fore.YELLOW}`name`{Fore.CYAN} and {Fore.YELLOW}`payload`{Fore.CYAN} from your input args as is - this is used by the framework as metadata{Fore.RESET}'
+        )
         print()
-        print(f'{Fore.YELLOW}   NOTE: If it recommended to implement retries on rate limit errors on the call to {Fore.YELLOW}`{PLUGIN_FUNCTION_NAME}`{Fore.RESET}')
-        print(f'{Fore.YELLOW}         Check out the built-in retry decorators in  {Fore.YELLOW}`simpleval/utilities/retryables.py`{Fore.RESET}')
+        print(
+            f'{Fore.YELLOW}   NOTE: If it recommended to implement retries on rate limit errors on the call to {Fore.YELLOW}`{PLUGIN_FUNCTION_NAME}`{Fore.RESET}'
+        )
+        print(
+            f'{Fore.YELLOW}         Check out the built-in retry decorators in  {Fore.YELLOW}`simpleval/utilities/retryables.py`{Fore.RESET}'
+        )
         print()
-        print(f'{Fore.CYAN}See https://cyberark.github.io/simple-llm-eval/latest/users/configuration/ on how to set different concurrency per testcase{Fore.RESET}')
+        print(
+            f'{Fore.CYAN}See https://cyberark.github.io/simple-llm-eval/latest/users/configuration/ on how to set different concurrency per testcase{Fore.RESET}'
+        )
 
         print()
         print(f'{Fore.CYAN}{idx}. You are ready to run the evaluation with:{Fore.RESET}')

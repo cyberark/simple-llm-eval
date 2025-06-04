@@ -148,7 +148,9 @@ def _handle_errors(eval_dir: str, testcase: str, llm_task_errors: list, eval_err
     logger = logging.getLogger(LOGGER_NAME)
 
     if llm_task_errors:
-        logger.error(f'{Fore.RED}Errors occurred during llm tasks run. {len(llm_task_errors)} error(s) found. Terminating evaluation.{Fore.RESET}')
+        logger.error(
+            f'{Fore.RED}Errors occurred during llm tasks run. {len(llm_task_errors)} error(s) found. Terminating evaluation.{Fore.RESET}'
+        )
         llm_task_error_file = get_llm_task_errors_file(eval_set_dir=eval_dir, testcase=testcase)
         with open(llm_task_error_file, 'w', encoding='utf-8') as file:
             file.writelines(f'{error}\n{"-" * 120}\n' for error in llm_task_errors)
@@ -166,7 +168,10 @@ def _handle_errors(eval_dir: str, testcase: str, llm_task_errors: list, eval_err
     if llm_task_errors or eval_errors:
         print()
         logger.error(f'{Fore.YELLOW}Run with --verbose/-v for more details{Fore.RESET}')
-        logger.error(f'{Fore.YELLOW}If these are temporary failures, run again without overwriting (no -o) to run only the failures{Fore.RESET}')
+        logger.error(
+            f'{Fore.YELLOW}If these are temporary failures, run again without overwriting (no -o) to run only the failures{Fore.RESET}'
+        )
+
 
 def print_exec_time(elapsed_time_testcases: float, elapsed_time_runeval: float):
     print()

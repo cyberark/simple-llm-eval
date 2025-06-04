@@ -72,24 +72,6 @@ so you can always also refer to its documentation.
 
     See the [Gemini API docs](https://ai.google.dev/gemini-api/docs/api-key) for more details.
 
-???- note "Generic Bedrock Judge"
-
-    **Required credentials:**
-
-    AWS credentials must be available, either via environment variables or in a `~/.aws/credentials` file.
-
-    You can learn more about using AWS credentials in the [AWS docs](https://docs.aws.amazon.com/cli/v1/userguide/cli-configure-files.html)
-
-???- note "LiteLLM Structured Output Judge"
-
-    **Required authentication:**
-
-    Depends on the provider you use with LiteLLM.
-
-    You can learn about the available providers in the [LiteLLM documentation](https://docs.litellm.ai/docs/providers).
-
-    And about structured output in LiteLLM [here](https://docs.litellm.ai/docs/completion/json_mode)
-
 ???- note "OpenAI Judge"
 
     **Required environment variable:**
@@ -119,3 +101,21 @@ so you can always also refer to its documentation.
     ```
 
     See the [Vertex AI docs](https://cloud.google.com/vertex-ai/docs/start/client-libraries#client-libraries-install-python) for more details.
+
+???- note "Generic Bedrock Judge"
+
+    **Required credentials:**
+
+    AWS credentials must be available, either via environment variables or in a `~/.aws/credentials` file.
+
+    You can learn more about using AWS credentials in the [AWS docs](https://docs.aws.amazon.com/cli/v1/userguide/cli-configure-files.html)
+
+???- note "LiteLLM Structured Output Judge"
+
+    **Required authentication:**
+
+    Depends on the provider you use with LiteLLM.
+
+    You can learn about the available providers in the [LiteLLM documentation](https://docs.litellm.ai/docs/providers).
+
+    And about structured output in LiteLLM [here](https://docs.litellm.ai/docs/completion/json_mode)

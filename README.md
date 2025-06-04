@@ -12,7 +12,7 @@ Welcome to the simple LLM evaluation framework, or **simpleval** for short.
 
 **simpleval** is a Python package designed to simplify the evaluation of Large Language Models (LLMs) using the "LLM as a Judge" technique.
 
-It supports various LLM providers, including OpenAI, Google (Gemini API, Vertex), AWS Bedrock, Anthropic, Azure, and more (via LiteLLM).
+It supports various LLM providers, such as OpenAI, Google (Gemini API, Vertex), AWS Bedrock, Anthropic, Azure, and more (via LiteLLM).
 
 ## Getting Started
 

@@ -14,6 +14,8 @@ Welcome to the simple LLM evaluation framework, or **simpleval** for short.
 
 It supports various LLM providers, such as OpenAI, Google (Gemini API, Vertex), AWS Bedrock, Anthropic, Azure, and more (via LiteLLM).
 
+It also includes a few reports to help analyze, compare and summarize the results of your evaluations.
+
 ## Getting Started
 
 See the [📚 Quickstart Guide 📚](https://cyberark.github.io/simple-llm-eval/latest/getting-started/quickstart/)

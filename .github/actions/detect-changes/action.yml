@@ -1,13 +1,13 @@
 name: "Detect Changes"
 description: "Detect if files in a given path have changed"
 inputs:
-  path:
-    description: "Path to check for changes"
+  paths:
+    description: "Comma-separated list of paths or files to check for changes (e.g. 'src,docs/file.txt')"
     required: true
 
 outputs:
   changed:
-    description: "Whether the path has changed"
+    description: "Whether any of the paths/files have changed"
     value: ${{ steps.detect.outputs.changed }}
 
 runs:
@@ -40,6 +40,17 @@ runs:
           DIFF_RANGE=$(git hash-object -t tree /dev/null)
         fi
 
-        CHANGED=$(git diff --name-only $DIFF_RANGE | grep -q "^$(printf '%q' "${{ inputs.path }}")/" && echo "true" || echo "false")
+        CHANGED="false"
+        IFS=',' read -ra PATHS <<< "${{ inputs.paths }}"
+        for p in "${PATHS[@]}"; do
+          p_trimmed=$(echo "$p" | xargs)
+          if [ -z "$p_trimmed" ]; then
+            continue
+          fi
+          if git diff --name-only $DIFF_RANGE | grep -q "^$p_trimmed\(/\|$\)"; then
+            CHANGED="true"
+            break
+          fi
+        done
 
         echo "changed=$CHANGED" >> $GITHUB_OUTPUT

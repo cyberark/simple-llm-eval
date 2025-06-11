@@ -63,8 +63,10 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # 4.2.2
+        if: needs.detect-changes.outputs.python_changed == 'true'
 
       - name: 🐍 Install uv with caching
+        if: needs.detect-changes.outputs.python_changed == 'true'
         uses: astral-sh/setup-uv@f0ec1fc3b38f5e7cd731bb6ce540c5af426746bb # 6.1.0
         with:
           enable-cache: true
@@ -72,29 +74,34 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - name: 📦 Install the project
+        if: needs.detect-changes.outputs.python_changed == 'true'
         run: uv sync --locked --all-extras --dev
 
       - name: 🔍 Run Radon complexity checks
+        if: needs.detect-changes.outputs.python_changed == 'true'
         run: uv run radon cc -n B simpleval
 
       - name: 🔍 Run Xenon complexity checks
+        if: needs.detect-changes.outputs.python_changed == 'true'
         run: uv run xenon --max-absolute B --max-modules B --max-average B simpleval
 
       - name: 🔍 Verify uv.lock <-> requirements.txt sync
-        if: runner.os == 'Linux'
+        if: needs.detect-changes.outputs.python_changed == 'true' && runner.os == 'Linux'
         run: uv run ci/scripts/validate_requirements_sync.py
 
       - name: 🧪 Run tests with coverage
+        if: needs.detect-changes.outputs.python_changed == 'true'
         run: uv run pytest --cov=simpleval --cov-report=term --cov-report=xml --cov-fail-under=90
 
       - name: ⬆️ Upload coverage report
-        if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.11'
+        if: needs.detect-changes.outputs.python_changed == 'true' && matrix.os == 'ubuntu-latest' && matrix.python-version == '3.11'
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # 4.6.2
         with:
           name: coverage-report
           path: coverage.xml
 
       - name: 📦 Build Project Package
+        if: needs.detect-changes.outputs.python_changed == 'true'
         run: uv build
 
   frontend-build:

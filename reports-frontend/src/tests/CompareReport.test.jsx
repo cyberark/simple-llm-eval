@@ -5,7 +5,7 @@ import { describe, it, beforeEach, expect } from "vitest";
 import CompareReport from "../components/CompareReport";
 
 
-// Helper function to render component before each test
+// helper function to render component before each test
 beforeEach(() => {
   render(<CompareReport />);
 });

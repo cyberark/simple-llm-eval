@@ -15,16 +15,23 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       frontend_changed: ${{ steps.frontend.outputs.changed }}
-
+      python_changed: ${{ steps.python.outputs.changed }}
     steps:
       - name: 🔄 Checkout repository
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # 4.2.2
 
-      - name: Detect changes in frontend/
+      - name: Detect changes in frontend-reports
         id: frontend
         uses: ./.github/actions/detect-changes
         with:
-          path: reports-frontend
+          paths: reports-frontend
+
+      - name: Detect python changes
+        id: python
+        uses: ./.github/actions/detect-changes
+        with:
+          paths: simpleval,tests,requirements.txt,uv.lock,pyproject.toml
+
 
   python-build:
     needs: detect-changes

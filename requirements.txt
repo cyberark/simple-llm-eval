@@ -480,9 +480,9 @@ jsonschema-specifications==2025.4.1 \
     --hash=sha256:4653bffbd6584f7de83a67e0d620ef16900b390ddc7939d56684d6c81e33f1af \
     --hash=sha256:630159c9f4dbea161a6a2205c3011cc4f18ff381b189fff48bb39b9bf26ae608
     # via jsonschema
-litellm==1.70.0 \
-    --hash=sha256:357f3891e38f23a12f0932c235ed860dc41bc5880afaee7229e6d25318652706 \
-    --hash=sha256:7e094057b38ddb1d77f61452895835aa5d376db1850e9a1bc0342c5631d89638
+litellm==1.72.4 \
+    --hash=sha256:8855de30f78bcb1f37af244519b37a37faaaf579401b1414400b5b5e5b616d57 \
+    --hash=sha256:f98ca994420ed649c466d423655a6e0f2aeecab4564ed372b3378a949e491dc2
     # via simpleval
 mando==0.7.1 \
     --hash=sha256:18baa999b4b613faefb00eac4efadcf14f510b59b924b66e08289aa1de8c3500 \

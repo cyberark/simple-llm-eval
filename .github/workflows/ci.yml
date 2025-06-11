@@ -30,7 +30,7 @@ jobs:
         id: python
         uses: ./.github/actions/detect-changes
         with:
-          paths: simpleval,tests,requirements.txt,uv.lock,pyproject.toml
+          paths: simpleval,tests,requirements.txt,uv.lock,pyproject.toml,reports-frontend/src
 
   pre-commit-checks:
     name: Run Pre-commit Checks

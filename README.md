@@ -5,6 +5,7 @@
 ![Code Coverage](https://raw.githubusercontent.com/cyberark/simple-llm-eval/refs/heads/badges/ci/badges/coverage-updated.svg)
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/simpleval)
 [![license](https://img.shields.io/badge/license-Apache%202.0-blue?style=flat-square)](https://raw.githubusercontent.com/cyberark/simple-llm-eval/refs/heads/main/LICENSE)
+[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/cyberark/simple-llm-eval/badge)](https://scorecard.dev/viewer/?uri=github.com/cyberark/simple-llm-eval)
 
 ![Simpleval Banner](https://raw.githubusercontent.com/cyberark/simple-llm-eval/main/docs/media/simpleval-banner.jpeg)
 

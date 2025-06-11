@@ -32,9 +32,30 @@ jobs:
         with:
           paths: simpleval,tests,requirements.txt,uv.lock,pyproject.toml
 
+  pre-commit-checks:
+    name: Run Pre-commit Checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # 4.2.2
+
+      - name: 🐍 Install uv with caching
+        uses: astral-sh/setup-uv@f0ec1fc3b38f5e7cd731bb6ce540c5af426746bb # 6.1.0
+        with:
+          enable-cache: true
+          cache-dependency-glob: "uv.lock"
+          python-version: "3.11"
+
+      - name: 📦 Install dev dependencies
+        run: uv sync --locked --dev
+
+      - name: 👁️ Show versions
+        run: python --version && uv --version
+
+      - name: 🔍 Run pre-commit
+        run: uv run pre-commit run -a --config .config/.pre-commit-config.yaml
 
   python-build:
-    needs: detect-changes
+    needs: [detect-changes, pre-commit-checks]
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
@@ -52,12 +73,6 @@ jobs:
 
       - name: 📦 Install the project
         run: uv sync --locked --all-extras --dev
-
-      - name: 👁️ Show versions
-        run: python --version && uv --version
-
-      - name: 🔍 Run pre-commit
-        run: uv run pre-commit run -a --config .config/.pre-commit-config.yaml
 
       - name: 🔍 Run Radon complexity checks
         run: uv run radon cc -n B simpleval
@@ -83,7 +98,7 @@ jobs:
         run: uv build
 
   frontend-build:
-    needs: detect-changes
+    needs: [detect-changes, pre-commit-checks]
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]

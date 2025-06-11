@@ -15,23 +15,63 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       frontend_changed: ${{ steps.frontend.outputs.changed }}
-
+      python_changed: ${{ steps.python.outputs.changed }}
     steps:
       - name: 🔄 Checkout repository
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # 4.2.2
 
-      - name: Detect changes in frontend/
+      - name: Detect changes in frontend-reports
         id: frontend
         uses: ./.github/actions/detect-changes
         with:
-          path: reports-frontend
+          paths: reports-frontend
+
+      - name: Detect python changes
+        id: python
+        uses: ./.github/actions/detect-changes
+        with:
+          paths: simpleval,tests,requirements.txt,uv.lock,pyproject.toml
+
+  pre-commit-checks:
+    name: Run Pre-commit Checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # 4.2.2
+
+      - name: 🐍 Install uv with caching
+        uses: astral-sh/setup-uv@f0ec1fc3b38f5e7cd731bb6ce540c5af426746bb # 6.1.0
+        with:
+          enable-cache: true
+          cache-dependency-glob: "uv.lock"
+          python-version: "3.11"
+
+      - name: 📦 Install dev dependencies
+        run: uv sync --locked --dev
+
+      - name: 👁️ Show versions
+        run: python --version && uv --version
+
+      - name: 🔍 Run pre-commit
+        run: uv run pre-commit run -a --config .config/.pre-commit-config.yaml
 
   python-build:
-    needs: detect-changes
+    needs: [detect-changes, pre-commit-checks]
+    if: needs.detect-changes.outputs.python_changed == 'true'
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
-        python-version: [3.11, 3.12, 3.13]
+        include:
+          # Run Python 3.11 on all OS platforms
+          - os: ubuntu-latest
+            python-version: 3.11
+          - os: macos-latest
+            python-version: 3.11
+          - os: windows-latest
+            python-version: 3.11
+          # Run Python 3.12 and 3.13 only on Ubuntu
+          - os: ubuntu-latest
+            python-version: 3.12
+          - os: ubuntu-latest
+            python-version: 3.13
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # 4.2.2
@@ -45,12 +85,6 @@ jobs:
 
       - name: 📦 Install the project
         run: uv sync --locked --all-extras --dev
-
-      - name: 👁️ Show versions
-        run: python --version && uv --version
-
-      - name: 🔍 Run pre-commit
-        run: uv run pre-commit run -a --config .config/.pre-commit-config.yaml
 
       - name: 🔍 Run Radon complexity checks
         run: uv run radon cc -n B simpleval
@@ -76,11 +110,23 @@ jobs:
         run: uv build
 
   frontend-build:
-    needs: detect-changes
+    needs: [detect-changes, pre-commit-checks]
+    if: needs.detect-changes.outputs.frontend_changed == 'true'
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
-        node-version: [18, 20, 22]
+        include:
+          # Test 18, 20, 22 on ubuntu
+          - os: ubuntu-latest
+            node-version: 18
+          - os: ubuntu-latest
+            node-version: 20
+          - os: ubuntu-latest
+            node-version: 22
+          # Test latest on other OSs
+          - os: macos-latest
+            node-version: 22
+          - os: windows-latest
+            node-version: 22
     runs-on: ${{ matrix.os }}
     defaults:
       run:
@@ -89,7 +135,6 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # 4.2.2
 
       - name: ⬇️ Setup Node.js ${{ matrix.node-version }}
-        if: needs.detect-changes.outputs.frontend_changed == 'true'
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # 4.4.0
         with:
           node-version: ${{ matrix.node-version }}
@@ -97,19 +142,15 @@ jobs:
           cache-dependency-path: reports-frontend/package-lock.json
 
       - name: 📦 Install dependencies
-        if: needs.detect-changes.outputs.frontend_changed == 'true'
         run: npm ci
 
       - name: 🛠️ Build project
-        if: needs.detect-changes.outputs.frontend_changed == 'true'
         run: npm run build
 
       - name: 🔍 Audit for vulnerabilities
-        if: needs.detect-changes.outputs.frontend_changed == 'true'
         run: npm audit --audit-level=low
 
       - name: 🧪 Run tests
-        if: needs.detect-changes.outputs.frontend_changed == 'true'
         run: npm run test-no-watch
 
   update-badge:
@@ -129,7 +170,7 @@ jobs:
         with:
           enable-cache: true
           cache-dependency-glob: "uv.lock"
-          python-version: ${{ matrix.python-version }}
+          python-version: "3.11"
 
       - name: ⬇️ Download coverage report
         uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # 4.3.0

@@ -24,8 +24,10 @@
 
 ### Release Automation
 
+*[version-bump]: Follow Semantic Versioning.<br>To help determine patch/minor/major version bump, run: `ci/scripts/inspect_changes_since_last_release.sh` to view changes since the last release.
+
 !!! info "Automatic Release Procedure (Recommended)"
-    - [ ] Run the [Init Release Workflow](https://github.com/cyberark/simple-llm-eval/actions/workflows/init-release.yml){target="_blank"} workflow and wait for it to complete.
+    - [ ] Run the [Init Release Workflow](https://github.com/cyberark/simple-llm-eval/actions/workflows/init-release.yml){target="_blank"} workflow and wait for it to complete. (You will need to decide how to version-bump)
 
     ???- note "Init Release Workflow - Under the Hood"
         The *Init Release Workflow* will:

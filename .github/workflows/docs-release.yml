@@ -39,7 +39,20 @@ jobs:
           echo "Validating version: $VERSION"
           uv run ci/scripts/validate_tag.py "$VERSION"
 
+      - name: Check for changes in docs/ between latest two stable tags
+        id: diff_check
+        run: |
+          latest_tag=$(git tag --sort=-v:refname | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+$' | sed -n '1p')
+          prev_tag=$(git tag --sort=-v:refname | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+$' | sed -n '2p')
+          echo "Comparing $prev_tag to $latest_tag"
+          if git diff --quiet "$prev_tag" "$latest_tag" -- docs/; then
+            echo "changes=false" >> $GITHUB_OUTPUT
+          else
+            echo "changes=true" >> $GITHUB_OUTPUT
+          fi
+
       - name: 📚 Publish Docs
+        if: steps.diff_check.outputs.changes == 'true'
         run: |
           VERSION=${{ github.event.inputs.version }}
           ci/scripts/publish_docs.sh "$VERSION"

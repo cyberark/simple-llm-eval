@@ -39,7 +39,7 @@ jobs:
           echo "Validating version: $VERSION"
           uv run ci/scripts/validate_tag.py "$VERSION"
 
-      - name: Check for changes in docs/ between latest two stable tags
+      - name: Check for changes in docs/ between latest two stable tags - to determine if need to publish
         id: diff_check
         run: |
           latest_tag=$(git tag --sort=-v:refname | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+$' | sed -n '1p')

@@ -50,22 +50,6 @@ jobs:
           enable-cache: true
           cache-dependency-glob: "uv.lock"
 
-      # - name: 🧹 Delete remote release branch if it exists
-      #   run: |
-      #     git config user.name "github-actions[bot]"
-      #     git config user.email "github-actions[bot]@users.noreply.github.com"
-      #     branch="${{ github.event.inputs.release_branch }}"
-
-      #     if git ls-remote --exit-code --heads origin $branch; then
-      #       git push origin --delete $branch
-      #     fi
-
-      # - name: 🌱 Create release branch from main
-      #   run: |
-      #     git fetch origin
-      #     branch="${{ github.event.inputs.release_branch }}"
-      #     git checkout -b $branch origin/main
-
       - name: Bump version
         run: |
           git config user.name "github-actions[bot]"

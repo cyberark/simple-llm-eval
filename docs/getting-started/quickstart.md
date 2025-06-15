@@ -41,7 +41,7 @@
     **Using a virtual environment:**
 
     ```bash
-    uv .venv
+    uv venv
     ```
     
     **Activate the virtual environment:**

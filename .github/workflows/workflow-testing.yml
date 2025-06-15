@@ -1,4 +1,5 @@
-name: Workflow Testing
+## This GitHub Actions workflow is intended for testing purposes only. It is used to validate workflow logic,
+## change detection, and other CI/CD features in a non-production context.
 
 permissions:
   contents: read

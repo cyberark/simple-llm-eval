@@ -63,6 +63,19 @@
     uv add simpleval
     ```
 
+???- note "Using uvx"
+
+    **Run any command with uvx, for example:**
+
+    ```bash
+    uvx simpleval init
+    ```
+
+    !!! warning "Important Note"
+        Since uvx runs commands in an isolated environment, you will not have the benefits of a virtual environment when implementing your own handlers.
+        
+        In this case, consider creating a virtual environment and installing the package as described above.
+
 ### Usage
 
 ✅ Run `simpleval init` and follow the instructions, or instead, follow the [Tutorial](./tutorial.md) section.

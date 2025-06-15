@@ -33,6 +33,7 @@ jobs:
           paths: simpleval,tests,requirements.txt,uv.lock,pyproject.toml,reports-frontend/src
 
   pre-commit-checks:
+    description: Mandatory pre-commit hooks and checks for code quality issues, runs once before everything
     name: Run Pre-commit Checks
     runs-on: ubuntu-latest
     steps:

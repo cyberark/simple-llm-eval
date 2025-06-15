@@ -1,3 +1,13 @@
+"""
+This script proposes GitHub pull request labels based on the PR title and body.
+
+It maps specific title prefixes (e.g., 'feat', 'fix', 'docs') and body checklist items (e.g., '[x] Bug Fix', '[x] Feature')
+to standard label names. The script reads the PR title and body from the environment variables `PR_TITLE` and `PR_BODY`,
+then outputs a JSON array of suggested labels. Intended for use in CI/CD pipelines to automate PR labeling.
+
+It is used in the `.github/workflows/pull_request_labeler.yml` workflow alongside the `actions/labeler` action ()
+
+"""
 #!/usr/bin/env python3
 
 TITLE_PREFIXES_TO_LABELS = {

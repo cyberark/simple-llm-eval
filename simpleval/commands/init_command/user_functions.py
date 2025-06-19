@@ -34,7 +34,9 @@ def get_eval_dir_from_user() -> str:
 
     eval_dir_set = False
     while not eval_dir_set:
-        logger.info(f'{Fore.CYAN}Enter the name of the new evaluation folder - relative or absolute path that does not exist.{Fore.RESET}')
+        logger.info(
+            f'{Fore.YELLOW}Enter the name of the new evaluation folder{Fore.CYAN} - relative or absolute path that does not exist.{Fore.RESET}'
+        )
         logger.info(f'{Fore.CYAN}The folder name should describe the evaluation you are going to perform.{Fore.RESET}')
         logger.info(f'{Fore.CYAN}For example: {Fore.YELLOW}my_eval{Fore.CYAN} or {Fore.YELLOW}{_example_dir()}{Fore.RESET}')
 
@@ -62,7 +64,7 @@ def get_testcase_name_from_user() -> str:
     logger = logging.getLogger(LOGGER_NAME)
 
     logger.info('')
-    logger.info(f'{Fore.CYAN}Enter the name of your first testcase.{Fore.RESET}')
+    logger.info(f'{Fore.YELLOW}Enter the name of your first testcase.{Fore.RESET}')
     logger.info(f'{Fore.CYAN}This should reflect the conditions that you want to run.{Fore.RESET}')
     logger.info(f'{Fore.CYAN}This can be: using different model, different set of prompts, etc.{Fore.RESET}')
     logger.info(f'{Fore.CYAN}For example: {Fore.YELLOW}sonnet37-prompt-v1{Fore.CYAN}')
@@ -76,6 +78,10 @@ def get_testcase_name_from_user() -> str:
 
 
 def pick_judge() -> str:
+    logger = logging.getLogger(LOGGER_NAME)
+    print()
+    logger.info(f'{Fore.YELLOW}Select the judge model provider{Fore.RESET}')
+
     judge_names = JudgeProvider.list_judges(filter_internal=True)
     questions = [{'type': 'list', 'name': 'selected_judge', 'message': 'Select a judge:', 'choices': judge_names}]
     answers = prompt(questions)
@@ -113,6 +119,10 @@ def get_judge_from_user() -> BaseJudge:
 
 
 def get_model_id_from_user(judge: BaseJudge) -> str:
+    print()
+    logger = logging.getLogger(LOGGER_NAME)
+    logger.info(f'{Fore.YELLOW}Select the judge model{Fore.RESET}')
+
     models_to_select = list(judge.supported_model_ids)
     if judge.model_id in models_to_select:
         models_to_select.remove(judge.model_id)
@@ -135,6 +145,7 @@ def get_model_id_from_user(judge: BaseJudge) -> str:
 
 
 def get_metrics_from_user(metrics: List[str]) -> List[str]:
+    print()
     logger = logging.getLogger(LOGGER_NAME)
     logger.info(f'{Fore.CYAN}To learn more about each metric run {Fore.YELLOW}`simpleval metrics-explorer`{Fore.RESET}')
 
@@ -174,7 +185,7 @@ def get_max_concurrent_from_user(task: str, default: int) -> int:
     question = f'Enter max concurrent {task} tasks (enter: {default}): '
 
     while True:
-        max_concurrent = input(f'{Fore.CYAN}{question}{Fore.RESET}')
+        max_concurrent = input(f'{Fore.YELLOW}{question}{Fore.RESET}')
         if not max_concurrent.strip():
             return default
         try:
@@ -192,8 +203,9 @@ def get_concurrency_values() -> tuple[int, int]:
     max_concurrent_judge_tasks = DEFAULT_CONCURRENT_JUDGE_TASKS
     max_concurrent_llm_tasks = DEFAULT_CONCURRENT_LLM_TASKS
 
+    print()
     logger.info(
-        f'{Fore.CYAN}By default you will run {DEFAULT_CONCURRENT_JUDGE_TASKS} judges in parallel{Fore.RESET}, and {DEFAULT_CONCURRENT_LLM_TASKS} LLM tasks in parallel'
+        f'{Fore.CYAN}By default simpleval will run {DEFAULT_CONCURRENT_JUDGE_TASKS} judges in parallel, and {DEFAULT_CONCURRENT_LLM_TASKS} LLM tasks in parallel{Fore.RESET}'
     )
     configure_concurrency = input(f'{Fore.CYAN}\nDo you want to configure concurrency (N/y)? {Fore.RESET}')
 

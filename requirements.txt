@@ -508,9 +508,9 @@ jsonschema-specifications==2025.4.1 \
     --hash=sha256:4653bffbd6584f7de83a67e0d620ef16900b390ddc7939d56684d6c81e33f1af \
     --hash=sha256:630159c9f4dbea161a6a2205c3011cc4f18ff381b189fff48bb39b9bf26ae608
     # via jsonschema
-litellm==1.70.0 \
-    --hash=sha256:357f3891e38f23a12f0932c235ed860dc41bc5880afaee7229e6d25318652706 \
-    --hash=sha256:7e094057b38ddb1d77f61452895835aa5d376db1850e9a1bc0342c5631d89638
+litellm==1.76.0 \
+    --hash=sha256:357464242fc1eeda384810c9e334e48ad67a50ecd30cf61e86c15f89e2f2e0b4 \
+    --hash=sha256:d26d12333135edd72af60e0e310284dac3b079f4d7c47c79dfbb2430b9b4b421
     # via simpleval
 mando==0.7.1 \
     --hash=sha256:18baa999b4b613faefb00eac4efadcf14f510b59b924b66e08289aa1de8c3500 \
@@ -758,9 +758,9 @@ numpy==2.3.2 \
     --hash=sha256:fc927d7f289d14f5e037be917539620603294454130b6de200091e23d27dc9be \
     --hash=sha256:fed5527c4cf10f16c6d0b6bee1f89958bccb0ad2522c8cadc2efd318bcd545f5
     # via pandas
-openai==1.75.0 \
-    --hash=sha256:fb3ea907efbdb1bcfd0c44507ad9c961afd7dce3147292b54505ecfd17be8fd1 \
-    --hash=sha256:fe6f932d2ded3b429ff67cc9ad118c71327db32eb9d32dd723de3acfca337125
+openai==1.102.0 \
+    --hash=sha256:2e0153bcd64a6523071e90211cbfca1f2bbc5ceedd0993ba932a5869f93b7fc9 \
+    --hash=sha256:d751a7e95e222b5325306362ad02a7aa96e1fab3ed05b5888ce1c7ca63451345
     # via litellm
 packaging==25.0 \
     --hash=sha256:29572ef2b1f17581046b3a2227d5c611fb25ec70ca1ba8554b24b0e69331a484 \

@@ -46,7 +46,7 @@
     "globals": "^15.14.0",
     "jsdom": "^26.0.0",
     "postcss": "^8.5.1",
-    "vite": "^6.0.5",
+    "vite": "^6.4.1",
     "vite-plugin-singlefile": "^2.1.0",
     "vitest": "^3.0.5"
   }

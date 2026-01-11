@@ -173,7 +173,7 @@ def test_anthropic_judge():
 
     assert isinstance(judge, AnthropicJudge)
     assert judge.name == judge_name
-    assert judge.model_id == 'claude-3-5-haiku-latest'
+    assert judge.model_id == 'claude-haiku-4-5'
     assert judge._metrics_model == 'litellm_structured_output'
 
 
@@ -193,7 +193,7 @@ def test_gemini_judge():
 
     assert isinstance(judge, GeminiJudge)
     assert judge.name == judge_name
-    assert judge.model_id == 'gemini/gemini-2.0-flash'
+    assert judge.model_id == 'gemini/gemini-2.5-flash'
     assert judge._metrics_model == 'litellm_structured_output'
 
 

@@ -4,7 +4,7 @@ from simpleval.commands.litellm_models_explorer_command import get_supported_mod
 from simpleval.evaluation.judges.judge_utils import verify_env_var
 from simpleval.evaluation.judges.models.litellm_structured_output.judge import LiteLLMJudge
 
-ANTHROPIC_JUDGE_DEFAULT_MODEL = 'claude-3-5-haiku-latest'
+ANTHROPIC_JUDGE_DEFAULT_MODEL = 'claude-haiku-4-5'
 
 
 class AnthropicJudge(LiteLLMJudge):

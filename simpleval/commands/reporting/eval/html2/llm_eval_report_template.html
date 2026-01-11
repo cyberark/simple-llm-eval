@@ -10708,7 +10708,31 @@ const LLMEvalReport = () => {
 clientExports.createRoot(document.getElementById("root")).render(/* @__PURE__ */jsxRuntimeExports.jsx(reactExports.StrictMode, {
   children: /* @__PURE__ */jsxRuntimeExports.jsx(LLMEvalReport, {})
 }));</script>
-    <style rel="stylesheet" crossorigin>/*! tailwindcss v4.0.14 | MIT License | https://tailwindcss.com */
+    <style rel="stylesheet" crossorigin>/*! tailwindcss v4.1.8 | MIT License | https://tailwindcss.com */
+@layer properties {
+  @supports (((-webkit-hyphens: none)) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color: rgb(from red r g b)))) {
+    *, :before, :after, ::backdrop {
+      --tw-divide-y-reverse: 0;
+      --tw-border-style: solid;
+      --tw-font-weight: initial;
+      --tw-tracking: initial;
+      --tw-blur: initial;
+      --tw-brightness: initial;
+      --tw-contrast: initial;
+      --tw-grayscale: initial;
+      --tw-hue-rotate: initial;
+      --tw-invert: initial;
+      --tw-opacity: initial;
+      --tw-saturate: initial;
+      --tw-sepia: initial;
+      --tw-drop-shadow: initial;
+      --tw-drop-shadow-color: initial;
+      --tw-drop-shadow-alpha: 100%;
+      --tw-drop-shadow-size: initial;
+    }
+  }
+}
+
 :root {
   --color-text: #ffffffde;
   --color-background: #101828;
@@ -10728,25 +10752,25 @@ clientExports.createRoot(document.getElementById("root")).render(/* @__PURE__ */
   :root, :host {
     --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-    --color-red-200: oklch(.885 .062 18.334);
-    --color-red-900: oklch(.396 .141 25.723);
-    --color-yellow-200: oklch(.945 .129 101.54);
-    --color-yellow-500: oklch(.795 .184 86.047);
-    --color-yellow-900: oklch(.421 .095 57.708);
-    --color-green-200: oklch(.925 .084 155.995);
-    --color-green-900: oklch(.393 .095 152.535);
-    --color-blue-300: oklch(.809 .105 251.813);
-    --color-blue-400: oklch(.707 .165 254.624);
-    --color-blue-500: oklch(.623 .214 259.815);
-    --color-gray-50: oklch(.985 .002 247.839);
-    --color-gray-100: oklch(.967 .003 264.542);
-    --color-gray-200: oklch(.928 .006 264.531);
-    --color-gray-300: oklch(.872 .01 258.338);
-    --color-gray-400: oklch(.707 .022 261.325);
-    --color-gray-600: oklch(.446 .03 256.802);
-    --color-gray-700: oklch(.373 .034 259.733);
-    --color-gray-800: oklch(.278 .033 256.848);
-    --color-gray-900: oklch(.21 .034 264.665);
+    --color-red-200: oklch(88.5% .062 18.334);
+    --color-red-900: oklch(39.6% .141 25.723);
+    --color-yellow-200: oklch(94.5% .129 101.54);
+    --color-yellow-500: oklch(79.5% .184 86.047);
+    --color-yellow-900: oklch(42.1% .095 57.708);
+    --color-green-200: oklch(92.5% .084 155.995);
+    --color-green-900: oklch(39.3% .095 152.535);
+    --color-blue-300: oklch(80.9% .105 251.813);
+    --color-blue-400: oklch(70.7% .165 254.624);
+    --color-blue-500: oklch(62.3% .214 259.815);
+    --color-gray-50: oklch(98.5% .002 247.839);
+    --color-gray-100: oklch(96.7% .003 264.542);
+    --color-gray-200: oklch(92.8% .006 264.531);
+    --color-gray-300: oklch(87.2% .01 258.338);
+    --color-gray-400: oklch(70.7% .022 261.325);
+    --color-gray-600: oklch(44.6% .03 256.802);
+    --color-gray-700: oklch(37.3% .034 259.733);
+    --color-gray-800: oklch(27.8% .033 256.848);
+    --color-gray-900: oklch(21% .034 264.665);
     --spacing: .25rem;
     --container-7xl: 80rem;
     --text-xs: .75rem;
@@ -10763,11 +10787,7 @@ clientExports.createRoot(document.getElementById("root")).render(/* @__PURE__ */
     --radius-md: .375rem;
     --radius-lg: .5rem;
     --default-font-family: var(--font-sans);
-    --default-font-feature-settings: var(--font-sans--font-feature-settings);
-    --default-font-variation-settings: var(--font-sans--font-variation-settings);
     --default-mono-font-family: var(--font-mono);
-    --default-mono-font-feature-settings: var(--font-mono--font-feature-settings);
-    --default-mono-font-variation-settings: var(--font-mono--font-variation-settings);
   }
 }
 
@@ -10794,10 +10814,6 @@ clientExports.createRoot(document.getElementById("root")).render(/* @__PURE__ */
     font-feature-settings: var(--default-font-feature-settings, normal);
     font-variation-settings: var(--default-font-variation-settings, normal);
     -webkit-tap-highlight-color: transparent;
-  }
-
-  body {
-    line-height: inherit;
   }
 
   hr {
@@ -10922,7 +10938,18 @@ clientExports.createRoot(document.getElementById("root")).render(/* @__PURE__ */
 
   ::placeholder {
     opacity: 1;
-    color: color-mix(in oklab, currentColor 50%, transparent);
+  }
+
+  @supports (not ((-webkit-appearance: -apple-pay-button))) or (contain-intrinsic-size: 1px) {
+    ::placeholder {
+      color: currentColor;
+    }
+
+    @supports (color: color-mix(in lab, red, red)) {
+      ::placeholder {
+        color: color-mix(in oklab, currentcolor 50%, transparent);
+      }
+    }
   }
 
   textarea {
@@ -11236,7 +11263,13 @@ clientExports.createRoot(document.getElementById("root")).render(/* @__PURE__ */
   }
 
   .bg-gray-50\/25 {
-    background-color: color-mix(in oklab, var(--color-gray-50) 25%, transparent);
+    background-color: #f9fafb40;
+  }
+
+  @supports (color: color-mix(in lab, red, red)) {
+    .bg-gray-50\/25 {
+      background-color: color-mix(in oklab, var(--color-gray-50) 25%, transparent);
+    }
   }
 
   .bg-gray-700 {
@@ -11520,6 +11553,22 @@ clientExports.createRoot(document.getElementById("root")).render(/* @__PURE__ */
 }
 
 @property --tw-drop-shadow {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-drop-shadow-color {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-drop-shadow-alpha {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 100%;
+}
+
+@property --tw-drop-shadow-size {
   syntax: "*";
   inherits: false
 }</style>

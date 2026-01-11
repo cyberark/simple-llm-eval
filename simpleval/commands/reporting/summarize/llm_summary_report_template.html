@@ -10166,7 +10166,7 @@ function _extends() {
  *   ...
  * @param {number} code
  */
-function formatMuiErrorMessage(code, ...args) {
+function formatMuiErrorMessage$1(code, ...args) {
   const url = new URL(`https://mui.com/production-error/?code=${code}`);
   args.forEach(arg => url.searchParams.append('args[]', arg));
   return `Minified MUI error #${code}; visit ${url} for the full message.`;
@@ -10876,7 +10876,7 @@ function rulesheet(callback) {
     if (!element.root) if (element = element.return) callback(element);
   };
 }
-function memoize$1(fn) {
+function memoize$2(fn) {
   var cache = Object.create(null);
   return function (arg) {
     if (cache[arg] === undefined) cache[arg] = fn(arg);
@@ -11646,7 +11646,7 @@ var isCustomProperty = function isCustomProperty(property) {
 var isProcessableValue = function isProcessableValue(value) {
   return value != null && typeof value !== 'boolean';
 };
-var processStyleName = /* #__PURE__ */memoize$1(function (styleName) {
+var processStyleName = /* #__PURE__ */memoize$2(function (styleName) {
   return isCustomProperty(styleName) ? styleName : styleName.replace(hyphenateRegex, '-$&').toLowerCase();
 });
 var processStyleValue = function processStyleValue(key, value) {
@@ -11984,7 +11984,7 @@ var Global = /* #__PURE__ */withEmotionCache(function (props, cache) {
 // eslint-disable-next-line no-undef
 var reactPropsRegex = /^((children|dangerouslySetInnerHTML|key|ref|autoFocus|defaultValue|defaultChecked|innerHTML|suppressContentEditableWarning|suppressHydrationWarning|valueLink|abbr|accept|acceptCharset|accessKey|action|allow|allowUserMedia|allowPaymentRequest|allowFullScreen|allowTransparency|alt|async|autoComplete|autoPlay|capture|cellPadding|cellSpacing|challenge|charSet|checked|cite|classID|className|cols|colSpan|content|contentEditable|contextMenu|controls|controlsList|coords|crossOrigin|data|dateTime|decoding|default|defer|dir|disabled|disablePictureInPicture|disableRemotePlayback|download|draggable|encType|enterKeyHint|fetchpriority|fetchPriority|form|formAction|formEncType|formMethod|formNoValidate|formTarget|frameBorder|headers|height|hidden|high|href|hrefLang|htmlFor|httpEquiv|id|inputMode|integrity|is|keyParams|keyType|kind|label|lang|list|loading|loop|low|marginHeight|marginWidth|max|maxLength|media|mediaGroup|method|min|minLength|multiple|muted|name|nonce|noValidate|open|optimum|pattern|placeholder|playsInline|poster|preload|profile|radioGroup|readOnly|referrerPolicy|rel|required|reversed|role|rows|rowSpan|sandbox|scope|scoped|scrolling|seamless|selected|shape|size|sizes|slot|span|spellCheck|src|srcDoc|srcLang|srcSet|start|step|style|summary|tabIndex|target|title|translate|type|useMap|value|width|wmode|wrap|about|datatype|inlist|prefix|property|resource|typeof|vocab|autoCapitalize|autoCorrect|autoSave|color|incremental|fallback|inert|itemProp|itemScope|itemType|itemID|itemRef|on|option|results|security|unselectable|accentHeight|accumulate|additive|alignmentBaseline|allowReorder|alphabetic|amplitude|arabicForm|ascent|attributeName|attributeType|autoReverse|azimuth|baseFrequency|baselineShift|baseProfile|bbox|begin|bias|by|calcMode|capHeight|clip|clipPathUnits|clipPath|clipRule|colorInterpolation|colorInterpolationFilters|colorProfile|colorRendering|contentScriptType|contentStyleType|cursor|cx|cy|d|decelerate|descent|diffuseConstant|direction|display|divisor|dominantBaseline|dur|dx|dy|edgeMode|elevation|enableBackground|end|exponent|externalResourcesRequired|fill|fillOpacity|fillRule|filter|filterRes|filterUnits|floodColor|floodOpacity|focusable|fontFamily|fontSize|fontSizeAdjust|fontStretch|fontStyle|fontVariant|fontWeight|format|from|fr|fx|fy|g1|g2|glyphName|glyphOrientationHorizontal|glyphOrientationVertical|glyphRef|gradientTransform|gradientUnits|hanging|horizAdvX|horizOriginX|ideographic|imageRendering|in|in2|intercept|k|k1|k2|k3|k4|kernelMatrix|kernelUnitLength|kerning|keyPoints|keySplines|keyTimes|lengthAdjust|letterSpacing|lightingColor|limitingConeAngle|local|markerEnd|markerMid|markerStart|markerHeight|markerUnits|markerWidth|mask|maskContentUnits|maskUnits|mathematical|mode|numOctaves|offset|opacity|operator|order|orient|orientation|origin|overflow|overlinePosition|overlineThickness|panose1|paintOrder|pathLength|patternContentUnits|patternTransform|patternUnits|pointerEvents|points|pointsAtX|pointsAtY|pointsAtZ|preserveAlpha|preserveAspectRatio|primitiveUnits|r|radius|refX|refY|renderingIntent|repeatCount|repeatDur|requiredExtensions|requiredFeatures|restart|result|rotate|rx|ry|scale|seed|shapeRendering|slope|spacing|specularConstant|specularExponent|speed|spreadMethod|startOffset|stdDeviation|stemh|stemv|stitchTiles|stopColor|stopOpacity|strikethroughPosition|strikethroughThickness|string|stroke|strokeDasharray|strokeDashoffset|strokeLinecap|strokeLinejoin|strokeMiterlimit|strokeOpacity|strokeWidth|surfaceScale|systemLanguage|tableValues|targetX|targetY|textAnchor|textDecoration|textRendering|textLength|to|transform|u1|u2|underlinePosition|underlineThickness|unicode|unicodeBidi|unicodeRange|unitsPerEm|vAlphabetic|vHanging|vIdeographic|vMathematical|values|vectorEffect|version|vertAdvY|vertOriginX|vertOriginY|viewBox|viewTarget|visibility|widths|wordSpacing|writingMode|x|xHeight|x1|x2|xChannelSelector|xlinkActuate|xlinkArcrole|xlinkHref|xlinkRole|xlinkShow|xlinkTitle|xlinkType|xmlBase|xmlns|xmlnsXlink|xmlLang|xmlSpace|y|y1|y2|yChannelSelector|z|zoomAndPan|for|class|autofocus)|(([Dd][Aa][Tt][Aa]|[Aa][Rr][Ii][Aa]|x)-.*))$/; // https://esbench.com/bench/5bfee68a4cd7e6009ef61d23
 
-var isPropValid = /* #__PURE__ */memoize$1(function (prop) {
+var isPropValid = /* #__PURE__ */memoize$2(function (prop) {
   return reactPropsRegex.test(prop) || prop.charCodeAt(0) === 111
   /* o */ && prop.charCodeAt(1) === 110
   /* n */ && prop.charCodeAt(2) < 91;
@@ -12139,7 +12139,7 @@ function GlobalStyles(props) {
 }
 
 /**
- * @mui/styled-engine v6.4.8
+ * @mui/styled-engine v6.4.11
  *
  * @license MIT
  * This source code is licensed under the MIT license found in the
@@ -12190,7 +12190,7 @@ function requireReactIs_production() {
     REACT_SUSPENSE_LIST_TYPE = Symbol.for("react.suspense_list"),
     REACT_MEMO_TYPE = Symbol.for("react.memo"),
     REACT_LAZY_TYPE = Symbol.for("react.lazy"),
-    REACT_OFFSCREEN_TYPE = Symbol.for("react.offscreen"),
+    REACT_VIEW_TRANSITION_TYPE = Symbol.for("react.view_transition"),
     REACT_CLIENT_REFERENCE = Symbol.for("react.client.reference");
   function typeOf(object) {
     if ("object" === typeof object && null !== object) {
@@ -12203,6 +12203,7 @@ function requireReactIs_production() {
             case REACT_STRICT_MODE_TYPE:
             case REACT_SUSPENSE_TYPE:
             case REACT_SUSPENSE_LIST_TYPE:
+            case REACT_VIEW_TRANSITION_TYPE:
               return object;
             default:
               switch (object = object && object.$$typeof, object) {
@@ -12271,7 +12272,7 @@ function requireReactIs_production() {
     return typeOf(object) === REACT_SUSPENSE_LIST_TYPE;
   };
   reactIs_production.isValidElementType = function (type) {
-    return "string" === typeof type || "function" === typeof type || type === REACT_FRAGMENT_TYPE || type === REACT_PROFILER_TYPE || type === REACT_STRICT_MODE_TYPE || type === REACT_SUSPENSE_TYPE || type === REACT_SUSPENSE_LIST_TYPE || type === REACT_OFFSCREEN_TYPE || "object" === typeof type && null !== type && (type.$$typeof === REACT_LAZY_TYPE || type.$$typeof === REACT_MEMO_TYPE || type.$$typeof === REACT_CONTEXT_TYPE || type.$$typeof === REACT_CONSUMER_TYPE || type.$$typeof === REACT_FORWARD_REF_TYPE || type.$$typeof === REACT_CLIENT_REFERENCE || void 0 !== type.getModuleId) ? true : false;
+    return "string" === typeof type || "function" === typeof type || type === REACT_FRAGMENT_TYPE || type === REACT_PROFILER_TYPE || type === REACT_STRICT_MODE_TYPE || type === REACT_SUSPENSE_TYPE || type === REACT_SUSPENSE_LIST_TYPE || "object" === typeof type && null !== type && (type.$$typeof === REACT_LAZY_TYPE || type.$$typeof === REACT_MEMO_TYPE || type.$$typeof === REACT_CONTEXT_TYPE || type.$$typeof === REACT_CONSUMER_TYPE || type.$$typeof === REACT_FORWARD_REF_TYPE || type.$$typeof === REACT_CLIENT_REFERENCE || void 0 !== type.getModuleId) ? true : false;
   };
   reactIs_production.typeOf = typeOf;
   return reactIs_production;
@@ -12288,20 +12289,20 @@ function requireReactIs() {
 var reactIsExports = /*@__PURE__*/requireReactIs();
 
 // https://github.com/sindresorhus/is-plain-obj/blob/main/index.js
-function isPlainObject(item) {
+function isPlainObject$1(item) {
   if (typeof item !== 'object' || item === null) {
     return false;
   }
   const prototype = Object.getPrototypeOf(item);
   return (prototype === null || prototype === Object.prototype || Object.getPrototypeOf(prototype) === null) && !(Symbol.toStringTag in item) && !(Symbol.iterator in item);
 }
-function deepClone(source) {
-  if (/*#__PURE__*/reactExports.isValidElement(source) || reactIsExports.isValidElementType(source) || !isPlainObject(source)) {
+function deepClone$1(source) {
+  if (/*#__PURE__*/reactExports.isValidElement(source) || reactIsExports.isValidElementType(source) || !isPlainObject$1(source)) {
     return source;
   }
   const output = {};
   Object.keys(source).forEach(key => {
-    output[key] = deepClone(source[key]);
+    output[key] = deepClone$1(source[key]);
   });
   return output;
 }
@@ -12324,23 +12325,23 @@ function deepClone(source) {
  * @param options.clone Set to `false` to merge the source object directly into the target object.
  * @returns The merged object.
  */
-function deepmerge(target, source, options = {
+function deepmerge$1(target, source, options = {
   clone: true
 }) {
   const output = options.clone ? {
     ...target
   } : target;
-  if (isPlainObject(target) && isPlainObject(source)) {
+  if (isPlainObject$1(target) && isPlainObject$1(source)) {
     Object.keys(source).forEach(key => {
       if (/*#__PURE__*/reactExports.isValidElement(source[key]) || reactIsExports.isValidElementType(source[key])) {
         output[key] = source[key];
-      } else if (isPlainObject(source[key]) &&
+      } else if (isPlainObject$1(source[key]) &&
       // Avoid prototype pollution
-      Object.prototype.hasOwnProperty.call(target, key) && isPlainObject(target[key])) {
+      Object.prototype.hasOwnProperty.call(target, key) && isPlainObject$1(target[key])) {
         // Since `output` is a clone of `target` and we have narrowed `target` in this block we can cast to the same type.
-        output[key] = deepmerge(target[key], source[key], options);
+        output[key] = deepmerge$1(target[key], source[key], options);
       } else if (options.clone) {
-        output[key] = isPlainObject(source[key]) ? deepClone(source[key]) : source[key];
+        output[key] = isPlainObject$1(source[key]) ? deepClone$1(source[key]) : source[key];
       } else {
         output[key] = source[key];
       }
@@ -12351,7 +12352,7 @@ function deepmerge(target, source, options = {
 
 // Sorted ASC by size. That's important.
 // It can't be configured as it's used statically for propTypes.
-const sortBreakpointsValues = values => {
+const sortBreakpointsValues$1 = values => {
   const breakpointsAsArray = Object.keys(values).map(key => ({
     key,
     val: values[key]
@@ -12367,7 +12368,7 @@ const sortBreakpointsValues = values => {
 };
 
 // Keep in mind that @media is inclusive by the CSS specification.
-function createBreakpoints(breakpoints) {
+function createBreakpoints$1(breakpoints) {
   const {
     // The breakpoint **start** at this value.
     // For instance with the first breakpoint xs: [xs, sm).
@@ -12386,7 +12387,7 @@ function createBreakpoints(breakpoints) {
     step = 5,
     ...other
   } = breakpoints;
-  const sortedValues = sortBreakpointsValues(values);
+  const sortedValues = sortBreakpointsValues$1(values);
   const keys = Object.keys(sortedValues);
   function up(key) {
     const value = typeof values[key] === 'number' ? values[key] : key;
@@ -12429,7 +12430,7 @@ function createBreakpoints(breakpoints) {
     ...other
   };
 }
-function sortContainerQueries(theme, css) {
+function sortContainerQueries$1(theme, css) {
   if (!theme.containerQueries) {
     return css;
   }
@@ -12449,10 +12450,10 @@ function sortContainerQueries(theme, css) {
     ...css
   });
 }
-function isCqShorthand(breakpointKeys, value) {
+function isCqShorthand$1(breakpointKeys, value) {
   return value === "@" || value.startsWith("@") && (breakpointKeys.some(key => value.startsWith(`@${key}`)) || !!value.match(/^@\d/));
 }
-function getContainerQuery(theme, shorthand) {
+function getContainerQuery$1(theme, shorthand) {
   const matches = shorthand.match(/^@([^/]+)?\/?(.+)?$/);
   if (!matches) {
     return null;
@@ -12461,7 +12462,7 @@ function getContainerQuery(theme, shorthand) {
   const value = Number.isNaN(+containerQuery) ? containerQuery || 0 : +containerQuery;
   return theme.containerQueries(containerName).up(value);
 }
-function cssContainerQueries(themeInput) {
+function cssContainerQueries$1(themeInput) {
   const toContainerQuery = (mediaQuery, name) => mediaQuery.replace("@media", name ? `@container ${name}` : "@container");
   function attachCq(node2, name) {
     node2.up = (...args) => toContainerQuery(themeInput.breakpoints.up(...args), name);
@@ -12487,18 +12488,18 @@ function cssContainerQueries(themeInput) {
     containerQueries
   };
 }
-const shape = {
+const shape$1 = {
   borderRadius: 4
 };
-function merge(acc, item) {
+function merge$1(acc, item) {
   if (!item) {
     return acc;
   }
-  return deepmerge(acc, item, {
+  return deepmerge$1(acc, item, {
     clone: false // No need to clone deep, it's way faster.
   });
 }
-const values = {
+const values$1 = {
   xs: 0,
   // phone
   sm: 600,
@@ -12510,16 +12511,16 @@ const values = {
   xl: 1536
   // large screen
 };
-const defaultBreakpoints = {
+const defaultBreakpoints$1 = {
   // Sorted ASC by size. That's important.
   // It can't be configured as it's used statically for propTypes.
   keys: ["xs", "sm", "md", "lg", "xl"],
-  up: key => `@media (min-width:${values[key]}px)`
+  up: key => `@media (min-width:${values$1[key]}px)`
 };
-const defaultContainerQueries = {
+const defaultContainerQueries$1 = {
   containerQueries: containerName => ({
     up: key => {
-      let result = typeof key === "number" ? key : values[key] || key;
+      let result = typeof key === "number" ? key : values$1[key] || key;
       if (typeof result === "number") {
         result = `${result}px`;
       }
@@ -12527,24 +12528,24 @@ const defaultContainerQueries = {
     }
   })
 };
-function handleBreakpoints(props, propValue, styleFromPropValue) {
+function handleBreakpoints$1(props, propValue, styleFromPropValue) {
   const theme = props.theme || {};
   if (Array.isArray(propValue)) {
-    const themeBreakpoints = theme.breakpoints || defaultBreakpoints;
+    const themeBreakpoints = theme.breakpoints || defaultBreakpoints$1;
     return propValue.reduce((acc, item, index) => {
       acc[themeBreakpoints.up(themeBreakpoints.keys[index])] = styleFromPropValue(propValue[index]);
       return acc;
     }, {});
   }
   if (typeof propValue === "object") {
-    const themeBreakpoints = theme.breakpoints || defaultBreakpoints;
+    const themeBreakpoints = theme.breakpoints || defaultBreakpoints$1;
     return Object.keys(propValue).reduce((acc, breakpoint) => {
-      if (isCqShorthand(themeBreakpoints.keys, breakpoint)) {
-        const containerKey = getContainerQuery(theme.containerQueries ? theme : defaultContainerQueries, breakpoint);
+      if (isCqShorthand$1(themeBreakpoints.keys, breakpoint)) {
+        const containerKey = getContainerQuery$1(theme.containerQueries ? theme : defaultContainerQueries$1, breakpoint);
         if (containerKey) {
           acc[containerKey] = styleFromPropValue(propValue[breakpoint], breakpoint);
         }
-      } else if (Object.keys(themeBreakpoints.values || values).includes(breakpoint)) {
+      } else if (Object.keys(themeBreakpoints.values || values$1).includes(breakpoint)) {
         const mediaKey = themeBreakpoints.up(breakpoint);
         acc[mediaKey] = styleFromPropValue(propValue[breakpoint], breakpoint);
       } else {
@@ -12557,7 +12558,7 @@ function handleBreakpoints(props, propValue, styleFromPropValue) {
   const output = styleFromPropValue(propValue);
   return output;
 }
-function createEmptyBreakpointObject(breakpointsInput = {}) {
+function createEmptyBreakpointObject$1(breakpointsInput = {}) {
   const breakpointsInOrder = breakpointsInput.keys?.reduce((acc, key) => {
     const breakpointStyleKey = breakpointsInput.up(key);
     acc[breakpointStyleKey] = {};
@@ -12565,7 +12566,7 @@ function createEmptyBreakpointObject(breakpointsInput = {}) {
   }, {});
   return breakpointsInOrder || {};
 }
-function removeUnusedBreakpoints(breakpointKeys, style) {
+function removeUnusedBreakpoints$1(breakpointKeys, style) {
   return breakpointKeys.reduce((acc, key) => {
     const breakpointOutput = acc[key];
     const isBreakpointUnused = !breakpointOutput || Object.keys(breakpointOutput).length === 0;
@@ -12575,13 +12576,13 @@ function removeUnusedBreakpoints(breakpointKeys, style) {
     return acc;
   }, style);
 }
-function capitalize(string) {
+function capitalize$1(string) {
   if (typeof string !== "string") {
-    throw new Error(formatMuiErrorMessage(7));
+    throw new Error(formatMuiErrorMessage$1(7));
   }
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
-function getPath(obj, path, checkVars = true) {
+function getPath$1(obj, path, checkVars = true) {
   if (!path || typeof path !== "string") {
     return null;
   }
@@ -12598,21 +12599,21 @@ function getPath(obj, path, checkVars = true) {
     return null;
   }, obj);
 }
-function getStyleValue(themeMapping, transform, propValueFinal, userValue = propValueFinal) {
+function getStyleValue$1(themeMapping, transform, propValueFinal, userValue = propValueFinal) {
   let value;
   if (typeof themeMapping === "function") {
     value = themeMapping(propValueFinal);
   } else if (Array.isArray(themeMapping)) {
     value = themeMapping[propValueFinal] || userValue;
   } else {
-    value = getPath(themeMapping, propValueFinal) || userValue;
+    value = getPath$1(themeMapping, propValueFinal) || userValue;
   }
   if (transform) {
     value = transform(value, userValue, themeMapping);
   }
   return value;
 }
-function style$1(options) {
+function style$3(options) {
   const {
     prop,
     cssProperty = options.prop,
@@ -12625,11 +12626,11 @@ function style$1(options) {
     }
     const propValue = props[prop];
     const theme = props.theme;
-    const themeMapping = getPath(theme, themeKey) || {};
+    const themeMapping = getPath$1(theme, themeKey) || {};
     const styleFromPropValue = propValueFinal => {
-      let value = getStyleValue(themeMapping, transform, propValueFinal);
+      let value = getStyleValue$1(themeMapping, transform, propValueFinal);
       if (propValueFinal === value && typeof propValueFinal === "string") {
-        value = getStyleValue(themeMapping, transform, `${prop}${propValueFinal === "default" ? "" : capitalize(propValueFinal)}`, propValueFinal);
+        value = getStyleValue$1(themeMapping, transform, `${prop}${propValueFinal === "default" ? "" : capitalize$1(propValueFinal)}`, propValueFinal);
       }
       if (cssProperty === false) {
         return value;
@@ -12638,13 +12639,13 @@ function style$1(options) {
         [cssProperty]: value
       };
     };
-    return handleBreakpoints(props, propValue, styleFromPropValue);
+    return handleBreakpoints$1(props, propValue, styleFromPropValue);
   };
   fn.propTypes = {};
   fn.filterProps = [prop];
   return fn;
 }
-function memoize(fn) {
+function memoize$1(fn) {
   const cache = {};
   return arg => {
     if (cache[arg] === undefined) {
@@ -12653,11 +12654,11 @@ function memoize(fn) {
     return cache[arg];
   };
 }
-const properties = {
+const properties$1 = {
   m: "margin",
   p: "padding"
 };
-const directions = {
+const directions$1 = {
   t: "Top",
   r: "Right",
   b: "Bottom",
@@ -12665,30 +12666,30 @@ const directions = {
   x: ["Left", "Right"],
   y: ["Top", "Bottom"]
 };
-const aliases = {
+const aliases$1 = {
   marginX: "mx",
   marginY: "my",
   paddingX: "px",
   paddingY: "py"
 };
-const getCssProperties = memoize(prop => {
+const getCssProperties$1 = memoize$1(prop => {
   if (prop.length > 2) {
-    if (aliases[prop]) {
-      prop = aliases[prop];
+    if (aliases$1[prop]) {
+      prop = aliases$1[prop];
     } else {
       return [prop];
     }
   }
   const [a, b] = prop.split("");
-  const property = properties[a];
-  const direction = directions[b] || "";
+  const property = properties$1[a];
+  const direction = directions$1[b] || "";
   return Array.isArray(direction) ? direction.map(dir => property + dir) : [property + direction];
 });
-const marginKeys = ["m", "mt", "mr", "mb", "ml", "mx", "my", "margin", "marginTop", "marginRight", "marginBottom", "marginLeft", "marginX", "marginY", "marginInline", "marginInlineStart", "marginInlineEnd", "marginBlock", "marginBlockStart", "marginBlockEnd"];
-const paddingKeys = ["p", "pt", "pr", "pb", "pl", "px", "py", "padding", "paddingTop", "paddingRight", "paddingBottom", "paddingLeft", "paddingX", "paddingY", "paddingInline", "paddingInlineStart", "paddingInlineEnd", "paddingBlock", "paddingBlockStart", "paddingBlockEnd"];
-[...marginKeys, ...paddingKeys];
-function createUnaryUnit(theme, themeKey, defaultValue, propName) {
-  const themeSpacing = getPath(theme, themeKey, true) ?? defaultValue;
+const marginKeys$1 = ["m", "mt", "mr", "mb", "ml", "mx", "my", "margin", "marginTop", "marginRight", "marginBottom", "marginLeft", "marginX", "marginY", "marginInline", "marginInlineStart", "marginInlineEnd", "marginBlock", "marginBlockStart", "marginBlockEnd"];
+const paddingKeys$1 = ["p", "pt", "pr", "pb", "pl", "px", "py", "padding", "paddingTop", "paddingRight", "paddingBottom", "paddingLeft", "paddingX", "paddingY", "paddingInline", "paddingInlineStart", "paddingInlineEnd", "paddingBlock", "paddingBlockStart", "paddingBlockEnd"];
+[...marginKeys$1, ...paddingKeys$1];
+function createUnaryUnit$1(theme, themeKey, defaultValue, propName) {
+  const themeSpacing = getPath$1(theme, themeKey, true) ?? defaultValue;
   if (typeof themeSpacing === "number" || typeof themeSpacing === "string") {
     return val => {
       if (typeof val === "string") {
@@ -12721,45 +12722,45 @@ function createUnaryUnit(theme, themeKey, defaultValue, propName) {
   }
   return () => void 0;
 }
-function createUnarySpacing(theme) {
-  return createUnaryUnit(theme, "spacing", 8);
+function createUnarySpacing$1(theme) {
+  return createUnaryUnit$1(theme, "spacing", 8);
 }
-function getValue(transformer, propValue) {
+function getValue$1(transformer, propValue) {
   if (typeof propValue === "string" || propValue == null) {
     return propValue;
   }
   return transformer(propValue);
 }
-function getStyleFromPropValue(cssProperties, transformer) {
+function getStyleFromPropValue$1(cssProperties, transformer) {
   return propValue => cssProperties.reduce((acc, cssProperty) => {
-    acc[cssProperty] = getValue(transformer, propValue);
+    acc[cssProperty] = getValue$1(transformer, propValue);
     return acc;
   }, {});
 }
-function resolveCssProperty(props, keys, prop, transformer) {
+function resolveCssProperty$1(props, keys, prop, transformer) {
   if (!keys.includes(prop)) {
     return null;
   }
-  const cssProperties = getCssProperties(prop);
-  const styleFromPropValue = getStyleFromPropValue(cssProperties, transformer);
+  const cssProperties = getCssProperties$1(prop);
+  const styleFromPropValue = getStyleFromPropValue$1(cssProperties, transformer);
   const propValue = props[prop];
-  return handleBreakpoints(props, propValue, styleFromPropValue);
+  return handleBreakpoints$1(props, propValue, styleFromPropValue);
 }
-function style(props, keys) {
-  const transformer = createUnarySpacing(props.theme);
-  return Object.keys(props).map(prop => resolveCssProperty(props, keys, prop, transformer)).reduce(merge, {});
+function style$2(props, keys) {
+  const transformer = createUnarySpacing$1(props.theme);
+  return Object.keys(props).map(prop => resolveCssProperty$1(props, keys, prop, transformer)).reduce(merge$1, {});
 }
-function margin(props) {
-  return style(props, marginKeys);
+function margin$1(props) {
+  return style$2(props, marginKeys$1);
 }
-margin.propTypes = {};
-margin.filterProps = marginKeys;
-function padding(props) {
-  return style(props, paddingKeys);
+margin$1.propTypes = {};
+margin$1.filterProps = marginKeys$1;
+function padding$1(props) {
+  return style$2(props, paddingKeys$1);
 }
-padding.propTypes = {};
-padding.filterProps = paddingKeys;
-function createSpacing(spacingInput = 8, transform = createUnarySpacing({
+padding$1.propTypes = {};
+padding$1.filterProps = paddingKeys$1;
+function createSpacing$1(spacingInput = 8, transform = createUnarySpacing$1({
   spacing: spacingInput
 })) {
   if (spacingInput.mui) {
@@ -12775,7 +12776,7 @@ function createSpacing(spacingInput = 8, transform = createUnarySpacing({
   spacing.mui = true;
   return spacing;
 }
-function compose(...styles) {
+function compose$1(...styles) {
   const handlers = styles.reduce((acc, style) => {
     style.filterProps.forEach(prop => {
       acc[prop] = style;
@@ -12785,7 +12786,7 @@ function compose(...styles) {
   const fn = props => {
     return Object.keys(props).reduce((acc, prop) => {
       if (handlers[prop]) {
-        return merge(acc, handlers[prop](props));
+        return merge$1(acc, handlers[prop](props));
       }
       return acc;
     }, {});
@@ -12794,145 +12795,145 @@ function compose(...styles) {
   fn.filterProps = styles.reduce((acc, style) => acc.concat(style.filterProps), []);
   return fn;
 }
-function borderTransform(value) {
+function borderTransform$1(value) {
   if (typeof value !== "number") {
     return value;
   }
   return `${value}px solid`;
 }
-function createBorderStyle(prop, transform) {
-  return style$1({
+function createBorderStyle$1(prop, transform) {
+  return style$3({
     prop,
     themeKey: "borders",
     transform
   });
 }
-const border = createBorderStyle("border", borderTransform);
-const borderTop = createBorderStyle("borderTop", borderTransform);
-const borderRight = createBorderStyle("borderRight", borderTransform);
-const borderBottom = createBorderStyle("borderBottom", borderTransform);
-const borderLeft = createBorderStyle("borderLeft", borderTransform);
-const borderColor = createBorderStyle("borderColor");
-const borderTopColor = createBorderStyle("borderTopColor");
-const borderRightColor = createBorderStyle("borderRightColor");
-const borderBottomColor = createBorderStyle("borderBottomColor");
-const borderLeftColor = createBorderStyle("borderLeftColor");
-const outline = createBorderStyle("outline", borderTransform);
-const outlineColor = createBorderStyle("outlineColor");
-const borderRadius = props => {
+const border$1 = createBorderStyle$1("border", borderTransform$1);
+const borderTop$1 = createBorderStyle$1("borderTop", borderTransform$1);
+const borderRight$1 = createBorderStyle$1("borderRight", borderTransform$1);
+const borderBottom$1 = createBorderStyle$1("borderBottom", borderTransform$1);
+const borderLeft$1 = createBorderStyle$1("borderLeft", borderTransform$1);
+const borderColor$1 = createBorderStyle$1("borderColor");
+const borderTopColor$1 = createBorderStyle$1("borderTopColor");
+const borderRightColor$1 = createBorderStyle$1("borderRightColor");
+const borderBottomColor$1 = createBorderStyle$1("borderBottomColor");
+const borderLeftColor$1 = createBorderStyle$1("borderLeftColor");
+const outline$1 = createBorderStyle$1("outline", borderTransform$1);
+const outlineColor$1 = createBorderStyle$1("outlineColor");
+const borderRadius$1 = props => {
   if (props.borderRadius !== void 0 && props.borderRadius !== null) {
-    const transformer = createUnaryUnit(props.theme, "shape.borderRadius", 4);
+    const transformer = createUnaryUnit$1(props.theme, "shape.borderRadius", 4);
     const styleFromPropValue = propValue => ({
-      borderRadius: getValue(transformer, propValue)
+      borderRadius: getValue$1(transformer, propValue)
     });
-    return handleBreakpoints(props, props.borderRadius, styleFromPropValue);
+    return handleBreakpoints$1(props, props.borderRadius, styleFromPropValue);
   }
   return null;
 };
-borderRadius.propTypes = {};
-borderRadius.filterProps = ["borderRadius"];
-compose(border, borderTop, borderRight, borderBottom, borderLeft, borderColor, borderTopColor, borderRightColor, borderBottomColor, borderLeftColor, borderRadius, outline, outlineColor);
-const gap = props => {
+borderRadius$1.propTypes = {};
+borderRadius$1.filterProps = ["borderRadius"];
+compose$1(border$1, borderTop$1, borderRight$1, borderBottom$1, borderLeft$1, borderColor$1, borderTopColor$1, borderRightColor$1, borderBottomColor$1, borderLeftColor$1, borderRadius$1, outline$1, outlineColor$1);
+const gap$1 = props => {
   if (props.gap !== void 0 && props.gap !== null) {
-    const transformer = createUnaryUnit(props.theme, "spacing", 8);
+    const transformer = createUnaryUnit$1(props.theme, "spacing", 8);
     const styleFromPropValue = propValue => ({
-      gap: getValue(transformer, propValue)
+      gap: getValue$1(transformer, propValue)
     });
-    return handleBreakpoints(props, props.gap, styleFromPropValue);
+    return handleBreakpoints$1(props, props.gap, styleFromPropValue);
   }
   return null;
 };
-gap.propTypes = {};
-gap.filterProps = ["gap"];
-const columnGap = props => {
+gap$1.propTypes = {};
+gap$1.filterProps = ["gap"];
+const columnGap$1 = props => {
   if (props.columnGap !== void 0 && props.columnGap !== null) {
-    const transformer = createUnaryUnit(props.theme, "spacing", 8);
+    const transformer = createUnaryUnit$1(props.theme, "spacing", 8);
     const styleFromPropValue = propValue => ({
-      columnGap: getValue(transformer, propValue)
+      columnGap: getValue$1(transformer, propValue)
     });
-    return handleBreakpoints(props, props.columnGap, styleFromPropValue);
+    return handleBreakpoints$1(props, props.columnGap, styleFromPropValue);
   }
   return null;
 };
-columnGap.propTypes = {};
-columnGap.filterProps = ["columnGap"];
-const rowGap = props => {
+columnGap$1.propTypes = {};
+columnGap$1.filterProps = ["columnGap"];
+const rowGap$1 = props => {
   if (props.rowGap !== void 0 && props.rowGap !== null) {
-    const transformer = createUnaryUnit(props.theme, "spacing", 8);
+    const transformer = createUnaryUnit$1(props.theme, "spacing", 8);
     const styleFromPropValue = propValue => ({
-      rowGap: getValue(transformer, propValue)
+      rowGap: getValue$1(transformer, propValue)
     });
-    return handleBreakpoints(props, props.rowGap, styleFromPropValue);
+    return handleBreakpoints$1(props, props.rowGap, styleFromPropValue);
   }
   return null;
 };
-rowGap.propTypes = {};
-rowGap.filterProps = ["rowGap"];
-const gridColumn = style$1({
+rowGap$1.propTypes = {};
+rowGap$1.filterProps = ["rowGap"];
+const gridColumn$1 = style$3({
   prop: "gridColumn"
 });
-const gridRow = style$1({
+const gridRow$1 = style$3({
   prop: "gridRow"
 });
-const gridAutoFlow = style$1({
+const gridAutoFlow$1 = style$3({
   prop: "gridAutoFlow"
 });
-const gridAutoColumns = style$1({
+const gridAutoColumns$1 = style$3({
   prop: "gridAutoColumns"
 });
-const gridAutoRows = style$1({
+const gridAutoRows$1 = style$3({
   prop: "gridAutoRows"
 });
-const gridTemplateColumns = style$1({
+const gridTemplateColumns$1 = style$3({
   prop: "gridTemplateColumns"
 });
-const gridTemplateRows = style$1({
+const gridTemplateRows$1 = style$3({
   prop: "gridTemplateRows"
 });
-const gridTemplateAreas = style$1({
+const gridTemplateAreas$1 = style$3({
   prop: "gridTemplateAreas"
 });
-const gridArea = style$1({
+const gridArea$1 = style$3({
   prop: "gridArea"
 });
-compose(gap, columnGap, rowGap, gridColumn, gridRow, gridAutoFlow, gridAutoColumns, gridAutoRows, gridTemplateColumns, gridTemplateRows, gridTemplateAreas, gridArea);
-function paletteTransform(value, userValue) {
+compose$1(gap$1, columnGap$1, rowGap$1, gridColumn$1, gridRow$1, gridAutoFlow$1, gridAutoColumns$1, gridAutoRows$1, gridTemplateColumns$1, gridTemplateRows$1, gridTemplateAreas$1, gridArea$1);
+function paletteTransform$1(value, userValue) {
   if (userValue === 'grey') {
     return userValue;
   }
   return value;
 }
-const color$1 = style$1({
+const color$2 = style$3({
   prop: 'color',
   themeKey: 'palette',
-  transform: paletteTransform
+  transform: paletteTransform$1
 });
-const bgcolor = style$1({
+const bgcolor$1 = style$3({
   prop: 'bgcolor',
   cssProperty: 'backgroundColor',
   themeKey: 'palette',
-  transform: paletteTransform
+  transform: paletteTransform$1
 });
-const backgroundColor = style$1({
+const backgroundColor$1 = style$3({
   prop: 'backgroundColor',
   themeKey: 'palette',
-  transform: paletteTransform
+  transform: paletteTransform$1
 });
-compose(color$1, bgcolor, backgroundColor);
-function sizingTransform(value) {
+compose$1(color$2, bgcolor$1, backgroundColor$1);
+function sizingTransform$1(value) {
   return value <= 1 && value !== 0 ? `${value * 100}%` : value;
 }
-const width = style$1({
+const width$1 = style$3({
   prop: 'width',
-  transform: sizingTransform
+  transform: sizingTransform$1
 });
-const maxWidth = props => {
+const maxWidth$1 = props => {
   if (props.maxWidth !== undefined && props.maxWidth !== null) {
     const styleFromPropValue = propValue => {
-      const breakpoint = props.theme?.breakpoints?.values?.[propValue] || values[propValue];
+      const breakpoint = props.theme?.breakpoints?.values?.[propValue] || values$1[propValue];
       if (!breakpoint) {
         return {
-          maxWidth: sizingTransform(propValue)
+          maxWidth: sizingTransform$1(propValue)
         };
       }
       if (props.theme?.breakpoints?.unit !== 'px') {
@@ -12944,62 +12945,62 @@ const maxWidth = props => {
         maxWidth: breakpoint
       };
     };
-    return handleBreakpoints(props, props.maxWidth, styleFromPropValue);
+    return handleBreakpoints$1(props, props.maxWidth, styleFromPropValue);
   }
   return null;
 };
-maxWidth.filterProps = ['maxWidth'];
-const minWidth = style$1({
+maxWidth$1.filterProps = ['maxWidth'];
+const minWidth$1 = style$3({
   prop: 'minWidth',
-  transform: sizingTransform
+  transform: sizingTransform$1
 });
-const height = style$1({
+const height$1 = style$3({
   prop: 'height',
-  transform: sizingTransform
+  transform: sizingTransform$1
 });
-const maxHeight = style$1({
+const maxHeight$1 = style$3({
   prop: 'maxHeight',
-  transform: sizingTransform
+  transform: sizingTransform$1
 });
-const minHeight = style$1({
+const minHeight$1 = style$3({
   prop: 'minHeight',
-  transform: sizingTransform
+  transform: sizingTransform$1
 });
-style$1({
+style$3({
   prop: 'size',
   cssProperty: 'width',
-  transform: sizingTransform
+  transform: sizingTransform$1
 });
-style$1({
+style$3({
   prop: 'size',
   cssProperty: 'height',
-  transform: sizingTransform
+  transform: sizingTransform$1
 });
-const boxSizing = style$1({
+const boxSizing$1 = style$3({
   prop: 'boxSizing'
 });
-compose(width, maxWidth, minWidth, height, maxHeight, minHeight, boxSizing);
-const defaultSxConfig = {
+compose$1(width$1, maxWidth$1, minWidth$1, height$1, maxHeight$1, minHeight$1, boxSizing$1);
+const defaultSxConfig$1 = {
   // borders
   border: {
     themeKey: 'borders',
-    transform: borderTransform
+    transform: borderTransform$1
   },
   borderTop: {
     themeKey: 'borders',
-    transform: borderTransform
+    transform: borderTransform$1
   },
   borderRight: {
     themeKey: 'borders',
-    transform: borderTransform
+    transform: borderTransform$1
   },
   borderBottom: {
     themeKey: 'borders',
-    transform: borderTransform
+    transform: borderTransform$1
   },
   borderLeft: {
     themeKey: 'borders',
-    transform: borderTransform
+    transform: borderTransform$1
   },
   borderColor: {
     themeKey: 'palette'
@@ -13018,149 +13019,149 @@ const defaultSxConfig = {
   },
   outline: {
     themeKey: 'borders',
-    transform: borderTransform
+    transform: borderTransform$1
   },
   outlineColor: {
     themeKey: 'palette'
   },
   borderRadius: {
     themeKey: 'shape.borderRadius',
-    style: borderRadius
+    style: borderRadius$1
   },
   // palette
   color: {
     themeKey: 'palette',
-    transform: paletteTransform
+    transform: paletteTransform$1
   },
   bgcolor: {
     themeKey: 'palette',
     cssProperty: 'backgroundColor',
-    transform: paletteTransform
+    transform: paletteTransform$1
   },
   backgroundColor: {
     themeKey: 'palette',
-    transform: paletteTransform
+    transform: paletteTransform$1
   },
   // spacing
   p: {
-    style: padding
+    style: padding$1
   },
   pt: {
-    style: padding
+    style: padding$1
   },
   pr: {
-    style: padding
+    style: padding$1
   },
   pb: {
-    style: padding
+    style: padding$1
   },
   pl: {
-    style: padding
+    style: padding$1
   },
   px: {
-    style: padding
+    style: padding$1
   },
   py: {
-    style: padding
+    style: padding$1
   },
   padding: {
-    style: padding
+    style: padding$1
   },
   paddingTop: {
-    style: padding
+    style: padding$1
   },
   paddingRight: {
-    style: padding
+    style: padding$1
   },
   paddingBottom: {
-    style: padding
+    style: padding$1
   },
   paddingLeft: {
-    style: padding
+    style: padding$1
   },
   paddingX: {
-    style: padding
+    style: padding$1
   },
   paddingY: {
-    style: padding
+    style: padding$1
   },
   paddingInline: {
-    style: padding
+    style: padding$1
   },
   paddingInlineStart: {
-    style: padding
+    style: padding$1
   },
   paddingInlineEnd: {
-    style: padding
+    style: padding$1
   },
   paddingBlock: {
-    style: padding
+    style: padding$1
   },
   paddingBlockStart: {
-    style: padding
+    style: padding$1
   },
   paddingBlockEnd: {
-    style: padding
+    style: padding$1
   },
   m: {
-    style: margin
+    style: margin$1
   },
   mt: {
-    style: margin
+    style: margin$1
   },
   mr: {
-    style: margin
+    style: margin$1
   },
   mb: {
-    style: margin
+    style: margin$1
   },
   ml: {
-    style: margin
+    style: margin$1
   },
   mx: {
-    style: margin
+    style: margin$1
   },
   my: {
-    style: margin
+    style: margin$1
   },
   margin: {
-    style: margin
+    style: margin$1
   },
   marginTop: {
-    style: margin
+    style: margin$1
   },
   marginRight: {
-    style: margin
+    style: margin$1
   },
   marginBottom: {
-    style: margin
+    style: margin$1
   },
   marginLeft: {
-    style: margin
+    style: margin$1
   },
   marginX: {
-    style: margin
+    style: margin$1
   },
   marginY: {
-    style: margin
+    style: margin$1
   },
   marginInline: {
-    style: margin
+    style: margin$1
   },
   marginInlineStart: {
-    style: margin
+    style: margin$1
   },
   marginInlineEnd: {
-    style: margin
+    style: margin$1
   },
   marginBlock: {
-    style: margin
+    style: margin$1
   },
   marginBlockStart: {
-    style: margin
+    style: margin$1
   },
   marginBlockEnd: {
-    style: margin
+    style: margin$1
   },
   // display
   displayPrint: {
@@ -13192,13 +13193,13 @@ const defaultSxConfig = {
   justifySelf: {},
   // grid
   gap: {
-    style: gap
+    style: gap$1
   },
   rowGap: {
-    style: rowGap
+    style: rowGap$1
   },
   columnGap: {
-    style: columnGap
+    style: columnGap$1
   },
   gridColumn: {},
   gridRow: {},
@@ -13224,22 +13225,22 @@ const defaultSxConfig = {
   },
   // sizing
   width: {
-    transform: sizingTransform
+    transform: sizingTransform$1
   },
   maxWidth: {
-    style: maxWidth
+    style: maxWidth$1
   },
   minWidth: {
-    transform: sizingTransform
+    transform: sizingTransform$1
   },
   height: {
-    transform: sizingTransform
+    transform: sizingTransform$1
   },
   maxHeight: {
-    transform: sizingTransform
+    transform: sizingTransform$1
   },
   minHeight: {
-    transform: sizingTransform
+    transform: sizingTransform$1
   },
   boxSizing: {},
   // typography
@@ -13267,17 +13268,17 @@ const defaultSxConfig = {
     themeKey: 'typography'
   }
 };
-function objectsHaveSameKeys(...objects) {
+function objectsHaveSameKeys$1(...objects) {
   const allKeys = objects.reduce((keys, object) => keys.concat(Object.keys(object)), []);
   const union = new Set(allKeys);
   return objects.every(object => union.size === Object.keys(object).length);
 }
-function callIfFn(maybeFn, arg) {
+function callIfFn$1(maybeFn, arg) {
   return typeof maybeFn === 'function' ? maybeFn(arg) : maybeFn;
 }
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
-function unstable_createStyleFunctionSx() {
+function unstable_createStyleFunctionSx$1() {
   function getThemeValue(prop, val, theme, config) {
     const props = {
       [prop]: val,
@@ -13305,15 +13306,15 @@ function unstable_createStyleFunctionSx() {
         [prop]: val
       };
     }
-    const themeMapping = getPath(theme, themeKey) || {};
+    const themeMapping = getPath$1(theme, themeKey) || {};
     if (style) {
       return style(props);
     }
     const styleFromPropValue = propValueFinal => {
-      let value = getStyleValue(themeMapping, transform, propValueFinal);
+      let value = getStyleValue$1(themeMapping, transform, propValueFinal);
       if (propValueFinal === value && typeof propValueFinal === 'string') {
         // Haven't found value
-        value = getStyleValue(themeMapping, transform, `${prop}${propValueFinal === 'default' ? '' : capitalize(propValueFinal)}`, propValueFinal);
+        value = getStyleValue$1(themeMapping, transform, `${prop}${propValueFinal === 'default' ? '' : capitalize$1(propValueFinal)}`, propValueFinal);
       }
       if (cssProperty === false) {
         return value;
@@ -13322,7 +13323,7 @@ function unstable_createStyleFunctionSx() {
         [cssProperty]: value
       };
     };
-    return handleBreakpoints(props, val, styleFromPropValue);
+    return handleBreakpoints$1(props, val, styleFromPropValue);
   }
   function styleFunctionSx(props) {
     const {
@@ -13332,7 +13333,7 @@ function unstable_createStyleFunctionSx() {
     if (!sx) {
       return null; // Emotion & styled-components will neglect null
     }
-    const config = theme.unstable_sxConfig ?? defaultSxConfig;
+    const config = theme.unstable_sxConfig ?? defaultSxConfig$1;
 
     /*
      * Receive `sxInput` as object or callback
@@ -13350,43 +13351,43 @@ function unstable_createStyleFunctionSx() {
       if (!sxObject) {
         return null;
       }
-      const emptyBreakpoints = createEmptyBreakpointObject(theme.breakpoints);
+      const emptyBreakpoints = createEmptyBreakpointObject$1(theme.breakpoints);
       const breakpointsKeys = Object.keys(emptyBreakpoints);
       let css = emptyBreakpoints;
       Object.keys(sxObject).forEach(styleKey => {
-        const value = callIfFn(sxObject[styleKey], theme);
+        const value = callIfFn$1(sxObject[styleKey], theme);
         if (value !== null && value !== undefined) {
           if (typeof value === 'object') {
             if (config[styleKey]) {
-              css = merge(css, getThemeValue(styleKey, value, theme, config));
+              css = merge$1(css, getThemeValue(styleKey, value, theme, config));
             } else {
-              const breakpointsValues = handleBreakpoints({
+              const breakpointsValues = handleBreakpoints$1({
                 theme
               }, value, x => ({
                 [styleKey]: x
               }));
-              if (objectsHaveSameKeys(breakpointsValues, value)) {
+              if (objectsHaveSameKeys$1(breakpointsValues, value)) {
                 css[styleKey] = styleFunctionSx({
                   sx: value,
                   theme
                 });
               } else {
-                css = merge(css, breakpointsValues);
+                css = merge$1(css, breakpointsValues);
               }
             }
           } else {
-            css = merge(css, getThemeValue(styleKey, value, theme, config));
+            css = merge$1(css, getThemeValue(styleKey, value, theme, config));
           }
         }
       });
-      return sortContainerQueries(theme, removeUnusedBreakpoints(breakpointsKeys, css));
+      return sortContainerQueries$1(theme, removeUnusedBreakpoints$1(breakpointsKeys, css));
     }
     return Array.isArray(sx) ? sx.map(traverse) : traverse(sx);
   }
   return styleFunctionSx;
 }
-const styleFunctionSx = unstable_createStyleFunctionSx();
-styleFunctionSx.filterProps = ['sx'];
+const styleFunctionSx$1 = unstable_createStyleFunctionSx$1();
+styleFunctionSx$1.filterProps = ['sx'];
 
 /**
  * A universal utility to style components with multiple color modes. Always use it from the theme object.
@@ -13450,7 +13451,7 @@ styleFunctionSx.filterProps = ['sx'];
  *   })
  *```
  */
-function applyStyles$2(key, styles) {
+function applyStyles$3(key, styles) {
   // @ts-expect-error this is 'any' type
   const theme = this;
   if (theme.vars) {
@@ -13475,7 +13476,7 @@ function applyStyles$2(key, styles) {
   }
   return {};
 }
-function createTheme$1(options = {}, ...args) {
+function createTheme$2(options = {}, ...args) {
   const {
     breakpoints: breakpointsInput = {},
     palette: paletteInput = {},
@@ -13483,9 +13484,9 @@ function createTheme$1(options = {}, ...args) {
     shape: shapeInput = {},
     ...other
   } = options;
-  const breakpoints = createBreakpoints(breakpointsInput);
-  const spacing = createSpacing(spacingInput);
-  let muiTheme = deepmerge({
+  const breakpoints = createBreakpoints$1(breakpointsInput);
+  const spacing = createSpacing$1(spacingInput);
+  let muiTheme = deepmerge$1({
     breakpoints,
     direction: 'ltr',
     components: {},
@@ -13496,19 +13497,19 @@ function createTheme$1(options = {}, ...args) {
     },
     spacing,
     shape: {
-      ...shape,
+      ...shape$1,
       ...shapeInput
     }
   }, other);
-  muiTheme = cssContainerQueries(muiTheme);
-  muiTheme.applyStyles = applyStyles$2;
-  muiTheme = args.reduce((acc, argument) => deepmerge(acc, argument), muiTheme);
+  muiTheme = cssContainerQueries$1(muiTheme);
+  muiTheme.applyStyles = applyStyles$3;
+  muiTheme = args.reduce((acc, argument) => deepmerge$1(acc, argument), muiTheme);
   muiTheme.unstable_sxConfig = {
-    ...defaultSxConfig,
+    ...defaultSxConfig$1,
     ...other?.unstable_sxConfig
   };
   muiTheme.unstable_sx = function sx(props) {
-    return styleFunctionSx({
+    return styleFunctionSx$1({
       sx: props,
       theme: this
     });
@@ -13522,7 +13523,7 @@ function useTheme$3(defaultTheme = null) {
   const contextTheme = reactExports.useContext(ThemeContext$1);
   return !contextTheme || isObjectEmpty$1(contextTheme) ? defaultTheme : contextTheme;
 }
-const systemDefaultTheme$1 = createTheme$1();
+const systemDefaultTheme$1 = createTheme$2();
 function useTheme$2(defaultTheme = systemDefaultTheme$1) {
   return useTheme$3(defaultTheme);
 }
@@ -13531,7 +13532,7 @@ const splitProps = props => {
     systemProps: {},
     otherProps: {}
   };
-  const config = props?.theme?.unstable_sxConfig ?? defaultSxConfig;
+  const config = props?.theme?.unstable_sxConfig ?? defaultSxConfig$1;
   Object.keys(props).forEach(prop => {
     if (config[prop]) {
       result.systemProps[prop] = props[prop];
@@ -13556,7 +13557,7 @@ function extendSxProp$1(props) {
   } else if (typeof inSx === 'function') {
     finalSx = (...args) => {
       const result = inSx(...args);
-      if (!isPlainObject(result)) {
+      if (!isPlainObject$1(result)) {
         return systemProps;
       }
       return {
@@ -13654,8 +13655,8 @@ function preprocessStyles(input) {
   }
   return result;
 }
-const systemDefaultTheme = createTheme$1();
-function shouldForwardProp(prop) {
+const systemDefaultTheme = createTheme$2();
+function shouldForwardProp$1(prop) {
   return prop !== "ownerState" && prop !== "theme" && prop !== "sx" && prop !== "as";
 }
 function defaultOverridesResolver(slot) {
@@ -13727,14 +13728,14 @@ function createStyled(input = {}) {
   const {
     themeId,
     defaultTheme = systemDefaultTheme,
-    rootShouldForwardProp = shouldForwardProp,
-    slotShouldForwardProp = shouldForwardProp
+    rootShouldForwardProp = shouldForwardProp$1,
+    slotShouldForwardProp = shouldForwardProp$1
   } = input;
   function styleAttachTheme(props) {
     attachTheme(props, themeId, defaultTheme);
   }
   const styled = (tag, inputOptions = {}) => {
-    internal_mutateStyles(tag, styles => styles.filter(style => style !== styleFunctionSx));
+    internal_mutateStyles(tag, styles => styles.filter(style => style !== styleFunctionSx$1));
     const {
       name: componentName,
       slot: componentSlot,
@@ -13750,7 +13751,7 @@ function createStyled(input = {}) {
     // For more details: https://github.com/mui/material-ui/pull/37908
     componentSlot && componentSlot !== "Root" && componentSlot !== "root" || false;
     const skipSx = inputSkipSx || false;
-    let shouldForwardPropOption = shouldForwardProp;
+    let shouldForwardPropOption = shouldForwardProp$1;
     if (componentSlot === "Root" || componentSlot === "root") {
       shouldForwardPropOption = rootShouldForwardProp;
     } else if (componentSlot) {
@@ -13764,12 +13765,15 @@ function createStyled(input = {}) {
       ...options
     });
     const transformStyle = style => {
-      if (typeof style === "function" && style.__emotion_real !== style) {
+      if (style.__emotion_real === style) {
+        return style;
+      }
+      if (typeof style === "function") {
         return function styleFunctionProcessor(props) {
           return processStyle(props, style);
         };
       }
-      if (isPlainObject(style)) {
+      if (isPlainObject$1(style)) {
         const serialized = preprocessStyles(style);
         if (!serialized.variants) {
           return serialized.style;
@@ -13810,7 +13814,7 @@ function createStyled(input = {}) {
         });
       }
       if (!skipSx) {
-        expressionsTail.push(styleFunctionSx);
+        expressionsTail.push(styleFunctionSx$1);
       }
       if (Array.isArray(expressionsBody[0])) {
         const inputStrings = expressionsBody.shift();
@@ -13967,7 +13971,7 @@ function decomposeColor(color) {
   const marker = color.indexOf("(");
   const type = color.substring(0, marker);
   if (!["rgb", "rgba", "hsl", "hsla", "color"].includes(type)) {
-    throw new Error(formatMuiErrorMessage(9, color));
+    throw new Error(formatMuiErrorMessage$1(9, color));
   }
   let values = color.substring(marker + 1, color.length - 1);
   let colorSpace;
@@ -13978,7 +13982,7 @@ function decomposeColor(color) {
       values[3] = values[3].slice(1);
     }
     if (!["srgb", "display-p3", "a98-rgb", "prophoto-rgb", "rec-2020"].includes(colorSpace)) {
-      throw new Error(formatMuiErrorMessage(10, colorSpace));
+      throw new Error(formatMuiErrorMessage$1(10, colorSpace));
     }
   } else {
     values = values.split(",");
@@ -14221,8 +14225,7 @@ function useControlled({
 }
 
 /**
- * Takes an array of refs and returns a new ref which will apply any modification to all of the refs.
- * This is useful when you want to have the ref used in multiple places.
+ * Merges refs into a single memoized callback ref or `null`.
  *
  * ```tsx
  * const rootRef = React.useRef<Instance>(null);
@@ -14237,19 +14240,41 @@ function useControlled({
  * @returns {React.RefCallback<Instance> | null} The new ref callback.
  */
 function useForkRef(...refs) {
-  /**
-   * This will create a new function if the refs passed to this hook change and are all defined.
-   * This means react will call the old forkRef with `null` and the new forkRef
-   * with the ref. Cleanup naturally emerges from this behavior.
-   */
+  const cleanupRef = reactExports.useRef(undefined);
+  const refEffect = reactExports.useCallback(instance => {
+    const cleanups = refs.map(ref => {
+      if (ref == null) {
+        return null;
+      }
+      if (typeof ref === 'function') {
+        const refCallback = ref;
+        const refCleanup = refCallback(instance);
+        return typeof refCleanup === 'function' ? refCleanup : () => {
+          refCallback(null);
+        };
+      }
+      ref.current = instance;
+      return () => {
+        ref.current = null;
+      };
+    });
+    return () => {
+      cleanups.forEach(refCleanup => refCleanup?.());
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, refs);
   return reactExports.useMemo(() => {
     if (refs.every(ref => ref == null)) {
       return null;
     }
-    return instance => {
-      refs.forEach(ref => {
-        setRef(ref, instance);
-      });
+    return value => {
+      if (cleanupRef.current) {
+        cleanupRef.current();
+        cleanupRef.current = undefined;
+      }
+      if (value != null) {
+        cleanupRef.current = refEffect(value);
+      }
     };
     // TODO: uncomment once we enable eslint-plugin-react-compiler // eslint-disable-next-line react-compiler/react-compiler -- intentionally ignoring that the dependency array must be an array literal
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -14562,18 +14587,18 @@ function ThemeProvider$2(props) {
     children
   });
 }
-const RtlContext = /* @__PURE__ */reactExports.createContext();
+const RtlContext$1 = /* @__PURE__ */reactExports.createContext();
 function RtlProvider({
   value,
   ...props
 }) {
-  return /* @__PURE__ */jsxRuntimeExports.jsx(RtlContext.Provider, {
+  return /* @__PURE__ */jsxRuntimeExports.jsx(RtlContext$1.Provider, {
     value: value ?? true,
     ...props
   });
 }
-const useRtl = () => {
-  const value = reactExports.useContext(RtlContext);
+const useRtl$1 = () => {
+  const value = reactExports.useContext(RtlContext$1);
   return value ?? false;
 };
 const PropsContext = /* @__PURE__ */reactExports.createContext(void 0);
@@ -15451,7 +15476,7 @@ function prepareCssVars(theme, parserConfig = {}) {
       css,
       varsWithDefaults
     } = cssVarsParser(scheme, parserConfig);
-    themeVars = deepmerge(themeVars, varsWithDefaults);
+    themeVars = deepmerge$1(themeVars, varsWithDefaults);
     colorSchemesMap[key] = {
       css,
       vars
@@ -15464,7 +15489,7 @@ function prepareCssVars(theme, parserConfig = {}) {
       vars,
       varsWithDefaults
     } = cssVarsParser(defaultScheme, parserConfig);
-    themeVars = deepmerge(themeVars, varsWithDefaults);
+    themeVars = deepmerge$1(themeVars, varsWithDefaults);
     colorSchemesMap[defaultColorScheme] = {
       css,
       vars
@@ -15510,7 +15535,7 @@ function prepareCssVars(theme, parserConfig = {}) {
     Object.entries(colorSchemesMap).forEach(([, {
       vars: schemeVars
     }]) => {
-      vars = deepmerge(vars, schemeVars);
+      vars = deepmerge$1(vars, schemeVars);
     });
     return vars;
   };
@@ -15854,10 +15879,10 @@ function createPalette(palette) {
       color.main = color[mainShade];
     }
     if (!color.hasOwnProperty("main")) {
-      throw new Error(formatMuiErrorMessage(11, name ? ` (${name})` : "", mainShade));
+      throw new Error(formatMuiErrorMessage$1(11, name ? ` (${name})` : "", mainShade));
     }
     if (typeof color.main !== "string") {
-      throw new Error(formatMuiErrorMessage(12, name ? ` (${name})` : "", JSON.stringify(color.main)));
+      throw new Error(formatMuiErrorMessage$1(12, name ? ` (${name})` : "", JSON.stringify(color.main)));
     }
     addLightOrDark(color, "light", lightShade, tonalOffset);
     addLightOrDark(color, "dark", darkShade, tonalOffset);
@@ -15872,7 +15897,7 @@ function createPalette(palette) {
   } else if (mode === "dark") {
     modeHydrated = getDark();
   }
-  const paletteOutput = deepmerge({
+  const paletteOutput = deepmerge$1({
     // A collection of common colors.
     common: {
       ...common
@@ -16022,7 +16047,7 @@ function createTypography(palette, typography) {
       letterSpacing: "inherit"
     }
   };
-  return deepmerge({
+  return deepmerge$1({
     htmlFontSize,
     pxToRem,
     fontFamily,
@@ -16122,7 +16147,7 @@ const zIndex = {
 
 /* eslint-disable import/prefer-default-export */
 function isSerializable(val) {
-  return isPlainObject(val) || typeof val === 'undefined' || typeof val === 'string' || typeof val === 'boolean' || typeof val === 'number' || Array.isArray(val);
+  return isPlainObject$1(val) || typeof val === 'undefined' || typeof val === 'string' || typeof val === 'boolean' || typeof val === 'number' || Array.isArray(val);
 }
 
 /**
@@ -16155,7 +16180,7 @@ function stringifyTheme(baseTheme = {}) {
       const [key, value] = array[index];
       if (!isSerializable(value) || key.startsWith('unstable_')) {
         delete object[key];
-      } else if (isPlainObject(value)) {
+      } else if (isPlainObject$1(value)) {
         object[key] = {
           ...value
         };
@@ -16188,11 +16213,11 @@ function createThemeNoVars(options = {}, ...args) {
   // The error should throw only for the root theme creation because user is not allowed to use a custom node `vars`.
   // `generateThemeVars` is the closest identifier for checking that the `options` is a result of `createTheme` with CSS variables so that user can create new theme for nested ThemeProvider.
   options.generateThemeVars === void 0) {
-    throw new Error(formatMuiErrorMessage(20));
+    throw new Error(formatMuiErrorMessage$1(20));
   }
   const palette = createPalette(paletteInput);
-  const systemTheme = createTheme$1(options);
-  let muiTheme = deepmerge(systemTheme, {
+  const systemTheme = createTheme$2(options);
+  let muiTheme = deepmerge$1(systemTheme, {
     mixins: createMixins(systemTheme.breakpoints, mixinsInput),
     palette,
     // Don't use [...shadows] until you've verified its transpiled code is not invoking the iterator protocol.
@@ -16203,14 +16228,14 @@ function createThemeNoVars(options = {}, ...args) {
       ...zIndex
     }
   });
-  muiTheme = deepmerge(muiTheme, other);
-  muiTheme = args.reduce((acc, argument) => deepmerge(acc, argument), muiTheme);
+  muiTheme = deepmerge$1(muiTheme, other);
+  muiTheme = args.reduce((acc, argument) => deepmerge$1(acc, argument), muiTheme);
   muiTheme.unstable_sxConfig = {
-    ...defaultSxConfig,
+    ...defaultSxConfig$1,
     ...other?.unstable_sxConfig
   };
   muiTheme.unstable_sx = function sx(props) {
-    return styleFunctionSx({
+    return styleFunctionSx$1({
       sx: props,
       theme: this
     });
@@ -16443,7 +16468,7 @@ function createThemeWithVars(options = {}, ...args) {
     defaultScheme = true;
   }
   if (!defaultScheme) {
-    throw new Error(formatMuiErrorMessage(21, defaultColorScheme));
+    throw new Error(formatMuiErrorMessage$1(21, defaultColorScheme));
   }
   const muiTheme = attachColorScheme$1(colorSchemes, defaultScheme, input, defaultColorScheme);
   if (builtInLight && !colorSchemes.light) {
@@ -16642,7 +16667,7 @@ function createThemeWithVars(options = {}, ...args) {
       }
     });
   });
-  theme = args.reduce((acc, argument) => deepmerge(acc, argument), theme);
+  theme = args.reduce((acc, argument) => deepmerge$1(acc, argument), theme);
   const parserConfig = {
     prefix: cssVarPrefix,
     disableCssColorScheme,
@@ -16661,17 +16686,17 @@ function createThemeWithVars(options = {}, ...args) {
   theme.generateThemeVars = generateThemeVars;
   theme.generateStyleSheets = generateStyleSheets;
   theme.generateSpacing = function generateSpacing() {
-    return createSpacing(input.spacing, createUnarySpacing(this));
+    return createSpacing$1(input.spacing, createUnarySpacing$1(this));
   };
   theme.getColorSchemeSelector = createGetColorSchemeSelector(selector);
   theme.spacing = theme.generateSpacing();
   theme.shouldSkipGeneratingVar = shouldSkipGeneratingVar$1;
   theme.unstable_sxConfig = {
-    ...defaultSxConfig,
+    ...defaultSxConfig$1,
     ...input?.unstable_sxConfig
   };
   theme.unstable_sx = function sx(props) {
-    return styleFunctionSx({
+    return styleFunctionSx$1({
       sx: props,
       theme: this
     });
@@ -16702,7 +16727,7 @@ function attachColorScheme(theme, scheme, colorScheme) {
  * @param args Deep merge the arguments with the about to be returned theme.
  * @returns A complete, ready-to-use theme object.
  */
-function createTheme(options = {},
+function createTheme$1(options = {},
 // cast type to skip module augmentation test
 ...args) {
   const {
@@ -16775,7 +16800,7 @@ function createTheme(options = {},
     ...(typeof cssVariables !== 'boolean' && cssVariables)
   }, ...args);
 }
-const defaultTheme = createTheme();
+const defaultTheme = createTheme$1();
 function useTheme() {
   const theme = useTheme$2(defaultTheme);
   return theme[THEME_ID] || theme;
@@ -16824,7 +16849,7 @@ const {
 } = createCssVarsProvider({
   themeId: THEME_ID,
   // @ts-ignore ignore module augmentation tests
-  theme: () => createTheme({
+  theme: () => createTheme$1({
     cssVariables: true
   }),
   colorSchemeStorageKey: defaultConfig.colorSchemeStorageKey,
@@ -16839,7 +16864,7 @@ const {
       typography: createTypography(theme.palette, theme.typography)
     };
     newTheme.unstable_sx = function sx(props) {
-      return styleFunctionSx({
+      return styleFunctionSx$1({
         sx: props,
         theme: this
       });
@@ -16852,27 +16877,27 @@ function ThemeProvider({
   theme,
   ...props
 }) {
-  if (typeof theme === 'function') {
-    return /*#__PURE__*/jsxRuntimeExports.jsx(ThemeProviderNoVars, {
-      theme: theme,
-      ...props
-    });
-  }
-  const muiTheme = THEME_ID in theme ? theme[THEME_ID] : theme;
-  if (!('colorSchemes' in muiTheme)) {
-    if (!('vars' in muiTheme)) {
-      // For non-CSS variables themes, set `vars` to null to prevent theme inheritance from the upper theme.
-      // The example use case is the docs demo that uses ThemeProvider to customize the theme while the upper theme is using CSS variables.
-      return /*#__PURE__*/jsxRuntimeExports.jsx(ThemeProviderNoVars, {
-        theme: {
+  const noVarsTheme = reactExports.useMemo(() => {
+    if (typeof theme === 'function') {
+      return theme;
+    }
+    const muiTheme = THEME_ID in theme ? theme[THEME_ID] : theme;
+    if (!('colorSchemes' in muiTheme)) {
+      if (!('vars' in muiTheme)) {
+        // For non-CSS variables themes, set `vars` to null to prevent theme inheritance from the upper theme.
+        // The example use case is the docs demo that uses ThemeProvider to customize the theme while the upper theme is using CSS variables.
+        return {
           ...theme,
           vars: null
-        },
-        ...props
-      });
+        };
+      }
+      return theme;
     }
+    return null;
+  }, [theme]);
+  if (noVarsTheme) {
     return /*#__PURE__*/jsxRuntimeExports.jsx(ThemeProviderNoVars, {
-      theme: theme,
+      theme: noVarsTheme,
       ...props
     });
   }
@@ -18579,8 +18604,8 @@ var IS_PAUSED = 4;
 var hasAnimated = target => (target[$P] & HAS_ANIMATED) > 0;
 var isAnimating = target => (target[$P] & IS_ANIMATING) > 0;
 var isPaused = target => (target[$P] & IS_PAUSED) > 0;
-var setActiveBit = (target, active) => active ? target[$P] |= IS_ANIMATING | HAS_ANIMATED : target[$P] &= -3;
-var setPausedBit = (target, paused) => paused ? target[$P] |= IS_PAUSED : target[$P] &= -5;
+var setActiveBit = (target, active) => active ? target[$P] |= IS_ANIMATING | HAS_ANIMATED : target[$P] &= ~IS_ANIMATING;
+var setPausedBit = (target, paused) => paused ? target[$P] |= IS_PAUSED : target[$P] &= ~IS_PAUSED;
 
 // src/SpringValue.ts
 var SpringValue = class extends FrameValue {
@@ -20782,7 +20807,7 @@ var named = {
   yellow: 0xffff00,
   yellowgreen: 0x9acd32
 };
-define(Color, color, {
+define(Color, color$1, {
   copy(channels) {
     return Object.assign(new this.constructor(), this, channels);
   },
@@ -20809,7 +20834,7 @@ function color_formatHsl() {
 function color_formatRgb() {
   return this.rgb().formatRgb();
 }
-function color(format) {
+function color$1(format) {
   var m, l;
   format = (format + "").trim().toLowerCase();
   return (m = reHex.exec(format)) ? (l = m[1].length, m = parseInt(m[1], 16), l === 6 ? rgbn(m) // #ff0000
@@ -20834,7 +20859,7 @@ function rgba(r, g, b, a) {
   return new Rgb(r, g, b, a);
 }
 function rgbConvert(o) {
-  if (!(o instanceof Color)) o = color(o);
+  if (!(o instanceof Color)) o = color$1(o);
   if (!o) return new Rgb();
   o = o.rgb();
   return new Rgb(o.r, o.g, o.b, o.opacity);
@@ -20899,7 +20924,7 @@ function hsla(h, s, l, a) {
 }
 function hslConvert(o) {
   if (o instanceof Hsl) return new Hsl(o.h, o.s, o.l, o.opacity);
-  if (!(o instanceof Color)) o = color(o);
+  if (!(o instanceof Color)) o = color$1(o);
   if (!o) return new Hsl();
   if (o instanceof Hsl) return o;
   o = o.rgb();
@@ -21132,7 +21157,7 @@ function string(a, b) {
 function interpolate(a, b) {
   var t = typeof b,
     c;
-  return b == null || t === "boolean" ? constant$1(b) : (t === "number" ? interpolateNumber : t === "string" ? (c = color(b)) ? (b = c, rgb) : string : b instanceof color ? rgb : b instanceof Date ? interpolateDate : isNumberArray(b) ? numberArray : Array.isArray(b) ? genericArray : typeof b.valueOf !== "function" && typeof b.toString !== "function" || isNaN(b) ? object : interpolateNumber)(a, b);
+  return b == null || t === "boolean" ? constant$1(b) : (t === "number" ? interpolateNumber : t === "string" ? (c = color$1(b)) ? (b = c, rgb) : string : b instanceof color$1 ? rgb : b instanceof Date ? interpolateDate : isNumberArray(b) ? numberArray : Array.isArray(b) ? genericArray : typeof b.valueOf !== "function" && typeof b.toString !== "function" || isNaN(b) ? object : interpolateNumber)(a, b);
 }
 function interpolateRound(a, b) {
   return a = +a, b = +b, function (t) {
@@ -24657,7 +24682,7 @@ const BarElementPath = styled(animated.rect, {
   ownerState
 }) => ({
   stroke: "none",
-  fill: ownerState.isHighlighted ? color(ownerState.color).brighter(0.5).formatHex() : ownerState.color,
+  fill: ownerState.isHighlighted ? color$1(ownerState.color).brighter(0.5).formatHex() : ownerState.color,
   transition: "opacity 0.2s ease-in, fill 0.2s ease-in",
   opacity: ownerState.isFaded && 0.3 || 1
 }));
@@ -26492,6 +26517,11 @@ function ChartsXAxis(inProps) {
     })]
   });
 }
+const RtlContext = /* @__PURE__ */reactExports.createContext();
+const useRtl = () => {
+  const value = reactExports.useContext(RtlContext);
+  return value ?? false;
+};
 const _excluded$8 = ["scale", "tickNumber"];
 const useUtilityClasses$6 = ownerState => {
   const {
@@ -26804,7 +26834,7 @@ function isShadowRoot(node) {
 
 // and applies them to the HTMLElements such as popper and arrow
 
-function applyStyles(_ref) {
+function applyStyles$1(_ref) {
   var state = _ref.state;
   Object.keys(state.elements).forEach(function (name) {
     var style = state.styles[name] || {};
@@ -26869,11 +26899,11 @@ function effect$2(_ref2) {
   };
 } // eslint-disable-next-line import/no-unused-modules
 
-const applyStyles$1 = {
+const applyStyles$2 = {
   name: 'applyStyles',
   enabled: true,
   phase: 'write',
-  fn: applyStyles,
+  fn: applyStyles$1,
   effect: effect$2,
   requires: ['computeStyles']
 };
@@ -28302,7 +28332,7 @@ function popperGenerator(generatorOptions) {
     return instance;
   };
 }
-var defaultModifiers = [eventListeners, popperOffsets$1, computeStyles$1, applyStyles$1, offset$1, flip$1, preventOverflow$1, arrow$1, hide$1];
+var defaultModifiers = [eventListeners, popperOffsets$1, computeStyles$1, applyStyles$2, offset$1, flip$1, preventOverflow$1, arrow$1, hide$1];
 var createPopper = /*#__PURE__*/popperGenerator({
   defaultModifiers: defaultModifiers
 }); // eslint-disable-next-line import/no-unused-modules
@@ -28575,7 +28605,7 @@ const PopperRoot = styled(Popper$1, {
   overridesResolver: (props, styles) => styles.root
 })({});
 const Popper = /* @__PURE__ */reactExports.forwardRef(function Popper2(inProps, ref) {
-  const isRtl = useRtl();
+  const isRtl = useRtl$1();
   const props = useDefaultProps({
     props: inProps,
     name: "MuiPopper"
@@ -28725,6 +28755,1264 @@ function utcFormatter(v) {
     return v.toUTCString();
   }
   return v.toLocaleString();
+}
+
+/**
+ * WARNING: Don't import this directly. It's imported by the code generated by
+ * `@mui/interal-babel-plugin-minify-errors`. Make sure to always use string literals in `Error`
+ * constructors to ensure the plugin works as expected. Supported patterns include:
+ *   throw new Error('My message');
+ *   throw new Error(`My message: ${foo}`);
+ *   throw new Error(`My message: ${foo}` + 'another string');
+ *   ...
+ * @param {number} code
+ */
+function formatMuiErrorMessage(code, ...args) {
+  const url = new URL(`https://mui.com/production-error/?code=${code}`);
+  args.forEach(arg => url.searchParams.append('args[]', arg));
+  return `Minified MUI error #${code}; visit ${url} for the full message.`;
+}
+
+// https://github.com/sindresorhus/is-plain-obj/blob/main/index.js
+function isPlainObject(item) {
+  if (typeof item !== 'object' || item === null) {
+    return false;
+  }
+  const prototype = Object.getPrototypeOf(item);
+  return (prototype === null || prototype === Object.prototype || Object.getPrototypeOf(prototype) === null) && !(Symbol.toStringTag in item) && !(Symbol.iterator in item);
+}
+function deepClone(source) {
+  if (/*#__PURE__*/reactExports.isValidElement(source) || reactIsExports.isValidElementType(source) || !isPlainObject(source)) {
+    return source;
+  }
+  const output = {};
+  Object.keys(source).forEach(key => {
+    output[key] = deepClone(source[key]);
+  });
+  return output;
+}
+
+/**
+ * Merge objects deeply.
+ * It will shallow copy React elements.
+ *
+ * If `options.clone` is set to `false` the source object will be merged directly into the target object.
+ *
+ * @example
+ * ```ts
+ * deepmerge({ a: { b: 1 }, d: 2 }, { a: { c: 2 }, d: 4 });
+ * // => { a: { b: 1, c: 2 }, d: 4 }
+ * ````
+ *
+ * @param target The target object.
+ * @param source The source object.
+ * @param options The merge options.
+ * @param options.clone Set to `false` to merge the source object directly into the target object.
+ * @returns The merged object.
+ */
+function deepmerge(target, source, options = {
+  clone: true
+}) {
+  const output = options.clone ? {
+    ...target
+  } : target;
+  if (isPlainObject(target) && isPlainObject(source)) {
+    Object.keys(source).forEach(key => {
+      if (/*#__PURE__*/reactExports.isValidElement(source[key]) || reactIsExports.isValidElementType(source[key])) {
+        output[key] = source[key];
+      } else if (isPlainObject(source[key]) &&
+      // Avoid prototype pollution
+      Object.prototype.hasOwnProperty.call(target, key) && isPlainObject(target[key])) {
+        // Since `output` is a clone of `target` and we have narrowed `target` in this block we can cast to the same type.
+        output[key] = deepmerge(target[key], source[key], options);
+      } else if (options.clone) {
+        output[key] = isPlainObject(source[key]) ? deepClone(source[key]) : source[key];
+      } else {
+        output[key] = source[key];
+      }
+    });
+  }
+  return output;
+}
+
+// Sorted ASC by size. That's important.
+// It can't be configured as it's used statically for propTypes.
+const sortBreakpointsValues = values => {
+  const breakpointsAsArray = Object.keys(values).map(key => ({
+    key,
+    val: values[key]
+  })) || [];
+  // Sort in ascending order
+  breakpointsAsArray.sort((breakpoint1, breakpoint2) => breakpoint1.val - breakpoint2.val);
+  return breakpointsAsArray.reduce((acc, obj) => {
+    return {
+      ...acc,
+      [obj.key]: obj.val
+    };
+  }, {});
+};
+
+// Keep in mind that @media is inclusive by the CSS specification.
+function createBreakpoints(breakpoints) {
+  const {
+    // The breakpoint **start** at this value.
+    // For instance with the first breakpoint xs: [xs, sm).
+    values = {
+      xs: 0,
+      // phone
+      sm: 600,
+      // tablet
+      md: 900,
+      // small laptop
+      lg: 1200,
+      // desktop
+      xl: 1536 // large screen
+    },
+    unit = 'px',
+    step = 5,
+    ...other
+  } = breakpoints;
+  const sortedValues = sortBreakpointsValues(values);
+  const keys = Object.keys(sortedValues);
+  function up(key) {
+    const value = typeof values[key] === 'number' ? values[key] : key;
+    return `@media (min-width:${value}${unit})`;
+  }
+  function down(key) {
+    const value = typeof values[key] === 'number' ? values[key] : key;
+    return `@media (max-width:${value - step / 100}${unit})`;
+  }
+  function between(start, end) {
+    const endIndex = keys.indexOf(end);
+    return `@media (min-width:${typeof values[start] === 'number' ? values[start] : start}${unit}) and ` + `(max-width:${(endIndex !== -1 && typeof values[keys[endIndex]] === 'number' ? values[keys[endIndex]] : end) - step / 100}${unit})`;
+  }
+  function only(key) {
+    if (keys.indexOf(key) + 1 < keys.length) {
+      return between(key, keys[keys.indexOf(key) + 1]);
+    }
+    return up(key);
+  }
+  function not(key) {
+    // handle first and last key separately, for better readability
+    const keyIndex = keys.indexOf(key);
+    if (keyIndex === 0) {
+      return up(keys[1]);
+    }
+    if (keyIndex === keys.length - 1) {
+      return down(keys[keyIndex]);
+    }
+    return between(key, keys[keys.indexOf(key) + 1]).replace('@media', '@media not all and');
+  }
+  return {
+    keys,
+    values: sortedValues,
+    up,
+    down,
+    between,
+    only,
+    not,
+    unit,
+    ...other
+  };
+}
+function sortContainerQueries(theme, css) {
+  if (!theme.containerQueries) {
+    return css;
+  }
+  const sorted = Object.keys(css).filter(key => key.startsWith("@container")).sort((a, b) => {
+    const regex = /min-width:\s*([0-9.]+)/;
+    return +(a.match(regex)?.[1] || 0) - +(b.match(regex)?.[1] || 0);
+  });
+  if (!sorted.length) {
+    return css;
+  }
+  return sorted.reduce((acc, key) => {
+    const value = css[key];
+    delete acc[key];
+    acc[key] = value;
+    return acc;
+  }, {
+    ...css
+  });
+}
+function isCqShorthand(breakpointKeys, value) {
+  return value === "@" || value.startsWith("@") && (breakpointKeys.some(key => value.startsWith(`@${key}`)) || !!value.match(/^@\d/));
+}
+function getContainerQuery(theme, shorthand) {
+  const matches = shorthand.match(/^@([^/]+)?\/?(.+)?$/);
+  if (!matches) {
+    return null;
+  }
+  const [, containerQuery, containerName] = matches;
+  const value = Number.isNaN(+containerQuery) ? containerQuery || 0 : +containerQuery;
+  return theme.containerQueries(containerName).up(value);
+}
+function cssContainerQueries(themeInput) {
+  const toContainerQuery = (mediaQuery, name) => mediaQuery.replace("@media", name ? `@container ${name}` : "@container");
+  function attachCq(node2, name) {
+    node2.up = (...args) => toContainerQuery(themeInput.breakpoints.up(...args), name);
+    node2.down = (...args) => toContainerQuery(themeInput.breakpoints.down(...args), name);
+    node2.between = (...args) => toContainerQuery(themeInput.breakpoints.between(...args), name);
+    node2.only = (...args) => toContainerQuery(themeInput.breakpoints.only(...args), name);
+    node2.not = (...args) => {
+      const result = toContainerQuery(themeInput.breakpoints.not(...args), name);
+      if (result.includes("not all and")) {
+        return result.replace("not all and ", "").replace("min-width:", "width<").replace("max-width:", "width>").replace("and", "or");
+      }
+      return result;
+    };
+  }
+  const node = {};
+  const containerQueries = name => {
+    attachCq(node, name);
+    return node;
+  };
+  attachCq(containerQueries);
+  return {
+    ...themeInput,
+    containerQueries
+  };
+}
+const shape = {
+  borderRadius: 4
+};
+function merge(acc, item) {
+  if (!item) {
+    return acc;
+  }
+  return deepmerge(acc, item, {
+    clone: false // No need to clone deep, it's way faster.
+  });
+}
+const values = {
+  xs: 0,
+  // phone
+  sm: 600,
+  // tablet
+  md: 900,
+  // small laptop
+  lg: 1200,
+  // desktop
+  xl: 1536
+  // large screen
+};
+const defaultBreakpoints = {
+  // Sorted ASC by size. That's important.
+  // It can't be configured as it's used statically for propTypes.
+  keys: ["xs", "sm", "md", "lg", "xl"],
+  up: key => `@media (min-width:${values[key]}px)`
+};
+const defaultContainerQueries = {
+  containerQueries: containerName => ({
+    up: key => {
+      let result = typeof key === "number" ? key : values[key] || key;
+      if (typeof result === "number") {
+        result = `${result}px`;
+      }
+      return containerName ? `@container ${containerName} (min-width:${result})` : `@container (min-width:${result})`;
+    }
+  })
+};
+function handleBreakpoints(props, propValue, styleFromPropValue) {
+  const theme = props.theme || {};
+  if (Array.isArray(propValue)) {
+    const themeBreakpoints = theme.breakpoints || defaultBreakpoints;
+    return propValue.reduce((acc, item, index) => {
+      acc[themeBreakpoints.up(themeBreakpoints.keys[index])] = styleFromPropValue(propValue[index]);
+      return acc;
+    }, {});
+  }
+  if (typeof propValue === "object") {
+    const themeBreakpoints = theme.breakpoints || defaultBreakpoints;
+    return Object.keys(propValue).reduce((acc, breakpoint) => {
+      if (isCqShorthand(themeBreakpoints.keys, breakpoint)) {
+        const containerKey = getContainerQuery(theme.containerQueries ? theme : defaultContainerQueries, breakpoint);
+        if (containerKey) {
+          acc[containerKey] = styleFromPropValue(propValue[breakpoint], breakpoint);
+        }
+      } else if (Object.keys(themeBreakpoints.values || values).includes(breakpoint)) {
+        const mediaKey = themeBreakpoints.up(breakpoint);
+        acc[mediaKey] = styleFromPropValue(propValue[breakpoint], breakpoint);
+      } else {
+        const cssKey = breakpoint;
+        acc[cssKey] = propValue[cssKey];
+      }
+      return acc;
+    }, {});
+  }
+  const output = styleFromPropValue(propValue);
+  return output;
+}
+function createEmptyBreakpointObject(breakpointsInput = {}) {
+  const breakpointsInOrder = breakpointsInput.keys?.reduce((acc, key) => {
+    const breakpointStyleKey = breakpointsInput.up(key);
+    acc[breakpointStyleKey] = {};
+    return acc;
+  }, {});
+  return breakpointsInOrder || {};
+}
+function removeUnusedBreakpoints(breakpointKeys, style) {
+  return breakpointKeys.reduce((acc, key) => {
+    const breakpointOutput = acc[key];
+    const isBreakpointUnused = !breakpointOutput || Object.keys(breakpointOutput).length === 0;
+    if (isBreakpointUnused) {
+      delete acc[key];
+    }
+    return acc;
+  }, style);
+}
+function capitalize(string) {
+  if (typeof string !== "string") {
+    throw new Error(formatMuiErrorMessage(7));
+  }
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+function getPath(obj, path, checkVars = true) {
+  if (!path || typeof path !== "string") {
+    return null;
+  }
+  if (obj && obj.vars && checkVars) {
+    const val = `vars.${path}`.split(".").reduce((acc, item) => acc && acc[item] ? acc[item] : null, obj);
+    if (val != null) {
+      return val;
+    }
+  }
+  return path.split(".").reduce((acc, item) => {
+    if (acc && acc[item] != null) {
+      return acc[item];
+    }
+    return null;
+  }, obj);
+}
+function getStyleValue(themeMapping, transform, propValueFinal, userValue = propValueFinal) {
+  let value;
+  if (typeof themeMapping === "function") {
+    value = themeMapping(propValueFinal);
+  } else if (Array.isArray(themeMapping)) {
+    value = themeMapping[propValueFinal] || userValue;
+  } else {
+    value = getPath(themeMapping, propValueFinal) || userValue;
+  }
+  if (transform) {
+    value = transform(value, userValue, themeMapping);
+  }
+  return value;
+}
+function style$1(options) {
+  const {
+    prop,
+    cssProperty = options.prop,
+    themeKey,
+    transform
+  } = options;
+  const fn = props => {
+    if (props[prop] == null) {
+      return null;
+    }
+    const propValue = props[prop];
+    const theme = props.theme;
+    const themeMapping = getPath(theme, themeKey) || {};
+    const styleFromPropValue = propValueFinal => {
+      let value = getStyleValue(themeMapping, transform, propValueFinal);
+      if (propValueFinal === value && typeof propValueFinal === "string") {
+        value = getStyleValue(themeMapping, transform, `${prop}${propValueFinal === "default" ? "" : capitalize(propValueFinal)}`, propValueFinal);
+      }
+      if (cssProperty === false) {
+        return value;
+      }
+      return {
+        [cssProperty]: value
+      };
+    };
+    return handleBreakpoints(props, propValue, styleFromPropValue);
+  };
+  fn.propTypes = {};
+  fn.filterProps = [prop];
+  return fn;
+}
+function memoize(fn) {
+  const cache = {};
+  return arg => {
+    if (cache[arg] === undefined) {
+      cache[arg] = fn(arg);
+    }
+    return cache[arg];
+  };
+}
+const properties = {
+  m: "margin",
+  p: "padding"
+};
+const directions = {
+  t: "Top",
+  r: "Right",
+  b: "Bottom",
+  l: "Left",
+  x: ["Left", "Right"],
+  y: ["Top", "Bottom"]
+};
+const aliases = {
+  marginX: "mx",
+  marginY: "my",
+  paddingX: "px",
+  paddingY: "py"
+};
+const getCssProperties = memoize(prop => {
+  if (prop.length > 2) {
+    if (aliases[prop]) {
+      prop = aliases[prop];
+    } else {
+      return [prop];
+    }
+  }
+  const [a, b] = prop.split("");
+  const property = properties[a];
+  const direction = directions[b] || "";
+  return Array.isArray(direction) ? direction.map(dir => property + dir) : [property + direction];
+});
+const marginKeys = ["m", "mt", "mr", "mb", "ml", "mx", "my", "margin", "marginTop", "marginRight", "marginBottom", "marginLeft", "marginX", "marginY", "marginInline", "marginInlineStart", "marginInlineEnd", "marginBlock", "marginBlockStart", "marginBlockEnd"];
+const paddingKeys = ["p", "pt", "pr", "pb", "pl", "px", "py", "padding", "paddingTop", "paddingRight", "paddingBottom", "paddingLeft", "paddingX", "paddingY", "paddingInline", "paddingInlineStart", "paddingInlineEnd", "paddingBlock", "paddingBlockStart", "paddingBlockEnd"];
+[...marginKeys, ...paddingKeys];
+function createUnaryUnit(theme, themeKey, defaultValue, propName) {
+  const themeSpacing = getPath(theme, themeKey, true) ?? defaultValue;
+  if (typeof themeSpacing === "number" || typeof themeSpacing === "string") {
+    return val => {
+      if (typeof val === "string") {
+        return val;
+      }
+      if (typeof themeSpacing === "string") {
+        if (themeSpacing.startsWith("var(") && val === 0) {
+          return 0;
+        }
+        if (themeSpacing.startsWith("var(") && val === 1) {
+          return themeSpacing;
+        }
+        return `calc(${val} * ${themeSpacing})`;
+      }
+      return themeSpacing * val;
+    };
+  }
+  if (Array.isArray(themeSpacing)) {
+    return val => {
+      if (typeof val === "string") {
+        return val;
+      }
+      const abs = Math.abs(val);
+      const transformed = themeSpacing[abs];
+      if (val >= 0) {
+        return transformed;
+      }
+      if (typeof transformed === "number") {
+        return -transformed;
+      }
+      if (typeof transformed === "string" && transformed.startsWith("var(")) {
+        return `calc(-1 * ${transformed})`;
+      }
+      return `-${transformed}`;
+    };
+  }
+  if (typeof themeSpacing === "function") {
+    return themeSpacing;
+  }
+  return () => void 0;
+}
+function createUnarySpacing(theme) {
+  return createUnaryUnit(theme, "spacing", 8);
+}
+function getValue(transformer, propValue) {
+  if (typeof propValue === "string" || propValue == null) {
+    return propValue;
+  }
+  return transformer(propValue);
+}
+function getStyleFromPropValue(cssProperties, transformer) {
+  return propValue => cssProperties.reduce((acc, cssProperty) => {
+    acc[cssProperty] = getValue(transformer, propValue);
+    return acc;
+  }, {});
+}
+function resolveCssProperty(props, keys, prop, transformer) {
+  if (!keys.includes(prop)) {
+    return null;
+  }
+  const cssProperties = getCssProperties(prop);
+  const styleFromPropValue = getStyleFromPropValue(cssProperties, transformer);
+  const propValue = props[prop];
+  return handleBreakpoints(props, propValue, styleFromPropValue);
+}
+function style(props, keys) {
+  const transformer = createUnarySpacing(props.theme);
+  return Object.keys(props).map(prop => resolveCssProperty(props, keys, prop, transformer)).reduce(merge, {});
+}
+function margin(props) {
+  return style(props, marginKeys);
+}
+margin.propTypes = {};
+margin.filterProps = marginKeys;
+function padding(props) {
+  return style(props, paddingKeys);
+}
+padding.propTypes = {};
+padding.filterProps = paddingKeys;
+function createSpacing(spacingInput = 8, transform = createUnarySpacing({
+  spacing: spacingInput
+})) {
+  if (spacingInput.mui) {
+    return spacingInput;
+  }
+  const spacing = (...argsInput) => {
+    const args = argsInput.length === 0 ? [1] : argsInput;
+    return args.map(argument => {
+      const output = transform(argument);
+      return typeof output === "number" ? `${output}px` : output;
+    }).join(" ");
+  };
+  spacing.mui = true;
+  return spacing;
+}
+function compose(...styles) {
+  const handlers = styles.reduce((acc, style) => {
+    style.filterProps.forEach(prop => {
+      acc[prop] = style;
+    });
+    return acc;
+  }, {});
+  const fn = props => {
+    return Object.keys(props).reduce((acc, prop) => {
+      if (handlers[prop]) {
+        return merge(acc, handlers[prop](props));
+      }
+      return acc;
+    }, {});
+  };
+  fn.propTypes = {};
+  fn.filterProps = styles.reduce((acc, style) => acc.concat(style.filterProps), []);
+  return fn;
+}
+function borderTransform(value) {
+  if (typeof value !== "number") {
+    return value;
+  }
+  return `${value}px solid`;
+}
+function createBorderStyle(prop, transform) {
+  return style$1({
+    prop,
+    themeKey: "borders",
+    transform
+  });
+}
+const border = createBorderStyle("border", borderTransform);
+const borderTop = createBorderStyle("borderTop", borderTransform);
+const borderRight = createBorderStyle("borderRight", borderTransform);
+const borderBottom = createBorderStyle("borderBottom", borderTransform);
+const borderLeft = createBorderStyle("borderLeft", borderTransform);
+const borderColor = createBorderStyle("borderColor");
+const borderTopColor = createBorderStyle("borderTopColor");
+const borderRightColor = createBorderStyle("borderRightColor");
+const borderBottomColor = createBorderStyle("borderBottomColor");
+const borderLeftColor = createBorderStyle("borderLeftColor");
+const outline = createBorderStyle("outline", borderTransform);
+const outlineColor = createBorderStyle("outlineColor");
+const borderRadius = props => {
+  if (props.borderRadius !== void 0 && props.borderRadius !== null) {
+    const transformer = createUnaryUnit(props.theme, "shape.borderRadius", 4);
+    const styleFromPropValue = propValue => ({
+      borderRadius: getValue(transformer, propValue)
+    });
+    return handleBreakpoints(props, props.borderRadius, styleFromPropValue);
+  }
+  return null;
+};
+borderRadius.propTypes = {};
+borderRadius.filterProps = ["borderRadius"];
+compose(border, borderTop, borderRight, borderBottom, borderLeft, borderColor, borderTopColor, borderRightColor, borderBottomColor, borderLeftColor, borderRadius, outline, outlineColor);
+const gap = props => {
+  if (props.gap !== void 0 && props.gap !== null) {
+    const transformer = createUnaryUnit(props.theme, "spacing", 8);
+    const styleFromPropValue = propValue => ({
+      gap: getValue(transformer, propValue)
+    });
+    return handleBreakpoints(props, props.gap, styleFromPropValue);
+  }
+  return null;
+};
+gap.propTypes = {};
+gap.filterProps = ["gap"];
+const columnGap = props => {
+  if (props.columnGap !== void 0 && props.columnGap !== null) {
+    const transformer = createUnaryUnit(props.theme, "spacing", 8);
+    const styleFromPropValue = propValue => ({
+      columnGap: getValue(transformer, propValue)
+    });
+    return handleBreakpoints(props, props.columnGap, styleFromPropValue);
+  }
+  return null;
+};
+columnGap.propTypes = {};
+columnGap.filterProps = ["columnGap"];
+const rowGap = props => {
+  if (props.rowGap !== void 0 && props.rowGap !== null) {
+    const transformer = createUnaryUnit(props.theme, "spacing", 8);
+    const styleFromPropValue = propValue => ({
+      rowGap: getValue(transformer, propValue)
+    });
+    return handleBreakpoints(props, props.rowGap, styleFromPropValue);
+  }
+  return null;
+};
+rowGap.propTypes = {};
+rowGap.filterProps = ["rowGap"];
+const gridColumn = style$1({
+  prop: "gridColumn"
+});
+const gridRow = style$1({
+  prop: "gridRow"
+});
+const gridAutoFlow = style$1({
+  prop: "gridAutoFlow"
+});
+const gridAutoColumns = style$1({
+  prop: "gridAutoColumns"
+});
+const gridAutoRows = style$1({
+  prop: "gridAutoRows"
+});
+const gridTemplateColumns = style$1({
+  prop: "gridTemplateColumns"
+});
+const gridTemplateRows = style$1({
+  prop: "gridTemplateRows"
+});
+const gridTemplateAreas = style$1({
+  prop: "gridTemplateAreas"
+});
+const gridArea = style$1({
+  prop: "gridArea"
+});
+compose(gap, columnGap, rowGap, gridColumn, gridRow, gridAutoFlow, gridAutoColumns, gridAutoRows, gridTemplateColumns, gridTemplateRows, gridTemplateAreas, gridArea);
+function paletteTransform(value, userValue) {
+  if (userValue === 'grey') {
+    return userValue;
+  }
+  return value;
+}
+const color = style$1({
+  prop: 'color',
+  themeKey: 'palette',
+  transform: paletteTransform
+});
+const bgcolor = style$1({
+  prop: 'bgcolor',
+  cssProperty: 'backgroundColor',
+  themeKey: 'palette',
+  transform: paletteTransform
+});
+const backgroundColor = style$1({
+  prop: 'backgroundColor',
+  themeKey: 'palette',
+  transform: paletteTransform
+});
+compose(color, bgcolor, backgroundColor);
+function sizingTransform(value) {
+  return value <= 1 && value !== 0 ? `${value * 100}%` : value;
+}
+const width = style$1({
+  prop: 'width',
+  transform: sizingTransform
+});
+const maxWidth = props => {
+  if (props.maxWidth !== undefined && props.maxWidth !== null) {
+    const styleFromPropValue = propValue => {
+      const breakpoint = props.theme?.breakpoints?.values?.[propValue] || values[propValue];
+      if (!breakpoint) {
+        return {
+          maxWidth: sizingTransform(propValue)
+        };
+      }
+      if (props.theme?.breakpoints?.unit !== 'px') {
+        return {
+          maxWidth: `${breakpoint}${props.theme.breakpoints.unit}`
+        };
+      }
+      return {
+        maxWidth: breakpoint
+      };
+    };
+    return handleBreakpoints(props, props.maxWidth, styleFromPropValue);
+  }
+  return null;
+};
+maxWidth.filterProps = ['maxWidth'];
+const minWidth = style$1({
+  prop: 'minWidth',
+  transform: sizingTransform
+});
+const height = style$1({
+  prop: 'height',
+  transform: sizingTransform
+});
+const maxHeight = style$1({
+  prop: 'maxHeight',
+  transform: sizingTransform
+});
+const minHeight = style$1({
+  prop: 'minHeight',
+  transform: sizingTransform
+});
+style$1({
+  prop: 'size',
+  cssProperty: 'width',
+  transform: sizingTransform
+});
+style$1({
+  prop: 'size',
+  cssProperty: 'height',
+  transform: sizingTransform
+});
+const boxSizing = style$1({
+  prop: 'boxSizing'
+});
+compose(width, maxWidth, minWidth, height, maxHeight, minHeight, boxSizing);
+const defaultSxConfig = {
+  // borders
+  border: {
+    themeKey: 'borders',
+    transform: borderTransform
+  },
+  borderTop: {
+    themeKey: 'borders',
+    transform: borderTransform
+  },
+  borderRight: {
+    themeKey: 'borders',
+    transform: borderTransform
+  },
+  borderBottom: {
+    themeKey: 'borders',
+    transform: borderTransform
+  },
+  borderLeft: {
+    themeKey: 'borders',
+    transform: borderTransform
+  },
+  borderColor: {
+    themeKey: 'palette'
+  },
+  borderTopColor: {
+    themeKey: 'palette'
+  },
+  borderRightColor: {
+    themeKey: 'palette'
+  },
+  borderBottomColor: {
+    themeKey: 'palette'
+  },
+  borderLeftColor: {
+    themeKey: 'palette'
+  },
+  outline: {
+    themeKey: 'borders',
+    transform: borderTransform
+  },
+  outlineColor: {
+    themeKey: 'palette'
+  },
+  borderRadius: {
+    themeKey: 'shape.borderRadius',
+    style: borderRadius
+  },
+  // palette
+  color: {
+    themeKey: 'palette',
+    transform: paletteTransform
+  },
+  bgcolor: {
+    themeKey: 'palette',
+    cssProperty: 'backgroundColor',
+    transform: paletteTransform
+  },
+  backgroundColor: {
+    themeKey: 'palette',
+    transform: paletteTransform
+  },
+  // spacing
+  p: {
+    style: padding
+  },
+  pt: {
+    style: padding
+  },
+  pr: {
+    style: padding
+  },
+  pb: {
+    style: padding
+  },
+  pl: {
+    style: padding
+  },
+  px: {
+    style: padding
+  },
+  py: {
+    style: padding
+  },
+  padding: {
+    style: padding
+  },
+  paddingTop: {
+    style: padding
+  },
+  paddingRight: {
+    style: padding
+  },
+  paddingBottom: {
+    style: padding
+  },
+  paddingLeft: {
+    style: padding
+  },
+  paddingX: {
+    style: padding
+  },
+  paddingY: {
+    style: padding
+  },
+  paddingInline: {
+    style: padding
+  },
+  paddingInlineStart: {
+    style: padding
+  },
+  paddingInlineEnd: {
+    style: padding
+  },
+  paddingBlock: {
+    style: padding
+  },
+  paddingBlockStart: {
+    style: padding
+  },
+  paddingBlockEnd: {
+    style: padding
+  },
+  m: {
+    style: margin
+  },
+  mt: {
+    style: margin
+  },
+  mr: {
+    style: margin
+  },
+  mb: {
+    style: margin
+  },
+  ml: {
+    style: margin
+  },
+  mx: {
+    style: margin
+  },
+  my: {
+    style: margin
+  },
+  margin: {
+    style: margin
+  },
+  marginTop: {
+    style: margin
+  },
+  marginRight: {
+    style: margin
+  },
+  marginBottom: {
+    style: margin
+  },
+  marginLeft: {
+    style: margin
+  },
+  marginX: {
+    style: margin
+  },
+  marginY: {
+    style: margin
+  },
+  marginInline: {
+    style: margin
+  },
+  marginInlineStart: {
+    style: margin
+  },
+  marginInlineEnd: {
+    style: margin
+  },
+  marginBlock: {
+    style: margin
+  },
+  marginBlockStart: {
+    style: margin
+  },
+  marginBlockEnd: {
+    style: margin
+  },
+  // display
+  displayPrint: {
+    cssProperty: false,
+    transform: value => ({
+      '@media print': {
+        display: value
+      }
+    })
+  },
+  display: {},
+  overflow: {},
+  textOverflow: {},
+  visibility: {},
+  whiteSpace: {},
+  // flexbox
+  flexBasis: {},
+  flexDirection: {},
+  flexWrap: {},
+  justifyContent: {},
+  alignItems: {},
+  alignContent: {},
+  order: {},
+  flex: {},
+  flexGrow: {},
+  flexShrink: {},
+  alignSelf: {},
+  justifyItems: {},
+  justifySelf: {},
+  // grid
+  gap: {
+    style: gap
+  },
+  rowGap: {
+    style: rowGap
+  },
+  columnGap: {
+    style: columnGap
+  },
+  gridColumn: {},
+  gridRow: {},
+  gridAutoFlow: {},
+  gridAutoColumns: {},
+  gridAutoRows: {},
+  gridTemplateColumns: {},
+  gridTemplateRows: {},
+  gridTemplateAreas: {},
+  gridArea: {},
+  // positions
+  position: {},
+  zIndex: {
+    themeKey: 'zIndex'
+  },
+  top: {},
+  right: {},
+  bottom: {},
+  left: {},
+  // shadows
+  boxShadow: {
+    themeKey: 'shadows'
+  },
+  // sizing
+  width: {
+    transform: sizingTransform
+  },
+  maxWidth: {
+    style: maxWidth
+  },
+  minWidth: {
+    transform: sizingTransform
+  },
+  height: {
+    transform: sizingTransform
+  },
+  maxHeight: {
+    transform: sizingTransform
+  },
+  minHeight: {
+    transform: sizingTransform
+  },
+  boxSizing: {},
+  // typography
+  font: {
+    themeKey: 'font'
+  },
+  fontFamily: {
+    themeKey: 'typography'
+  },
+  fontSize: {
+    themeKey: 'typography'
+  },
+  fontStyle: {
+    themeKey: 'typography'
+  },
+  fontWeight: {
+    themeKey: 'typography'
+  },
+  letterSpacing: {},
+  textTransform: {},
+  lineHeight: {},
+  textAlign: {},
+  typography: {
+    cssProperty: false,
+    themeKey: 'typography'
+  }
+};
+function objectsHaveSameKeys(...objects) {
+  const allKeys = objects.reduce((keys, object) => keys.concat(Object.keys(object)), []);
+  const union = new Set(allKeys);
+  return objects.every(object => union.size === Object.keys(object).length);
+}
+function callIfFn(maybeFn, arg) {
+  return typeof maybeFn === 'function' ? maybeFn(arg) : maybeFn;
+}
+
+// eslint-disable-next-line @typescript-eslint/naming-convention
+function unstable_createStyleFunctionSx() {
+  function getThemeValue(prop, val, theme, config) {
+    const props = {
+      [prop]: val,
+      theme
+    };
+    const options = config[prop];
+    if (!options) {
+      return {
+        [prop]: val
+      };
+    }
+    const {
+      cssProperty = prop,
+      themeKey,
+      transform,
+      style
+    } = options;
+    if (val == null) {
+      return null;
+    }
+
+    // TODO v6: remove, see https://github.com/mui/material-ui/pull/38123
+    if (themeKey === 'typography' && val === 'inherit') {
+      return {
+        [prop]: val
+      };
+    }
+    const themeMapping = getPath(theme, themeKey) || {};
+    if (style) {
+      return style(props);
+    }
+    const styleFromPropValue = propValueFinal => {
+      let value = getStyleValue(themeMapping, transform, propValueFinal);
+      if (propValueFinal === value && typeof propValueFinal === 'string') {
+        // Haven't found value
+        value = getStyleValue(themeMapping, transform, `${prop}${propValueFinal === 'default' ? '' : capitalize(propValueFinal)}`, propValueFinal);
+      }
+      if (cssProperty === false) {
+        return value;
+      }
+      return {
+        [cssProperty]: value
+      };
+    };
+    return handleBreakpoints(props, val, styleFromPropValue);
+  }
+  function styleFunctionSx(props) {
+    const {
+      sx,
+      theme = {}
+    } = props || {};
+    if (!sx) {
+      return null; // Emotion & styled-components will neglect null
+    }
+    const config = theme.unstable_sxConfig ?? defaultSxConfig;
+
+    /*
+     * Receive `sxInput` as object or callback
+     * and then recursively check keys & values to create media query object styles.
+     * (the result will be used in `styled`)
+     */
+    function traverse(sxInput) {
+      let sxObject = sxInput;
+      if (typeof sxInput === 'function') {
+        sxObject = sxInput(theme);
+      } else if (typeof sxInput !== 'object') {
+        // value
+        return sxInput;
+      }
+      if (!sxObject) {
+        return null;
+      }
+      const emptyBreakpoints = createEmptyBreakpointObject(theme.breakpoints);
+      const breakpointsKeys = Object.keys(emptyBreakpoints);
+      let css = emptyBreakpoints;
+      Object.keys(sxObject).forEach(styleKey => {
+        const value = callIfFn(sxObject[styleKey], theme);
+        if (value !== null && value !== undefined) {
+          if (typeof value === 'object') {
+            if (config[styleKey]) {
+              css = merge(css, getThemeValue(styleKey, value, theme, config));
+            } else {
+              const breakpointsValues = handleBreakpoints({
+                theme
+              }, value, x => ({
+                [styleKey]: x
+              }));
+              if (objectsHaveSameKeys(breakpointsValues, value)) {
+                css[styleKey] = styleFunctionSx({
+                  sx: value,
+                  theme
+                });
+              } else {
+                css = merge(css, breakpointsValues);
+              }
+            }
+          } else {
+            css = merge(css, getThemeValue(styleKey, value, theme, config));
+          }
+        }
+      });
+      return sortContainerQueries(theme, removeUnusedBreakpoints(breakpointsKeys, css));
+    }
+    return Array.isArray(sx) ? sx.map(traverse) : traverse(sx);
+  }
+  return styleFunctionSx;
+}
+const styleFunctionSx = unstable_createStyleFunctionSx();
+styleFunctionSx.filterProps = ['sx'];
+
+/**
+ * A universal utility to style components with multiple color modes. Always use it from the theme object.
+ * It works with:
+ *  - [Basic theme](https://mui.com/material-ui/customization/dark-mode/)
+ *  - [CSS theme variables](https://mui.com/material-ui/customization/css-theme-variables/overview/)
+ *  - Zero-runtime engine
+ *
+ * Tips: Use an array over object spread and place `theme.applyStyles()` last.
+ *
+ * With the styled function:
+ * ✅ [{ background: '#e5e5e5' }, theme.applyStyles('dark', { background: '#1c1c1c' })]
+ * 🚫 { background: '#e5e5e5', ...theme.applyStyles('dark', { background: '#1c1c1c' })}
+ *
+ * With the sx prop:
+ * ✅ [{ background: '#e5e5e5' }, theme => theme.applyStyles('dark', { background: '#1c1c1c' })]
+ * 🚫 { background: '#e5e5e5', ...theme => theme.applyStyles('dark', { background: '#1c1c1c' })}
+ *
+ * @example
+ * 1. using with `styled`:
+ * ```jsx
+ *   const Component = styled('div')(({ theme }) => [
+ *     { background: '#e5e5e5' },
+ *     theme.applyStyles('dark', {
+ *       background: '#1c1c1c',
+ *       color: '#fff',
+ *     }),
+ *   ]);
+ * ```
+ *
+ * @example
+ * 2. using with `sx` prop:
+ * ```jsx
+ *   <Box sx={[
+ *     { background: '#e5e5e5' },
+ *     theme => theme.applyStyles('dark', {
+ *        background: '#1c1c1c',
+ *        color: '#fff',
+ *      }),
+ *     ]}
+ *   />
+ * ```
+ *
+ * @example
+ * 3. theming a component:
+ * ```jsx
+ *   extendTheme({
+ *     components: {
+ *       MuiButton: {
+ *         styleOverrides: {
+ *           root: ({ theme }) => [
+ *             { background: '#e5e5e5' },
+ *             theme.applyStyles('dark', {
+ *               background: '#1c1c1c',
+ *               color: '#fff',
+ *             }),
+ *           ],
+ *         },
+ *       }
+ *     }
+ *   })
+ *```
+ */
+function applyStyles(key, styles) {
+  // @ts-expect-error this is 'any' type
+  const theme = this;
+  if (theme.vars) {
+    if (!theme.colorSchemes?.[key] || typeof theme.getColorSchemeSelector !== 'function') {
+      return {};
+    }
+    // If CssVarsProvider is used as a provider, returns '*:where({selector}) &'
+    let selector = theme.getColorSchemeSelector(key);
+    if (selector === '&') {
+      return styles;
+    }
+    if (selector.includes('data-') || selector.includes('.')) {
+      // '*' is required as a workaround for Emotion issue (https://github.com/emotion-js/emotion/issues/2836)
+      selector = `*:where(${selector.replace(/\s*&$/, '')}) &`;
+    }
+    return {
+      [selector]: styles
+    };
+  }
+  if (theme.palette.mode === key) {
+    return styles;
+  }
+  return {};
+}
+function createTheme(options = {}, ...args) {
+  const {
+    breakpoints: breakpointsInput = {},
+    palette: paletteInput = {},
+    spacing: spacingInput,
+    shape: shapeInput = {},
+    ...other
+  } = options;
+  const breakpoints = createBreakpoints(breakpointsInput);
+  const spacing = createSpacing(spacingInput);
+  let muiTheme = deepmerge({
+    breakpoints,
+    direction: 'ltr',
+    components: {},
+    // Inject component definitions.
+    palette: {
+      mode: 'light',
+      ...paletteInput
+    },
+    spacing,
+    shape: {
+      ...shape,
+      ...shapeInput
+    }
+  }, other);
+  muiTheme = cssContainerQueries(muiTheme);
+  muiTheme.applyStyles = applyStyles;
+  muiTheme = args.reduce((acc, argument) => deepmerge(acc, argument), muiTheme);
+  muiTheme.unstable_sxConfig = {
+    ...defaultSxConfig,
+    ...other?.unstable_sxConfig
+  };
+  muiTheme.unstable_sx = function sx(props) {
+    return styleFunctionSx({
+      sx: props,
+      theme: this
+    });
+  };
+  return muiTheme;
+}
+createTheme();
+function shouldForwardProp(prop) {
+  return prop !== "ownerState" && prop !== "theme" && prop !== "sx" && prop !== "as";
 }
 function getChartsTooltipUtilityClass(slot) {
   return generateUtilityClass('MuiChartsTooltip', slot);
@@ -28995,7 +30283,7 @@ const useUtilityClasses$4 = ownerState => {
     classes
   } = ownerState;
   const slots = {
-    root: ["root", variant, ownerState.align !== "inherit" && `align${capitalize(align)}`, gutterBottom && "gutterBottom", noWrap && "noWrap", paragraph && "paragraph"]
+    root: ["root", variant, ownerState.align !== "inherit" && `align${capitalize$1(align)}`, gutterBottom && "gutterBottom", noWrap && "noWrap", paragraph && "paragraph"]
   };
   return composeClasses(slots, getTypographyUtilityClass, classes);
 };
@@ -29006,7 +30294,7 @@ const TypographyRoot = styled("span", {
     const {
       ownerState
     } = props;
-    return [styles.root, ownerState.variant && styles[ownerState.variant], ownerState.align !== "inherit" && styles[`align${capitalize(ownerState.align)}`], ownerState.noWrap && styles.noWrap, ownerState.gutterBottom && styles.gutterBottom, ownerState.paragraph && styles.paragraph];
+    return [styles.root, ownerState.variant && styles[ownerState.variant], ownerState.align !== "inherit" && styles[`align${capitalize$1(ownerState.align)}`], ownerState.noWrap && styles.noWrap, ownerState.gutterBottom && styles.gutterBottom, ownerState.paragraph && styles.paragraph];
   }
 })(memoTheme(({
   theme
@@ -29036,7 +30324,7 @@ const TypographyRoot = styled("span", {
     }
   })), ...Object.entries(theme.palette?.text || {}).filter(([, value]) => typeof value === "string").map(([color]) => ({
     props: {
-      color: `text${capitalize(color)}`
+      color: `text${capitalize$1(color)}`
     },
     style: {
       color: (theme.vars || theme).palette.text[color]
@@ -30371,7 +31659,7 @@ const BarChart = /* @__PURE__ */reactExports.forwardRef(function BarChart2(inPro
   }));
 });
 const datasets = "DATASETS_PLACEHOLDER";
-const theme = createTheme({
+const theme = createTheme$1({
   colorSchemes: {
     dark: true
   }
@@ -30501,7 +31789,31 @@ function SummaryReport() {
 clientExports.createRoot(document.getElementById("root")).render(/* @__PURE__ */jsxRuntimeExports.jsx(reactExports.StrictMode, {
   children: /* @__PURE__ */jsxRuntimeExports.jsx(SummaryReport, {})
 }));</script>
-    <style rel="stylesheet" crossorigin>/*! tailwindcss v4.0.14 | MIT License | https://tailwindcss.com */
+    <style rel="stylesheet" crossorigin>/*! tailwindcss v4.1.8 | MIT License | https://tailwindcss.com */
+@layer properties {
+  @supports (((-webkit-hyphens: none)) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color: rgb(from red r g b)))) {
+    *, :before, :after, ::backdrop {
+      --tw-divide-y-reverse: 0;
+      --tw-border-style: solid;
+      --tw-font-weight: initial;
+      --tw-tracking: initial;
+      --tw-blur: initial;
+      --tw-brightness: initial;
+      --tw-contrast: initial;
+      --tw-grayscale: initial;
+      --tw-hue-rotate: initial;
+      --tw-invert: initial;
+      --tw-opacity: initial;
+      --tw-saturate: initial;
+      --tw-sepia: initial;
+      --tw-drop-shadow: initial;
+      --tw-drop-shadow-color: initial;
+      --tw-drop-shadow-alpha: 100%;
+      --tw-drop-shadow-size: initial;
+    }
+  }
+}
+
 :root {
   --color-text: #ffffffde;
   --color-background: #101828;
@@ -30521,25 +31833,25 @@ clientExports.createRoot(document.getElementById("root")).render(/* @__PURE__ */
   :root, :host {
     --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-    --color-red-200: oklch(.885 .062 18.334);
-    --color-red-900: oklch(.396 .141 25.723);
-    --color-yellow-200: oklch(.945 .129 101.54);
-    --color-yellow-500: oklch(.795 .184 86.047);
-    --color-yellow-900: oklch(.421 .095 57.708);
-    --color-green-200: oklch(.925 .084 155.995);
-    --color-green-900: oklch(.393 .095 152.535);
-    --color-blue-300: oklch(.809 .105 251.813);
-    --color-blue-400: oklch(.707 .165 254.624);
-    --color-blue-500: oklch(.623 .214 259.815);
-    --color-gray-50: oklch(.985 .002 247.839);
-    --color-gray-100: oklch(.967 .003 264.542);
-    --color-gray-200: oklch(.928 .006 264.531);
-    --color-gray-300: oklch(.872 .01 258.338);
-    --color-gray-400: oklch(.707 .022 261.325);
-    --color-gray-600: oklch(.446 .03 256.802);
-    --color-gray-700: oklch(.373 .034 259.733);
-    --color-gray-800: oklch(.278 .033 256.848);
-    --color-gray-900: oklch(.21 .034 264.665);
+    --color-red-200: oklch(88.5% .062 18.334);
+    --color-red-900: oklch(39.6% .141 25.723);
+    --color-yellow-200: oklch(94.5% .129 101.54);
+    --color-yellow-500: oklch(79.5% .184 86.047);
+    --color-yellow-900: oklch(42.1% .095 57.708);
+    --color-green-200: oklch(92.5% .084 155.995);
+    --color-green-900: oklch(39.3% .095 152.535);
+    --color-blue-300: oklch(80.9% .105 251.813);
+    --color-blue-400: oklch(70.7% .165 254.624);
+    --color-blue-500: oklch(62.3% .214 259.815);
+    --color-gray-50: oklch(98.5% .002 247.839);
+    --color-gray-100: oklch(96.7% .003 264.542);
+    --color-gray-200: oklch(92.8% .006 264.531);
+    --color-gray-300: oklch(87.2% .01 258.338);
+    --color-gray-400: oklch(70.7% .022 261.325);
+    --color-gray-600: oklch(44.6% .03 256.802);
+    --color-gray-700: oklch(37.3% .034 259.733);
+    --color-gray-800: oklch(27.8% .033 256.848);
+    --color-gray-900: oklch(21% .034 264.665);
     --spacing: .25rem;
     --container-7xl: 80rem;
     --text-xs: .75rem;
@@ -30556,11 +31868,7 @@ clientExports.createRoot(document.getElementById("root")).render(/* @__PURE__ */
     --radius-md: .375rem;
     --radius-lg: .5rem;
     --default-font-family: var(--font-sans);
-    --default-font-feature-settings: var(--font-sans--font-feature-settings);
-    --default-font-variation-settings: var(--font-sans--font-variation-settings);
     --default-mono-font-family: var(--font-mono);
-    --default-mono-font-feature-settings: var(--font-mono--font-feature-settings);
-    --default-mono-font-variation-settings: var(--font-mono--font-variation-settings);
   }
 }
 
@@ -30587,10 +31895,6 @@ clientExports.createRoot(document.getElementById("root")).render(/* @__PURE__ */
     font-feature-settings: var(--default-font-feature-settings, normal);
     font-variation-settings: var(--default-font-variation-settings, normal);
     -webkit-tap-highlight-color: transparent;
-  }
-
-  body {
-    line-height: inherit;
   }
 
   hr {
@@ -30715,7 +32019,18 @@ clientExports.createRoot(document.getElementById("root")).render(/* @__PURE__ */
 
   ::placeholder {
     opacity: 1;
-    color: color-mix(in oklab, currentColor 50%, transparent);
+  }
+
+  @supports (not ((-webkit-appearance: -apple-pay-button))) or (contain-intrinsic-size: 1px) {
+    ::placeholder {
+      color: currentColor;
+    }
+
+    @supports (color: color-mix(in lab, red, red)) {
+      ::placeholder {
+        color: color-mix(in oklab, currentcolor 50%, transparent);
+      }
+    }
   }
 
   textarea {
@@ -31029,7 +32344,13 @@ clientExports.createRoot(document.getElementById("root")).render(/* @__PURE__ */
   }
 
   .bg-gray-50\/25 {
-    background-color: color-mix(in oklab, var(--color-gray-50) 25%, transparent);
+    background-color: #f9fafb40;
+  }
+
+  @supports (color: color-mix(in lab, red, red)) {
+    .bg-gray-50\/25 {
+      background-color: color-mix(in oklab, var(--color-gray-50) 25%, transparent);
+    }
   }
 
   .bg-gray-700 {
@@ -31313,6 +32634,22 @@ clientExports.createRoot(document.getElementById("root")).render(/* @__PURE__ */
 }
 
 @property --tw-drop-shadow {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-drop-shadow-color {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-drop-shadow-alpha {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 100%;
+}
+
+@property --tw-drop-shadow-size {
   syntax: "*";
   inherits: false
 }</style>

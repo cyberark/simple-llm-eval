@@ -23,6 +23,7 @@ dependencies = [
     "litellm>=1.70.0",
     "httpcore>=1.0.7,<2",
     "google-genai>=1.16.0,<2",
+    "urllib3>=2.6.0",
 ]
 
 [project.urls]

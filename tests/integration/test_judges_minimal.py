@@ -1,7 +1,6 @@
 import os
 import pytest
 
-from simpleval.evaluation.judges.base_judge import BaseJudge
 from simpleval.evaluation.judges.models.anthropic.judge import AnthropicJudge
 from simpleval.evaluation.judges.models.azure.judge import AzureJudge
 from simpleval.evaluation.judges.models.bedrock_claude_sonnet.judge import BedrockClaudeSonnetJudge

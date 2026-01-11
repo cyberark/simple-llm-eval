@@ -36,7 +36,7 @@ jobs:
             }
 
       - name: 🐍 Init uv with caching
-        uses: astral-sh/setup-uv@4959332f0f014c5280e7eac8b70c90cb574c9f9b # 6.6.0
+        uses: astral-sh/setup-uv@1e862dfacbd1d6d858c55d9b792c756523627244 # 7.1.4
         with:
           enable-cache: true
           cache-dependency-glob: "uv.lock"

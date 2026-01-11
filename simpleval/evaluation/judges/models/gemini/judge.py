@@ -4,7 +4,7 @@ from simpleval.commands.litellm_models_explorer_command import get_supported_mod
 from simpleval.evaluation.judges.judge_utils import verify_env_var
 from simpleval.evaluation.judges.models.litellm_structured_output.judge import LiteLLMJudge
 
-GEMINI_JUDGE_DEFAULT_MODEL = 'gemini/gemini-2.0-flash'
+GEMINI_JUDGE_DEFAULT_MODEL = 'gemini/gemini-2.5-flash'
 
 
 class GeminiJudge(LiteLLMJudge):

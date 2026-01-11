@@ -26,7 +26,7 @@ def main():
 
     run_command(
         cmd='npm audit --audit-level=low',
-        description='Running npm audit...'
+        description='Running npm audit (to fix run npm audit fix in `reports-frontend`)...'
     )
 
     run_command(

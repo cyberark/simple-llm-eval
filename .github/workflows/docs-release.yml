@@ -19,13 +19,13 @@ jobs:
 
     steps:
       - name: 🔄 Checkout repository
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # 4.2.2
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # 5.0.0
 
       - name: 🔄 Fetch gh-pages branch
         run: git fetch origin gh-pages:gh-pages
 
       - name: 🐍 Install uv with caching
-        uses: astral-sh/setup-uv@445689ea25e0de0a23313031f5fe577c74ae45a1 # 6.3.0
+        uses: astral-sh/setup-uv@1e862dfacbd1d6d858c55d9b792c756523627244 # 7.1.4
         with:
           enable-cache: true
           cache-dependency-glob: "uv.lock"

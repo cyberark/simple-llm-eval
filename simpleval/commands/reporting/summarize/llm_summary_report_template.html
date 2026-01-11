@@ -29,20 +29,12 @@
 }
 true && function polyfill() {
   const relList = document.createElement("link").relList;
-  if (relList && relList.supports && relList.supports("modulepreload")) {
-    return;
-  }
-  for (const link of document.querySelectorAll('link[rel="modulepreload"]')) {
-    processPreload(link);
-  }
+  if (relList && relList.supports && relList.supports("modulepreload")) return;
+  for (const link of document.querySelectorAll("link[rel=\"modulepreload\"]")) processPreload(link);
   new MutationObserver(mutations => {
     for (const mutation of mutations) {
-      if (mutation.type !== "childList") {
-        continue;
-      }
-      for (const node of mutation.addedNodes) {
-        if (node.tagName === "LINK" && node.rel === "modulepreload") processPreload(node);
-      }
+      if (mutation.type !== "childList") continue;
+      for (const node of mutation.addedNodes) if (node.tagName === "LINK" && node.rel === "modulepreload") processPreload(node);
     }
   }).observe(document, {
     childList: true,
@@ -540,7 +532,7 @@ var hasRequiredScheduler_production;
 function requireScheduler_production() {
   if (hasRequiredScheduler_production) return scheduler_production;
   hasRequiredScheduler_production = 1;
-  (function (exports) {
+  (function (exports$1) {
     function push(heap, node) {
       var index = heap.length;
       heap.push(node);
@@ -573,16 +565,16 @@ function requireScheduler_production() {
       var diff = a.sortIndex - b.sortIndex;
       return 0 !== diff ? diff : a.id - b.id;
     }
-    exports.unstable_now = void 0;
+    exports$1.unstable_now = void 0;
     if ("object" === typeof performance && "function" === typeof performance.now) {
       var localPerformance = performance;
-      exports.unstable_now = function () {
+      exports$1.unstable_now = function () {
         return localPerformance.now();
       };
     } else {
       var localDate = Date,
         initialTime = localDate.now();
-      exports.unstable_now = function () {
+      exports$1.unstable_now = function () {
         return localDate.now() - initialTime;
       };
     }
@@ -616,11 +608,11 @@ function requireScheduler_production() {
       frameInterval = 5,
       startTime = -1;
     function shouldYieldToHost() {
-      return exports.unstable_now() - startTime < frameInterval ? false : true;
+      return exports$1.unstable_now() - startTime < frameInterval ? false : true;
     }
     function performWorkUntilDeadline() {
       if (isMessageLoopRunning) {
-        var currentTime = exports.unstable_now();
+        var currentTime = exports$1.unstable_now();
         startTime = currentTime;
         var hasMoreWork = true;
         try {
@@ -638,7 +630,7 @@ function requireScheduler_production() {
                     currentTask.callback = null;
                     currentPriorityLevel = currentTask.priorityLevel;
                     var continuationCallback = callback(currentTask.expirationTime <= currentTime);
-                    currentTime = exports.unstable_now();
+                    currentTime = exports$1.unstable_now();
                     if ("function" === typeof continuationCallback) {
                       currentTask.callback = continuationCallback;
                       advanceTimers(currentTime);
@@ -685,31 +677,31 @@ function requireScheduler_production() {
     }
     function requestHostTimeout(callback, ms) {
       taskTimeoutID = localSetTimeout(function () {
-        callback(exports.unstable_now());
+        callback(exports$1.unstable_now());
       }, ms);
     }
-    exports.unstable_IdlePriority = 5;
-    exports.unstable_ImmediatePriority = 1;
-    exports.unstable_LowPriority = 4;
-    exports.unstable_NormalPriority = 3;
-    exports.unstable_Profiling = null;
-    exports.unstable_UserBlockingPriority = 2;
-    exports.unstable_cancelCallback = function (task) {
+    exports$1.unstable_IdlePriority = 5;
+    exports$1.unstable_ImmediatePriority = 1;
+    exports$1.unstable_LowPriority = 4;
+    exports$1.unstable_NormalPriority = 3;
+    exports$1.unstable_Profiling = null;
+    exports$1.unstable_UserBlockingPriority = 2;
+    exports$1.unstable_cancelCallback = function (task) {
       task.callback = null;
     };
-    exports.unstable_continueExecution = function () {
+    exports$1.unstable_continueExecution = function () {
       isHostCallbackScheduled || isPerformingWork || (isHostCallbackScheduled = true, requestHostCallback());
     };
-    exports.unstable_forceFrameRate = function (fps) {
+    exports$1.unstable_forceFrameRate = function (fps) {
       0 > fps || 125 < fps ? console.error("forceFrameRate takes a positive int between 0 and 125, forcing frame rates higher than 125 fps is not supported") : frameInterval = 0 < fps ? Math.floor(1e3 / fps) : 5;
     };
-    exports.unstable_getCurrentPriorityLevel = function () {
+    exports$1.unstable_getCurrentPriorityLevel = function () {
       return currentPriorityLevel;
     };
-    exports.unstable_getFirstCallbackNode = function () {
+    exports$1.unstable_getFirstCallbackNode = function () {
       return peek(taskQueue);
     };
-    exports.unstable_next = function (eventHandler) {
+    exports$1.unstable_next = function (eventHandler) {
       switch (currentPriorityLevel) {
         case 1:
         case 2:
@@ -727,9 +719,9 @@ function requireScheduler_production() {
         currentPriorityLevel = previousPriorityLevel;
       }
     };
-    exports.unstable_pauseExecution = function () {};
-    exports.unstable_requestPaint = function () {};
-    exports.unstable_runWithPriority = function (priorityLevel, eventHandler) {
+    exports$1.unstable_pauseExecution = function () {};
+    exports$1.unstable_requestPaint = function () {};
+    exports$1.unstable_runWithPriority = function (priorityLevel, eventHandler) {
       switch (priorityLevel) {
         case 1:
         case 2:
@@ -748,8 +740,8 @@ function requireScheduler_production() {
         currentPriorityLevel = previousPriorityLevel;
       }
     };
-    exports.unstable_scheduleCallback = function (priorityLevel, callback, options) {
-      var currentTime = exports.unstable_now();
+    exports$1.unstable_scheduleCallback = function (priorityLevel, callback, options) {
+      var currentTime = exports$1.unstable_now();
       "object" === typeof options && null !== options ? (options = options.delay, options = "number" === typeof options && 0 < options ? currentTime + options : currentTime) : options = currentTime;
       switch (priorityLevel) {
         case 1:
@@ -779,8 +771,8 @@ function requireScheduler_production() {
       options > currentTime ? (priorityLevel.sortIndex = options, push(timerQueue, priorityLevel), null === peek(taskQueue) && priorityLevel === peek(timerQueue) && (isHostTimeoutScheduled ? (localClearTimeout(taskTimeoutID), taskTimeoutID = -1) : isHostTimeoutScheduled = true, requestHostTimeout(handleTimeout, options - currentTime))) : (priorityLevel.sortIndex = timeout, push(taskQueue, priorityLevel), isHostCallbackScheduled || isPerformingWork || (isHostCallbackScheduled = true, requestHostCallback()));
       return priorityLevel;
     };
-    exports.unstable_shouldYield = shouldYieldToHost;
-    exports.unstable_wrapCallback = function (callback) {
+    exports$1.unstable_shouldYield = shouldYieldToHost;
+    exports$1.unstable_wrapCallback = function (callback) {
       var parentPriorityLevel = currentPriorityLevel;
       return function () {
         var previousPriorityLevel = currentPriorityLevel;
@@ -11982,7 +11974,7 @@ var Global = /* #__PURE__ */withEmotionCache(function (props, cache) {
 });
 
 // eslint-disable-next-line no-undef
-var reactPropsRegex = /^((children|dangerouslySetInnerHTML|key|ref|autoFocus|defaultValue|defaultChecked|innerHTML|suppressContentEditableWarning|suppressHydrationWarning|valueLink|abbr|accept|acceptCharset|accessKey|action|allow|allowUserMedia|allowPaymentRequest|allowFullScreen|allowTransparency|alt|async|autoComplete|autoPlay|capture|cellPadding|cellSpacing|challenge|charSet|checked|cite|classID|className|cols|colSpan|content|contentEditable|contextMenu|controls|controlsList|coords|crossOrigin|data|dateTime|decoding|default|defer|dir|disabled|disablePictureInPicture|disableRemotePlayback|download|draggable|encType|enterKeyHint|fetchpriority|fetchPriority|form|formAction|formEncType|formMethod|formNoValidate|formTarget|frameBorder|headers|height|hidden|high|href|hrefLang|htmlFor|httpEquiv|id|inputMode|integrity|is|keyParams|keyType|kind|label|lang|list|loading|loop|low|marginHeight|marginWidth|max|maxLength|media|mediaGroup|method|min|minLength|multiple|muted|name|nonce|noValidate|open|optimum|pattern|placeholder|playsInline|poster|preload|profile|radioGroup|readOnly|referrerPolicy|rel|required|reversed|role|rows|rowSpan|sandbox|scope|scoped|scrolling|seamless|selected|shape|size|sizes|slot|span|spellCheck|src|srcDoc|srcLang|srcSet|start|step|style|summary|tabIndex|target|title|translate|type|useMap|value|width|wmode|wrap|about|datatype|inlist|prefix|property|resource|typeof|vocab|autoCapitalize|autoCorrect|autoSave|color|incremental|fallback|inert|itemProp|itemScope|itemType|itemID|itemRef|on|option|results|security|unselectable|accentHeight|accumulate|additive|alignmentBaseline|allowReorder|alphabetic|amplitude|arabicForm|ascent|attributeName|attributeType|autoReverse|azimuth|baseFrequency|baselineShift|baseProfile|bbox|begin|bias|by|calcMode|capHeight|clip|clipPathUnits|clipPath|clipRule|colorInterpolation|colorInterpolationFilters|colorProfile|colorRendering|contentScriptType|contentStyleType|cursor|cx|cy|d|decelerate|descent|diffuseConstant|direction|display|divisor|dominantBaseline|dur|dx|dy|edgeMode|elevation|enableBackground|end|exponent|externalResourcesRequired|fill|fillOpacity|fillRule|filter|filterRes|filterUnits|floodColor|floodOpacity|focusable|fontFamily|fontSize|fontSizeAdjust|fontStretch|fontStyle|fontVariant|fontWeight|format|from|fr|fx|fy|g1|g2|glyphName|glyphOrientationHorizontal|glyphOrientationVertical|glyphRef|gradientTransform|gradientUnits|hanging|horizAdvX|horizOriginX|ideographic|imageRendering|in|in2|intercept|k|k1|k2|k3|k4|kernelMatrix|kernelUnitLength|kerning|keyPoints|keySplines|keyTimes|lengthAdjust|letterSpacing|lightingColor|limitingConeAngle|local|markerEnd|markerMid|markerStart|markerHeight|markerUnits|markerWidth|mask|maskContentUnits|maskUnits|mathematical|mode|numOctaves|offset|opacity|operator|order|orient|orientation|origin|overflow|overlinePosition|overlineThickness|panose1|paintOrder|pathLength|patternContentUnits|patternTransform|patternUnits|pointerEvents|points|pointsAtX|pointsAtY|pointsAtZ|preserveAlpha|preserveAspectRatio|primitiveUnits|r|radius|refX|refY|renderingIntent|repeatCount|repeatDur|requiredExtensions|requiredFeatures|restart|result|rotate|rx|ry|scale|seed|shapeRendering|slope|spacing|specularConstant|specularExponent|speed|spreadMethod|startOffset|stdDeviation|stemh|stemv|stitchTiles|stopColor|stopOpacity|strikethroughPosition|strikethroughThickness|string|stroke|strokeDasharray|strokeDashoffset|strokeLinecap|strokeLinejoin|strokeMiterlimit|strokeOpacity|strokeWidth|surfaceScale|systemLanguage|tableValues|targetX|targetY|textAnchor|textDecoration|textRendering|textLength|to|transform|u1|u2|underlinePosition|underlineThickness|unicode|unicodeBidi|unicodeRange|unitsPerEm|vAlphabetic|vHanging|vIdeographic|vMathematical|values|vectorEffect|version|vertAdvY|vertOriginX|vertOriginY|viewBox|viewTarget|visibility|widths|wordSpacing|writingMode|x|xHeight|x1|x2|xChannelSelector|xlinkActuate|xlinkArcrole|xlinkHref|xlinkRole|xlinkShow|xlinkTitle|xlinkType|xmlBase|xmlns|xmlnsXlink|xmlLang|xmlSpace|y|y1|y2|yChannelSelector|z|zoomAndPan|for|class|autofocus)|(([Dd][Aa][Tt][Aa]|[Aa][Rr][Ii][Aa]|x)-.*))$/; // https://esbench.com/bench/5bfee68a4cd7e6009ef61d23
+var reactPropsRegex = /^((children|dangerouslySetInnerHTML|key|ref|autoFocus|defaultValue|defaultChecked|innerHTML|suppressContentEditableWarning|suppressHydrationWarning|valueLink|abbr|accept|acceptCharset|accessKey|action|allow|allowUserMedia|allowPaymentRequest|allowFullScreen|allowTransparency|alt|async|autoComplete|autoPlay|capture|cellPadding|cellSpacing|challenge|charSet|checked|cite|classID|className|cols|colSpan|content|contentEditable|contextMenu|controls|controlsList|coords|crossOrigin|data|dateTime|decoding|default|defer|dir|disabled|disablePictureInPicture|disableRemotePlayback|download|draggable|encType|enterKeyHint|fetchpriority|fetchPriority|form|formAction|formEncType|formMethod|formNoValidate|formTarget|frameBorder|headers|height|hidden|high|href|hrefLang|htmlFor|httpEquiv|id|inputMode|integrity|is|keyParams|keyType|kind|label|lang|list|loading|loop|low|marginHeight|marginWidth|max|maxLength|media|mediaGroup|method|min|minLength|multiple|muted|name|nonce|noValidate|open|optimum|pattern|placeholder|playsInline|popover|popoverTarget|popoverTargetAction|poster|preload|profile|radioGroup|readOnly|referrerPolicy|rel|required|reversed|role|rows|rowSpan|sandbox|scope|scoped|scrolling|seamless|selected|shape|size|sizes|slot|span|spellCheck|src|srcDoc|srcLang|srcSet|start|step|style|summary|tabIndex|target|title|translate|type|useMap|value|width|wmode|wrap|about|datatype|inlist|prefix|property|resource|typeof|vocab|autoCapitalize|autoCorrect|autoSave|color|incremental|fallback|inert|itemProp|itemScope|itemType|itemID|itemRef|on|option|results|security|unselectable|accentHeight|accumulate|additive|alignmentBaseline|allowReorder|alphabetic|amplitude|arabicForm|ascent|attributeName|attributeType|autoReverse|azimuth|baseFrequency|baselineShift|baseProfile|bbox|begin|bias|by|calcMode|capHeight|clip|clipPathUnits|clipPath|clipRule|colorInterpolation|colorInterpolationFilters|colorProfile|colorRendering|contentScriptType|contentStyleType|cursor|cx|cy|d|decelerate|descent|diffuseConstant|direction|display|divisor|dominantBaseline|dur|dx|dy|edgeMode|elevation|enableBackground|end|exponent|externalResourcesRequired|fill|fillOpacity|fillRule|filter|filterRes|filterUnits|floodColor|floodOpacity|focusable|fontFamily|fontSize|fontSizeAdjust|fontStretch|fontStyle|fontVariant|fontWeight|format|from|fr|fx|fy|g1|g2|glyphName|glyphOrientationHorizontal|glyphOrientationVertical|glyphRef|gradientTransform|gradientUnits|hanging|horizAdvX|horizOriginX|ideographic|imageRendering|in|in2|intercept|k|k1|k2|k3|k4|kernelMatrix|kernelUnitLength|kerning|keyPoints|keySplines|keyTimes|lengthAdjust|letterSpacing|lightingColor|limitingConeAngle|local|markerEnd|markerMid|markerStart|markerHeight|markerUnits|markerWidth|mask|maskContentUnits|maskUnits|mathematical|mode|numOctaves|offset|opacity|operator|order|orient|orientation|origin|overflow|overlinePosition|overlineThickness|panose1|paintOrder|pathLength|patternContentUnits|patternTransform|patternUnits|pointerEvents|points|pointsAtX|pointsAtY|pointsAtZ|preserveAlpha|preserveAspectRatio|primitiveUnits|r|radius|refX|refY|renderingIntent|repeatCount|repeatDur|requiredExtensions|requiredFeatures|restart|result|rotate|rx|ry|scale|seed|shapeRendering|slope|spacing|specularConstant|specularExponent|speed|spreadMethod|startOffset|stdDeviation|stemh|stemv|stitchTiles|stopColor|stopOpacity|strikethroughPosition|strikethroughThickness|string|stroke|strokeDasharray|strokeDashoffset|strokeLinecap|strokeLinejoin|strokeMiterlimit|strokeOpacity|strokeWidth|surfaceScale|systemLanguage|tableValues|targetX|targetY|textAnchor|textDecoration|textRendering|textLength|to|transform|u1|u2|underlinePosition|underlineThickness|unicode|unicodeBidi|unicodeRange|unitsPerEm|vAlphabetic|vHanging|vIdeographic|vMathematical|values|vectorEffect|version|vertAdvY|vertOriginX|vertOriginY|viewBox|viewTarget|visibility|widths|wordSpacing|writingMode|x|xHeight|x1|x2|xChannelSelector|xlinkActuate|xlinkArcrole|xlinkHref|xlinkRole|xlinkShow|xlinkTitle|xlinkType|xmlBase|xmlns|xmlnsXlink|xmlLang|xmlSpace|y|y1|y2|yChannelSelector|z|zoomAndPan|for|class|autofocus)|(([Dd][Aa][Tt][Aa]|[Aa][Rr][Ii][Aa]|x)-.*))$/; // https://esbench.com/bench/5bfee68a4cd7e6009ef61d23
 
 var isPropValid = /* #__PURE__ */memoize$2(function (prop) {
   return reactPropsRegex.test(prop) || prop.charCodeAt(0) === 111
@@ -12120,14 +12112,14 @@ var tags = ['a', 'abbr', 'address', 'area', 'article', 'aside', 'audio', 'b', 'b
 'circle', 'clipPath', 'defs', 'ellipse', 'foreignObject', 'g', 'image', 'line', 'linearGradient', 'mask', 'path', 'pattern', 'polygon', 'polyline', 'radialGradient', 'rect', 'stop', 'svg', 'text', 'tspan'];
 
 // bind it to avoid mutating the original function
-var newStyled = createStyled$1.bind(null);
+var styled$2 = createStyled$1.bind(null);
 tags.forEach(function (tagName) {
-  newStyled[tagName] = newStyled(tagName);
+  styled$2[tagName] = styled$2(tagName);
 });
 function isEmpty(obj) {
   return obj === void 0 || obj === null || Object.keys(obj).length === 0;
 }
-function GlobalStyles(props) {
+function GlobalStyles$1(props) {
   const {
     styles,
     defaultTheme = {}
@@ -12139,14 +12131,14 @@ function GlobalStyles(props) {
 }
 
 /**
- * @mui/styled-engine v6.4.11
+ * @mui/styled-engine v6.5.0
  *
  * @license MIT
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
 function styled$1(tag, options) {
-  const stylesFactory = newStyled(tag, options);
+  const stylesFactory = styled$2(tag, options);
   return stylesFactory;
 }
 function internal_mutateStyles(tag, processor) {
@@ -12182,8 +12174,8 @@ function requireReactIs_production() {
     REACT_PORTAL_TYPE = Symbol.for("react.portal"),
     REACT_FRAGMENT_TYPE = Symbol.for("react.fragment"),
     REACT_STRICT_MODE_TYPE = Symbol.for("react.strict_mode"),
-    REACT_PROFILER_TYPE = Symbol.for("react.profiler");
-  var REACT_CONSUMER_TYPE = Symbol.for("react.consumer"),
+    REACT_PROFILER_TYPE = Symbol.for("react.profiler"),
+    REACT_CONSUMER_TYPE = Symbol.for("react.consumer"),
     REACT_CONTEXT_TYPE = Symbol.for("react.context"),
     REACT_FORWARD_REF_TYPE = Symbol.for("react.forward_ref"),
     REACT_SUSPENSE_TYPE = Symbol.for("react.suspense"),
@@ -13328,7 +13320,8 @@ function unstable_createStyleFunctionSx$1() {
   function styleFunctionSx(props) {
     const {
       sx,
-      theme = {}
+      theme = {},
+      nested
     } = props || {};
     if (!sx) {
       return null; // Emotion & styled-components will neglect null
@@ -13369,7 +13362,8 @@ function unstable_createStyleFunctionSx$1() {
               if (objectsHaveSameKeys$1(breakpointsValues, value)) {
                 css[styleKey] = styleFunctionSx({
                   sx: value,
-                  theme
+                  theme,
+                  nested: true
                 });
               } else {
                 css = merge$1(css, breakpointsValues);
@@ -13380,6 +13374,11 @@ function unstable_createStyleFunctionSx$1() {
           }
         }
       });
+      if (!nested && theme.modularCssLayers) {
+        return {
+          '@layer sx': sortContainerQueries$1(theme, removeUnusedBreakpoints$1(breakpointsKeys, css))
+        };
+      }
       return sortContainerQueries$1(theme, removeUnusedBreakpoints$1(breakpointsKeys, css));
     }
     return Array.isArray(sx) ? sx.map(traverse) : traverse(sx);
@@ -13527,6 +13526,40 @@ const systemDefaultTheme$1 = createTheme$2();
 function useTheme$2(defaultTheme = systemDefaultTheme$1) {
   return useTheme$3(defaultTheme);
 }
+function wrapGlobalLayer(styles) {
+  const serialized = internal_serializeStyles(styles);
+  if (styles !== serialized && serialized.styles) {
+    if (!serialized.styles.match(/^@layer\s+[^{]*$/)) {
+      serialized.styles = `@layer global{${serialized.styles}}`;
+    }
+    return serialized;
+  }
+  return styles;
+}
+function GlobalStyles({
+  styles,
+  themeId,
+  defaultTheme = {}
+}) {
+  const upperTheme = useTheme$2(defaultTheme);
+  const resolvedTheme = themeId ? upperTheme[themeId] || upperTheme : upperTheme;
+  let globalStyles = typeof styles === "function" ? styles(resolvedTheme) : styles;
+  if (resolvedTheme.modularCssLayers) {
+    if (Array.isArray(globalStyles)) {
+      globalStyles = globalStyles.map(styleArg => {
+        if (typeof styleArg === "function") {
+          return wrapGlobalLayer(styleArg(resolvedTheme));
+        }
+        return wrapGlobalLayer(styleArg);
+      });
+    } else {
+      globalStyles = wrapGlobalLayer(globalStyles);
+    }
+  }
+  return /* @__PURE__ */jsxRuntimeExports.jsx(GlobalStyles$1, {
+    styles: globalStyles
+  });
+}
 const splitProps = props => {
   const result = {
     systemProps: {},
@@ -13659,6 +13692,12 @@ const systemDefaultTheme = createTheme$2();
 function shouldForwardProp$1(prop) {
   return prop !== "ownerState" && prop !== "theme" && prop !== "sx" && prop !== "as";
 }
+function shallowLayer(serialized, layerName) {
+  if (layerName && serialized && typeof serialized === "object" && serialized.styles && !serialized.styles.startsWith("@layer")) {
+    serialized.styles = `@layer ${layerName}{${String(serialized.styles)}}`;
+  }
+  return serialized;
+}
 function defaultOverridesResolver(slot) {
   if (!slot) {
     return null;
@@ -13668,30 +13707,30 @@ function defaultOverridesResolver(slot) {
 function attachTheme(props, themeId, defaultTheme) {
   props.theme = isObjectEmpty(props.theme) ? defaultTheme : props.theme[themeId] || props.theme;
 }
-function processStyle(props, style) {
+function processStyle(props, style, layerName) {
   const resolvedStyle = typeof style === "function" ? style(props) : style;
   if (Array.isArray(resolvedStyle)) {
-    return resolvedStyle.flatMap(subStyle => processStyle(props, subStyle));
+    return resolvedStyle.flatMap(subStyle => processStyle(props, subStyle, layerName));
   }
   if (Array.isArray(resolvedStyle?.variants)) {
     let rootStyle;
     if (resolvedStyle.isProcessed) {
-      rootStyle = resolvedStyle.style;
+      rootStyle = layerName ? shallowLayer(resolvedStyle.style, layerName) : resolvedStyle.style;
     } else {
       const {
         variants,
         ...otherStyles
       } = resolvedStyle;
-      rootStyle = otherStyles;
+      rootStyle = layerName ? shallowLayer(internal_serializeStyles(otherStyles), layerName) : otherStyles;
     }
-    return processStyleVariants(props, resolvedStyle.variants, [rootStyle]);
+    return processStyleVariants(props, resolvedStyle.variants, [rootStyle], layerName);
   }
   if (resolvedStyle?.isProcessed) {
-    return resolvedStyle.style;
+    return layerName ? shallowLayer(internal_serializeStyles(resolvedStyle.style), layerName) : resolvedStyle.style;
   }
-  return resolvedStyle;
+  return layerName ? shallowLayer(internal_serializeStyles(resolvedStyle), layerName) : resolvedStyle;
 }
-function processStyleVariants(props, variants, results = []) {
+function processStyleVariants(props, variants, results = [], layerName = void 0) {
   let mergedState;
   variantLoop: for (let i = 0; i < variants.length; i += 1) {
     const variant = variants[i];
@@ -13717,9 +13756,9 @@ function processStyleVariants(props, variants, results = []) {
         ...props.ownerState,
         ownerState: props.ownerState
       };
-      results.push(variant.style(mergedState));
+      results.push(layerName ? shallowLayer(internal_serializeStyles(variant.style(mergedState)), layerName) : variant.style(mergedState));
     } else {
-      results.push(variant.style);
+      results.push(layerName ? shallowLayer(internal_serializeStyles(variant.style), layerName) : variant.style);
     }
   }
   return results;
@@ -13746,6 +13785,7 @@ function createStyled(input = {}) {
       overridesResolver = defaultOverridesResolver(lowercaseFirstLetter(componentSlot)),
       ...options
     } = inputOptions;
+    const layerName = componentName && componentName.startsWith("Mui") || !!componentSlot ? "components" : "custom";
     const skipVariantsResolver = inputSkipVariantsResolver !== void 0 ? inputSkipVariantsResolver :
     // TODO v6: remove `Root` in the next major release
     // For more details: https://github.com/mui/material-ui/pull/37908
@@ -13770,16 +13810,16 @@ function createStyled(input = {}) {
       }
       if (typeof style === "function") {
         return function styleFunctionProcessor(props) {
-          return processStyle(props, style);
+          return processStyle(props, style, props.theme.modularCssLayers ? layerName : void 0);
         };
       }
       if (isPlainObject$1(style)) {
         const serialized = preprocessStyles(style);
-        if (!serialized.variants) {
-          return serialized.style;
-        }
         return function styleObjectProcessor(props) {
-          return processStyle(props, serialized);
+          if (!serialized.variants) {
+            return props.theme.modularCssLayers ? shallowLayer(serialized.style, layerName) : serialized.style;
+          }
+          return processStyle(props, serialized, props.theme.modularCssLayers ? layerName : void 0);
         };
       }
       return style;
@@ -13798,7 +13838,7 @@ function createStyled(input = {}) {
           }
           const resolvedStyleOverrides = {};
           for (const slotKey in styleOverrides) {
-            resolvedStyleOverrides[slotKey] = processStyle(props, styleOverrides[slotKey]);
+            resolvedStyleOverrides[slotKey] = processStyle(props, styleOverrides[slotKey], props.theme.modularCssLayers ? "theme" : void 0);
           }
           return overridesResolver(props, resolvedStyleOverrides);
         });
@@ -13810,7 +13850,7 @@ function createStyled(input = {}) {
           if (!themeVariants) {
             return null;
           }
-          return processStyleVariants(props, themeVariants);
+          return processStyleVariants(props, themeVariants, [], props.theme.modularCssLayers ? "theme" : void 0);
         });
       }
       if (!skipSx) {
@@ -14168,7 +14208,7 @@ let globalId = 0;
 // TODO React 17: Remove `useGlobalId` once React 17 support is removed
 function useGlobalId(idOverride) {
   const [defaultId, setDefaultId] = reactExports.useState(idOverride);
-  const id = defaultId;
+  const id = idOverride || defaultId;
   reactExports.useEffect(() => {
     if (defaultId == null) {
       // Fallback to this default id when possible.
@@ -14642,6 +14682,47 @@ function useDefaultProps$1({
     }
   });
 }
+function useLayerOrder(theme) {
+  const upperTheme = useTheme$3();
+  const id = useId() || '';
+  const {
+    modularCssLayers
+  } = theme;
+  let layerOrder = 'mui.global, mui.components, mui.theme, mui.custom, mui.sx';
+  if (!modularCssLayers || upperTheme !== null) {
+    // skip this hook if upper theme exists.
+    layerOrder = '';
+  } else if (typeof modularCssLayers === 'string') {
+    layerOrder = modularCssLayers.replace(/mui(?!\.)/g, layerOrder);
+  } else {
+    layerOrder = `@layer ${layerOrder};`;
+  }
+  useEnhancedEffect(() => {
+    const head = document.querySelector('head');
+    if (!head) {
+      return;
+    }
+    const firstChild = head.firstChild;
+    if (layerOrder) {
+      // Only insert if first child doesn't have data-mui-layer-order attribute
+      if (firstChild && firstChild.hasAttribute?.('data-mui-layer-order') && firstChild.getAttribute('data-mui-layer-order') === id) {
+        return;
+      }
+      const styleElement = document.createElement('style');
+      styleElement.setAttribute('data-mui-layer-order', id);
+      styleElement.textContent = layerOrder;
+      head.prepend(styleElement);
+    } else {
+      head.querySelector(`style[data-mui-layer-order="${id}"]`)?.remove();
+    }
+  }, [layerOrder, id]);
+  if (!layerOrder) {
+    return null;
+  }
+  return /*#__PURE__*/jsxRuntimeExports.jsx(GlobalStyles, {
+    styles: layerOrder
+  });
+}
 const EMPTY_THEME = {};
 function useThemeScoping(themeId, upperTheme, localTheme, isPrivate = false) {
   return reactExports.useMemo(() => {
@@ -14677,15 +14758,16 @@ function ThemeProvider$1(props) {
   const engineTheme = useThemeScoping(themeId, upperTheme, localTheme);
   const privateTheme = useThemeScoping(themeId, upperPrivateTheme, localTheme, true);
   const rtlValue = (themeId ? engineTheme[themeId] : engineTheme).direction === "rtl";
+  const layerOrder = useLayerOrder(engineTheme);
   return /* @__PURE__ */jsxRuntimeExports.jsx(ThemeProvider$2, {
     theme: privateTheme,
     children: /* @__PURE__ */jsxRuntimeExports.jsx(ThemeContext$1.Provider, {
       value: engineTheme,
       children: /* @__PURE__ */jsxRuntimeExports.jsx(RtlProvider, {
         value: rtlValue,
-        children: /* @__PURE__ */jsxRuntimeExports.jsx(DefaultPropsProvider, {
+        children: /* @__PURE__ */jsxRuntimeExports.jsxs(DefaultPropsProvider, {
           value: themeId ? engineTheme[themeId].components : engineTheme.components,
-          children
+          children: [layerOrder, children]
         })
       })
     })
@@ -15266,7 +15348,7 @@ function createCssVarsProvider(options) {
         themeId: scopedTheme ? themeId : void 0,
         theme: memoTheme,
         children
-      }), shouldGenerateStyleSheet && /* @__PURE__ */jsxRuntimeExports.jsx(GlobalStyles, {
+      }), shouldGenerateStyleSheet && /* @__PURE__ */jsxRuntimeExports.jsx(GlobalStyles$1, {
         styles: memoTheme.generateStyleSheets?.() || []
       })]
     });
@@ -16294,7 +16376,7 @@ function createColorScheme(options) {
   };
 }
 function shouldSkipGeneratingVar(keys) {
-  return !!keys[0].match(/(cssVarPrefix|colorSchemeSelector|rootSelector|typography|mixins|breakpoints|direction|transitions)/) || !!keys[0].match(/sxConfig$/) ||
+  return !!keys[0].match(/(cssVarPrefix|colorSchemeSelector|modularCssLayers|rootSelector|typography|mixins|breakpoints|direction|transitions)/) || !!keys[0].match(/sxConfig$/) ||
   // ends with sxConfig
   keys[0] === 'palette' && !!keys[1]?.match(/(mode|contrastThreshold|tonalOffset)/);
 }
@@ -29822,7 +29904,8 @@ function unstable_createStyleFunctionSx() {
   function styleFunctionSx(props) {
     const {
       sx,
-      theme = {}
+      theme = {},
+      nested
     } = props || {};
     if (!sx) {
       return null; // Emotion & styled-components will neglect null
@@ -29863,7 +29946,8 @@ function unstable_createStyleFunctionSx() {
               if (objectsHaveSameKeys(breakpointsValues, value)) {
                 css[styleKey] = styleFunctionSx({
                   sx: value,
-                  theme
+                  theme,
+                  nested: true
                 });
               } else {
                 css = merge(css, breakpointsValues);
@@ -29874,6 +29958,11 @@ function unstable_createStyleFunctionSx() {
           }
         }
       });
+      if (!nested && theme.modularCssLayers) {
+        return {
+          '@layer sx': sortContainerQueries(theme, removeUnusedBreakpoints(breakpointsKeys, css))
+        };
+      }
       return sortContainerQueries(theme, removeUnusedBreakpoints(breakpointsKeys, css));
     }
     return Array.isArray(sx) ? sx.map(traverse) : traverse(sx);
@@ -31789,7 +31878,7 @@ function SummaryReport() {
 clientExports.createRoot(document.getElementById("root")).render(/* @__PURE__ */jsxRuntimeExports.jsx(reactExports.StrictMode, {
   children: /* @__PURE__ */jsxRuntimeExports.jsx(SummaryReport, {})
 }));</script>
-    <style rel="stylesheet" crossorigin>/*! tailwindcss v4.1.8 | MIT License | https://tailwindcss.com */
+    <style rel="stylesheet" crossorigin>/*! tailwindcss v4.1.18 | MIT License | https://tailwindcss.com */
 @layer properties {
   @supports (((-webkit-hyphens: none)) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color: rgb(from red r g b)))) {
     *, :before, :after, ::backdrop {
@@ -32088,6 +32177,10 @@ clientExports.createRoot(document.getElementById("root")).render(/* @__PURE__ */
 
   ::-webkit-datetime-edit-meridiem-field {
     padding-block: 0;
+  }
+
+  ::-webkit-calendar-picker-indicator {
+    line-height: 1;
   }
 
   :-moz-ui-invalid {

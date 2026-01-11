@@ -184,7 +184,7 @@ The simple prompt is set at `prompt`, instructing the LLM to answer the question
     from simpleval.testcases.schemas.llm_task_result import LlmTaskResult
     from simpleval.utilities.retryables import litellm_limits_retry
 
-    model_id = 'claude-3-5-haiku-latest'
+    model_id = 'claude-haiku-4-5'
     temperature = 0.7
 
 
@@ -246,7 +246,7 @@ The simple prompt is set at `prompt`, instructing the LLM to answer the question
     from simpleval.testcases.schemas.llm_task_result import LlmTaskResult
     from simpleval.utilities.retryables import litellm_limits_retry
 
-    model_id = 'gemini/gemini-2.0-flash'
+    model_id = 'gemini/gemini-2.5-flash'
     temperature = 0.7
 
 

@@ -8,9 +8,7 @@ from simpleval.evaluation.judges.base_judge import BaseJudge
 from simpleval.evaluation.judges.judge_utils import bedrock_preliminary_checks
 from simpleval.evaluation.judges.models.bedrock_claude_sonnet.consts import (
     AWS_REGION_PLACEHOLDER,
-    SONNET35_V1_MODEL_ID,
-    SONNET35_V2_MODEL_ID,
-    SONNET37_V1_MODEL_ID,
+    SONNET45_V1_MODEL_ID,
 )
 from simpleval.evaluation.metrics.base_metric import EvaluationMetric
 from simpleval.evaluation.metrics.models.bedrock_claude_sonnet.base.base_metric import BaseBedrockSonnetMetric
@@ -24,13 +22,11 @@ class BedrockClaudeSonnetJudge(BaseJudge):
     retries call_claude_completion on retryable errors like rate limits.
     """
 
-    DEFAULT_MODEL_ID = SONNET35_V1_MODEL_ID
+    DEFAULT_MODEL_ID = SONNET45_V1_MODEL_ID
     DEFAULT_REGION = 'us-east-1'
 
     SUPPORTED_MODEL_IDS = {
-        SONNET35_V1_MODEL_ID,
-        SONNET35_V2_MODEL_ID,
-        SONNET37_V1_MODEL_ID,
+        SONNET45_V1_MODEL_ID,
     }
 
     # bedrock's default values (https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters-claude.html):

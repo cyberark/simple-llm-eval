@@ -11212,7 +11212,7 @@ const CompareReport = () => {
         className: "fixed inset-0 bg-gray-50/25 flex items-center justify-center",
         onClick: () => setSelectedPrompt(null),
         children: /* @__PURE__ */jsxRuntimeExports.jsxs("div", {
-          className: "bg-gray-800 p-6 rounded-lg w-1/3",
+          className: "bg-gray-800 p-6 rounded-lg w-1/3 max-h-[80vh] overflow-y-auto",
           onClick: e => e.stopPropagation(),
           children: [/* @__PURE__ */jsxRuntimeExports.jsx("h3", {
             className: "text-lg font-semibold mb-4",
@@ -11230,7 +11230,7 @@ const CompareReport = () => {
         className: "fixed inset-0 bg-gray-50/25 flex items-center justify-center",
         onClick: () => setSelectedExplanation(null),
         children: /* @__PURE__ */jsxRuntimeExports.jsxs("div", {
-          className: "bg-gray-800 p-6 rounded-lg w-1/3",
+          className: "bg-gray-800 p-6 rounded-lg w-1/3 max-h-[80vh] overflow-y-auto",
           onClick: e => e.stopPropagation(),
           children: [/* @__PURE__ */jsxRuntimeExports.jsx("h3", {
             className: "text-lg font-semibold mb-4",
@@ -11261,7 +11261,7 @@ const CompareReport = () => {
         className: "fixed inset-0 bg-gray-50/25 flex items-center justify-center",
         onClick: () => setSelectedExtraInfo(null),
         children: /* @__PURE__ */jsxRuntimeExports.jsxs("div", {
-          className: "bg-gray-800 p-6 rounded-lg w-1/3",
+          className: "bg-gray-800 p-6 rounded-lg w-1/3 max-h-[80vh] overflow-y-auto",
           onClick: e => e.stopPropagation(),
           children: [/* @__PURE__ */jsxRuntimeExports.jsx("h3", {
             className: "text-lg font-semibold mb-4",
@@ -11711,6 +11711,10 @@ clientExports.createRoot(document.getElementById("root")).render(/* @__PURE__ */
     height: calc(var(--spacing) * 8);
   }
 
+  .max-h-\[80vh\] {
+    max-height: 80vh;
+  }
+
   .min-h-screen {
     min-height: 100vh;
   }
@@ -11809,6 +11813,10 @@ clientExports.createRoot(document.getElementById("root")).render(/* @__PURE__ */
 
   .overflow-hidden {
     overflow: hidden;
+  }
+
+  .overflow-y-auto {
+    overflow-y: auto;
   }
 
   .rounded {

@@ -270,4 +270,23 @@ describe("LLMEvalReport Component", () => {
     expect(within(rows3[1]).getByText("1.00")).toBeInTheDocument();
   });
 
+  it("prompt popup has scrollable container for long text", () => {
+    const showLink = screen.getAllByText("show")[0];
+    fireEvent.click(showLink);
+    
+    // Find the popup by the h3 heading element which is unique to the popup
+    const popupHeading = screen.getByRole('heading', { name: 'Prompt To LLM' });
+    const popupContainer = popupHeading.closest('div');
+    expect(popupContainer).toHaveClass('max-h-[80vh]', 'overflow-y-auto');
+  });
+
+  it("score explanation popup has scrollable container for long text", () => {
+    const scoreButton = screen.getAllByText(/0.95|0.6|0.2/)[0];
+    fireEvent.click(scoreButton);
+    
+    const popupHeading = screen.getByRole('heading', { name: 'Score Explanation' });
+    const popupContainer = popupHeading.closest('div');
+    expect(popupContainer).toHaveClass('max-h-[80vh]', 'overflow-y-auto');
+  });
+
 });

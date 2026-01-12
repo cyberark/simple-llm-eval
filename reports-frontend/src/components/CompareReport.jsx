@@ -683,7 +683,7 @@ const CompareReport = () => {
         {/* Add popup for prompt */}
         {selectedPrompt && (
           <div className="fixed inset-0 bg-gray-50/25 flex items-center justify-center" onClick={() => setSelectedPrompt(null)}>
-            <div className="bg-gray-800 p-6 rounded-lg w-1/3" onClick={e => e.stopPropagation()}>
+            <div className="bg-gray-800 p-6 rounded-lg w-1/3 max-h-[80vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
               <h3 className="text-lg font-semibold mb-4">Prompt To LLM</h3>
               <p className="text-gray-300 whitespace-pre-wrap">{selectedPrompt}</p>
               <button
@@ -699,7 +699,7 @@ const CompareReport = () => {
         {/* Add popup */}
         {selectedExplanation && (
           <div className="fixed inset-0 bg-gray-50/25 flex items-center justify-center" onClick={() => setSelectedExplanation(null)}>
-            <div className="bg-gray-800 p-6 rounded-lg w-1/3" onClick={e => e.stopPropagation()}>
+            <div className="bg-gray-800 p-6 rounded-lg w-1/3 max-h-[80vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
               <h3 className="text-lg font-semibold mb-4">Eval Result</h3>
               <p className="text-gray-300"><strong>Eval result:</strong></p>
               <p className="text-gray-300 whitespace-pre-wrap">{selectedExplanation.evalResult}</p>
@@ -719,7 +719,7 @@ const CompareReport = () => {
         {/* Add popup for extraInfo */}
         {selectedExtraInfo && (
           <div className="fixed inset-0 bg-gray-50/25 flex items-center justify-center" onClick={() => setSelectedExtraInfo(null)}>
-            <div className="bg-gray-800 p-6 rounded-lg w-1/3" onClick={e => e.stopPropagation()}>
+            <div className="bg-gray-800 p-6 rounded-lg w-1/3 max-h-[80vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
               <h3 className="text-lg font-semibold mb-4">Extra Info</h3>
               <p className="text-gray-300 whitespace-pre-wrap">{selectedExtraInfo}</p>
               <button

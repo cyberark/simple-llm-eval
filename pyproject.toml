@@ -27,7 +27,7 @@ dependencies = [
 ]
 
 [project.urls]
-Repository = "https://github.cyberng.com/InnoAI/simple-llm-eval"
+Repository = "https://github.com/cyberark/simple-llm-eval"
 
 [project.scripts]
 simpleval = "simpleval.main:main"

@@ -4,7 +4,7 @@ from unittest.mock import MagicMock
 import pytest
 from botocore.exceptions import ClientError
 
-from simpleval.evaluation.judges.models.bedrock_claude_sonnet.consts import SONNET35_V1_MODEL_ID, SONNET35_V2_MODEL_ID
+from simpleval.evaluation.judges.models.bedrock_claude_sonnet.consts import SONNET45_V1_MODEL_ID
 from simpleval.evaluation.judges.models.bedrock_claude_sonnet.judge import BedrockClaudeSonnetJudge
 from simpleval.evaluation.metrics.models.bedrock_claude_sonnet.base.base_metric import BaseBedrockSonnetMetric
 
@@ -22,13 +22,13 @@ def judge():
 
 
 def test_init_default_model(judge):
-    assert judge.model_id == SONNET35_V1_MODEL_ID
+    assert judge.model_id == SONNET45_V1_MODEL_ID.format(AWS_REGION='us-east-1')
 
 
 def test_init_custom_model(mocker):
     mocker.patch('boto3.session.Session').return_value.region_name = 'jj-east-1'
-    judge = BedrockClaudeSonnetJudge(model_id=SONNET35_V2_MODEL_ID)
-    assert judge.model_id == SONNET35_V2_MODEL_ID.format(AWS_REGION='jj-east-1')
+    custom_judge = BedrockClaudeSonnetJudge(model_id=SONNET45_V1_MODEL_ID)
+    assert custom_judge.model_id == SONNET45_V1_MODEL_ID.format(AWS_REGION='jj-east-1')
 
 
 def test_init_invalid_model(mocker):

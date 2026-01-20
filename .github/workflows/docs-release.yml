@@ -25,7 +25,7 @@ jobs:
         run: git fetch origin gh-pages:gh-pages
 
       - name: 🐍 Install uv with caching
-        uses: astral-sh/setup-uv@1e862dfacbd1d6d858c55d9b792c756523627244 # 7.1.4
+        uses: astral-sh/setup-uv@61cb8a9741eeb8a550a1b8544337180c0fc8476b # 7.2.0
         with:
           enable-cache: true
           cache-dependency-glob: "uv.lock"

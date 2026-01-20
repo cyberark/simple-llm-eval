@@ -39,7 +39,7 @@ jobs:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # 6.0.1
 
       - name: 🐍 Install uv with caching
-        uses: astral-sh/setup-uv@1e862dfacbd1d6d858c55d9b792c756523627244 # 7.1.4
+        uses: astral-sh/setup-uv@61cb8a9741eeb8a550a1b8544337180c0fc8476b # 7.2.0
         with:
           enable-cache: true
           cache-dependency-glob: "uv.lock"
@@ -77,7 +77,7 @@ jobs:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # 6.0.1
 
       - name: 🐍 Install uv with caching
-        uses: astral-sh/setup-uv@1e862dfacbd1d6d858c55d9b792c756523627244 # 7.1.4
+        uses: astral-sh/setup-uv@61cb8a9741eeb8a550a1b8544337180c0fc8476b # 7.2.0
         with:
           enable-cache: true
           cache-dependency-glob: "uv.lock"
@@ -135,7 +135,7 @@ jobs:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # 6.0.1
 
       - name: ⬇️ Setup Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@395ad3262231945c25e8478fd5baf05154b1d79f # 6.1.0
+        uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # 6.2.0
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
@@ -166,7 +166,7 @@ jobs:
           fetch-depth: 0
 
       - name: 🐍 Install uv with caching
-        uses: astral-sh/setup-uv@1e862dfacbd1d6d858c55d9b792c756523627244 # 7.1.4
+        uses: astral-sh/setup-uv@61cb8a9741eeb8a550a1b8544337180c0fc8476b # 7.2.0
         with:
           enable-cache: true
           cache-dependency-glob: "uv.lock"

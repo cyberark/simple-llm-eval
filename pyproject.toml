@@ -37,7 +37,7 @@ dev = [
     "pytest-mock",
     "mkdocs>=1.6.1,<2",
     "mkdocs-git-revision-date-plugin>=0.3.2,<0.4",
-    "pandas>=2.2.3,<3",
+    "pandas>=2.2.3,<4",
     "xenon>=0.9.3,<0.10",
     "semver>=3.0.4,<4",
     "radon>=6.0.1,<7",

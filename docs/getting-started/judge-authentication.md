@@ -58,9 +58,11 @@ so you can always also refer to its documentation.
 
     **Required credentials:**
 
-    AWS credentials must be available, either via environment variables or in a `~/.aws/credentials` file.
+    Use either AWS credentials (via environment variables or in a `~/.aws/credentials` file) or an AWS Bedrock API key (set in `AWS_BEARER_TOKEN_BEDROCK` environment variable).
     
     You can learn more about using AWS credentials in the [AWS docs](https://docs.aws.amazon.com/cli/v1/userguide/cli-configure-files.html)
+
+    You can learn more about using AWS Bedrock API keys in the [AWS Bedrock API Key Usage](https://docs.aws.amazon.com/bedrock/latest/userguide/api-keys-use.html) documentation.
     
 ???- note "Gemini Judge"
 

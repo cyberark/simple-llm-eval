@@ -58,9 +58,11 @@ class BedrockClaudeSonnetJudge(BaseJudge):
         bedrock_preliminary_checks()
 
     def preliminary_checks_explanation(self):
-        return ('The Bedrock judge requires working AWS credentials:\n'
-                '- Set AWS_BEARER_TOKEN_BEDROCK environment variable with a Bedrock API key, or\n'
-                '- Use traditional AWS credentials (environment variables or ~/.aws/credentials file)')
+        return (
+            'The Bedrock judge requires working AWS credentials:\n'
+            '- Set AWS_BEARER_TOKEN_BEDROCK environment variable with a Bedrock API key, or\n'
+            '- Use traditional AWS credentials (environment variables or ~/.aws/credentials file)'
+        )
 
     def _model_inference(self, eval_prompt: str, metric: EvaluationMetric) -> str:
         """

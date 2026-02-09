@@ -87,12 +87,12 @@ def test_bedrock_preliminary_checks_api_key_success(mocker, monkeypatch):
     monkeypatch.setenv(BEDROCK_API_KEY_ENV_VAR, 'test-api-key')
     mock_bedrock = mocker.Mock()
     mock_bedrock.list_foundation_models.return_value = {'modelSummaries': []}
-    
+
     def client_side_effect(service_name, **kwargs):
         if service_name == 'bedrock':
             return mock_bedrock
         return mocker.Mock()
-    
+
     mocker.patch('boto3.client', side_effect=client_side_effect)
     mock_session = mocker.Mock()
     mock_session.region_name = 'us-east-1'
@@ -106,12 +106,12 @@ def test_bedrock_preliminary_checks_api_key_failure(mocker, monkeypatch):
     monkeypatch.setenv(BEDROCK_API_KEY_ENV_VAR, 'invalid-api-key')
     mock_bedrock = mocker.Mock()
     mock_bedrock.list_foundation_models.side_effect = Exception('Invalid API key')
-    
+
     def client_side_effect(service_name, **kwargs):
         if service_name == 'bedrock':
             return mock_bedrock
         return mocker.Mock()
-    
+
     mocker.patch('boto3.client', side_effect=client_side_effect)
     mock_session = mocker.Mock()
     mock_session.region_name = 'us-east-1'
@@ -125,12 +125,12 @@ def test_bedrock_preliminary_checks_api_key_region_failure(mocker, monkeypatch):
     monkeypatch.setenv(BEDROCK_API_KEY_ENV_VAR, 'test-api-key')
     mock_bedrock = mocker.Mock()
     mock_bedrock.list_foundation_models.return_value = {'modelSummaries': []}
-    
+
     def client_side_effect(service_name, **kwargs):
         if service_name == 'bedrock':
             return mock_bedrock
         return mocker.Mock()
-    
+
     mocker.patch('boto3.client', side_effect=client_side_effect)
     mock_session = mocker.Mock()
     mock_session.region_name = None
@@ -144,7 +144,7 @@ def test_bedrock_preliminary_checks_api_key_takes_priority(mocker, monkeypatch):
     monkeypatch.setenv(BEDROCK_API_KEY_ENV_VAR, 'test-api-key')
     mock_bedrock = mocker.Mock()
     mock_bedrock.list_foundation_models.return_value = {'modelSummaries': []}
-    
+
     def client_side_effect(service_name, **kwargs):
         if service_name == 'bedrock':
             return mock_bedrock
@@ -152,7 +152,7 @@ def test_bedrock_preliminary_checks_api_key_takes_priority(mocker, monkeypatch):
         if service_name == 'sts':
             raise AssertionError('STS client should not be called when API key is present')
         return mocker.Mock()
-    
+
     mocker.patch('boto3.client', side_effect=client_side_effect)
     mock_session = mocker.Mock()
     mock_session.region_name = 'us-east-1'

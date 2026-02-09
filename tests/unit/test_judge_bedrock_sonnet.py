@@ -88,12 +88,12 @@ def test_run_preliminary_checks_api_key_success(mocker, judge, monkeypatch):
     mocker.patch('boto3.session.Session').return_value.region_name = 'jj-east-1'
     mock_bedrock = mocker.Mock()
     mock_bedrock.list_foundation_models.return_value = {'modelSummaries': []}
-    
+
     def client_side_effect(service_name, **kwargs):
         if service_name == 'bedrock':
             return mock_bedrock
         return mocker.Mock()
-    
+
     mocker.patch('boto3.client', side_effect=client_side_effect)
 
     judge.run_preliminary_checks()

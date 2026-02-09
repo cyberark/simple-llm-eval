@@ -6,6 +6,8 @@ import boto3
 from simpleval.evaluation.consts import MODELS_DIR
 from simpleval.evaluation.metrics.consts import METRICS_DIR
 
+BEDROCK_API_KEY_ENV_VAR = 'AWS_BEARER_TOKEN_BEDROCK'
+
 
 def get_metrics_models_root():
     metrics_dir = (Path(__file__).resolve().parent.parent / METRICS_DIR / MODELS_DIR).resolve()
@@ -29,15 +31,31 @@ def verify_env_var(env_var: str):
         raise ValueError(f'{env_var} environment variable is required.')
 
 
-def bedrock_preliminary_checks():
+def _validate_bedrock_api_key():
     """
-    Run any preliminary checks before the evaluation starts.
+    Validate Bedrock API key by calling list_foundation_models.
+    boto3 automatically recognizes AWS_BEARER_TOKEN_BEDROCK env var for bearer token authentication.
+    """
+    try:
+        boto3.client('bedrock').list_foundation_models()
+    except Exception as e:
+        raise RuntimeError('Failed to validate Bedrock API key.') from e
+
+
+def _validate_sts_credentials():
+    """
+    Validate STS credentials by calling get_caller_identity.
     """
     try:
         boto3.client('sts').get_caller_identity()
     except Exception as e:
         raise RuntimeError('Failed to validate sts credentials.') from e
 
+
+def _validate_aws_region():
+    """
+    Validate that AWS region is configured.
+    """
     try:
         session = boto3.session.Session()
         region = session.region_name
@@ -45,3 +63,22 @@ def bedrock_preliminary_checks():
             raise ValueError('AWS region is not configured.')
     except Exception as e:
         raise RuntimeError('Failed to retrieve AWS region.') from e
+
+
+def bedrock_preliminary_checks():
+    """
+    Run any preliminary checks before the evaluation starts.
+    First checks for Bedrock API key, then falls back to STS credentials.
+    """
+    api_key = os.getenv(BEDROCK_API_KEY_ENV_VAR)
+
+    if api_key:
+        # Validate API key using list_foundation_models
+        # boto3 automatically uses AWS_BEARER_TOKEN_BEDROCK env var
+        _validate_bedrock_api_key()
+    else:
+        # Fall back to STS credential validation
+        _validate_sts_credentials()
+
+    # Region check remains for both paths
+    _validate_aws_region()

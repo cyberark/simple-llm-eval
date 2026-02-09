@@ -4,6 +4,7 @@ from unittest.mock import MagicMock
 import pytest
 from botocore.exceptions import ClientError
 
+from simpleval.evaluation.judges.judge_utils import BEDROCK_API_KEY_ENV_VAR
 from simpleval.evaluation.judges.models.bedrock_claude_sonnet.consts import SONNET45_V1_MODEL_ID
 from simpleval.evaluation.judges.models.bedrock_claude_sonnet.judge import BedrockClaudeSonnetJudge
 from simpleval.evaluation.metrics.models.bedrock_claude_sonnet.base.base_metric import BaseBedrockSonnetMetric
@@ -41,7 +42,9 @@ def test_init_invalid_model(mocker):
     assert judge.model_id == 'invalid_model'
 
 
-def test_run_preliminary_checks_success(mocker, judge):
+def test_run_preliminary_checks_success(mocker, judge, monkeypatch):
+    # Ensure API key env var is not set to test STS path
+    monkeypatch.delenv(BEDROCK_API_KEY_ENV_VAR, raising=False)
     mocker.patch('boto3.session.Session').return_value.region_name = 'jj-east-1'
     mock_sts_client = mocker.Mock()
     mock_sts_client.get_caller_identity.return_value = {'UserId': 'test'}
@@ -50,7 +53,9 @@ def test_run_preliminary_checks_success(mocker, judge):
     judge.run_preliminary_checks()
 
 
-def test_run_preliminary_checks_sts_failure(mocker, judge):
+def test_run_preliminary_checks_sts_failure(mocker, judge, monkeypatch):
+    # Ensure API key env var is not set to test STS path
+    monkeypatch.delenv(BEDROCK_API_KEY_ENV_VAR, raising=False)
     mocker.patch('boto3.session.Session').return_value.region_name = 'jj-east-1'
     mock_sts_client = mocker.Mock()
     mock_sts_client.get_caller_identity.side_effect = ClientError(
@@ -68,11 +73,31 @@ def test_run_preliminary_checks_sts_failure(mocker, judge):
         judge.run_preliminary_checks()
 
 
-def test_run_preliminary_checks_region_failure(mocker, judge):
+def test_run_preliminary_checks_region_failure(mocker, judge, monkeypatch):
+    # Ensure API key env var is not set to test STS path
+    monkeypatch.delenv(BEDROCK_API_KEY_ENV_VAR, raising=False)
     mocker.patch('boto3.session.Session').return_value.region_name = None
 
     with pytest.raises(RuntimeError):
         judge.run_preliminary_checks()
+
+
+def test_run_preliminary_checks_api_key_success(mocker, judge, monkeypatch):
+    # Set API key env var to test API key path
+    monkeypatch.setenv(BEDROCK_API_KEY_ENV_VAR, 'test-api-key')
+    mocker.patch('boto3.session.Session').return_value.region_name = 'jj-east-1'
+    mock_bedrock = mocker.Mock()
+    mock_bedrock.list_foundation_models.return_value = {'modelSummaries': []}
+    
+    def client_side_effect(service_name, **kwargs):
+        if service_name == 'bedrock':
+            return mock_bedrock
+        return mocker.Mock()
+    
+    mocker.patch('boto3.client', side_effect=client_side_effect)
+
+    judge.run_preliminary_checks()
+    mock_bedrock.list_foundation_models.assert_called_once()
 
 
 def test_model_inference_invalid_metric(judge):

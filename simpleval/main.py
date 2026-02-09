@@ -82,12 +82,24 @@ def eval_report_file(name: str, eval_results_file: str, report_format: str):
     eval_report_file_command(name=name, eval_results_file=eval_results_file, report_format=report_format)
 
 
-@click.command(help='Interactive creation of a new evaluation set')
+@click.command(
+    help=(
+        'Interactive creation of a new evaluation set.\n\n'
+        'If no names are provided, prompts interactively for all settings including the evaluation set name.\n\n'
+        'If one or more names are provided, prompts once for testcase, judge, model, metrics, and concurrency settings, '
+        'then creates an evaluation set for each provided name using those shared settings.\n\n'
+        'Examples:\n'
+        '  simpleval init                    # Fully interactive mode\n'
+        '  simpleval init my_eval           # Create single eval set with name "my_eval"\n'
+        '  simpleval init eval1 eval2 eval3 # Create three eval sets with shared config'
+    )
+)
+@click.argument('names', nargs=-1)
 @handle_exceptions
-def init():
+def init(names):
     from simpleval.commands.init_command.init_command import init_command  # Improve startup time # noqa: I001
 
-    init_command()
+    init_command(names)  # noqa: Pylint false positive - function accepts names parameter
 
 
 @click.command(help='Create a new evaluation using default values for a new evaluation (advanced)')

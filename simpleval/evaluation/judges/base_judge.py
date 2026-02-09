@@ -1,8 +1,8 @@
 import importlib
 import inspect
 import logging
-import os
 from abc import ABC, abstractmethod
+from pathlib import Path
 from typing import Dict, List, Set
 
 from colorama import Fore
@@ -47,7 +47,7 @@ class BaseJudge(ABC):
 
     @property
     @abstractmethod
-    def _metrics_model(self) -> Set[str]:
+    def _metrics_model(self) -> str:
         """
         The model that the metrics support.
         Metrics are in their core llm prompts and as such might fit certain models.
@@ -88,7 +88,7 @@ class BaseJudge(ABC):
         Dynamically fetch the file name from the concrete class.
         This is the directory name of the judge class.
         """
-        return os.path.basename(os.path.dirname(inspect.getfile(self.__class__)))
+        return Path(inspect.getfile(self.__class__)).parent.name
 
     def get_metric(self, metric_name: str) -> EvaluationMetric:
         if metric_name not in self.__metrics:
@@ -127,9 +127,9 @@ class BaseJudge(ABC):
         List all available evaluation metrics by scanning the judge metrics directory.
         :return: A list of metric module names.
         """
-        metrics_dir = get_metrics_dir(self._metrics_model)
-        metric_files = [f for f in os.listdir(metrics_dir) if f.endswith('.py') and f != '__init__.py']
-        metric_modules = [os.path.splitext(f)[0] for f in metric_files]
+        metrics_dir = Path(get_metrics_dir(self._metrics_model))
+        metric_files = [f for f in metrics_dir.iterdir() if f.is_file() and f.suffix == '.py' and f.name != '__init__.py']
+        metric_modules = [f.stem for f in metric_files]
 
         return metric_modules
 

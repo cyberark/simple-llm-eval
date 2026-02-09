@@ -2,6 +2,7 @@ from typing import Callable, List
 
 from simpleval.evaluation.metrics.models.bedrock_claude_sonnet.base.base_metric import BaseBedrockSonnetMetric
 from simpleval.evaluation.metrics.parsers.output_parsing import parse_explanation_answer_output
+from simpleval.evaluation.metrics.prompts.no_ground_truth_simple import CORE_PROMPT, POSSIBLE_RESPONSES
 
 
 class NoGroundTruthSimpleMetric(BaseBedrockSonnetMetric):
@@ -18,14 +19,7 @@ class NoGroundTruthSimpleMetric(BaseBedrockSonnetMetric):
 
     @property
     def eval_prompt(self) -> str:
-        return """
-You are given a task and a candidate response. Is this a correct and accurate response to the task?
-
-					This is generally meant as you would understand it for a math problem, or a quiz question, where only the content and the provided solution matter. Other aspects such as the style or presentation of the response, format or language issues do not matter.
-
-					Task: {prompt}
-					Candidate Response: {prediction}
-
+        plain_text_format_suffix = """
 					Firstly explain your response, followed by your final answer. You should follow the format
 					Explanation: [Explanation], Answer: [Answer],
 					where '[Answer]' can be one of the following:
@@ -35,10 +29,11 @@ You are given a task and a candidate response. Is this a correct and accurate re
 					incorrect
 					```
         """
+        return CORE_PROMPT + plain_text_format_suffix
 
     @property
     def possible_responses(self) -> List[str]:
-        return ['incorrect', 'partially correct', 'correct']
+        return POSSIBLE_RESPONSES
 
     @property
     def parser(self) -> Callable:

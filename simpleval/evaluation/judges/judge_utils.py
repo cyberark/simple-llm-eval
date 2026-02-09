@@ -17,10 +17,10 @@ def get_metrics_models_root():
 
 
 def get_metrics_dir(metric_model: str) -> str:
-    metrics_dir = os.path.join(get_metrics_models_root(), metric_model)
-    if not os.path.exists(metrics_dir):
+    metrics_dir = Path(get_metrics_models_root()) / metric_model
+    if not metrics_dir.exists():
         raise FileNotFoundError(f'Metrics folder `{metrics_dir}` not found')
-    return metrics_dir
+    return str(metrics_dir)
 
 
 def verify_env_var(env_var: str):

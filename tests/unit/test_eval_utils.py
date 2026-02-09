@@ -204,6 +204,8 @@ def test_get_all_eval_results_happy_flow(tmp_path, eval_results_data):
 def test_get_all_testcases():
     eval_path = os.path.join('simpleval', 'eval_sets', 'dummy_task')
     result = get_all_testcases(eval_path)
-    assert len(result) == 2
-    assert 'static_results' in result
+    # static_results has eval_results.jsonl, so it should be filtered out
+    # Only static_results2 should be returned
+    assert len(result) == 1
     assert 'static_results2' in result
+    assert 'static_results' not in result

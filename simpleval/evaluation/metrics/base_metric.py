@@ -1,6 +1,6 @@
 import inspect
-import os
 from abc import ABC, abstractmethod
+from pathlib import Path
 from typing import Callable, List
 
 
@@ -15,7 +15,7 @@ class EvaluationMetric(ABC):
         Dynamically fetch the file name from the concrete class.
         :return: The metric name name as a string.
         """
-        return os.path.splitext(os.path.basename(inspect.getfile(self.__class__)))[0]
+        return Path(inspect.getfile(self.__class__)).stem
 
     def render_eval_prompt(self, prompt: str, prediction: str, **kwargs) -> str:
         """

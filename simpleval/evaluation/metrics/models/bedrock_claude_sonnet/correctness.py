@@ -2,6 +2,7 @@ from typing import Callable, List
 
 from simpleval.evaluation.metrics.models.bedrock_claude_sonnet.base.base_metric import BaseBedrockSonnetMetric
 from simpleval.evaluation.metrics.parsers.output_parsing import parse_explanation_answer_output
+from simpleval.evaluation.metrics.prompts.correctness import CORE_PROMPT, POSSIBLE_RESPONSES
 
 
 class CorrectnessMetric(BaseBedrockSonnetMetric):
@@ -21,18 +22,7 @@ class CorrectnessMetric(BaseBedrockSonnetMetric):
 
     @property
     def eval_prompt(self) -> str:
-        return """
-You are a helpful agent that can assess LLM response according to the given rubrics.
-
-					You are given a question, a candidate response from LLM and a reference response. Your task is to check if the candidate response is correct or not.
-
-					A correct candidate response should contain the same semantic information as the reference response.
-
-					Here is the actual task:
-					Question: {prompt}
-					Reference Response: {ground_truth}
-					Candidate Response: {prediction}
-
+        plain_text_format_suffix = """
 					Firstly explain your response, followed by your final answer. You should follow the format
 					Explanation: [Explanation], Answer: [Answer],
 					where '[Answer]' can be one of the following:
@@ -42,10 +32,11 @@ You are a helpful agent that can assess LLM response according to the given rubr
 					incorrect
 					```
         """
+        return CORE_PROMPT + plain_text_format_suffix
 
     @property
     def possible_responses(self) -> List[str]:
-        return ['incorrect', 'partially correct', 'correct']
+        return POSSIBLE_RESPONSES
 
     @property
     def parser(self) -> Callable:

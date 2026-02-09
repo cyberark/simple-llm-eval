@@ -2,6 +2,7 @@ from typing import Callable, List
 
 from simpleval.evaluation.metrics.models.bedrock_claude_sonnet.base.base_metric import BaseBedrockSonnetMetric
 from simpleval.evaluation.metrics.parsers.output_parsing import parse_explanation_answer_output
+from simpleval.evaluation.metrics.prompts.relevance import CORE_PROMPT, POSSIBLE_RESPONSES
 
 
 class RelevanceMetric(BaseBedrockSonnetMetric):
@@ -20,24 +21,7 @@ class RelevanceMetric(BaseBedrockSonnetMetric):
 
     @property
     def eval_prompt(self) -> str:
-        return """
-You are a helpful agent that can assess LLM response according to the given rubrics.
-
-You are given a question and a response from LLM. Your task is to assess the relevance of the LLM response to the question, in other words, how focused the LLM response is on the given question.
-
-The output saying “I don’t know” or “I can’t answer” is relevant. Telling the user that the model is unable to respond to their query, or adding a simple caveat or condition to the response, should be considered relevant. However, the model may say “I don’t know” and go on to say something irrelevant. In such a case, relevance should be penalized.
-
-Please rate the relevance of the response based on the following scale:
-- not at all: No part of the response is relevant to the question.
-- slightly: An overwhelming amount of the response is irrelevant or the relevant information is not a direct answer.
-- somewhat: Roughly half of the response is relevant to the question.
-- mostly: An overwhelming amount of the response is relevant to the question.
-- completely: Every piece of the response is relevant to the question.
-
-Here is the actual task:
-Question: {prompt}
-Response: {prediction}
-
+        plain_text_format_suffix = """
 Firstly explain your response, followed by your final answer. You should follow the format
 Explanation: [Explanation], Answer: [Answer],
 where '[Answer]' can be one of the following:
@@ -49,10 +33,11 @@ mostly
 completely
 ```
         """
+        return CORE_PROMPT + plain_text_format_suffix
 
     @property
     def possible_responses(self) -> List[str]:
-        return ['not at all', 'slightly', 'somewhat', 'mostly', 'completely']
+        return POSSIBLE_RESPONSES
 
     @property
     def parser(self) -> Callable:

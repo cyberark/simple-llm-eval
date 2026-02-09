@@ -23,7 +23,7 @@ jobs:
       python_changed: ${{ steps.python.outputs.changed }}
     steps:
       - name: 🔄 Checkout repository
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # 6.0.1
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # 6.0.2
 
       - name: Detect changes in frontend-reports
         id: frontend
@@ -42,7 +42,7 @@ jobs:
     needs: detect-changes
     steps:
       - name: 🔄 Checkout repository
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # 6.0.1
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # 6.0.2
 
       - name: Print change detection outputs
         run: |

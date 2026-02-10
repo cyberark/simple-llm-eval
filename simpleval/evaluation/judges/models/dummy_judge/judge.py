@@ -1,5 +1,4 @@
 import random
-from typing import Set
 
 from simpleval.evaluation.judges.base_judge import BaseJudge
 from simpleval.evaluation.metrics.base_metric import EvaluationMetric
@@ -17,7 +16,7 @@ class DummyJudge(BaseJudge):
         super().__init__(model_id=model_id, supported_model_ids=[self.DEFAULT_MODEL_ID, 'test_model_id_2'])
 
     @property
-    def _metrics_model(self) -> Set[str]:
+    def _metrics_model(self) -> str:
         return 'test_metric'
 
     def run_preliminary_checks(self):

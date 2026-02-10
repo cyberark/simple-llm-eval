@@ -1,5 +1,4 @@
 import logging
-import os
 from pathlib import Path
 
 from colorama import Fore
@@ -15,8 +14,9 @@ def delete_file(file_path: str, log: bool = True):
         file_path (str): _description_
         log (bool, optional): Whether to log the deletion. Defaults to True.
     """
-    if os.path.exists(file_path):
-        os.remove(file_path)
+    path = Path(file_path)
+    if path.exists():
+        path.unlink()
         if log:
             logger = logging.getLogger(LOGGER_NAME)
             logger.debug(f'{Fore.YELLOW}`{file_path}` deleted{Fore.RESET}\n')

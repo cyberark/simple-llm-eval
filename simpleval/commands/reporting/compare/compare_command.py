@@ -1,5 +1,4 @@
 import logging
-import os
 from pathlib import Path
 from typing import List
 
@@ -36,9 +35,9 @@ def compare_results(eval_set_dir: str, testcase1: str, testcase2: str, report_fo
         logger.info(f'{Fore.GREEN}1. {results1}{Fore.RESET}')
         logger.info(f'{Fore.GREEN}2. {results2}{Fore.RESET}')
 
-        if not os.path.exists(results1) and not ignore_missing_llm_results:
+        if not Path(results1).exists() and not ignore_missing_llm_results:
             raise FileNotFoundError(f'{results1} does not exist.')
-        if not os.path.exists(results2) and not ignore_missing_llm_results:
+        if not Path(results2).exists() and not ignore_missing_llm_results:
             raise FileNotFoundError(f'{results2} does not exist.')
 
         mean_scores1: MeanScores = calc_scores(get_all_eval_results(eval_set_dir=eval_set_dir, testcase=testcase1))

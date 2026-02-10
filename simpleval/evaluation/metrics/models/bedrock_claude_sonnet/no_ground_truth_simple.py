@@ -1,7 +1,12 @@
 from typing import Callable, List
 
 from simpleval.evaluation.metrics.models.bedrock_claude_sonnet.base.base_metric import BaseBedrockSonnetMetric
-from simpleval.evaluation.metrics.parsers.output_parsing import parse_explanation_answer_output
+from simpleval.evaluation.metrics.parsers.output_parsing import parse_json_output
+from simpleval.evaluation.metrics.prompts.core_prompts import (
+    NO_GROUND_TRUTH_SIMPLE_CORE_PROMPT,
+    NO_GROUND_TRUTH_SIMPLE_POSSIBLE_RESPONSES,
+)
+from simpleval.evaluation.metrics.prompts.format_instructions import get_json_format_instructions
 
 
 class NoGroundTruthSimpleMetric(BaseBedrockSonnetMetric):
@@ -14,35 +19,19 @@ class NoGroundTruthSimpleMetric(BaseBedrockSonnetMetric):
 
     @property
     def prefill(self) -> str:
-        return 'Explanation:'
+        return '{"reasoning":'
 
     @property
     def eval_prompt(self) -> str:
-        return """
-You are given a task and a candidate response. Is this a correct and accurate response to the task?
-
-					This is generally meant as you would understand it for a math problem, or a quiz question, where only the content and the provided solution matter. Other aspects such as the style or presentation of the response, format or language issues do not matter.
-
-					Task: {prompt}
-					Candidate Response: {prediction}
-
-					Firstly explain your response, followed by your final answer. You should follow the format
-					Explanation: [Explanation], Answer: [Answer],
-					where '[Answer]' can be one of the following:
-					```
-					correct
-					partially correct
-					incorrect
-					```
-        """
+        return NO_GROUND_TRUTH_SIMPLE_CORE_PROMPT + get_json_format_instructions(NO_GROUND_TRUTH_SIMPLE_POSSIBLE_RESPONSES)
 
     @property
     def possible_responses(self) -> List[str]:
-        return ['incorrect', 'partially correct', 'correct']
+        return NO_GROUND_TRUTH_SIMPLE_POSSIBLE_RESPONSES
 
     @property
     def parser(self) -> Callable:
         """
         The parser that converts the model's output into a structured format.
         """
-        return parse_explanation_answer_output
+        return parse_json_output

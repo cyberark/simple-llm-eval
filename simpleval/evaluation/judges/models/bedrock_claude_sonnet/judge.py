@@ -1,5 +1,4 @@
 import json
-from typing import Set
 
 import boto3
 from colorama import Fore
@@ -48,7 +47,7 @@ class BedrockClaudeSonnetJudge(BaseJudge):
         super().__init__(model_id=model_id, supported_model_ids=supported_model_ids)
 
     @property
-    def _metrics_model(self) -> Set[str]:
+    def _metrics_model(self) -> str:
         return 'bedrock_claude_sonnet'
 
     def run_preliminary_checks(self):
@@ -96,7 +95,7 @@ class BedrockClaudeSonnetJudge(BaseJudge):
             log_bookkeeping_data(source='eval', model_name=self.model_id, input_tokens=input_tokens, output_tokens=output_tokens)
 
             if not output_list:
-                raise ValueError('empty response from sonnet35')
+                raise ValueError(f'empty response from {self.model_id}')
             else:
                 output = output_list[0].get('text', '')
 

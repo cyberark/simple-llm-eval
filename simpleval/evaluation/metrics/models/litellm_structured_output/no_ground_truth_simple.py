@@ -4,8 +4,11 @@ from pydantic import BaseModel
 
 from simpleval.evaluation.metrics.models.litellm_structured_output.base.base_metric import LiteLLMMetric
 from simpleval.evaluation.metrics.parsers.output_parsing import litellm_structured_output_parser
-
-NO_GROUND_TRUTH_SIMPLE_POSSIBLE_RESPONSES = ['incorrect', 'partially correct', 'correct']
+from simpleval.evaluation.metrics.prompts.core_prompts import (
+    NO_GROUND_TRUTH_SIMPLE_CORE_PROMPT,
+    NO_GROUND_TRUTH_SIMPLE_POSSIBLE_RESPONSES,
+)
+from simpleval.evaluation.metrics.prompts.format_instructions import get_json_format_instructions
 
 
 class NoGroundTruthSimpleStructuredResponse(BaseModel):
@@ -23,26 +26,7 @@ class NoGroundTruthSimpleMetric(LiteLLMMetric):
 
     @property
     def eval_prompt(self) -> str:
-        return """
-You are given a task and a candidate response. Is this a correct and accurate response to the task?
-
-					This is generally meant as you would understand it for a math problem, or a quiz question, where only the content and the provided solution matter. Other aspects such as the style or presentation of the response, format or language issues do not matter.
-
-					Task: {prompt}
-					Candidate Response: {prediction}
-
-					The output should be a well-formatted JSON instance that conforms to the JSON schema below.
-
-					As an example, for the schema {{"properties": {{"foo": {{"title": "Foo", "description": "a list of strings", "type": "array", "items": {{"type": "string"}}}}}}, "required": ["foo"]}}
-					the object {{"foo": ["bar", "baz"]}} is a well-formatted instance of the schema. The object {{"properties": {{"foo": ["bar", "baz"]}}}} is not well-formatted.
-
-					Here is the output JSON schema:
-					```
-					{{"properties": {{"reasoning": {{"description": "step by step reasoning to derive the final answer", "title": "Reasoning", "type": "string"}}, "answer": {{"description": "answer should be one of `incorrect`, `partially correct`, `correct`", "enum": ["incorrect", "partially correct", "correct"], "title": "Answer", "type": "string"}}}}, "required": ["reasoning", "answer"]}}
-					```
-
-					Do not return any preamble or explanations, return only a pure JSON string surrounded by triple backticks (```).
-        """
+        return NO_GROUND_TRUTH_SIMPLE_CORE_PROMPT + get_json_format_instructions(NO_GROUND_TRUTH_SIMPLE_POSSIBLE_RESPONSES)
 
     @property
     def possible_responses(self) -> List[str]:

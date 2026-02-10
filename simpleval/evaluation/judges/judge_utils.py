@@ -9,18 +9,18 @@ from simpleval.evaluation.metrics.consts import METRICS_DIR
 BEDROCK_API_KEY_ENV_VAR = 'AWS_BEARER_TOKEN_BEDROCK'
 
 
-def get_metrics_models_root():
+def get_metrics_models_root() -> Path:
     metrics_dir = (Path(__file__).resolve().parent.parent / METRICS_DIR / MODELS_DIR).resolve()
     if not metrics_dir.exists():
         raise FileNotFoundError(f'Metrics dir `{metrics_dir}` not found')
-    return str(metrics_dir)
+    return metrics_dir
 
 
 def get_metrics_dir(metric_model: str) -> str:
-    metrics_dir = os.path.join(get_metrics_models_root(), metric_model)
-    if not os.path.exists(metrics_dir):
+    metrics_dir = get_metrics_models_root() / metric_model
+    if not metrics_dir.exists():
         raise FileNotFoundError(f'Metrics folder `{metrics_dir}` not found')
-    return metrics_dir
+    return str(metrics_dir)
 
 
 def verify_env_var(env_var: str):

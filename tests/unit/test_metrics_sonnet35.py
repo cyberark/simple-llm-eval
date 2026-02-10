@@ -10,6 +10,9 @@ from simpleval.evaluation.metrics.models.bedrock_claude_sonnet.pro_style_and_ton
 from simpleval.evaluation.metrics.models.bedrock_claude_sonnet.readability import ReadabilityMetric
 from simpleval.evaluation.metrics.models.bedrock_claude_sonnet.relevance import RelevanceMetric
 
+# All metrics now use JSON format with this prefill (EVAL-1234 refactoring)
+JSON_PREFILL = '{"reasoning":'
+
 
 def test_coherence_metric():
     metric = CoherenceMetric()
@@ -21,7 +24,7 @@ def test_coherence_metric():
     assert in_prompt in prompt
     assert in_prediction in prompt
     assert metric.possible_responses == expected_possible_answers
-    assert metric.prefill == '<response>'
+    assert metric.prefill == JSON_PREFILL
 
 
 def test_completeness_metric():
@@ -37,7 +40,7 @@ def test_completeness_metric():
     assert in_prediction in prompt
     assert in_ground_truth in prompt
     assert metric.possible_responses == expected_possible_answers
-    assert metric.prefill == '<response>'
+    assert metric.prefill == JSON_PREFILL
 
 
 def test_correctness_metric():
@@ -53,7 +56,7 @@ def test_correctness_metric():
     assert in_prediction in prompt
     assert in_ground_truth in prompt
     assert metric.possible_responses == expected_possible_answers
-    assert metric.prefill == 'Explanation:'
+    assert metric.prefill == JSON_PREFILL
 
 
 def test_faithfulness_metric():
@@ -69,7 +72,7 @@ def test_faithfulness_metric():
     assert in_prompt in prompt
     assert in_prediction in prompt
     assert metric.possible_responses == expected_possible_answers
-    assert metric.prefill == 'Explanation:'
+    assert metric.prefill == JSON_PREFILL
 
 
 def test_following_instructions_metric():
@@ -83,7 +86,7 @@ def test_following_instructions_metric():
     assert in_prompt in prompt
     assert in_prediction in prompt
     assert metric.possible_responses == expected_possible_answers
-    assert metric.prefill == '{"reasoning": '
+    assert metric.prefill == JSON_PREFILL
 
 
 def test_helpfulness_metric():
@@ -100,7 +103,7 @@ def test_helpfulness_metric():
     assert in_prompt in prompt
     assert in_prediction in prompt
     assert metric.possible_responses == expected_possible_answers
-    assert metric.prefill == 'Explanation:'
+    assert metric.prefill == JSON_PREFILL
 
 
 def test_no_ground_truth_simple_metric():
@@ -114,7 +117,7 @@ def test_no_ground_truth_simple_metric():
     assert in_prompt in prompt
     assert in_prediction in prompt
     assert metric.possible_responses == expected_possible_answers
-    assert metric.prefill == 'Explanation:'
+    assert metric.prefill == JSON_PREFILL
 
 
 def test_no_ground_truth_metric():
@@ -128,7 +131,7 @@ def test_no_ground_truth_metric():
     assert in_prompt in prompt
     assert in_prediction in prompt
     assert metric.possible_responses == expected_possible_answers
-    assert metric.prefill == '{"reasoning": '
+    assert metric.prefill == JSON_PREFILL
 
 
 def test_pro_style_and_tone_metric():
@@ -142,7 +145,7 @@ def test_pro_style_and_tone_metric():
     assert in_prompt in prompt
     assert in_prediction in prompt
     assert metric.possible_responses == expected_possible_answers
-    assert metric.prefill == 'Explanation:'
+    assert metric.prefill == JSON_PREFILL
 
 
 def test_readability_metric():
@@ -156,7 +159,7 @@ def test_readability_metric():
     assert in_prompt in prompt
     assert in_prediction in prompt
     assert metric.possible_responses == expected_possible_answers
-    assert metric.prefill == 'Explanation:'
+    assert metric.prefill == JSON_PREFILL
 
 
 def test_relevance_metric():
@@ -170,4 +173,4 @@ def test_relevance_metric():
     assert in_prompt in prompt
     assert in_prediction in prompt
     assert metric.possible_responses == expected_possible_answers
-    assert metric.prefill == 'Explanation:'
+    assert metric.prefill == JSON_PREFILL

@@ -26,8 +26,8 @@ from simpleval.testcases.schemas.llm_task_result import LlmTaskResult
 
 
 def get_eval_ground_truth(eval_dir: str) -> List[GroundTruth]:
-    ground_truth_path = os.path.join(eval_dir, GROUND_TRUTH_FILE)
-    if not os.path.exists(ground_truth_path):
+    ground_truth_path = Path(eval_dir) / GROUND_TRUTH_FILE
+    if not ground_truth_path.exists():
         cwd = os.getcwd()
         raise FileNotFoundError(f'{ground_truth_path} not found, {cwd=}')
 
@@ -38,8 +38,8 @@ def get_eval_ground_truth(eval_dir: str) -> List[GroundTruth]:
 
 
 def get_eval_config(eval_dir: str, config_file: str, verify_metrics: bool = True) -> EvalTaskConfig:
-    config_path = os.path.join(eval_dir, config_file)
-    if not os.path.exists(config_path):
+    config_path = Path(eval_dir) / config_file
+    if not config_path.exists():
         cwd = os.getcwd()
         raise FileNotFoundError(f'Eval config file `{config_path}` not found, {cwd=}')
 
@@ -52,7 +52,7 @@ def get_eval_config(eval_dir: str, config_file: str, verify_metrics: bool = True
         available_metrics = judge.list_metrics()
 
         if len(eval_config.eval_metrics) == 0 or not all(metrics in available_metrics for metrics in eval_config.eval_metrics):
-            metrics_dir = os.path.join(judge.get_metrics_dir(), eval_config.llm_as_a_judge_name)
+            metrics_dir = Path(judge.get_metrics_dir()) / eval_config.llm_as_a_judge_name
             raise ValueError(
                 f'Invalid Metric(s): `{eval_config.eval_metrics}`. Available metrics: {available_metrics}, Metrics dir: {metrics_dir}'
             )
@@ -78,15 +78,15 @@ def get_empty_testcase_folder():
 
 
 def get_testcase_folder(eval_set_dir: str, testcase: str):
-    return os.path.join(eval_set_dir, TESTCASES_FOLDER, testcase)
+    return str(Path(eval_set_dir) / TESTCASES_FOLDER / testcase)
 
 
 def get_llm_task_results_file(eval_set_dir: str, testcase: str):
-    return os.path.join(get_testcase_folder(eval_set_dir, testcase), LLM_TASKS_RESULT_FILE)
+    return str(Path(get_testcase_folder(eval_set_dir, testcase)) / LLM_TASKS_RESULT_FILE)
 
 
 def get_llm_task_errors_file(eval_set_dir: str, testcase: str):
-    return os.path.join(get_testcase_folder(eval_set_dir, testcase), LLM_TASKS_ERROR_FILE_NAME)
+    return str(Path(get_testcase_folder(eval_set_dir, testcase)) / LLM_TASKS_ERROR_FILE_NAME)
 
 
 def get_all_llm_task_results(eval_set_dir: str, testcase: str, fail_on_missing: bool = False) -> List[LlmTaskResult]:
@@ -101,8 +101,8 @@ def get_all_llm_task_results(eval_set_dir: str, testcase: str, fail_on_missing: 
     Returns:
         List[LlmRunResult]: the results of the llm task run
     """
-    results_file_path = get_llm_task_results_file(eval_set_dir, testcase)
-    if not os.path.exists(results_file_path):
+    results_file_path = Path(get_llm_task_results_file(eval_set_dir, testcase))
+    if not results_file_path.exists():
         if fail_on_missing:
             raise FileNotFoundError(f'LLM task results file not found at `{results_file_path}`')
         return []
@@ -145,15 +145,15 @@ def is_llm_task_result_found(llm_task_results: List[LlmTaskResult], llm_task_nam
 
 
 def get_eval_result_file(eval_set_dir: str, testcase: str):
-    return os.path.join(get_testcase_folder(eval_set_dir, testcase), EVAL_RESULTS_FILE)
+    return str(Path(get_testcase_folder(eval_set_dir, testcase)) / EVAL_RESULTS_FILE)
 
 
 def get_eval_errors_file(eval_set_dir: str, testcase: str):
-    return os.path.join(get_testcase_folder(eval_set_dir, testcase), EVAL_ERROR_FILE_NAME)
+    return str(Path(get_testcase_folder(eval_set_dir, testcase)) / EVAL_ERROR_FILE_NAME)
 
 
 def get_eval_set_name(eval_set_dir: str) -> str:
-    return os.path.basename(eval_set_dir)
+    return Path(eval_set_dir).name
 
 
 def get_all_eval_results(eval_set_dir: str, testcase: str, fail_on_missing: bool = True) -> List[EvalTestResult]:
@@ -175,12 +175,13 @@ def get_all_eval_results(eval_set_dir: str, testcase: str, fail_on_missing: bool
 
 
 def get_all_eval_results_from_file(eval_results_file: str, fail_on_missing: bool = True) -> List[EvalTestResult]:
-    if not os.path.exists(eval_results_file):
+    results_path = Path(eval_results_file)
+    if not results_path.exists():
         if fail_on_missing:
             raise FileNotFoundError(f'Eval results file not found at {eval_results_file}')
         return []
 
-    with open(eval_results_file, 'r', encoding='utf-8') as results_file:
+    with open(results_path, 'r', encoding='utf-8') as results_file:
         results = [EvalTestResult.model_validate_json(line) for line in results_file]
 
     return results
@@ -221,11 +222,11 @@ def eval_result_found(eval_results: List[EvalTestResult], eval_task: EvalTask) -
 
 
 def get_all_testcases(eval_dir: str) -> List[str]:
-    testcases_folder = os.path.join(eval_dir, TESTCASES_FOLDER)
-    if not os.path.exists(testcases_folder):
+    testcases_folder = Path(eval_dir) / TESTCASES_FOLDER
+    if not testcases_folder.exists():
         raise FileNotFoundError(f'testcases folder not found at {testcases_folder}')
 
-    sub_folders = [folder for folder in os.listdir(testcases_folder) if os.path.isdir(os.path.join(testcases_folder, folder))]
-    testcase_folders = [folder for folder in sub_folders if not os.path.isfile(os.path.join(folder, EVAL_RESULTS_FILE))]
+    sub_folders = [folder.name for folder in testcases_folder.iterdir() if folder.is_dir()]
+    testcase_folders = [folder for folder in sub_folders if not (Path(folder) / EVAL_RESULTS_FILE).is_file()]
 
     return testcase_folders

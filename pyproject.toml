@@ -69,6 +69,11 @@ include = ["simpleval"]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
+[tool.pytest.ini_options]
+filterwarnings = [
+    "ignore:'asyncio.iscoroutinefunction' is deprecated:DeprecationWarning",
+]
+
 [tool.ruff]
 line-length = 140
 indent-width = 4

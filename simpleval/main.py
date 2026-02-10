@@ -83,11 +83,12 @@ def eval_report_file(name: str, eval_results_file: str, report_format: str):
 
 
 @click.command(help='Interactive creation of a new evaluation set')
+@click.option('-n', '--name', 'names', multiple=True, help='Name(s) for evaluation set(s). Can be repeated.')
 @handle_exceptions
-def init():
+def init(names):
     from simpleval.commands.init_command.init_command import init_command  # Improve startup time # noqa: I001
 
-    init_command()
+    init_command(names=names)
 
 
 @click.command(help='Create a new evaluation using default values for a new evaluation (advanced)')

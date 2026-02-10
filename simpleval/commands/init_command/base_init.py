@@ -3,6 +3,7 @@ import logging
 import os
 import shutil
 from abc import ABC, abstractmethod
+from typing import List, Tuple
 
 from colorama import Fore
 
@@ -16,12 +17,14 @@ from simpleval.utilities.files import is_subpath
 
 
 class BaseInit(ABC):
-    def __init__(self, post_instructions_start_index: int):
+    def __init__(self, post_instructions_start_index: int, names: Tuple[str, ...] = ()):
         """
         Args:
             post_instructions_start_index (int):  Numbered list starting index for common instructions text.
+            names: Optional tuple of evaluation set names provided via CLI.
         """
         self.post_instructions_start_index = post_instructions_start_index
+        self.names = names
 
         print_boxed_message('Create a New Evaluation-Set')
 
@@ -31,42 +34,69 @@ class BaseInit(ABC):
         empty_eval_set_folder = get_empty_eval_set_folder()
         empty_testcase_folder = get_empty_testcase_folder()
 
-        eval_dir = self._get_eval_set_dir()
+        # Get eval directories - either from CLI names or interactively
+        eval_dirs = self._get_eval_dirs()
+
+        # Validate that none of the folders already exist
+        for eval_dir in eval_dirs:
+            if os.path.exists(eval_dir):
+                raise TerminationError(f'{Fore.RED}Folder already exists: {eval_dir}, please choose another name{Fore.RESET}')
+
+        # Get testcase name and config once (reused for all eval sets)
         testcase = self._get_testcase_name()
-
-        new_eval_set_folder = eval_dir
-        if os.path.exists(new_eval_set_folder):
-            raise TerminationError(f'{Fore.RED}Folder already exists: {new_eval_set_folder}, please choose another name{Fore.RESET}')
-
         new_config = self._get_config()
-        new_config.name = os.path.basename(eval_dir)
 
-        print(f'{Fore.CYAN}Creating a new skeleton evaluation in {eval_dir}{Fore.RESET}')
-        print()
-        os.makedirs(new_eval_set_folder)
-        new_testcases_folder = os.path.join(eval_dir, TESTCASES_FOLDER, testcase)
-        os.makedirs(new_testcases_folder)
+        # Create each evaluation set
+        created_eval_sets: List[Tuple[str, str]] = []  # List of (eval_folder, testcase_folder)
+        for eval_dir in eval_dirs:
+            new_eval_set_folder = eval_dir
 
-        try:
-            shutil.copy(os.path.join(empty_eval_set_folder, EVAL_CONFIG_FILE), new_eval_set_folder)
-            shutil.copy(os.path.join(empty_eval_set_folder, GROUND_TRUTH_FILE), new_eval_set_folder)
-            shutil.copy(os.path.join(empty_eval_set_folder, 'README.md'), new_eval_set_folder)
+            # Clone config and set name for this specific eval set
+            config_for_eval = new_config.model_copy()
+            config_for_eval.name = os.path.basename(eval_dir)
 
-            shutil.copy(os.path.join(empty_testcase_folder, '__init__.py'), new_testcases_folder)
-            shutil.copy(os.path.join(empty_testcase_folder, PLUGIN_FILE_NAME), new_testcases_folder)
-        except Exception as e:
-            raise TerminationError(f'{Fore.RED}Error occurred creating the new evaluation: {e}{Fore.RESET}')
+            print(f'{Fore.CYAN}Creating a new skeleton evaluation in {eval_dir}{Fore.RESET}')
+            print()
+            os.makedirs(new_eval_set_folder)
+            new_testcases_folder = os.path.join(eval_dir, TESTCASES_FOLDER, testcase)
+            os.makedirs(new_testcases_folder)
 
-        with open(os.path.join(new_eval_set_folder, EVAL_CONFIG_FILE), 'w', encoding='utf-8') as file:
-            json.dump(new_config.model_dump(exclude_none=True), file, indent=4)
+            try:
+                shutil.copy(os.path.join(empty_eval_set_folder, EVAL_CONFIG_FILE), new_eval_set_folder)
+                shutil.copy(os.path.join(empty_eval_set_folder, GROUND_TRUTH_FILE), new_eval_set_folder)
+                shutil.copy(os.path.join(empty_eval_set_folder, 'README.md'), new_eval_set_folder)
 
-        logger.info(f'{Fore.GREEN}New evaluation `{new_config.name}` created successfully in {eval_dir}{Fore.RESET}')
+                shutil.copy(os.path.join(empty_testcase_folder, '__init__.py'), new_testcases_folder)
+                shutil.copy(os.path.join(empty_testcase_folder, PLUGIN_FILE_NAME), new_testcases_folder)
+            except Exception as e:
+                raise TerminationError(f'{Fore.RED}Error occurred creating the new evaluation: {e}{Fore.RESET}')
 
+            with open(os.path.join(new_eval_set_folder, EVAL_CONFIG_FILE), 'w', encoding='utf-8') as file:
+                json.dump(config_for_eval.model_dump(exclude_none=True), file, indent=4)
+
+            logger.info(f'{Fore.GREEN}New evaluation `{config_for_eval.name}` created successfully in {eval_dir}{Fore.RESET}')
+            created_eval_sets.append((new_eval_set_folder, new_testcases_folder))
+
+        # Print instructions (use the last created eval set for examples)
+        last_eval_folder, last_testcase_folder = created_eval_sets[-1]
         self._print_common_instructions_pre()
         self._print_specific_instructions()
         self._print_common_instructions_post(
-            new_eval_set_folder=new_eval_set_folder, new_testcases_folder=new_testcases_folder, testcase=testcase
+            new_eval_set_folder=last_eval_folder, new_testcases_folder=last_testcase_folder, testcase=testcase
         )
+
+    def _get_eval_dirs(self) -> List[str]:
+        """
+        Return list of evaluation directories.
+        If names were provided via CLI, convert them to absolute paths.
+        Otherwise, call the abstract method to get directory interactively.
+        """
+        if self.names:
+            # Names provided via CLI - convert to absolute paths
+            return [os.path.abspath(os.path.expanduser(name)) for name in self.names]
+        else:
+            # Get single directory interactively
+            return [self._get_eval_set_dir()]
 
     @staticmethod
     def normalize_testcase_dir_name(testcase: str) -> str:

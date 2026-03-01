@@ -592,9 +592,9 @@ httpx==0.28.1 \
     #   huggingface-hub
     #   litellm
     #   openai
-huggingface-hub==1.3.2 \
-    --hash=sha256:15d7902e154f04174a0816d1e9594adcf15cdad57596920a5dc70fadb5d896c7 \
-    --hash=sha256:b552b9562a5532102a041fa31a6966bb9de95138fc7aa578bb3703198c25d1b6
+huggingface-hub==1.5.0 \
+    --hash=sha256:c9c0b3ab95a777fc91666111f3b3ede71c0cdced3614c553a64e98920585c4ee \
+    --hash=sha256:f281838db29265880fb543de7a23b0f81d3504675de82044307ea3c6c62f799d
     # via tokenizers
 identify==2.6.16 \
     --hash=sha256:391ee4d77741d994189522896270b787aed8670389bfd60f326d677d64a6dfb0 \

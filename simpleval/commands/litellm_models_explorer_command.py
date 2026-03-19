@@ -8,7 +8,7 @@ from simpleval.consts import LOGGER_NAME
 from simpleval.utilities.console import print_boxed_message, print_list
 
 # These providers cause handing errors trying to authenticate, see: https://github.com/BerriAI/litellm/issues/18930
-UNSUPPORTED_PROVIDERS = ['github_copilot']
+UNSUPPORTED_PROVIDERS = ['github_copilot', 'chatgpt']
 
 
 def get_model_info(model: str, provider: str) -> Dict:

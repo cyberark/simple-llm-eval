@@ -74,6 +74,11 @@ def main():
 
     update_requirements_txt()
 
+    run_command(
+        cmd='python ci/scripts/validate_litellm_unsupported_providers.py',
+        description='Validating litellm unsupported providers sync...'
+    )
+
     if args.with_coverage:
         print(f'{Fore.CYAN}Running coverage checks with fail-under={COVERAGE_FAIL_UNDER}...{Fore.RESET}')
         run_command(

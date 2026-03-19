@@ -501,7 +501,7 @@ function requireReact_production() {
   react_production.useTransition = function () {
     return ReactSharedInternals.H.useTransition();
   };
-  react_production.version = "19.2.3";
+  react_production.version = "19.2.4";
   return react_production;
 }
 var hasRequiredReact;
@@ -952,7 +952,7 @@ function requireReactDom_production() {
   reactDom_production.useFormStatus = function () {
     return ReactSharedInternals.H.useHostTransitionStatus();
   };
-  reactDom_production.version = "19.2.3";
+  reactDom_production.version = "19.2.4";
   return reactDom_production;
 }
 var hasRequiredReactDom;
@@ -10557,7 +10557,7 @@ function requireReactDomClient_production() {
     }
   };
   var isomorphicReactPackageVersion$jscomp$inline_1840 = React.version;
-  if ("19.2.3" !== isomorphicReactPackageVersion$jscomp$inline_1840) throw Error(formatProdErrorMessage(527, isomorphicReactPackageVersion$jscomp$inline_1840, "19.2.3"));
+  if ("19.2.4" !== isomorphicReactPackageVersion$jscomp$inline_1840) throw Error(formatProdErrorMessage(527, isomorphicReactPackageVersion$jscomp$inline_1840, "19.2.4"));
   ReactDOMSharedInternals.findDOMNode = function (componentOrElement) {
     var fiber = componentOrElement._reactInternals;
     if (void 0 === fiber) {
@@ -10572,10 +10572,10 @@ function requireReactDomClient_production() {
   };
   var internals$jscomp$inline_2347 = {
     bundleType: 0,
-    version: "19.2.3",
+    version: "19.2.4",
     rendererPackageName: "react-dom",
     currentDispatcherRef: ReactSharedInternals,
-    reconcilerVersion: "19.2.3"
+    reconcilerVersion: "19.2.4"
   };
   if ("undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__) {
     var hook$jscomp$inline_2348 = __REACT_DEVTOOLS_GLOBAL_HOOK__;
@@ -10621,7 +10621,7 @@ function requireReactDomClient_production() {
     listenToAllSupportedEvents(container);
     return new ReactDOMHydrationRoot(initialChildren);
   };
-  reactDomClient_production.version = "19.2.3";
+  reactDomClient_production.version = "19.2.4";
   return reactDomClient_production;
 }
 var hasRequiredClient;
@@ -21814,8 +21814,8 @@ function formatDecimal(x) {
 // significant digits p, where x is positive and p is in [1, 21] or undefined.
 // For example, formatDecimalParts(1.23) returns ["123", 0].
 function formatDecimalParts(x, p) {
-  if ((i = (x = p ? x.toExponential(p - 1) : x.toExponential()).indexOf("e")) < 0) return null; // NaN, ±Infinity
-  var i,
+  if (!isFinite(x) || x === 0) return null; // NaN, ±Infinity, ±0
+  var i = (x = p ? x.toExponential(p - 1) : x.toExponential()).indexOf("e"),
     coefficient = x.slice(0, i);
 
   // The string returned by toExponential either has the form \d\.\d+e[-+]\d+
@@ -21907,7 +21907,7 @@ function formatTrim(s) {
 var prefixExponent;
 function formatPrefixAuto(x, p) {
   var d = formatDecimalParts(x, p);
-  if (!d) return x + "";
+  if (!d) return prefixExponent = undefined, x.toPrecision(p);
   var coefficient = d[0],
     exponent = d[1],
     i = exponent - (prefixExponent = Math.max(-8, Math.min(8, Math.floor(exponent / 3))) * 3) + 1,
@@ -21950,7 +21950,7 @@ function formatLocale$1(locale) {
     percent = locale.percent === undefined ? "%" : locale.percent + "",
     minus = locale.minus === undefined ? "−" : locale.minus + "",
     nan = locale.nan === undefined ? "NaN" : locale.nan + "";
-  function newFormat(specifier) {
+  function newFormat(specifier, options) {
     specifier = formatSpecifier(specifier);
     var fill = specifier.fill,
       align = specifier.align,
@@ -21974,8 +21974,8 @@ function formatLocale$1(locale) {
 
     // Compute the prefix and suffix.
     // For SI-prefix, the suffix is lazily computed.
-    var prefix = symbol === "$" ? currencyPrefix : symbol === "#" && /[boxX]/.test(type) ? "0" + type.toLowerCase() : "",
-      suffix = symbol === "$" ? currencySuffix : /[%p]/.test(type) ? percent : "";
+    var prefix = (options && options.prefix !== undefined ? options.prefix : "") + (symbol === "$" ? currencyPrefix : symbol === "#" && /[boxX]/.test(type) ? "0" + type.toLowerCase() : ""),
+      suffix = (symbol === "$" ? currencySuffix : /[%p]/.test(type) ? percent : "") + (options && options.suffix !== undefined ? options.suffix : "");
 
     // What format function should we use?
     // Is this an integer type?
@@ -22014,7 +22014,7 @@ function formatLocale$1(locale) {
 
         // Compute the prefix and suffix.
         valuePrefix = (valueNegative ? sign === "(" ? sign : minus : sign === "-" || sign === "(" ? "" : sign) + valuePrefix;
-        valueSuffix = (type === "s" ? prefixes[8 + prefixExponent / 3] : "") + valueSuffix + (valueNegative && sign === "(" ? ")" : "");
+        valueSuffix = (type === "s" && !isNaN(value) && prefixExponent !== undefined ? prefixes[8 + prefixExponent / 3] : "") + valueSuffix + (valueNegative && sign === "(" ? ")" : "");
 
         // Break the formatted value into the integer “value” part that can be
         // grouped, and fractional or exponential “suffix” part that is not.
@@ -22063,12 +22063,13 @@ function formatLocale$1(locale) {
     return format;
   }
   function formatPrefix(specifier, value) {
-    var f = newFormat((specifier = formatSpecifier(specifier), specifier.type = "f", specifier)),
-      e = Math.max(-8, Math.min(8, Math.floor(exponent(value) / 3))) * 3,
+    var e = Math.max(-8, Math.min(8, Math.floor(exponent(value) / 3))) * 3,
       k = Math.pow(10, -e),
-      prefix = prefixes[8 + e / 3];
+      f = newFormat((specifier = formatSpecifier(specifier), specifier.type = "f", specifier), {
+        suffix: prefixes[8 + e / 3]
+      });
     return function (value) {
-      return f(k * value) + prefix;
+      return f(k * value);
     };
   }
   return {
@@ -32328,7 +32329,7 @@ function SummaryReport() {
 clientExports.createRoot(document.getElementById("root")).render(/* @__PURE__ */jsxRuntimeExports.jsx(reactExports.StrictMode, {
   children: /* @__PURE__ */jsxRuntimeExports.jsx(SummaryReport, {})
 }));</script>
-    <style rel="stylesheet" crossorigin>/*! tailwindcss v4.1.18 | MIT License | https://tailwindcss.com */
+    <style rel="stylesheet" crossorigin>/*! tailwindcss v4.2.2 | MIT License | https://tailwindcss.com */
 @layer properties {
   @supports (((-webkit-hyphens: none)) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color: rgb(from red r g b)))) {
     *, :before, :after, ::backdrop {
@@ -32360,7 +32361,7 @@ clientExports.createRoot(document.getElementById("root")).render(/* @__PURE__ */
   color: var(--color-text);
   background-color: var(--color-background);
   font-synthesis: none;
-  text-rendering: optimizeLegibility;
+  text-rendering: optimizelegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -32370,8 +32371,10 @@ clientExports.createRoot(document.getElementById("root")).render(/* @__PURE__ */
 
 @layer theme {
   :root, :host {
-    --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+      "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+      "Courier New", monospace;
     --color-red-200: oklch(88.5% .062 18.334);
     --color-red-900: oklch(39.6% .141 25.723);
     --color-yellow-200: oklch(94.5% .129 101.54);
@@ -32675,6 +32678,10 @@ clientExports.createRoot(document.getElementById("root")).render(/* @__PURE__ */
 
   .inset-0 {
     inset: calc(var(--spacing) * 0);
+  }
+
+  .start {
+    inset-inline-start: var(--spacing);
   }
 
   .top-2\.5 {

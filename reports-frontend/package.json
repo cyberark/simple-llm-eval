@@ -3,6 +3,9 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "engines": {
+    "npm": ">=11.10.0"
+  },
   "scripts": {
     "dev": "vite",
     "build": "npm run build:eval && npm run build:compare && npm run build:summary",

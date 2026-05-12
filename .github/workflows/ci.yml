@@ -141,6 +141,10 @@ jobs:
           cache: 'npm'
           cache-dependency-path: reports-frontend/package-lock.json
 
+      # reports-frontend/.npmrc sets min-release-age (requires npm >= 11.10.0).
+      - name: Upgrade npm for min-release-age support
+        run: npm install -g npm@^11.10.0
+
       - name: 📦 Install dependencies
         run: npm ci
 

@@ -480,7 +480,7 @@ function requireReact_production() {
   react_production.useTransition = function () {
     return ReactSharedInternals.H.useTransition();
   };
-  react_production.version = "19.2.4";
+  react_production.version = "19.2.5";
   return react_production;
 }
 var hasRequiredReact;
@@ -927,7 +927,7 @@ function requireReactDom_production() {
   reactDom_production.useFormStatus = function () {
     return ReactSharedInternals.H.useHostTransitionStatus();
   };
-  reactDom_production.version = "19.2.4";
+  reactDom_production.version = "19.2.5";
   return reactDom_production;
 }
 var hasRequiredReactDom;
@@ -10532,7 +10532,7 @@ function requireReactDomClient_production() {
     }
   };
   var isomorphicReactPackageVersion$jscomp$inline_1840 = React.version;
-  if ("19.2.4" !== isomorphicReactPackageVersion$jscomp$inline_1840) throw Error(formatProdErrorMessage(527, isomorphicReactPackageVersion$jscomp$inline_1840, "19.2.4"));
+  if ("19.2.5" !== isomorphicReactPackageVersion$jscomp$inline_1840) throw Error(formatProdErrorMessage(527, isomorphicReactPackageVersion$jscomp$inline_1840, "19.2.5"));
   ReactDOMSharedInternals.findDOMNode = function (componentOrElement) {
     var fiber = componentOrElement._reactInternals;
     if (void 0 === fiber) {
@@ -10547,10 +10547,10 @@ function requireReactDomClient_production() {
   };
   var internals$jscomp$inline_2347 = {
     bundleType: 0,
-    version: "19.2.4",
+    version: "19.2.5",
     rendererPackageName: "react-dom",
     currentDispatcherRef: ReactSharedInternals,
-    reconcilerVersion: "19.2.4"
+    reconcilerVersion: "19.2.5"
   };
   if ("undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__) {
     var hook$jscomp$inline_2348 = __REACT_DEVTOOLS_GLOBAL_HOOK__;
@@ -10596,7 +10596,7 @@ function requireReactDomClient_production() {
     listenToAllSupportedEvents(container);
     return new ReactDOMHydrationRoot(initialChildren);
   };
-  reactDomClient_production.version = "19.2.4";
+  reactDomClient_production.version = "19.2.5";
   return reactDomClient_production;
 }
 var hasRequiredClient;
@@ -11282,7 +11282,7 @@ const CompareReport = () => {
 clientExports.createRoot(document.getElementById("root")).render(/* @__PURE__ */jsxRuntimeExports.jsx(reactExports.StrictMode, {
   children: /* @__PURE__ */jsxRuntimeExports.jsx(CompareReport, {})
 }));</script>
-    <style rel="stylesheet" crossorigin>/*! tailwindcss v4.2.2 | MIT License | https://tailwindcss.com */
+    <style rel="stylesheet" crossorigin>/*! tailwindcss v4.2.4 | MIT License | https://tailwindcss.com */
 @layer properties {
   @supports (((-webkit-hyphens: none)) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color: rgb(from red r g b)))) {
     *, :before, :after, ::backdrop {

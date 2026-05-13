@@ -6,12 +6,19 @@ import subprocess
 import json
 import argparse
 import time
+import glob
+import re
 
 from colorama import Fore
 
 from gh_utils import get_pr_info
 from run_commands import run_cmd
 from update_changelog import update_changelog
+
+
+# Stable release tag: vX.Y.Z (no pre-release suffix).
+# Per docs, only stable releases publish docs.
+STABLE_TAG_RE = re.compile(r'^v?\d+\.\d+\.\d+$')
 
 
 def get_current_version():
@@ -46,16 +53,98 @@ def wait_for_human_approval_and_merge(pr_link, pr_number):
         raise RuntimeError(f'{Fore.RED}PR was not merged, please try again.{Fore.RESET}')
 
 
+def ensure_on_main_and_confirm_merged():
+    """Refuse to run unless on `main`; if on `main`, require explicit confirmation
+    that all work for this release has already been merged.
+    """
+    current_branch = run_cmd(['git', 'rev-parse', '--abbrev-ref', 'HEAD']).stdout.strip()
+    if current_branch != 'main':
+        raise RuntimeError(
+            f'You are on branch "{current_branch}", not "main". '
+            f'Did you forget to merge "{current_branch}" into main before releasing? '
+            f'Merge it (or switch to main) and re-run this script.'
+        )
+
+    response = input(
+        f'{Fore.YELLOW}❓ You are on "main". Have you merged ALL the work you want included in this release? (y/N): {Fore.RESET}'
+    ).strip().lower()
+    if response != 'y':
+        raise RuntimeError('Aborted by user. Merge your work to main and re-run.')
+
+
+def build_and_release(tag_name: str, version: str, publish_docs: bool, sign: bool):
+    """Mirror the release steps documented in docs/maintainers/version-release.md.
+
+    Per docs the release does: validate version vs tag, build the package,
+    create the GitHub release with binaries, and (optionally) publish the docs.
+    PyPI publish is intentionally omitted (docs say it's manual).
+    """
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    repo_root = run_cmd(['git', 'rev-parse', '--show-toplevel']).stdout.strip()
+    dist_dir = os.path.join(repo_root, 'dist')
+
+    print(f'{Fore.YELLOW}🔎 Validating tag value against pyproject.toml...{Fore.RESET}')
+    run_cmd([sys.executable, os.path.join(script_dir, 'validate_tag.py'), tag_name])
+
+    # Clean dist/ so stale artifacts from a previous build aren't attached to the release.
+    for path in glob.glob(os.path.join(dist_dir, '*')):
+        os.remove(path)
+
+    print(f'{Fore.YELLOW}📦 Building project package...{Fore.RESET}')
+    run_cmd(['uv', 'build'])
+
+    if sign:
+        artifacts = sorted(
+            glob.glob(os.path.join(dist_dir, '*.whl')) + glob.glob(os.path.join(dist_dir, '*.tar.gz'))
+        )
+        if not artifacts:
+            raise RuntimeError('No artifacts found in dist/ to sign.')
+        print(f'{Fore.YELLOW}🔏 Signing the wheel(s)...{Fore.RESET}')
+        for artifact in artifacts:
+            run_cmd(['gpg', '--batch', '--yes', '--armor', '--detach-sign', artifact])
+    else:
+        print(f'{Fore.YELLOW}🔏 Skipping artifact signing (pass --sign to enable).{Fore.RESET}')
+
+    release_files = sorted(glob.glob(os.path.join(dist_dir, '*')))
+    if not release_files:
+        raise RuntimeError('No artifacts found in dist/ to attach to the release.')
+
+    print(f'{Fore.YELLOW}📝 Creating GitHub release {tag_name}...{Fore.RESET}')
+    run_cmd([
+        'gh', 'release', 'create', tag_name,
+        '--title', tag_name,
+        '--generate-notes',
+        '--verify-tag',
+        *release_files,
+    ])
+
+    if not publish_docs:
+        print(f'{Fore.YELLOW}📚 Skipping docs publish (pass --publish-docs to enable).{Fore.RESET}')
+        return
+
+    if not STABLE_TAG_RE.match(tag_name):
+        print(f'{Fore.YELLOW}📚 Skipping docs publish: {tag_name} is not a stable release ([v]X.Y.Z).{Fore.RESET}')
+        return
+
+    print(f'{Fore.YELLOW}📚 Publishing docs for {version}...{Fore.RESET}')
+    run_cmd([os.path.join(script_dir, 'publish_docs.sh'), version])
+
 
 def main():
     try:
-        parser = argparse.ArgumentParser(description='Create version PR from pyproject.toml version.')
+        parser = argparse.ArgumentParser(description='Manual release procedure: bump version, open PR, merge, tag, build and create the GitHub release.')
         group = parser.add_mutually_exclusive_group(required=True)
         group.add_argument('--version', type=str, help='Set version to a specific value')
         group.add_argument('--bump-patch', action='store_true', help='Bump patch version')
         group.add_argument('--bump-minor', action='store_true', help='Bump minor version')
         group.add_argument('--bump-major', action='store_true', help='Bump major version')
+        parser.add_argument('--publish-docs', action='store_true', default=False,
+                            help='Publish docs after the GitHub release is created. Only effective for stable [v]X.Y.Z releases. Off by default.')
+        parser.add_argument('--sign', action='store_true', default=False,
+                            help='GPG-sign the built artifacts (requires a configured GPG key). Off by default.')
         args = parser.parse_args()
+
+        ensure_on_main_and_confirm_merged()
 
         print(f'{Fore.YELLOW}🔧 Update version in pyproject.toml.{Fore.RESET}')
 
@@ -64,7 +153,6 @@ def main():
 
         run_cmd(['git', 'diff', '--quiet'], error='There are uncommitted changes, cannot proceed.')
 
-        run_cmd(['git', 'checkout', 'main'])
         run_cmd(['git', 'pull', 'origin', 'main'])
 
         # Delete the version branch if it exists
@@ -89,16 +177,17 @@ def main():
 
         run_cmd(['uv', 'sync'])
 
+        update_changelog(version=new_version)
+
         run_cmd(['git', 'add', 'pyproject.toml'])
         run_cmd(['git', 'add', 'uv.lock'])
+        run_cmd(['git', 'add', 'CHANGELOG.md'])
 
         run_cmd(['git', 'commit', '-m', f'Bump version to {new_version}'])
-        run_cmd(['git', 'push'])
+        run_cmd(['git', 'push', '--set-upstream', 'origin', version_branch_name])
 
         pr_title = f'chore: 🤖 Bump version to {new_version}'
         pr_body = f'## Summary \n\nBump version to {new_version}'
-
-        update_changelog(version=new_version)
 
         print(f'{Fore.YELLOW}📝 Creating PR with title: {pr_title}{Fore.RESET}')
         result = run_cmd(['gh', 'pr', 'create', '--title', pr_title, '--body', pr_body])
@@ -125,7 +214,12 @@ def main():
         run_cmd([sys.executable, release_tag_script, '--yes'])
 
         print(f'{Fore.GREEN}🚀 Release tag created successfully!{Fore.RESET}')
-        print(f'{Fore.CYAN}Check out the release workflow: https://github.com/cyberark/simple-llm-eval/actions/workflows/release.yml{Fore.RESET}')
+
+        tag_name = f'v{new_version}'
+        build_and_release(tag_name=tag_name, version=new_version, publish_docs=args.publish_docs, sign=args.sign)
+
+        print(f'{Fore.GREEN}🎉 Release {tag_name} completed successfully!{Fore.RESET}')
+        print(f'{Fore.CYAN}Release URL: https://github.com/cyberark/simple-llm-eval/releases/tag/{tag_name}{Fore.RESET}')
 
     except subprocess.CalledProcessError as e:
         raise RuntimeError(f'Failed to run command: {e}')
@@ -134,5 +228,4 @@ def main():
         sys.exit(1)
 
 if __name__ == '__main__':
-    update_changelog()
-    # main()
+    main()

@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.1.2] - 2026-05-13
+
+### Other
+
+- feat: Support bedrock api key ([#368](https://github.com/cyberark/simple-llm-eval/pull/368))
+- feat: add validation script for litellm unsupported providers
+- feat: add 'chatgpt' to unsupported providers list in litellm models explorer
+- fix: change file permissions for validate_litellm_unsupported_providers.py to executable
+- Chore: deps update ([#418](https://github.com/cyberark/simple-llm-eval/pull/418))
+
+
 ## [1.1.1] - 2026-01-13
 
 ### Other

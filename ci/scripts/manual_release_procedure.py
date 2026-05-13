@@ -53,6 +53,25 @@ def wait_for_human_approval_and_merge(pr_link, pr_number):
         raise RuntimeError(f'{Fore.RED}PR was not merged, please try again.{Fore.RESET}')
 
 
+def ensure_on_main_and_confirm_merged():
+    """Refuse to run unless on `main`; if on `main`, require explicit confirmation
+    that all work for this release has already been merged.
+    """
+    current_branch = run_cmd(['git', 'rev-parse', '--abbrev-ref', 'HEAD']).stdout.strip()
+    if current_branch != 'main':
+        raise RuntimeError(
+            f'You are on branch "{current_branch}", not "main". '
+            f'Did you forget to merge "{current_branch}" into main before releasing? '
+            f'Merge it (or switch to main) and re-run this script.'
+        )
+
+    response = input(
+        f'{Fore.YELLOW}❓ You are on "main". Have you merged ALL the work you want included in this release? (y/N): {Fore.RESET}'
+    ).strip().lower()
+    if response != 'y':
+        raise RuntimeError('Aborted by user. Merge your work to main and re-run.')
+
+
 def build_and_release(tag_name: str, version: str, publish_docs: bool, sign: bool):
     """Mirror the release steps documented in docs/maintainers/version-release.md.
 
@@ -125,6 +144,8 @@ def main():
                             help='GPG-sign the built artifacts (requires a configured GPG key). Off by default.')
         args = parser.parse_args()
 
+        ensure_on_main_and_confirm_merged()
+
         print(f'{Fore.YELLOW}🔧 Update version in pyproject.toml.{Fore.RESET}')
 
         current_version = get_current_version()
@@ -132,7 +153,6 @@ def main():
 
         run_cmd(['git', 'diff', '--quiet'], error='There are uncommitted changes, cannot proceed.')
 
-        run_cmd(['git', 'checkout', 'main'])
         run_cmd(['git', 'pull', 'origin', 'main'])
 
         # Delete the version branch if it exists

@@ -3,8 +3,19 @@ name: "Pull Request Labeler"
 permissions:
   contents: read
 
+# SECURITY NOTE:
+# This workflow intentionally uses `pull_request` (NOT `pull_request_target`).
+# `pull_request_target` runs with a write-scoped token + secrets in the base-repo
+# context and is the trigger abused in recent supply-chain attacks. We avoid it.
+#
+# Trade-off of `pull_request`: PRs opened from FORKS get a read-only GITHUB_TOKEN,
+# so labeling will be skipped for external-contributor PRs. PRs from branches in
+# this repo are still labeled normally.
+#
+# If fork-PR labeling becomes required, do NOT revert to pull_request_target.
+# Instead use the safe two-workflow pattern documented at the bottom of this file.
 on:
-- pull_request_target
+- pull_request
 
 jobs:
   labeler:
@@ -15,6 +26,10 @@ jobs:
     steps:
     - name: 🔄 Checkout repository
       uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # 6.0.2
+      with:
+        # Pin to the base branch so the script we execute is always trusted
+        # repo code, never the PR head (which `pull_request` checks out by default).
+        ref: ${{ github.base_ref }}
 
     - name: Set up Python
       uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
@@ -52,3 +67,35 @@ jobs:
           }
       env:
         LABELS: ${{ steps.propose_labels.outputs.labels }}
+
+# -----------------------------------------------------------------------------
+# OPTIONAL FULL SOLUTION: labeling fork PRs without `pull_request_target`
+# -----------------------------------------------------------------------------
+# The `pull_request` trigger above cannot label PRs from forks, because forked
+# PRs receive a read-only GITHUB_TOKEN. If you need to label fork PRs too, use
+# the GitHub-recommended two-workflow ("compute then apply") pattern instead of
+# reintroducing the dangerous `pull_request_target` trigger:
+#
+#   Workflow A  ("Compute labels", this file's logic):
+#     on: pull_request
+#     permissions: { contents: read }      # read-only, no secrets exposed
+#     - Runs the labeling logic but does NOT apply labels.
+#     - Writes the proposed labels + the PR number to a file and uploads it as
+#       an artifact (actions/upload-artifact). Running on untrusted fork code is
+#       safe here because the token is read-only and has no secret access.
+#
+#   Workflow B  ("Apply labels"):
+#     on:
+#       workflow_run:
+#         workflows: ["Compute labels"]
+#         types: [completed]
+#     permissions: { pull-requests: write } # privileged, runs from base branch
+#     - Triggered by Workflow A completing. This workflow's definition + code
+#       always come from the base branch (never the PR head), so the privileged
+#       token never executes untrusted code.
+#     - Downloads the artifact, reads the PR number + proposed labels, and calls
+#       github.rest.issues.addLabels(...) to apply them.
+#
+# This keeps the privileged write step isolated from any contributor-controlled
+# code, achieving fork-PR labeling with none of the pull_request_target risk.
+# Docs: https://securitylab.github.com/resources/github-actions-preventing-pwn-requests/

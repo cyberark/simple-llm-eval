@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.1.3] - 2026-06-02
+
+### Other
+
+- Chore: deps update  ([#422](https://github.com/cyberark/simple-llm-eval/pull/422))
+
+
 ## [1.1.2] - 2026-05-13
 
 ### Other

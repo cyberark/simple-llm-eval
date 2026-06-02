@@ -68,6 +68,20 @@ Once in a while update the pre-commit hooks to the latest version:
 ## Update npm packages 📦
 * `cd reports-frontend`
 * `npm update`
+* `npm audit` to check for vulnerabilities
+
+!!! warning "`npm audit fix --force` can fail with `ETARGET`"
+    Our npm environment enforces a "before" date cutoff (a time-travel/reproducibility pin),
+    so only package versions published before that date can be installed.
+
+    `npm audit fix --force` always targets the *latest* fix version, which may be newer than
+    the cutoff, causing `npm error code ETARGET / No matching version found ... with a date before <date>`.
+
+    Workaround: don't use `audit fix --force`. Instead, find the latest in-range version that
+    contains the fix and pin it manually in `package.json`, then `npm install`. For example,
+    if the advisory is fixed in `vitest >= 4.1.0`, set `"vitest": "^4.1.0"` and run `npm install`
+    (it resolves to the newest `4.1.x` available before the cutoff). Re-run `npm audit` and the
+    tests/build to confirm.
 
 ## Publishing the docs 📚
 This project uses mkdocs/mike to publish its docs to GitHub Pages on a release.

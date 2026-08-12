@@ -1,4 +1,5 @@
-from typing import Callable, List, Literal, Type
+from collections.abc import Callable
+from typing import Literal
 
 from pydantic import BaseModel
 
@@ -45,7 +46,7 @@ You are given a task and a candidate response. Is this a correct and accurate re
         """
 
     @property
-    def possible_responses(self) -> List[str]:
+    def possible_responses(self) -> list[str]:
         return NO_GROUND_TRUTH_SIMPLE_POSSIBLE_RESPONSES
 
     @property
@@ -56,5 +57,5 @@ You are given a task and a candidate response. Is this a correct and accurate re
         return litellm_structured_output_parser
 
     @property
-    def output_model(self) -> Type[BaseModel]:
+    def output_model(self) -> type[BaseModel]:
         return NoGroundTruthSimpleStructuredResponse

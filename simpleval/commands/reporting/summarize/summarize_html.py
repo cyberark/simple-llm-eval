@@ -3,7 +3,6 @@ import logging
 import os
 import webbrowser
 from datetime import datetime
-from typing import Dict, List
 
 from simpleval.consts import LOGGER_NAME, RESULTS_FOLDER
 from simpleval.evaluation.metrics.calc import MeanScores
@@ -12,7 +11,7 @@ from simpleval.evaluation.utils import get_eval_name
 DATASETS_PLACEHOLDER = '"DATASETS_PLACEHOLDER"'
 
 
-def plot_scores_html(eval_dir: str, config_file: str, testcases: List[str], scores: List[MeanScores], primary_metric: str):
+def plot_scores_html(eval_dir: str, config_file: str, testcases: list[str], scores: list[MeanScores], primary_metric: str):
     logger = logging.getLogger(LOGGER_NAME)
     eval_name = get_eval_name(eval_dir=eval_dir, config_file=config_file)
 
@@ -47,13 +46,13 @@ def plot_scores_html(eval_dir: str, config_file: str, testcases: List[str], scor
     return _write_summary_report(eval_name=eval_name, datasets=datasets)
 
 
-def _get_dataset_index_by_metric(metric: str, datasets: List[Dict]):
+def _get_dataset_index_by_metric(metric: str, datasets: list[dict]):
     for i, dataset in enumerate(datasets):
         if metric in dataset:
             return i
 
 
-def _write_summary_report(eval_name: str, datasets: Dict):
+def _write_summary_report(eval_name: str, datasets: dict):
     logger = logging.getLogger(LOGGER_NAME)
 
     template_path = os.path.join(os.path.dirname(__file__), 'llm_summary_report_template.html')
@@ -84,6 +83,6 @@ def _validate_summary_html_template(report_template: str):
         raise ValueError('HTML Summary Report: template does not contain datasets placeholder')
 
 
-def _populate_template(template: str, datasets: Dict):
+def _populate_template(template: str, datasets: dict):
     html_content = template.replace(DATASETS_PLACEHOLDER, json.dumps(datasets))
     return html_content

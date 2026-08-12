@@ -1,4 +1,5 @@
-from typing import Callable, List, Literal, Type
+from collections.abc import Callable
+from typing import Literal
 
 from pydantic import BaseModel
 
@@ -56,7 +57,7 @@ Do not return any preamble or explanations, return only a pure JSON string surro
         """
 
     @property
-    def possible_responses(self) -> List[str]:
+    def possible_responses(self) -> list[str]:
         return FAITHFULNESS_POSSIBLE_RESPONSES
 
     @property
@@ -67,5 +68,5 @@ Do not return any preamble or explanations, return only a pure JSON string surro
         return litellm_structured_output_parser
 
     @property
-    def output_model(self) -> Type[BaseModel]:
+    def output_model(self) -> type[BaseModel]:
         return FaithfulnessStructuredResponse

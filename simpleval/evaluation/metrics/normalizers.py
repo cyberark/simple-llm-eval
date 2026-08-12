@@ -1,7 +1,6 @@
-from typing import List
 
 
-def get_normalize_score(value: str, items: List[str]):
+def get_normalize_score(value: str, items: list[str]):
     """
     Normalize a value based on its position in a list of items.
 

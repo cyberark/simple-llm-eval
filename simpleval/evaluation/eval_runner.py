@@ -1,6 +1,5 @@
 import json
 import logging
-from typing import List
 
 from simpleval.consts import LOGGER_NAME
 from simpleval.evaluation.judges.base_judge import BaseJudge
@@ -30,7 +29,7 @@ def run_eval(eval_dir: str, config_file: str, testcase: str):
     eval_config = get_eval_config(eval_dir=eval_dir, config_file=config_file)
     logger.debug(f'Eval config: {eval_config}')
 
-    existing_eval_results: List[EvalTestResult] = get_all_eval_results(eval_set_dir=eval_dir, testcase=testcase, fail_on_missing=False)
+    existing_eval_results: list[EvalTestResult] = get_all_eval_results(eval_set_dir=eval_dir, testcase=testcase, fail_on_missing=False)
 
     all_evals_to_run = _get_all_evals_by_metric_to_run(eval_dir=eval_dir, eval_config=eval_config)
     evals_to_run = filter_existing_eval_results(existing_eval_results, all_evals_to_run=all_evals_to_run)
@@ -59,7 +58,7 @@ def run_eval(eval_dir: str, config_file: str, testcase: str):
     return results, errors
 
 
-def filter_existing_eval_results(existing_eval_results: List[EvalTestResult], all_evals_to_run: List[EvalTask]) -> List[EvalTask]:
+def filter_existing_eval_results(existing_eval_results: list[EvalTestResult], all_evals_to_run: list[EvalTask]) -> list[EvalTask]:
     logger = logging.getLogger(LOGGER_NAME)
 
     if not existing_eval_results:
@@ -71,7 +70,7 @@ def filter_existing_eval_results(existing_eval_results: List[EvalTestResult], al
     return evals_to_run_filtered
 
 
-def _get_all_evals_by_metric_to_run(eval_dir: str, eval_config) -> List[EvalTask]:
+def _get_all_evals_by_metric_to_run(eval_dir: str, eval_config) -> list[EvalTask]:
     all_eval_cases = get_eval_ground_truth(eval_dir)
 
     evals_to_run = []
@@ -81,11 +80,10 @@ def _get_all_evals_by_metric_to_run(eval_dir: str, eval_config) -> List[EvalTask
     return evals_to_run
 
 
-def _write_results_to_file(eval_dir: str, testcase: str, results: List[EvalTestResult]):
+def _write_results_to_file(eval_dir: str, testcase: str, results: list[EvalTestResult]):
     eval_results_file_path = get_eval_result_file(eval_set_dir=eval_dir, testcase=testcase)
     with open(eval_results_file_path, 'w', encoding='utf-8') as results_file:
-        for result in results:
-            results_file.write(json.dumps(result.model_dump()) + '\n')
+        results_file.writelines(json.dumps(result.model_dump()) + '\n' for result in results)
 
 
 def _run_llm_as_a_judge(task: EvalTask, eval_dir: str, testcase: str, eval_config: EvalTaskConfig) -> EvalTestResult:
@@ -124,7 +122,7 @@ class EvalRunner(BaseRunner):
         super().__init__(max_concurrent_tasks)
         self.logger = logging.getLogger(LOGGER_NAME)
 
-    def process_results(self, results: List[EvalTestResult], errors: List[str]):
+    def process_results(self, results: list[EvalTestResult], errors: list[str]):
         self.logger.debug('')
         self.logger.debug('Evaluation results:')
         self.logger.debug('-' * 50)

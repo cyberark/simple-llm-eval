@@ -1,4 +1,4 @@
-from typing import Callable, List
+from collections.abc import Callable
 
 from simpleval.evaluation.metrics.models.bedrock_claude_sonnet.base.base_metric import BaseBedrockSonnetMetric
 from simpleval.evaluation.metrics.parsers.xml_output_parsing import parse_xml_response
@@ -92,7 +92,7 @@ You are a helpful agent that can assess LLM response according to the given rubr
         """
 
     @property
-    def possible_responses(self) -> List[str]:
+    def possible_responses(self) -> list[str]:
         return ['Not at all', 'Not generally', 'Neutral/Mixed', 'Generally yes', 'Yes']
 
     @property

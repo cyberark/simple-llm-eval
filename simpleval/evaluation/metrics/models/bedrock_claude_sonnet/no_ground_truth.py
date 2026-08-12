@@ -1,4 +1,4 @@
-from typing import Callable, List
+from collections.abc import Callable
 
 from simpleval.evaluation.metrics.models.bedrock_claude_sonnet.base.base_metric import BaseBedrockSonnetMetric
 from simpleval.evaluation.metrics.parsers.output_parsing import parse_json_output
@@ -69,7 +69,7 @@ You are an expert evaluator focusing specifically on assessing the completeness 
         """
 
     @property
-    def possible_responses(self) -> List[str]:
+    def possible_responses(self) -> list[str]:
         return ['Not at all', 'Not generally', 'Neutral/Mixed', 'Generally yes', 'Yes']
 
     @property

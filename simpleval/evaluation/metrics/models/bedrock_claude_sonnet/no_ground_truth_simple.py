@@ -1,4 +1,4 @@
-from typing import Callable, List
+from collections.abc import Callable
 
 from simpleval.evaluation.metrics.models.bedrock_claude_sonnet.base.base_metric import BaseBedrockSonnetMetric
 from simpleval.evaluation.metrics.parsers.output_parsing import parse_explanation_answer_output
@@ -37,7 +37,7 @@ You are given a task and a candidate response. Is this a correct and accurate re
         """
 
     @property
-    def possible_responses(self) -> List[str]:
+    def possible_responses(self) -> list[str]:
         return ['incorrect', 'partially correct', 'correct']
 
     @property

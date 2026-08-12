@@ -31,7 +31,7 @@ def _apply_color_to_cols(table, col1_idx, col2_idx):
 
 
 def _apply_console_color_to_rows(table, col_idx):
-    for idx in range(0, len(table) - 1):
+    for idx in range(len(table) - 1):
         val1 = table[idx][col_idx]
         val2 = table[idx + 1][col_idx]
 

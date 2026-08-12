@@ -2,8 +2,9 @@ import logging
 import os
 import traceback
 from abc import ABC, abstractmethod
+from collections.abc import Callable
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from typing import Any, Callable
+from typing import Any
 
 from tenacity import RetryError
 from tqdm import tqdm

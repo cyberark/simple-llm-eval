@@ -1,7 +1,7 @@
 import inspect
 import os
 from abc import ABC, abstractmethod
-from typing import Callable, List
+from collections.abc import Callable
 
 
 class EvaluationMetric(ABC):
@@ -37,7 +37,7 @@ class EvaluationMetric(ABC):
 
     @property
     @abstractmethod
-    def possible_responses(self) -> List[str]:
+    def possible_responses(self) -> list[str]:
         """
         The possible responses that the metric can return.
         """

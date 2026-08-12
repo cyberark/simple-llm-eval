@@ -3,7 +3,6 @@ import inspect
 import logging
 import os
 from abc import ABC, abstractmethod
-from typing import Dict, List, Set
 
 from colorama import Fore
 from tenacity import retry, retry_if_exception_type, stop_after_attempt, wait_fixed
@@ -19,7 +18,7 @@ from simpleval.evaluation.metrics.parsers.parsed_output_schema import JudgeParse
 
 
 class BaseJudge(ABC):
-    def __init__(self, model_id: str, supported_model_ids: Set[str]):
+    def __init__(self, model_id: str, supported_model_ids: set[str]):
         """
         Base class for all judges.
 
@@ -31,8 +30,8 @@ class BaseJudge(ABC):
         """
 
         self.model_id: str = model_id
-        self._supported_model_ids: Set[str] = supported_model_ids or set()
-        self.__metrics: Dict[str, EvaluationMetric] = {}
+        self._supported_model_ids: set[str] = supported_model_ids or set()
+        self.__metrics: dict[str, EvaluationMetric] = {}
 
         self.logger = logging.getLogger(LOGGER_NAME)
 
@@ -47,7 +46,7 @@ class BaseJudge(ABC):
 
     @property
     @abstractmethod
-    def _metrics_model(self) -> Set[str]:
+    def _metrics_model(self) -> str:
         """
         The model that the metrics support.
         Metrics are in their core llm prompts and as such might fit certain models.
@@ -76,7 +75,7 @@ class BaseJudge(ABC):
         """
 
     @property
-    def supported_model_ids(self) -> Set[str]:
+    def supported_model_ids(self) -> set[str]:
         """
         The model IDs that are supported by the judge. Other might also for (e.g. Haiku models for Claude Sonnet but are not guaranteed).
         """
@@ -122,7 +121,7 @@ class BaseJudge(ABC):
 
         return MetricResult(result=parsed_response.answer, explanation=parsed_response.reasonings, normalized_score=score)
 
-    def list_metrics(self) -> List[str]:
+    def list_metrics(self) -> list[str]:
         """
         List all available evaluation metrics by scanning the judge metrics directory.
         :return: A list of metric module names.
@@ -140,7 +139,7 @@ class BaseJudge(ABC):
         """
         return get_metrics_dir(self._metrics_model)
 
-    def get_all_metrics(self) -> Dict[str, EvaluationMetric]:
+    def get_all_metrics(self) -> dict[str, EvaluationMetric]:
         """
         Retrieve all available metrics as a dictionary where the key is the metric name and the value is the metric instance.
 

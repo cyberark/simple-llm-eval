@@ -1,7 +1,6 @@
 import importlib
 import inspect
 from pathlib import Path
-from typing import Dict, List
 
 from simpleval.evaluation.consts import MODELS_DIR
 from simpleval.evaluation.judges.base_judge import BaseJudge
@@ -12,7 +11,7 @@ class JudgeProvider:
     INTERNAL_JUDGES = ['dummy_judge']
 
     @staticmethod
-    def list_judges(filter_internal=False) -> List[str]:
+    def list_judges(filter_internal=False) -> list[str]:
         """
         Returns a dictionary of available judges.
         """
@@ -24,7 +23,7 @@ class JudgeProvider:
         return sorted(judge_names)
 
     @staticmethod
-    def get_all_judges() -> Dict[str, BaseJudge]:
+    def get_all_judges() -> dict[str, BaseJudge]:
         """
         Get all judges available in the judges directory.
         :return: A dictionary of judge name to judge object.

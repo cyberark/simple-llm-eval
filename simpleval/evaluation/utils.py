@@ -2,7 +2,6 @@ import json
 import os
 import re
 from pathlib import Path
-from typing import List
 
 from colorama import Fore, Style
 
@@ -25,7 +24,7 @@ from simpleval.evaluation.schemas.eval_task_config_schema import EvalTaskConfig
 from simpleval.testcases.schemas.llm_task_result import LlmTaskResult
 
 
-def get_eval_ground_truth(eval_dir: str) -> List[GroundTruth]:
+def get_eval_ground_truth(eval_dir: str) -> list[GroundTruth]:
     ground_truth_path = os.path.join(eval_dir, GROUND_TRUTH_FILE)
     if not os.path.exists(ground_truth_path):
         cwd = os.getcwd()
@@ -89,7 +88,7 @@ def get_llm_task_errors_file(eval_set_dir: str, testcase: str):
     return os.path.join(get_testcase_folder(eval_set_dir, testcase), LLM_TASKS_ERROR_FILE_NAME)
 
 
-def get_all_llm_task_results(eval_set_dir: str, testcase: str, fail_on_missing: bool = False) -> List[LlmTaskResult]:
+def get_all_llm_task_results(eval_set_dir: str, testcase: str, fail_on_missing: bool = False) -> list[LlmTaskResult]:
     """
     Get the results of the llm tasks run, that is the results of the calls to your llm models.
 
@@ -136,7 +135,7 @@ def get_llm_task_result(eval_set_dir: str, testcase: str, llm_task_name: str) ->
     return results[llm_task_name]
 
 
-def is_llm_task_result_found(llm_task_results: List[LlmTaskResult], llm_task_name: str) -> bool:
+def is_llm_task_result_found(llm_task_results: list[LlmTaskResult], llm_task_name: str) -> bool:
     """
     Check if the llm_task result exists in the llm tasks results file
     """
@@ -156,7 +155,7 @@ def get_eval_set_name(eval_set_dir: str) -> str:
     return os.path.basename(eval_set_dir)
 
 
-def get_all_eval_results(eval_set_dir: str, testcase: str, fail_on_missing: bool = True) -> List[EvalTestResult]:
+def get_all_eval_results(eval_set_dir: str, testcase: str, fail_on_missing: bool = True) -> list[EvalTestResult]:
     """
     Get the eval results from EVAL_RESULTS_FILE in the testcase folder.
 
@@ -174,7 +173,7 @@ def get_all_eval_results(eval_set_dir: str, testcase: str, fail_on_missing: bool
     return get_all_eval_results_from_file(eval_results_file=eval_results_file, fail_on_missing=fail_on_missing)
 
 
-def get_all_eval_results_from_file(eval_results_file: str, fail_on_missing: bool = True) -> List[EvalTestResult]:
+def get_all_eval_results_from_file(eval_results_file: str, fail_on_missing: bool = True) -> list[EvalTestResult]:
     if not os.path.exists(eval_results_file):
         if fail_on_missing:
             raise FileNotFoundError(f'Eval results file not found at {eval_results_file}')
@@ -186,7 +185,7 @@ def get_all_eval_results_from_file(eval_results_file: str, fail_on_missing: bool
     return results
 
 
-def get_eval_results_sorted_by_name_metric(eval_set_dir: str, testcase: str) -> List[EvalTestResult]:  # -> list:# -> list:
+def get_eval_results_sorted_by_name_metric(eval_set_dir: str, testcase: str) -> list[EvalTestResult]:  # -> list:# -> list:
     """
     Returns the eval results sorted by <testcase name>:<metric>
     This is used later to sort and compare between two different runs.
@@ -198,20 +197,20 @@ def get_eval_results_sorted_by_name_metric(eval_set_dir: str, testcase: str) -> 
     Returns:
         List[Dict]: List of dictionaries of <llm-task name>-<metric> to result
     """
-    top_level_results: List[EvalTestResult] = get_all_eval_results(eval_set_dir=eval_set_dir, testcase=testcase)
+    top_level_results: list[EvalTestResult] = get_all_eval_results(eval_set_dir=eval_set_dir, testcase=testcase)
     return _sort_eval_test_results(top_level_results)
 
 
-def get_eval_results_sorted_by_name_metric_from_file(eval_results_file: str) -> List[EvalTestResult]:  # -> list:# -> list:
-    top_level_results: List[EvalTestResult] = get_all_eval_results_from_file(eval_results_file)
+def get_eval_results_sorted_by_name_metric_from_file(eval_results_file: str) -> list[EvalTestResult]:  # -> list:# -> list:
+    top_level_results: list[EvalTestResult] = get_all_eval_results_from_file(eval_results_file)
     return _sort_eval_test_results(top_level_results)
 
 
-def _sort_eval_test_results(results: List[EvalTestResult]):
+def _sort_eval_test_results(results: list[EvalTestResult]):
     return sorted(results, key=lambda x: x.name_metric)
 
 
-def eval_result_found(eval_results: List[EvalTestResult], eval_task: EvalTask) -> bool:
+def eval_result_found(eval_results: list[EvalTestResult], eval_task: EvalTask) -> bool:
     """
     Check if the eval result exists in the EVAL_RESULTS_FILE
     """
@@ -220,7 +219,7 @@ def eval_result_found(eval_results: List[EvalTestResult], eval_task: EvalTask) -
     return eval_task.name_metric in results_by_name
 
 
-def get_all_testcases(eval_dir: str) -> List[str]:
+def get_all_testcases(eval_dir: str) -> list[str]:
     testcases_folder = os.path.join(eval_dir, TESTCASES_FOLDER)
     if not os.path.exists(testcases_folder):
         raise FileNotFoundError(f'testcases folder not found at {testcases_folder}')

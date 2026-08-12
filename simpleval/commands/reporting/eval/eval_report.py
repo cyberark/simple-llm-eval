@@ -1,5 +1,4 @@
 import logging
-from typing import List
 
 from simpleval.commands.reporting.eval.console_report import _print_to_console
 from simpleval.commands.reporting.eval.html2.html2_report import _generate_html_report2
@@ -21,7 +20,7 @@ class ResultsManager:
         self,
         name: str,
         testcase: str,
-        eval_results: List[EvalTestResult],
+        eval_results: list[EvalTestResult],
         llm_tasks_errors_count: int,
         eval_errors_count: int,
         output_format: str = ReportFormat.HTML,

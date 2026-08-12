@@ -1,4 +1,5 @@
-from typing import Callable, List, Literal
+from collections.abc import Callable
+from typing import Literal
 
 from pydantic import BaseModel
 
@@ -55,7 +56,7 @@ Do not return any preamble or explanations, return only a pure JSON string surro
         """
 
     @property
-    def possible_responses(self) -> List[str]:
+    def possible_responses(self) -> list[str]:
         return READABILITY_POSSIBLE_RESPONSES
 
     @property

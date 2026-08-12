@@ -1,6 +1,5 @@
 from collections import defaultdict
 from statistics import mean, stdev
-from typing import Dict, List
 
 from pydantic import BaseModel
 
@@ -13,12 +12,12 @@ class Scores(BaseModel):
 
 
 class MeanScores(BaseModel):
-    metrics: Dict[str, Scores]
+    metrics: dict[str, Scores]
     aggregate_mean: float
     aggregate_std_dev: float
 
 
-def calc_scores(eval_results: List[EvalTestResult]) -> MeanScores:
+def calc_scores(eval_results: list[EvalTestResult]) -> MeanScores:
     """_summary_
 
     Args:

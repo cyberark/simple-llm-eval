@@ -1,6 +1,5 @@
 import logging
 import os
-from typing import List
 
 from colorama import Fore
 from InquirerPy import prompt
@@ -144,7 +143,7 @@ def get_model_id_from_user(judge: BaseJudge) -> str:
     return selected_model
 
 
-def get_metrics_from_user(metrics: List[str]) -> List[str]:
+def get_metrics_from_user(metrics: list[str]) -> list[str]:
     print()
     logger = logging.getLogger(LOGGER_NAME)
     logger.info(f'{Fore.CYAN}To learn more about each metric run {Fore.YELLOW}`simpleval metrics-explorer`{Fore.RESET}')

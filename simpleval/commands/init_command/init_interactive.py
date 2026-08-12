@@ -24,4 +24,3 @@ class InitInteractive(BaseInit):
         """
         No specific instructions for interactive mode.
         """
-        pass

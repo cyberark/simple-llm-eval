@@ -2,7 +2,6 @@ import html
 import json
 import logging
 import os
-from typing import List
 
 from simpleval.commands.reporting.eval.html_common import save_html_report
 from simpleval.consts import LOGGER_NAME
@@ -22,7 +21,7 @@ HIDDEN_ERRORS_BANNER = f'{ERRORS_BANNER_PLACEHOLDER} ${{"{HIDDEN}"}}'
 def _generate_html_report2(
     name: str,
     testcase: str,
-    eval_results: List[EvalTestResult],
+    eval_results: list[EvalTestResult],
     mean_scores: MeanScores,
     llm_task_errors_count: int,
     eval_errors_count: int,
@@ -91,7 +90,7 @@ def _get_js_aggregate_scores(mean_scores: MeanScores) -> str:
     return f'{{{js_aggregate_scores}}}'
 
 
-def _get_js_results_list(eval_results: List[EvalTestResult]) -> str:
+def _get_js_results_list(eval_results: list[EvalTestResult]) -> str:
     logger = logging.getLogger(LOGGER_NAME)
 
     js_results_array = ''

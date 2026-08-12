@@ -1,7 +1,6 @@
 # pylint: disable=too-many-arguments
 
 import textwrap
-from typing import List
 
 from colorama import Fore
 
@@ -16,7 +15,7 @@ WIDE_COLUMN_WIDTH = 20
 def _print_to_console(
     name: str,
     testcase,
-    eval_results: List[EvalTestResult],
+    eval_results: list[EvalTestResult],
     metric_means: dict,
     aggregate_mean: float,
     llm_task_errors_count: int,

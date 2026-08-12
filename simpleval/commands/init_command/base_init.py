@@ -96,7 +96,6 @@ class BaseInit(ABC):
         """
         Return the configuration for the new evaluation set.
         """
-        pass
 
     @abstractmethod
     def _print_specific_instructions(self):

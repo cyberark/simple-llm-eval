@@ -1,6 +1,5 @@
 import re
 import sys
-from typing import List
 
 import click
 from colorama import Fore, Style
@@ -36,11 +35,11 @@ def print_boxed_message(message, color=Fore.BLUE, text_color=Fore.YELLOW):
     click.echo('')
 
 
-def print_list(title: str, items: List, title_color=Fore.CYAN, items_color=Fore.YELLOW, tab_size: int = 2, add_empty_line: bool = True):
+def print_list(title: str, items: list, title_color=Fore.CYAN, items_color=Fore.YELLOW, tab_size: int = 2, add_empty_line: bool = True):
     print(f'{title_color}{title}{Fore.RESET}:')
     indent = ' ' * tab_size
     for item in items:
         print(f'{items_color}{indent}- {item}{Fore.RESET}')
 
     if add_empty_line:
-        print('')
+        print()

@@ -1,4 +1,4 @@
-from typing import Counter
+from collections import Counter
 
 from simpleval.consts import GROUND_TRUTH_FILE
 from simpleval.evaluation.utils import get_eval_config, get_eval_ground_truth

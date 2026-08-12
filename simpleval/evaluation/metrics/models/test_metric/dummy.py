@@ -1,4 +1,4 @@
-from typing import Callable, List
+from collections.abc import Callable
 
 from simpleval.evaluation.metrics.base_metric import EvaluationMetric
 from simpleval.evaluation.metrics.parsers.output_parsing import parse_explanation_answer_output
@@ -17,7 +17,7 @@ class DummyMetric(EvaluationMetric):
         )
 
     @property
-    def possible_responses(self) -> List[str]:
+    def possible_responses(self) -> list[str]:
         return [str(i) for i in range(1, 11)]
 
     @property

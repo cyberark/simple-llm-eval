@@ -1,7 +1,6 @@
 import logging
 import os
 from pathlib import Path
-from typing import List
 
 from colorama import Fore
 from pydantic import ValidationError
@@ -96,7 +95,7 @@ def compare_results_files(name: str, eval_results_file1: str, eval_results_file2
         raise TerminationError(f'Error occurred trying to compare results: {ex}') from ex
 
 
-def _verify_input(sorted_results1: List, sorted_results2: List):
+def _verify_input(sorted_results1: list, sorted_results2: list):
     if len(sorted_results1) != len(sorted_results2):
         raise ValueError(f'Number of results in the two directories are different: {len(sorted_results1)} vs {len(sorted_results2)}')
 

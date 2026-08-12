@@ -1,5 +1,3 @@
-from typing import Dict, List, Optional
-
 from pydantic import BaseModel, Field
 
 
@@ -27,11 +25,11 @@ class EvalTaskConfig(BaseModel):
     name: str
     max_concurrent_judge_tasks: int = Field(..., ge=1)
     max_concurrent_llm_tasks: int = Field(..., ge=1)
-    eval_metrics: List[str]
+    eval_metrics: list[str]
     llm_as_a_judge_name: str
-    llm_as_a_judge_model_id: Optional[str] = None
+    llm_as_a_judge_model_id: str | None = None
 
-    override: Dict[str, EvalTaskOverrides] = {}
+    override: dict[str, EvalTaskOverrides] = {}
 
     def effective_max_concurrent_judge_tasks(self, testcase: str = None):
         # Get the override value if override exists and if value is not None, otherwise use the default value

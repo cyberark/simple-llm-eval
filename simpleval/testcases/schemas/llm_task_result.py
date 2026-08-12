@@ -1,5 +1,3 @@
-from typing import Optional
-
 from pydantic import BaseModel
 
 
@@ -17,5 +15,5 @@ class LlmTaskResult(BaseModel):
     name: str
     prompt: str
     prediction: str
-    expected_prediction: Optional[str] = None
+    expected_prediction: str | None = None
     payload: dict = {}

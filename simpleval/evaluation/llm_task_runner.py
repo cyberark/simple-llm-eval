@@ -2,7 +2,6 @@ import importlib.util
 import json
 import logging
 import os
-from typing import List
 
 from colorama import Fore
 
@@ -62,7 +61,7 @@ def run_llm_tasks(eval_dir: str, config_file: str, testcase: str):
     return results, errors
 
 
-def filter_existing_results(existing_testcase_results: List[LlmTaskResult], eval_cases: List[GroundTruth]) -> List[GroundTruth]:
+def filter_existing_results(existing_testcase_results: list[LlmTaskResult], eval_cases: list[GroundTruth]) -> list[GroundTruth]:
     logger = logging.getLogger(LOGGER_NAME)
 
     if not existing_testcase_results:
@@ -83,11 +82,10 @@ def filter_existing_results(existing_testcase_results: List[LlmTaskResult], eval
     return eval_cases_to_run
 
 
-def write_llm_task_results_file(eval_set_dir: str, testcase: str, results: List[LlmTaskResult]):
+def write_llm_task_results_file(eval_set_dir: str, testcase: str, results: list[LlmTaskResult]):
     results_file_path = get_llm_task_results_file(eval_set_dir=eval_set_dir, testcase=testcase)
     with open(results_file_path, 'w', encoding='utf-8') as results_file:
-        for result in results:
-            results_file.write(json.dumps(result.model_dump()) + '\n')
+        results_file.writelines(json.dumps(result.model_dump()) + '\n' for result in results)
 
 
 def _load_plugin(test_dataset_dir: str):
@@ -124,7 +122,7 @@ class LlmTaskRunner(BaseRunner):
         super().__init__(max_concurrent_tasks)
         self.logger = logging.getLogger(LOGGER_NAME)
 
-    def process_results(self, results: List[LlmTaskResult], errors: List[str]):
+    def process_results(self, results: list[LlmTaskResult], errors: list[str]):
         self.logger.debug('')
         self.logger.debug('LLM tasks run results:')
         self.logger.debug('-' * 50)

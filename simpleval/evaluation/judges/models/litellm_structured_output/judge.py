@@ -1,5 +1,3 @@
-from typing import Set
-
 import litellm
 from colorama import Fore
 from litellm import LlmProviders, ModelResponse
@@ -53,7 +51,7 @@ class LiteLLMJudge(BaseJudge):
             raise ValueError(f'Model ID {model_id} not supported by litellm. Please provide a valid model ID. See {models_providers_info}')
 
     @property
-    def _metrics_model(self) -> Set[str]:
+    def _metrics_model(self) -> str:
         return 'litellm_structured_output'
 
     def run_preliminary_checks(self):

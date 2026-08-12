@@ -1,5 +1,4 @@
 import logging
-from typing import Dict
 
 import litellm
 from InquirerPy import prompt
@@ -11,7 +10,7 @@ from simpleval.utilities.console import print_boxed_message, print_list
 UNSUPPORTED_PROVIDERS = ['github_copilot', 'chatgpt']
 
 
-def get_model_info(model: str, provider: str) -> Dict:
+def get_model_info(model: str, provider: str) -> dict:
     """
     Get model information from litellm.
     """
@@ -70,7 +69,7 @@ def get_supported_model_ids_by_provider(provider_name: str) -> list:
     return [model.get('model') for model in models]
 
 
-def supported_models_by_provider() -> Dict[str, str]:
+def supported_models_by_provider() -> dict[str, str]:
     logger = logging.getLogger(LOGGER_NAME)
 
     supported_models = {}

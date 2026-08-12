@@ -77,6 +77,7 @@ indent-width = 4
 
 [tool.ruff.lint]
 extend-select = ["I", "S"] # isort, flake8-bandit
+ignore = ["BLE001", "C408", "RUF010", "RUF013", "RUF015", "SIM117"]
 # select = ["S"] # isort
 
 [tool.ruff.format]

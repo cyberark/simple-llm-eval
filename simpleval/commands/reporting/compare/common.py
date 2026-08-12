@@ -1,5 +1,3 @@
-from typing import List
-
 from pydantic import BaseModel
 
 from simpleval.evaluation.metrics.calc import MeanScores
@@ -9,7 +7,7 @@ from simpleval.evaluation.schemas.eval_result_schema import EvalTestResult
 class CompareArgs(BaseModel):
     name: str
     mean_scores: MeanScores
-    sorted_results: List[EvalTestResult]
+    sorted_results: list[EvalTestResult]
 
 
 def _generate_summary_table(left_side: CompareArgs, right_side: CompareArgs):

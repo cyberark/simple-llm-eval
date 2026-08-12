@@ -1,4 +1,3 @@
-
 from pydantic import BaseModel
 
 from simpleval.evaluation.metrics.calc import MeanScores

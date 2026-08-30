@@ -26,8 +26,11 @@ def extract_litellm_skip_providers() -> set[str]:
 
     source = inspect.getsource(register_model)
 
+    # The optional `: <annotation>` group tolerates PEP 526 annotations on the
+    # assignment (litellm 1.97.0 changed the bare assignment to `: Final`).
+    # An annotation carries no meaning for what we check, so it must not fail the guard.
     block_match = re.search(
-        r'_skip_get_model_info_providers\s*=\s*\{([^}]+)\}',
+        r'_skip_get_model_info_providers\s*(?::\s*[^=]+?)?\s*=\s*\{([^}]+)\}',
         source,
         re.DOTALL,
     )

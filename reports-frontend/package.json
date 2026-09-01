@@ -28,7 +28,7 @@
     "@emotion/styled": "^11.14.0",
     "@mui/material": "^6.4.3",
     "@mui/x-charts": "^7.26.0",
-    "@tailwindcss/vite": "^4.0.1",
+    "@tailwindcss/vite": "^4.3.3",
     "lucide-react": "^0.474.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

@@ -61,6 +61,13 @@ default-groups = [
     "dev",
 ]
 
+# Per-package overrides of the 14-day exclude-newer cooldown above.
+# certifi: pinned via a fixed cutoff to pick up 2026.10.19 before it cleared the cooldown.
+# This freezes certifi at releases before this date — when certifi needs updating, move the date
+# forward, or remove the override once the desired version is older than 14 days.
+[tool.uv.exclude-newer-package]
+certifi = "2026-10-21T00:00:00Z"
+
 [tool.hatch.build.targets.sdist]
 include = ["simpleval"]
 

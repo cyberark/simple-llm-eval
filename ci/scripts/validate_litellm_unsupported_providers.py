@@ -8,8 +8,13 @@ which trigger side effects (e.g. OAuth device-code flows) when get_model_info
 is called. This script extracts that set via source inspection and verifies
 our UNSUPPORTED_PROVIDERS is a superset of it.
 
+The variable used to be an inline set literal; since litellm 1.105.0 it is bound
+to the module-level PROVIDERS_THAT_AUTHENTICATE_ON_PROVIDER_INFO constant. Both
+shapes are supported: the constant is resolved through register_model's own
+globals, so we always read the set register_model actually uses.
+
 Two layers, because source inspection alone is brittle:
-  1. Source extraction of the set literal (fails loudly if litellm refactors).
+  1. Source extraction of the set (fails loudly if litellm refactors).
   2. A behavioural probe that register_model() really does skip get_model_info
      for those providers. This cross-checks layer 1: if litellm keeps a
      same-shaped set literal but stops honouring it, layer 1 still matches
@@ -19,11 +24,12 @@ If litellm refactors and either layer breaks, this script fails loudly so
 we can update it.
 """
 
+import ast
 import contextlib
 import inspect
 import logging
-import re
 import sys
+import textwrap
 
 # Provider used as the positive control in the behavioural probe: get_model_info is
 # expected to be called for it. That call proves the probe's spy is wired to the symbol
@@ -42,35 +48,44 @@ CONTROL_PROVIDER = 'anthropic'
 PROBE_KEY_PREFIX = 'simpleval-litellm-guard-probe'
 
 
-def extract_litellm_skip_providers() -> set[str]:
-    """
-    Extract the _skip_get_model_info_providers set from litellm's register_model
-    function source code by finding LlmProviders.<NAME>.value references.
-    """
-    from litellm.types.utils import LlmProviders
-    from litellm.utils import register_model
+def _find_skip_providers_value(register_model) -> ast.expr:
+    """Return the AST of the value assigned to _skip_get_model_info_providers in register_model."""
+    tree = ast.parse(textwrap.dedent(inspect.getsource(register_model)))
 
-    source = inspect.getsource(register_model)
-
-    # The optional `: <annotation>` group tolerates PEP 526 annotations on the
-    # assignment (litellm 1.97.0 changed the bare assignment to `: Final`).
+    # Both plain and annotated assignments count (litellm 1.97.0 added a `: Final` annotation).
     # An annotation carries no meaning for what we check, so it must not fail the guard.
-    block_match = re.search(
-        r'_skip_get_model_info_providers\s*(?::\s*[^=]+?)?\s*=\s*\{([^}]+)\}',
-        source,
-        re.DOTALL,
-    )
-    if not block_match:
-        raise RuntimeError(
-            'Could not find _skip_get_model_info_providers in litellm.utils.register_model source. '
-            'litellm may have refactored — update this script.'
-        )
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Assign):
+            targets = node.targets
+        elif isinstance(node, ast.AnnAssign) and node.value is not None:
+            targets = [node.target]
+        else:
+            continue
+        if any(isinstance(t, ast.Name) and t.id == '_skip_get_model_info_providers' for t in targets):
+            return node.value
 
-    block = block_match.group(1)
-    enum_names = re.findall(r'LlmProviders\.(\w+)\.value', block)
-    if not enum_names:
+    raise RuntimeError(
+        'Could not find _skip_get_model_info_providers in litellm.utils.register_model source. '
+        'litellm may have refactored — update this script.'
+    )
+
+
+def _providers_from_set_literal(node: ast.Set) -> set[str]:
+    """Resolve a {LlmProviders.<NAME>.value, ...} set literal (litellm < 1.105.0)."""
+    from litellm.types.utils import LlmProviders
+
+    enum_names = [
+        elt.value.attr
+        for elt in node.elts
+        if isinstance(elt, ast.Attribute)
+        and elt.attr == 'value'
+        and isinstance(elt.value, ast.Attribute)
+        and isinstance(elt.value.value, ast.Name)
+        and elt.value.value.id == 'LlmProviders'
+    ]
+    if not enum_names or len(enum_names) != len(node.elts):
         raise RuntimeError(
-            'Found _skip_get_model_info_providers block but could not parse any LlmProviders entries. '
+            'Found _skip_get_model_info_providers set literal but could not parse all entries as LlmProviders.<NAME>.value. '
             'litellm may have changed the format — update this script.'
         )
 
@@ -83,8 +98,55 @@ def extract_litellm_skip_providers() -> set[str]:
                 f'litellm may have renamed it — update this script.'
             )
         providers.add(member.value)
-
     return providers
+
+
+def _providers_from_name(node: ast.Name, register_model) -> set[str]:
+    """Resolve a module-level constant (litellm >= 1.105.0: PROVIDERS_THAT_AUTHENTICATE_ON_PROVIDER_INFO)."""
+    from litellm.types.utils import LlmProviders
+
+    # Look the name up in register_model's own globals, so we get exactly the object it binds,
+    # wherever litellm happens to define or re-export it.
+    if node.id not in register_model.__globals__:
+        raise RuntimeError(
+            f'_skip_get_model_info_providers is bound to {node.id}, which is not a global of litellm.utils. '
+            f'litellm may have refactored — update this script.'
+        )
+    value = register_model.__globals__[node.id]
+
+    if not isinstance(value, (set, frozenset)) or not value or not all(isinstance(p, str) for p in value):
+        raise RuntimeError(
+            f'_skip_get_model_info_providers is bound to {node.id}={value!r}, expected a non-empty set of provider '
+            f'names. litellm may have changed the format — update this script.'
+        )
+
+    known = {provider.value for provider in LlmProviders}
+    unknown = sorted(set(value) - known)
+    if unknown:
+        raise RuntimeError(
+            f'{node.id} contains providers that are not LlmProviders values: {unknown}. '
+            f'litellm may have renamed them — update this script.'
+        )
+    return set(value)
+
+
+def extract_litellm_skip_providers() -> set[str]:
+    """
+    Extract the _skip_get_model_info_providers set used by litellm's register_model,
+    either from an inline set literal or from the module constant it is bound to.
+    """
+    from litellm.utils import register_model
+
+    value = _find_skip_providers_value(register_model)
+    if isinstance(value, ast.Set):
+        return _providers_from_set_literal(value)
+    if isinstance(value, ast.Name):
+        return _providers_from_name(value, register_model)
+
+    raise RuntimeError(
+        f'_skip_get_model_info_providers is assigned an unsupported expression ({ast.unparse(value)}). '
+        f'litellm may have refactored — update this script.'
+    )
 
 
 @contextlib.contextmanager

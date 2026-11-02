@@ -5,6 +5,7 @@ from simpleval.evaluation.judges.models.anthropic.judge import AnthropicJudge
 from simpleval.evaluation.judges.models.azure.judge import AzureJudge
 from simpleval.evaluation.judges.models.bedrock_claude_sonnet.judge import BedrockClaudeSonnetJudge
 from simpleval.evaluation.judges.models.gemini.judge import GeminiJudge
+from simpleval.evaluation.judges.models.generic_bedrock.judge import GenericBedrockJudge
 from simpleval.evaluation.judges.models.open_ai.judge import OpenAIJudge
 from simpleval.evaluation.judges.models.vertex_ai.judge import VertexAIJudge
 
@@ -30,6 +31,20 @@ def test_bedrock_sonnet_minimal():
     Test minimal functionality of judges.
     """
     judge = BedrockClaudeSonnetJudge()
+    metrics = judge.list_metrics()
+    result = judge.evaluate(metric_name=metrics[0], prompt='say something nice', prediction='have a nice day')
+    assert result
+
+
+@pytest.mark.skipif(
+    not env_var_on(RUN_BEDROCK_SONNET_MINIMAL_TEST) and not env_var_on(RUN_ALL_MINIMAL_JUDGE_TESTS),
+    reason='To run this, set relevant env var to "1"',
+)
+def test_generic_bedrock_minimal():
+    """
+    Test minimal functionality of the generic Bedrock judge (Bedrock via Lite LLM, unlike the native boto3 Sonnet judge).
+    """
+    judge = GenericBedrockJudge()
     metrics = judge.list_metrics()
     result = judge.evaluate(metric_name=metrics[0], prompt='say something nice', prediction='have a nice day')
     assert result

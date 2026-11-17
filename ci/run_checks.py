@@ -79,7 +79,12 @@ def main():
         description='Validating litellm unsupported providers sync...'
     )
 
-    if args.with_coverage:
+    if not args.with_coverage:
+        run_command(
+            cmd='pytest tests/unit tests/integration',
+            description='Running pytest...'
+        )
+    else:
         print(f'{Fore.CYAN}Running coverage checks with fail-under={COVERAGE_FAIL_UNDER}...{Fore.RESET}')
         run_command(
             cmd='pytest tests/unit tests/integration -v --durations=0 --junitxml reports/codecov-test-results.xml '

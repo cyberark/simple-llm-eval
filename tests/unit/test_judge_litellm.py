@@ -1,5 +1,7 @@
+import os
 from unittest.mock import MagicMock, patch
 
+import litellm
 import pytest
 import tenacity
 from litellm import Choices, Message, ModelResponse, Usage
@@ -142,3 +144,27 @@ def test_call_litellm_completion_retryable_error(mock_sleep, judge, mock_metric)
             judge.call_litellm_completion('test prompt', mock_metric)
 
         assert any('Call to LiteLLM completion ended with a retryable error' in arg for arg in mock_error.call_args[0])
+
+
+def test_init_debug_logging_enables_litellm_debug_without_set_verbose(monkeypatch):
+    monkeypatch.delenv('LITELLM_LOG', raising=False)
+    monkeypatch.setattr('litellm.set_verbose', False)
+
+    with patch('simpleval.evaluation.judges.models.litellm_structured_output.judge.debug_logging_enabled', return_value=True), \
+         patch('litellm._turn_on_debug') as mock_turn_on_debug:
+        LiteLLMJudge()
+
+    assert os.environ.get('LITELLM_LOG') == 'DEBUG'
+    mock_turn_on_debug.assert_called_once_with()
+    assert not litellm.set_verbose
+
+
+def test_init_without_debug_logging_does_not_enable_litellm_debug(monkeypatch):
+    monkeypatch.delenv('LITELLM_LOG', raising=False)
+
+    with patch('simpleval.evaluation.judges.models.litellm_structured_output.judge.debug_logging_enabled', return_value=False), \
+         patch('litellm._turn_on_debug') as mock_turn_on_debug:
+        LiteLLMJudge()
+
+    assert 'LITELLM_LOG' not in os.environ
+    mock_turn_on_debug.assert_not_called()

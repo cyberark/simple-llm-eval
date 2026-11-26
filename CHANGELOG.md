@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.1.4] - 2026-11-26
+
+### Other
+
+- fix: replace deprecated litellm.set_verbose with LITELLM_LOG debug setup ([#497](https://github.com/cyberark/simple-llm-eval/pull/497))
+
+
 ## [1.1.3] - 2026-06-02
 
 ### Other

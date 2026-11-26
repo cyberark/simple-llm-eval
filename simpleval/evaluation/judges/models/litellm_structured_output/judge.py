@@ -1,5 +1,3 @@
-import os
-
 import litellm
 from colorama import Fore
 from litellm import LlmProviders, ModelResponse

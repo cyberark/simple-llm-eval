@@ -1,4 +1,4 @@
-import os
+import logging
 from unittest.mock import MagicMock, patch
 
 import litellm

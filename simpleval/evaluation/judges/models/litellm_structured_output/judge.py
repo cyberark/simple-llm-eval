@@ -32,7 +32,7 @@ class LiteLLMJudge(BaseJudge):
         super().__init__(model_id=model_id, supported_model_ids=supported_model_ids)
 
         if debug_logging_enabled():
-            litellm.set_verbose = True
+            litellm._turn_on_debug()
 
         self.model_params = litellm.get_supported_openai_params(model=model_id, custom_llm_provider=self.provider_id)
 

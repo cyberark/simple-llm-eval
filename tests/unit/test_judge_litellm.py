@@ -1,5 +1,7 @@
+import logging
 from unittest.mock import MagicMock, patch
 
+import litellm
 import pytest
 import tenacity
 from litellm import Choices, Message, ModelResponse, Usage
@@ -142,3 +144,38 @@ def test_call_litellm_completion_retryable_error(mock_sleep, judge, mock_metric)
             judge.call_litellm_completion('test prompt', mock_metric)
 
         assert any('Call to LiteLLM completion ended with a retryable error' in arg for arg in mock_error.call_args[0])
+
+
+@pytest.fixture
+def restore_litellm_loggers():
+    """litellm's turn_on_debug changes global logger levels, restore them so other tests are not affected."""
+    loggers = [logging.getLogger(name) for name in ('LiteLLM', 'LiteLLM Router', 'LiteLLM Proxy')]
+    levels = [lg.level for lg in loggers]
+    yield loggers
+    for lg, level in zip(loggers, levels):
+        lg.setLevel(level)
+
+
+def test_init_debug_logging_enables_litellm_debug_without_set_verbose(monkeypatch, restore_litellm_loggers):
+    # Intentionally calls the real litellm debug function, so the test fails if litellm renames/removes it
+    for lg in restore_litellm_loggers:
+        lg.setLevel(logging.WARNING)
+    monkeypatch.setattr('litellm.set_verbose', False)
+
+    with patch('simpleval.evaluation.judges.models.litellm_structured_output.judge.debug_logging_enabled', return_value=True):
+        LiteLLMJudge()
+
+    assert all(lg.level == logging.DEBUG for lg in restore_litellm_loggers)
+    assert not litellm.set_verbose
+
+
+def test_init_without_debug_logging_does_not_enable_litellm_debug(monkeypatch, restore_litellm_loggers):
+    for lg in restore_litellm_loggers:
+        lg.setLevel(logging.WARNING)
+    monkeypatch.setattr('litellm.set_verbose', False)
+
+    with patch('simpleval.evaluation.judges.models.litellm_structured_output.judge.debug_logging_enabled', return_value=False):
+        LiteLLMJudge()
+
+    assert all(lg.level == logging.WARNING for lg in restore_litellm_loggers)
+    assert not litellm.set_verbose
